@@ -1,0 +1,27 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {showPreferencePanel = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {changeFreeze = id; changeZoom = id; }; 
+            CLASS = GRFXTController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scrollView = NSScrollView; xtView = LLXTView; zoomButton = NSPopUpButton; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = LLXTView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {changeFreeze = id; changeZoom = id; }; 
+            CLASS = OCXTController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scrollView = NSScrollView; xtView = LLXTView; zoomButton = NSPopUpButton; }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

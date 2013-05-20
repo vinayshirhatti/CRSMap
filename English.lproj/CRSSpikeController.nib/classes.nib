@@ -1,0 +1,34 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {showPreferencePanel = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            CLASS = GRFSpikeController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = LLScrollZoomWindow; 
+        }, 
+        {CLASS = LLHistView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = LLPlotView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {changeZoom = id; }; 
+            CLASS = LLScrollZoomWindow; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scrollView = NSScrollView; zoomButton = NSPopUpButton; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = OCSpikeController; LANGUAGE = ObjC; SUPERCLASS = LLScrollZoomWindow; }, 
+        {
+            ACTIONS = {changeZoom = id; }; 
+            CLASS = SpikeView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {scrollView = NSScrollView; zoomButton = NSPopUpButton; }; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
