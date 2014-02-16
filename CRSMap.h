@@ -26,8 +26,9 @@
     NSWindowController 		*xtController;
 	
 	CRSMapStimTable			*mapStimTable0; 
-	CRSMapStimTable			*mapStimTable1; 
-
+	CRSMapStimTable			*mapStimTable1;
+	CRSMapStimTable			*mapStimTable2;     // [Vinay] - for centre gabor
+    
     IBOutlet NSMenu			*actionsMenu;
     IBOutlet NSMenu			*settingsMenu;
 	IBOutlet NSMenuItem		*runStopMenuItem;
@@ -43,6 +44,7 @@
 - (CRSStimuli *)stimuli;
 - (CRSMapStimTable *)mapStimTable0;
 - (CRSMapStimTable *)mapStimTable1;
+- (CRSMapStimTable *)mapStimTable2;             // [Vinay] - for centre gabor
 - (void)updateChangeTable;
 
 @end

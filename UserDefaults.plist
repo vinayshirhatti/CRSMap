@@ -32,19 +32,77 @@
 			<key>row</key>
 			<string>n</string>
 			<key>azimuthCount</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>elevationCount</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>spatialFreqCount</key>
-			<integer>3</integer>
+			<integer>6</integer>
 			<key>sigmaCount</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>orientationCount</key>
-			<integer>3</integer>
+			<integer>6</integer>
 			<key>contrastCount</key>
-			<integer>3</integer>
+			<integer>6</integer>
 			<key>temporalFreqCount</key>
-			<integer>3</integer>
+			<integer>1</integer>
+			<key>spatialPhaseCount</key>
+			<integer>6</integer>
+			<key>radiusCount</key>
+			<integer>6</integer>
+			<key>azimuthCount0</key>
+			<integer>1</integer>
+			<key>elevationCount0</key>
+			<integer>1</integer>
+			<key>spatialFreqCount0</key>
+			<integer>6</integer>
+			<key>sigmaCount0</key>
+			<integer>1</integer>
+			<key>orientationCount0</key>
+			<integer>6</integer>
+			<key>contrastCount0</key>
+			<integer>6</integer>
+			<key>temporalFreqCount0</key>
+			<integer>1</integer>
+			<key>spatialPhaseCount0</key>
+			<integer>6</integer>
+			<key>radiusCount0</key>
+			<integer>6</integer>
+			<key>azimuthCount1</key>
+			<integer>1</integer>
+			<key>elevationCount1</key>
+			<integer>1</integer>
+			<key>spatialFreqCount1</key>
+			<integer>6</integer>
+			<key>sigmaCount1</key>
+			<integer>1</integer>
+			<key>orientationCount1</key>
+			<integer>6</integer>
+			<key>contrastCount1</key>
+			<integer>6</integer>
+			<key>temporalFreqCount1</key>
+			<integer>1</integer>
+			<key>spatialPhaseCount1</key>
+			<integer>6</integer>
+			<key>radiusCount1</key>
+			<integer>6</integer>
+			<key>azimuthCount2</key>
+			<integer>1</integer>
+			<key>elevationCount2</key>
+			<integer>1</integer>
+			<key>spatialFreqCount2</key>
+			<integer>6</integer>
+			<key>sigmaCount2</key>
+			<integer>1</integer>
+			<key>orientationCount2</key>
+			<integer>6</integer>
+			<key>contrastCount2</key>
+			<integer>6</integer>
+			<key>temporalFreqCount2</key>
+			<integer>1</integer>
+			<key>spatialPhaseCount2</key>
+			<integer>6</integer>
+			<key>radiusCount2</key>
+			<integer>6</integer>
 		</dict>
 	</array>
 	<key>CRSStimTables</key>
@@ -53,9 +111,9 @@
 			<key>row</key>
 			<string>min</string>
 			<key>azimuthDeg0</key>
-			<integer>-5</integer>
+			<integer>2</integer>
 			<key>elevationDeg0</key>
-			<integer>-5</integer>
+			<integer>2</integer>
 			<key>spatialFreqCPD0</key>
 			<real>0.5</real>
 			<key>sigmaDeg0</key>
@@ -63,13 +121,17 @@
 			<key>orientationDeg0</key>
 			<real>0</real>
 			<key>contrastPC0</key>
-			<integer>25</integer>
+			<integer>0</integer>
 			<key>temporalFreqHz0</key>
 			<integer>0</integer>
+			<key>spatialPhaseDeg0</key>
+			<integer>0</integer>
+			<key>radiusDeg0</key>
+			<integer>8</integer>
 			<key>azimuthDeg1</key>
-			<integer>3</integer>
+			<integer>5</integer>
 			<key>elevationDeg1</key>
-			<integer>3</integer>
+			<integer>-5</integer>
 			<key>spatialFreqCPD1</key>
 			<real>0.5</real>
 			<key>sigmaDeg1</key>
@@ -80,38 +142,86 @@
 			<integer>0</integer>
 			<key>temporalFreqHz1</key>
 			<integer>0</integer>
+			<key>spatialPhaseDeg1</key>
+			<integer>0</integer>
+			<key>radiusDeg1</key>
+			<real>0.3</real>
+			<key>azimuthDeg2</key>
+			<integer>5</integer>
+			<key>elevationDeg2</key>
+			<integer>5</integer>
+			<key>spatialFreqCPD2</key>
+			<real>0.5</real>
+			<key>sigmaDeg2</key>
+			<real>0.2</real>
+			<key>orientationDeg2</key>
+			<integer>0</integer>
+			<key>contrastPC2</key>
+			<integer>0</integer>
+			<key>temporalFreqHz2</key>
+			<integer>0</integer>
+			<key>spatialPhaseDeg2</key>
+			<integer>0</integer>
+			<key>radiusDeg2</key>
+			<real>0.3</real>
 		</dict>
 		<dict>
 			<key>row</key>
 			<string>max</string>
 			<key>azimuthDeg0</key>
-			<integer>-3</integer>
+			<integer>2</integer>
 			<key>elevationDeg0</key>
-			<integer>-3</integer>
+			<integer>2</integer>
 			<key>spatialFreqCPD0</key>
-			<real>4</real>
+			<integer>8</integer>
 			<key>sigmaDeg0</key>
-			<integer>1</integer>
+			<real>0.2</real>
 			<key>orientationDeg0</key>
 			<integer>180</integer>
 			<key>contrastPC0</key>
 			<integer>100</integer>
 			<key>temporalFreqHz0</key>
-			<integer>5</integer>
+			<integer>0</integer>
+			<key>spatialPhaseDeg0</key>
+			<integer>90</integer>
+			<key>radiusDeg0</key>
+			<integer>8</integer>
 			<key>azimuthDeg1</key>
 			<integer>5</integer>
 			<key>elevationDeg1</key>
-			<integer>5</integer>
+			<integer>-5</integer>
 			<key>spatialFreqCPD1</key>
-			<real>4</real>
+			<integer>8</integer>
 			<key>sigmaDeg1</key>
-			<integer>1</integer>
+			<real>0.2</real>
 			<key>orientationDeg1</key>
 			<integer>180</integer>
 			<key>contrastPC1</key>
 			<integer>100</integer>
 			<key>temporalFreqHz1</key>
+			<integer>0</integer>
+			<key>spatialPhaseDeg1</key>
+			<integer>90</integer>
+			<key>radiusDeg1</key>
+			<integer>8</integer>
+			<key>azimuthDeg2</key>
 			<integer>5</integer>
+			<key>elevationDeg2</key>
+			<integer>5</integer>
+			<key>spatialFreqCPD2</key>
+			<integer>8</integer>
+			<key>sigmaDeg2</key>
+			<real>0.2</real>
+			<key>orientationDeg2</key>
+			<integer>180</integer>
+			<key>contrastPC2</key>
+			<integer>100</integer>
+			<key>temporalFreqHz2</key>
+			<integer>0</integer>
+			<key>spatialPhaseDeg2</key>
+			<integer>0</integer>
+			<key>radiusDeg2</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>CRSChangeArray</key>
@@ -269,13 +379,17 @@
 	<integer>0</integer>
 	<key>CRSFixJitterPC</key>
 	<integer>0</integer>
-	<key>CRSHideLeft</key>
+	<key>CRSHideCentre</key>
 	<false/>
-	<key>CRSHideLeftDigital</key>
+	<key>CRSHideCentreDigital</key>
 	<false/>
-	<key>CRSHideRight</key>
+	<key>CRSHideRing</key>
 	<false/>
-	<key>CRSHideRightDigital</key>
+	<key>CRSHideRingDigital</key>
+	<false/>
+	<key>CRSHideSurround</key>
+	<false/>
+	<key>CRSHideSurroundDigital</key>
 	<false/>
 	<key>CRSHideTaskGaborKey</key>
 	<false/>
@@ -357,11 +471,11 @@
 	<integer>0</integer>
 	<key>CRSSummaryWindowDateCount</key>
 	<integer>0</integer>
-	<key>CRSSummaryWindowFailedCount</key>
-	<integer>0</integer>
 	<key>CRSSummaryWindowIgnoredCount</key>
 	<integer>0</integer>
 	<key>CRSSummaryWindowTotalCount</key>
+	<integer>0</integer>
+	<key>CRSSummaryWindowFailedCount</key>
 	<integer>0</integer>
 	<key>CRSSummaryWindowVisible</key>
 	<true/>
@@ -382,9 +496,9 @@
 	<key>CRSTemporalModulationParam</key>
 	<integer>1</integer>
 	<key>CRSTemporalModulationType</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>CRSTemporalPhaseDeg</key>
-	<real>0</real>
+	<integer>0</integer>
 	<key>CRSTooFastMS</key>
 	<integer>100</integer>
 	<key>CRSTrialWindowVisible</key>
@@ -395,5 +509,13 @@
 	<integer>16</integer>
 	<key>CRSTries</key>
 	<integer>1</integer>
+	<key>CRSMatchCentreSurround</key>
+	<false/>
+	<key>CRSMatchCentreRing</key>
+	<false/>
+	<key>CRSMatchRingSurround</key>
+	<false/>
+	<key>CRSProtocolNumber</key>
+	<integer>0</integer>
 </dict>
 </plist>

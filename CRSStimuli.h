@@ -17,6 +17,7 @@ CRSStimuli.h
 	NSArray					*gabors;
 	NSMutableArray			*mapStimList0;
 	NSMutableArray			*mapStimList1;
+    NSMutableArray          *mapStimList2;                  // [Vinay] - added for centre gabors
 
 	LLIntervalMonitor 		*monitor;
 	short					selectTable[kMaxOriChanges];
@@ -25,6 +26,7 @@ CRSStimuli.h
 	BOOL					stimulusOn;
 	BOOL					targetPresented;
 //	LLGabor 				*taskGabor;
+    //BOOL                    matchSurroundCentre;           // [Vinay] - added this to indicate if surround and centre should have some common attributes
 }
 
 - (void)doFixSettings;
@@ -34,6 +36,7 @@ CRSStimuli.h
 - (void)erase;
 - (LLGabor *)mappingGabor0;
 - (LLGabor *)mappingGabor1;
+- (LLGabor *)mappingGabor2; // [Vinay] - Added Gabor2 for the centre gabor
 - (LLGabor *)taskGabor;
 - (LLGabor *)initGabor;
 - (void)loadGabor:(LLGabor *)gabor withStimDesc:(StimDesc *)pSD;

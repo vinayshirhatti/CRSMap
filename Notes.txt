@@ -31,3 +31,7 @@ Check whether both digital codes and reward/eyedata etc can be controlled using 
 % Bugs
 
 The code gives computer errors if contrast is different from 100%.          (22/03/13)  Supratim Ray
+
+================================^^^=====================^^^============================================
+
+VINAY: All the changes made here (from GRFMap to CRSMap code) are indicated in comments alongside the change. Changes made in the list are not indicated by comments however. 

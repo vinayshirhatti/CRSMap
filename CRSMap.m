@@ -71,10 +71,21 @@ NSString *CRSStimTableCountsKey = @"CRSStimTableCounts";
 //NSString *CRSMapStimContrastPCKey = @"CRSMapStimContrastPC";
 NSString *CRSMapStimRadiusSigmaRatioKey = @"CRSMapStimRadiusSigmaRatio";
 
-NSString *CRSHideLeftKey = @"CRSHideLeft";
-NSString *CRSHideRightKey = @"CRSHideRight";
-NSString *CRSHideLeftDigitalKey = @"CRSHideLeftDigital";
-NSString *CRSHideRightDigitalKey = @"CRSHideRightDigital";
+// [Vinay] - have replaced the L and R keys with C,R,S keys
+//NSString *CRSHideLeftKey = @"CRSHideLeft";
+//NSString *CRSHideRightKey = @"CRSHideRight";
+//NSString *CRSHideLeftDigitalKey = @"CRSHideLeftDigital";
+//NSString *CRSHideRightDigitalKey = @"CRSHideRightDigital";
+
+NSString *CRSHideCentreKey = @"CRSHideCentre";
+NSString *CRSHideRingKey = @"CRSHideRing";
+NSString *CRSHideSurroundKey = @"CRSHideSurround";
+NSString *CRSHideCentreDigitalKey = @"CRSHideCentreDigital";
+NSString *CRSHideRingDigitalKey = @"CRSHideRingDigital";
+NSString *CRSHideSurroundDigitalKey = @"CRSHideSurroundDigital";
+
+// [Vinay] - till here
+
 NSString *CRSConvertToGratingKey = @"CRSConvertToGrating";
 
 NSString *CRSHideTaskGaborKey = @"CRSHideTaskGabor";
@@ -83,8 +94,28 @@ NSString *CRSMapTemporalModulationKey = @"CRSMapTemporalModulation";
 
 // Visual Stimulus Parameters 
 
-//NSString *CRSSpatialPhaseDegKey = @"CRSSpatialPhaseDeg";
-//NSString *CRSTemporalFreqHzKey = @"CRSTemporalFreqHz";
+NSString *CRSSpatialPhaseDegKey = @"CRSSpatialPhaseDeg";            // [Vinay] - This was commented. I have uncommented it
+NSString *CRSTemporalFreqHzKey = @"CRSTemporalFreqHz";              // [Vinay] - This was commented. I have uncommented it
+
+// [Vinay] - added the following for protocol related keys
+
+NSString *CRSMatchCentreSurroundKey = @"CRSMatchCentreSurround"; // [Vinay] - whenever one wants to match the centre and surround properties
+/*
+NSString *CRSRingProtocolKey = @"CRSRingProtocol";
+NSString *CRSContrastRingProtocolKey = @"CRSContrastRingProtocol";
+NSString *CRSDualContrastProtocolKey = @"CRSDualContrastProtocol";
+NSString *CRSDualOrientationProtocolKey = @"CRSDualOrientationProtocol";
+NSString *CRSDualPhaseProtocolKey = @"CRSDualPhaseProtocol";
+*/ // [Vinay] - have commented these, since there aren't required
+// [Vinay] - Exploring defining the protocol selection as a pop down menu, so that each is selected exclusively
+NSString *CRSProtocolNumberKey = @"CRSProtocolNumber";
+
+// [Vinay] Adding other matching options now
+NSString *CRSMatchCentreRingKey = @"CRSMatchCentreRing";
+NSString *CRSMatchRingSurroundKey = @"CRSMatchRingSurround";
+
+
+// [Vinay] - till here
 
 // Keys for change array
 
@@ -99,8 +130,13 @@ NSString *keyPaths[] = {@"values.CRSBlockLimit", @"values.CRSRespTimeMS",
 					@"values.CRSMinDirChangeDeg", @"values.CRSMaxDirChangeDeg", @"values.CRSStimRepsPerBlock",
 					@"values.CRSMinTargetMS", @"values.CRSMaxTargetMS", @"values.CRSChangeArray",
 					@"values.CRSChangeScale", @"values.CRSMeanTargetMS", @"values.CRSFixateMS",
-					@"values.CRSMapStimRadiusSigmaRatio",@"values.CRSHideTaskGabor",@"values.CRSHideLeft",@"values.CRSHideRight",
-					nil};
+					@"values.CRSMapStimRadiusSigmaRatio",@"values.CRSHideTaskGabor",@"values.CRSHideCentre",@"values.CRSHideRing",@"values.CRSHideSurround",
+                    @"values.CRSMatchCentreSurround",@"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",
+					nil}; // [Vinay] - have added the last 2 lines before nil - related to matching C and S and the protocol
+// [Vinay] - Later removed. Added @"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",
+//"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",@"values.CRSRingProtocol",@"values.CRSContrastRingProtocol",@"values.CRSDualContrastProtocol",@"values.CRSDualOrientationProtocol",@"values.CRSDualPhaseProtocol",
+// and kept only @"values.CRSMatchCentreSurround"
+// and replaced Left and right keys - @"values.CRSHideLeft",@"values.CRSHideRight" - with @"values.CRSHideCentre",@"values.CRSHideRing",@"values.CRSHideSurround",
 
 LLScheduleController	*scheduler = nil;
 CRSStimuli				*stimuli = nil;
@@ -141,9 +177,11 @@ LLDataDef stimDescDef[] = {
 	{@"float",	@"azimuthDeg", 1, offsetof(StimDesc, azimuthDeg)},
 	{@"float",	@"elevationDeg", 1, offsetof(StimDesc, elevationDeg)},
 	{@"float",	@"sigmaDeg", 1, offsetof(StimDesc, sigmaDeg)},
+    {@"float",	@"radiusDeg", 1, offsetof(StimDesc, radiusDeg)},                          // [Vinay] - for the added parameter
 	{@"float",	@"spatialFreqCPD", 1, offsetof(StimDesc, spatialFreqCPD)},
 	{@"float",	@"directionDeg", 1, offsetof(StimDesc, directionDeg)},
     {@"float",	@"temporalFreqHz", 1, offsetof(StimDesc, temporalFreqHz)},
+    {@"float",	@"spatialPhaseDeg", 1, offsetof(StimDesc, spatialPhaseDeg)},                          // [Vinay] - for the added parameter
 	{@"long",	@"azimuthIndex", 1, offsetof(StimDesc, azimuthIndex)},
 	{@"long",	@"elevationIndex", 1, offsetof(StimDesc, elevationIndex)},
 	{@"long",	@"sigmaIndex", 1, offsetof(StimDesc, sigmaIndex)},
@@ -152,6 +190,8 @@ LLDataDef stimDescDef[] = {
 	{@"long",	@"contrastIndex", 1, offsetof(StimDesc, contrastIndex)},
 	{@"long",	@"temporalFreqIndex", 1, offsetof(StimDesc, temporalFreqIndex)},
     {@"long",	@"temporalModulation", 1, offsetof(StimDesc, temporalModulation)},
+    {@"long",	@"radiusIndex", 1, offsetof(StimDesc, radiusIndex)},                    // [Vinay] - for the added parameter
+    {@"long",	@"spatialPhaseIndex", 1, offsetof(StimDesc, spatialPhaseIndex)},                      // [Vinay] - for the added parameter
     {nil}};
 
 LLDataDef trialDescDef[] = {
@@ -196,7 +236,7 @@ LLDataDef stimSettingDef[] = {
 	{@"float",	@"polarAngleDeg", 1, offsetof(StimSetting, polarAngleDeg)},
 	{@"float",	@"driftDirectionDeg", 1, offsetof(StimSetting, driftDirectionDeg)},
 	{@"float",	@"contrastPC", 1, offsetof(StimSetting, contrastPC)},
-	{@"short",	@"numberOfSurrounds", 1, offsetof(StimSetting, numberOfSurrounds)},
+	{@"short",	@"numberOfSurrounds", 1, offsetof(StimSetting, numberOfSurrounds)}, // [Vinay] - what's this?. check!
 	{@"long",	@"changeScale", 1, offsetof(StimSetting, changeScale)},
 	{@"long",	@"orientationChanges", 1, offsetof(StimSetting, orientationChanges)},
 	{@"float",	@"maxChangeDeg", 1, offsetof(StimSetting, maxChangeDeg)},
@@ -218,6 +258,8 @@ LLDataDef mapSettingsDef[] = {
 	{@"struct",	@"sigmaDeg", 1, offsetof(MapSettings, sigmaDeg), sizeof(MapParams), mapParamsDef},
 	{@"struct",	@"contrastPC", 1, offsetof(MapSettings, contrastPC), sizeof(MapParams), mapParamsDef},
 	{@"struct",	@"temporalFreqHz", 1, offsetof(MapSettings, temporalFreqHz), sizeof(MapParams), mapParamsDef},
+    {@"struct",	@"radiusDeg", 1, offsetof(MapSettings, radiusDeg), sizeof(MapParams), mapParamsDef},            // [Vinay] - for the added parameter
+    {@"struct",	@"spatialPhaseDeg", 1, offsetof(MapSettings, spatialPhaseDeg), sizeof(MapParams), mapParamsDef},              // [Vinay] - for the added parameter
     {nil}};
 	
 DataAssignment eyeXDataAssignment = {@"eyeXData",	@"Synthetic", 0, 5.0};	
@@ -231,10 +273,12 @@ EventDefinition CRSEvents[] = {
 	{@"taskGabor",			sizeof(Gabor),			{@"struct", @"taskGabor", 1, 0, sizeof(Gabor), gaborStructDef}},
 	{@"mappingGabor0",		sizeof(Gabor),			{@"struct", @"mappingGabor0", 1, 0, sizeof(Gabor), gaborStructDef}},
 	{@"mappingGabor1",		sizeof(Gabor),			{@"struct", @"mappingGabor1", 1, 0, sizeof(Gabor), gaborStructDef}},
+    {@"mappingGabor2",		sizeof(Gabor),			{@"struct", @"mappingGabor2", 1, 0, sizeof(Gabor), gaborStructDef}},                        // [Vinay] - for the centre gabor
 	{@"behaviorSetting",	sizeof(BehaviorSetting),{@"struct", @"behaviorSetting", 1, 0, sizeof(BehaviorSetting), behaviorSettingDef}},
 	{@"stimSetting",		sizeof(StimSetting),	{@"struct", @"stimSetting", 1, 0, sizeof(StimSetting), stimSettingDef}},
 	{@"map0Settings",		sizeof(MapSettings),    {@"struct", @"mapSettings", 1, 0, sizeof(MapSettings), mapSettingsDef}},
 	{@"map1Settings",		sizeof(MapSettings),    {@"struct", @"mapSettings", 1, 0, sizeof(MapSettings), mapSettingsDef}},
+    {@"map2Settings",		sizeof(MapSettings),    {@"struct", @"mapSettings", 1, 0, sizeof(MapSettings), mapSettingsDef}},                    // [Vinay] - for the centre gabor
 	{@"eccentricityDeg",	sizeof(float),			{@"float"}},
 	{@"polarAngleDeg",		sizeof(float),			{@"float"}},
 
@@ -315,6 +359,7 @@ LLTaskPlugIn		*task = nil;
 	
 	mapStimTable0 = [[CRSMapStimTable alloc] init];
 	mapStimTable1 = [[CRSMapStimTable alloc] init];
+    mapStimTable2 = [[CRSMapStimTable alloc] init];         // [Vinay] - for centre gabor
 	
 // Create on-line display windows
 
@@ -480,6 +525,7 @@ LLTaskPlugIn		*task = nil;
 	[stimuli release];
 	[mapStimTable0 release];
 	[mapStimTable1 release];
+    [mapStimTable2 release];            // [Vinay] - for centre gabor
 	[digitalOut release];
 	[controlPanel release];
 	[taskStatus dealloc];
@@ -686,12 +732,17 @@ LLTaskPlugIn		*task = nil;
 	}
 	key = [keyPath pathExtension];
 	if ([key isEqualTo:CRSStimTablesKey] || [key isEqualTo:CRSStimTableCountsKey]) {
-		[mapStimTable0 updateBlockParameters];
+		[mapStimTable0 updateBlockParameters:0]; // [Vinay] - added arguement '0'
 		settings = [mapStimTable0 mapSettings];
 		[dataDoc putEvent:@"map0Settings" withData:&settings];
-		[mapStimTable1 updateBlockParameters];
+		[mapStimTable1 updateBlockParameters:1]; // [Vinay] - added arguement '1'
 		settings = [mapStimTable1 mapSettings];
 		[dataDoc putEvent:@"map1Settings" withData:&settings];
+        //----------------------------------------------------------- [Vinay] for centre gabor
+        [mapStimTable2 updateBlockParameters:2]; // [Vinay] - added arguement '2'
+		settings = [mapStimTable2 mapSettings];
+		[dataDoc putEvent:@"map2Settings" withData:&settings];
+        //-----------------------------------------------------
 		requestReset();
 	}
 	else if ([key isEqualTo:CRSRespTimeMSKey]) {
@@ -778,17 +829,80 @@ LLTaskPlugIn		*task = nil;
         [[task defaults] setBool:YES forKey:CRSIncludeCatchTrialsinDoneListKey];
         [[task defaults] setInteger:100 forKey:CRSCatchTrialPCKey];
     }
+    /* // [Vinay] - commented and replaced the following loops
     else if ([key isEqualTo:CRSHideLeftKey]) {
         [[task defaults] setBool:YES forKey:CRSHideLeftDigitalKey];
     }
     else if ([key isEqualTo:CRSHideRightKey]) {
         [[task defaults] setBool:YES forKey:CRSHideRightDigitalKey];
     }
+    */
 	/*
     else if ([key isEqualTo:CRSMapStimContrastPCKey])	{
 		[stimuli clearStimLists:&trial];
 		//[stimuli makeStimLists:&trial];
 	}*/
+    
+    // [Vinay] - Have replaced the Left and Right Digital code keys with C, R, S Digital code control keys
+    else if ([key isEqualTo:CRSHideCentreKey]) {
+        [[task defaults] setBool:YES forKey:CRSHideCentreDigitalKey];
+    }
+    else if ([key isEqualTo:CRSHideRingKey]) {
+        [[task defaults] setBool:YES forKey:CRSHideRingDigitalKey];
+    }
+    else if ([key isEqualTo:CRSHideSurroundKey]) {
+        [[task defaults] setBool:YES forKey:CRSHideSurroundDigitalKey];
+    }
+    
+    // [Vinay] - have added the follow lines. And commented all later since they aren't required. In fact they cause an error -  NSLock error because whenever the key is set, you try to again set it thus leading to an uncontrolled runaway situation
+    /*
+    else if ([key isEqualTo:CRSMatchCentreSurroundKey]) {
+        [[task defaults] setBool:YES forKey:CRSMatchCentreSurroundKey];
+    }
+    */
+    /*
+    else if ([key isEqualTo:CRSRingProtocolKey]) {
+        [[task defaults] setBool:YES forKey:CRSRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSContrastRingProtocolKey]; // [Vinay] - Set one protocol and disable the others so that two aren't selected simultaneously
+        //[[task defaults] setBool:NO forKey:CRSDualContrastProtocolKey]; // [Vinay] - Have commented all these becuase it was giving an NSLock error - *** -[NSLock lock]: deadlock (<NSLock: 0x676820> '(null)')
+        //[[task defaults] setBool:NO forKey:CRSDualOrientationProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualPhaseProtocolKey];
+        requestReset();
+    }
+    else if ([key isEqualTo:CRSContrastRingProtocolKey]) {
+        [[task defaults] setBool:YES forKey:CRSContrastRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualContrastProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualOrientationProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualPhaseProtocolKey];
+        requestReset();
+    }
+    else if ([key isEqualTo:CRSDualContrastProtocolKey]) {
+        [[task defaults] setBool:YES forKey:CRSDualContrastProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSContrastRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualOrientationProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualPhaseProtocolKey];
+        requestReset();
+    }
+    else if ([key isEqualTo:CRSDualOrientationProtocolKey]) {
+        [[task defaults] setBool:YES forKey:CRSDualOrientationProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSContrastRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualContrastProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualPhaseProtocolKey];
+        requestReset();
+    }
+    else if ([key isEqualTo:CRSDualPhaseProtocolKey]) {
+        [[task defaults] setBool:YES forKey:CRSDualPhaseProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSContrastRingProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualContrastProtocolKey];
+        //[[task defaults] setBool:NO forKey:CRSDualOrientationProtocolKey];
+        requestReset();
+    }
+    */
+    // [Vinay] - till here
 }
 
 - (DisplayModeParam)requestedDisplayMode;
@@ -852,6 +966,14 @@ LLTaskPlugIn		*task = nil;
 {
 	return mapStimTable1;
 }
+
+// [Vinay] Add mapStimTable2 for centre gabor
+
+- (CRSMapStimTable *)mapStimTable2
+{
+	return mapStimTable2;
+}
+//----------------------
 
 // The change table (array) contains information about what changes will be tested and
 // how often each change will be tested in the valid and invalid mode in each block

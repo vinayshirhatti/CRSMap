@@ -7,68 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		692E5AAF0CDBECE300E0BCB8 /* GRFMapStimTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 692E5AAE0CDBECE300E0BCB8 /* GRFMapStimTable.m */; };
+		692E5AAF0CDBECE300E0BCB8 /* CRSMapStimTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 692E5AAE0CDBECE300E0BCB8 /* CRSMapStimTable.m */; };
 		693BB74215C8005500390101 /* Lablib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BB74115C8005500390101 /* Lablib.framework */; };
-		695982D1080209EB0090B9A6 /* GRFFixGraceState.h in Resources */ = {isa = PBXBuildFile; fileRef = 695982CF080209EB0090B9A6 /* GRFFixGraceState.h */; };
-		695982D2080209EB0090B9A6 /* GRFFixGraceState.m in Sources */ = {isa = PBXBuildFile; fileRef = 695982D0080209EB0090B9A6 /* GRFFixGraceState.m */; };
-		695C12F709B108880021A27D /* GRFFixateState.m in Sources */ = {isa = PBXBuildFile; fileRef = 695C12F609B108880021A27D /* GRFFixateState.m */; };
-		69BDCE44098BD2CA00578E91 /* GRFSpikeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F13A6004716CF400F95509 /* GRFSpikeController.m */; };
+		695982D1080209EB0090B9A6 /* CRSFixGraceState.h in Resources */ = {isa = PBXBuildFile; fileRef = 695982CF080209EB0090B9A6 /* CRSFixGraceState.h */; };
+		695982D2080209EB0090B9A6 /* CRSFixGraceState.m in Sources */ = {isa = PBXBuildFile; fileRef = 695982D0080209EB0090B9A6 /* CRSFixGraceState.m */; };
+		695C12F709B108880021A27D /* CRSFixateState.m in Sources */ = {isa = PBXBuildFile; fileRef = 695C12F609B108880021A27D /* CRSFixateState.m */; };
+		69BDCE44098BD2CA00578E91 /* CRSSpikeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F13A6004716CF400F95509 /* CRSSpikeController.m */; };
 		69E24E1B07A5C25A00DDC096 /* CRSMap.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E247C907A5562500DDC096 /* CRSMap.h */; };
 		69E24E1C07A5C25B00DDC096 /* CRSMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E247CA07A5562500DDC096 /* CRSMap.m */; };
-		69E24E1E07A5C25E00DDC096 /* GRFStimuli.h in Resources */ = {isa = PBXBuildFile; fileRef = 69EAD86F04352E4F00F95509 /* GRFStimuli.h */; };
-		69E24E1F07A5C25F00DDC096 /* GRFStimuli.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EAD87004352E4F00F95509 /* GRFStimuli.m */; };
-		69E24E2107A5C27000DDC096 /* GRFBehaviorController.h in Resources */ = {isa = PBXBuildFile; fileRef = 690B798D047ADA9F00A80164 /* GRFBehaviorController.h */; };
-		69E24E2207A5C27100DDC096 /* GRFBehaviorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B798E047ADA9F00A80164 /* GRFBehaviorController.m */; };
-		69E24E2307A5C27200DDC096 /* GRFEyeXYController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E96F8D0472CC5C00F95509 /* GRFEyeXYController.h */; };
-		69E24E2407A5C27200DDC096 /* GRFEyeXYController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E96F8E0472CC5C00F95509 /* GRFEyeXYController.m */; };
-		69E24E2507A5C27300DDC096 /* GRFSpikeController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69F13A5F04716CF400F95509 /* GRFSpikeController.h */; };
-		69E24E2707A5C27400DDC096 /* GRFSummaryController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69B9AE720482FBDD00F95509 /* GRFSummaryController.h */; };
-		69E24E2807A5C27600DDC096 /* GRFSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B9AE730482FBDD00F95509 /* GRFSummaryController.m */; };
-		69E24E2907A5C27700DDC096 /* GRFXTController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69B5A7CA0471DBA300F95509 /* GRFXTController.h */; };
-		69E24E2A07A5C27800DDC096 /* GRFXTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B5A7CB0471DBA300F95509 /* GRFXTController.m */; };
-		69E24E2D07A5C29700DDC096 /* GRFStateSystem.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879F10486AA2000FE06D7 /* GRFStateSystem.h */; };
-		69E24E2E07A5C29800DDC096 /* GRFStateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879F20486AA2000FE06D7 /* GRFStateSystem.m */; };
-		69E24E2F07A5C29900DDC096 /* GRFBlockedState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0480486D97300FE06D7 /* GRFBlockedState.h */; };
-		69E24E3007A5C29A00DDC096 /* GRFBlockedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0490486D97300FE06D7 /* GRFBlockedState.m */; };
-		69E24E3107A5C29B00DDC096 /* GRFEndtrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0400486D3B700FE06D7 /* GRFEndtrialState.h */; };
-		69E24E3207A5C29B00DDC096 /* GRFEndtrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0410486D3B700FE06D7 /* GRFEndtrialState.m */; };
-		69E24E3307A5C29C00DDC096 /* GRFFixonState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A04C0486DB1300FE06D7 /* GRFFixonState.h */; };
-		69E24E3407A5C29D00DDC096 /* GRFFixonState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A04D0486DB1300FE06D7 /* GRFFixonState.m */; };
-		69E24E3707A5C29F00DDC096 /* GRFIdleState.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879FD0486B06A00FE06D7 /* GRFIdleState.h */; };
-		69E24E3807A5C2A000DDC096 /* GRFIdleState.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879FE0486B06A00FE06D7 /* GRFIdleState.m */; };
-		69E24E3907A5C2A000DDC096 /* GRFIntertrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 6983253D0486BE9600FE06D7 /* GRFIntertrialState.h */; };
-		69E24E3A07A5C2A100DDC096 /* GRFIntertrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983253E0486BE9600FE06D7 /* GRFIntertrialState.m */; };
-		69E24E3B07A5C2A200DDC096 /* GRFStimulate.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A05C0486F0A700FE06D7 /* GRFStimulate.h */; };
-		69E24E3C07A5C2A300DDC096 /* GRFStimulate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A05D0486F0A700FE06D7 /* GRFStimulate.m */; };
-		69E24E4307A5C2AC00DDC096 /* GRFReactState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0640486F23700FE06D7 /* GRFReactState.h */; };
-		69E24E4407A5C2AC00DDC096 /* GRFReactState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0650486F23700FE06D7 /* GRFReactState.m */; };
-		69E24E4507A5C2AD00DDC096 /* GRFSaccadeState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69F443A305DEE56D000705E2 /* GRFSaccadeState.h */; };
-		69E24E4607A5C2AE00DDC096 /* GRFSaccadeState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F443A405DEE56D000705E2 /* GRFSaccadeState.m */; };
-		69E24E4907A5C2B000DDC096 /* GRFStarttrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0440486D59800FE06D7 /* GRFStarttrialState.h */; };
-		69E24E4A07A5C2B000DDC096 /* GRFStarttrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0450486D59800FE06D7 /* GRFStarttrialState.m */; };
-		69E24E4B07A5C2B100DDC096 /* GRFStopState.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879F90486AF9300FE06D7 /* GRFStopState.h */; };
-		69E24E4C07A5C2B200DDC096 /* GRFStopState.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879FA0486AF9300FE06D7 /* GRFStopState.m */; };
+		69E24E1E07A5C25E00DDC096 /* CRSStimuli.h in Resources */ = {isa = PBXBuildFile; fileRef = 69EAD86F04352E4F00F95509 /* CRSStimuli.h */; };
+		69E24E2107A5C27000DDC096 /* CRSBehaviorController.h in Resources */ = {isa = PBXBuildFile; fileRef = 690B798D047ADA9F00A80164 /* CRSBehaviorController.h */; };
+		69E24E2207A5C27100DDC096 /* CRSBehaviorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B798E047ADA9F00A80164 /* CRSBehaviorController.m */; };
+		69E24E2307A5C27200DDC096 /* CRSEyeXYController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E96F8D0472CC5C00F95509 /* CRSEyeXYController.h */; };
+		69E24E2407A5C27200DDC096 /* CRSEyeXYController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E96F8E0472CC5C00F95509 /* CRSEyeXYController.m */; };
+		69E24E2507A5C27300DDC096 /* CRSSpikeController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69F13A5F04716CF400F95509 /* CRSSpikeController.h */; };
+		69E24E2707A5C27400DDC096 /* CRSSummaryController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69B9AE720482FBDD00F95509 /* CRSSummaryController.h */; };
+		69E24E2807A5C27600DDC096 /* CRSSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B9AE730482FBDD00F95509 /* CRSSummaryController.m */; };
+		69E24E2907A5C27700DDC096 /* CRSXTController.h in Resources */ = {isa = PBXBuildFile; fileRef = 69B5A7CA0471DBA300F95509 /* CRSXTController.h */; };
+		69E24E2A07A5C27800DDC096 /* CRSXTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B5A7CB0471DBA300F95509 /* CRSXTController.m */; };
+		69E24E2D07A5C29700DDC096 /* CRSStateSystem.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879F10486AA2000FE06D7 /* CRSStateSystem.h */; };
+		69E24E2E07A5C29800DDC096 /* CRSStateSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879F20486AA2000FE06D7 /* CRSStateSystem.m */; };
+		69E24E2F07A5C29900DDC096 /* CRSBlockedState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0480486D97300FE06D7 /* CRSBlockedState.h */; };
+		69E24E3007A5C29A00DDC096 /* CRSBlockedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0490486D97300FE06D7 /* CRSBlockedState.m */; };
+		69E24E3107A5C29B00DDC096 /* CRSEndtrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0400486D3B700FE06D7 /* CRSEndtrialState.h */; };
+		69E24E3207A5C29B00DDC096 /* CRSEndtrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0410486D3B700FE06D7 /* CRSEndtrialState.m */; };
+		69E24E3307A5C29C00DDC096 /* CRSFixonState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A04C0486DB1300FE06D7 /* CRSFixonState.h */; };
+		69E24E3407A5C29D00DDC096 /* CRSFixonState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A04D0486DB1300FE06D7 /* CRSFixonState.m */; };
+		69E24E3707A5C29F00DDC096 /* CRSIdleState.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879FD0486B06A00FE06D7 /* CRSIdleState.h */; };
+		69E24E3807A5C2A000DDC096 /* CRSIdleState.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879FE0486B06A00FE06D7 /* CRSIdleState.m */; };
+		69E24E3907A5C2A000DDC096 /* CRSIntertrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 6983253D0486BE9600FE06D7 /* CRSIntertrialState.h */; };
+		69E24E3A07A5C2A100DDC096 /* CRSIntertrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983253E0486BE9600FE06D7 /* CRSIntertrialState.m */; };
+		69E24E3B07A5C2A200DDC096 /* CRSStimulate.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A05C0486F0A700FE06D7 /* CRSStimulate.h */; };
+		69E24E3C07A5C2A300DDC096 /* CRSStimulate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A05D0486F0A700FE06D7 /* CRSStimulate.m */; };
+		69E24E4307A5C2AC00DDC096 /* CRSReactState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0640486F23700FE06D7 /* CRSReactState.h */; };
+		69E24E4407A5C2AC00DDC096 /* CRSReactState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0650486F23700FE06D7 /* CRSReactState.m */; };
+		69E24E4507A5C2AD00DDC096 /* CRSSaccadeState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69F443A305DEE56D000705E2 /* CRSSaccadeState.h */; };
+		69E24E4607A5C2AE00DDC096 /* CRSSaccadeState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F443A405DEE56D000705E2 /* CRSSaccadeState.m */; };
+		69E24E4907A5C2B000DDC096 /* CRSStarttrialState.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E8A0440486D59800FE06D7 /* CRSStarttrialState.h */; };
+		69E24E4A07A5C2B000DDC096 /* CRSStarttrialState.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E8A0450486D59800FE06D7 /* CRSStarttrialState.m */; };
+		69E24E4B07A5C2B100DDC096 /* CRSStopState.h in Resources */ = {isa = PBXBuildFile; fileRef = 694879F90486AF9300FE06D7 /* CRSStopState.h */; };
+		69E24E4C07A5C2B200DDC096 /* CRSStopState.m in Sources */ = {isa = PBXBuildFile; fileRef = 694879FA0486AF9300FE06D7 /* CRSStopState.m */; };
 		69E24E4F07A5C2BB00DDC096 /* CRSMap_Prefix.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E247A107A5527C00DDC096 /* CRSMap_Prefix.h */; };
-		69E24E5007A5C2BC00DDC096 /* GRF.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E247A207A5527C00DDC096 /* GRF.h */; };
+		69E24E5007A5C2BC00DDC096 /* CRS.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E247A207A5527C00DDC096 /* CRS.h */; };
 		69E24E5107A5C2BD00DDC096 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		69E24E5207A5C2BD00DDC096 /* UtilityFunctions.h in Resources */ = {isa = PBXBuildFile; fileRef = 69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */; };
 		69E24E5307A5C2BE00DDC096 /* UtilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69975550043E645C00F95509 /* UtilityFunctions.m */; };
 		69E24E5407A5C2C300DDC096 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		69E24E5507A5C2C400DDC096 /* CRSMap.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* CRSMap.nib */; };
-		69E24E5607A5C2C500DDC096 /* GRFBehaviorController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69B5A7C70471D9E400F95509 /* GRFBehaviorController.nib */; };
-		69E24E5707A5C2C500DDC096 /* GRFEyeXYController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69E96F950472CCC300F95509 /* GRFEyeXYController.nib */; };
-		69E24E5807A5C2C700DDC096 /* GRFSpikeController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69F13A6304716D0D00F95509 /* GRFSpikeController.nib */; };
-		69E24E5A07A5C2C900DDC096 /* GRFSummaryController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9AE6F0482FB9F00F95509 /* GRFSummaryController.nib */; };
-		69E24E5B07A5C2C900DDC096 /* GRFXTController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 690B7991047ADABA00A80164 /* GRFXTController.nib */; };
+		69E24E5607A5C2C500DDC096 /* CRSBehaviorController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69B5A7C70471D9E400F95509 /* CRSBehaviorController.nib */; };
+		69E24E5707A5C2C500DDC096 /* CRSEyeXYController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69E96F950472CCC300F95509 /* CRSEyeXYController.nib */; };
+		69E24E5807A5C2C700DDC096 /* CRSSpikeController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69F13A6304716D0D00F95509 /* CRSSpikeController.nib */; };
+		69E24E5A07A5C2C900DDC096 /* CRSSummaryController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9AE6F0482FB9F00F95509 /* CRSSummaryController.nib */; };
+		69E24E5B07A5C2C900DDC096 /* CRSXTController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 690B7991047ADABA00A80164 /* CRSXTController.nib */; };
 		69E24E5C07A5C2D100DDC096 /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 696D8C8A075D683B0057453A /* UserDefaults.plist */; };
 		69E24E5E07A5C2E100DDC096 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		69E24E6207A5C2E200DDC096 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A443DD0132ED6B0ACA2124 /* OpenGL.framework */; };
 		69E24E7407A5C34300DDC096 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		69E24F0907A5C34400DDC096 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
-		AF0220F80B37000B0029778E /* GRFTooFastState.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0220F70B37000B0029778E /* GRFTooFastState.m */; };
-		AFCACCF80B9D2F610033D226 /* GRFRoundToStimCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCACCF70B9D2F610033D226 /* GRFRoundToStimCycle.m */; };
-		FC1EC3730F5F3E6300C95582 /* GRFDigitalOut.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1EC3720F5F3E6300C95582 /* GRFDigitalOut.m */; };
-		FCCE5D140CC7BE8200E610EE /* GRFStimulusMapping.nib in Resources */ = {isa = PBXBuildFile; fileRef = FCCE5D120CC7BE8200E610EE /* GRFStimulusMapping.nib */; };
+		A1F6F3E21883BE4B00B32245 /* CRSStimuli.m in Sources */ = {isa = PBXBuildFile; fileRef = 69EAD87004352E4F00F95509 /* CRSStimuli.m */; };
+		AF0220F80B37000B0029778E /* CRSTooFastState.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0220F70B37000B0029778E /* CRSTooFastState.m */; };
+		AFCACCF80B9D2F610033D226 /* CRSRoundToStimCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCACCF70B9D2F610033D226 /* CRSRoundToStimCycle.m */; };
+		FC1EC3730F5F3E6300C95582 /* CRSDigitalOut.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1EC3720F5F3E6300C95582 /* CRSDigitalOut.m */; };
+		FCCE5D140CC7BE8200E610EE /* CRSStimulusMapping.nib in Resources */ = {isa = PBXBuildFile; fileRef = FCCE5D120CC7BE8200E610EE /* CRSStimulusMapping.nib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,69 +78,69 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSMap.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		690B798D047ADA9F00A80164 /* GRFBehaviorController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSBehaviorController.h; sourceTree = "<group>"; };
-		690B798E047ADA9F00A80164 /* GRFBehaviorController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSBehaviorController.m; sourceTree = "<group>"; };
+		690B798D047ADA9F00A80164 /* CRSBehaviorController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSBehaviorController.h; sourceTree = "<group>"; };
+		690B798E047ADA9F00A80164 /* CRSBehaviorController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSBehaviorController.m; sourceTree = "<group>"; };
 		690B7992047ADABA00A80164 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSXTController.nib; sourceTree = "<group>"; };
-		692E5AAD0CDBECE300E0BCB8 /* GRFMapStimTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSMapStimTable.h; sourceTree = "<group>"; };
-		692E5AAE0CDBECE300E0BCB8 /* GRFMapStimTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSMapStimTable.m; sourceTree = "<group>"; };
+		692E5AAD0CDBECE300E0BCB8 /* CRSMapStimTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSMapStimTable.h; sourceTree = "<group>"; };
+		692E5AAE0CDBECE300E0BCB8 /* CRSMapStimTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSMapStimTable.m; sourceTree = "<group>"; };
 		693BB74115C8005500390101 /* Lablib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Lablib.framework; path = ../../../../Documents/Lablib/Frameworks/Lablib/build/Development/Lablib.framework; sourceTree = "<group>"; };
-		694879F10486AA2000FE06D7 /* GRFStateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStateSystem.h; sourceTree = "<group>"; };
-		694879F20486AA2000FE06D7 /* GRFStateSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStateSystem.m; sourceTree = "<group>"; };
-		694879F90486AF9300FE06D7 /* GRFStopState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStopState.h; sourceTree = "<group>"; };
-		694879FA0486AF9300FE06D7 /* GRFStopState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStopState.m; sourceTree = "<group>"; };
-		694879FD0486B06A00FE06D7 /* GRFIdleState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSIdleState.h; sourceTree = "<group>"; };
-		694879FE0486B06A00FE06D7 /* GRFIdleState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSIdleState.m; sourceTree = "<group>"; };
-		695982CF080209EB0090B9A6 /* GRFFixGraceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixGraceState.h; sourceTree = "<group>"; };
-		695982D0080209EB0090B9A6 /* GRFFixGraceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixGraceState.m; sourceTree = "<group>"; };
-		695C12F509B108880021A27D /* GRFFixateState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixateState.h; sourceTree = "<group>"; };
-		695C12F609B108880021A27D /* GRFFixateState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixateState.m; sourceTree = "<group>"; };
+		694879F10486AA2000FE06D7 /* CRSStateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStateSystem.h; sourceTree = "<group>"; };
+		694879F20486AA2000FE06D7 /* CRSStateSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStateSystem.m; sourceTree = "<group>"; };
+		694879F90486AF9300FE06D7 /* CRSStopState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStopState.h; sourceTree = "<group>"; };
+		694879FA0486AF9300FE06D7 /* CRSStopState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStopState.m; sourceTree = "<group>"; };
+		694879FD0486B06A00FE06D7 /* CRSIdleState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSIdleState.h; sourceTree = "<group>"; };
+		694879FE0486B06A00FE06D7 /* CRSIdleState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSIdleState.m; sourceTree = "<group>"; };
+		695982CF080209EB0090B9A6 /* CRSFixGraceState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixGraceState.h; sourceTree = "<group>"; };
+		695982D0080209EB0090B9A6 /* CRSFixGraceState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixGraceState.m; sourceTree = "<group>"; };
+		695C12F509B108880021A27D /* CRSFixateState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixateState.h; sourceTree = "<group>"; };
+		695C12F609B108880021A27D /* CRSFixateState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixateState.m; sourceTree = "<group>"; };
 		6968EA58059DDD1900E33065 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		696D8C8A075D683B0057453A /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
-		6983253D0486BE9600FE06D7 /* GRFIntertrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSIntertrialState.h; sourceTree = "<group>"; };
-		6983253E0486BE9600FE06D7 /* GRFIntertrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSIntertrialState.m; sourceTree = "<group>"; };
+		6983253D0486BE9600FE06D7 /* CRSIntertrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSIntertrialState.h; sourceTree = "<group>"; };
+		6983253E0486BE9600FE06D7 /* CRSIntertrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSIntertrialState.m; sourceTree = "<group>"; };
 		69975550043E645C00F95509 /* UtilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityFunctions.m; sourceTree = "<group>"; };
 		69B5A7C80471D9E400F95509 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSBehaviorController.nib; sourceTree = "<group>"; };
-		69B5A7CA0471DBA300F95509 /* GRFXTController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSXTController.h; sourceTree = "<group>"; };
-		69B5A7CB0471DBA300F95509 /* GRFXTController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSXTController.m; sourceTree = "<group>"; };
+		69B5A7CA0471DBA300F95509 /* CRSXTController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSXTController.h; sourceTree = "<group>"; };
+		69B5A7CB0471DBA300F95509 /* CRSXTController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSXTController.m; sourceTree = "<group>"; };
 		69B9AE700482FB9F00F95509 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSSummaryController.nib; sourceTree = "<group>"; };
-		69B9AE720482FBDD00F95509 /* GRFSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSummaryController.h; sourceTree = "<group>"; };
-		69B9AE730482FBDD00F95509 /* GRFSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSummaryController.m; sourceTree = "<group>"; };
+		69B9AE720482FBDD00F95509 /* CRSSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSummaryController.h; sourceTree = "<group>"; };
+		69B9AE730482FBDD00F95509 /* CRSSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSummaryController.m; sourceTree = "<group>"; };
 		69E247A107A5527C00DDC096 /* CRSMap_Prefix.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSMap_Prefix.h; sourceTree = "<group>"; };
-		69E247A207A5527C00DDC096 /* GRF.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRS.h; sourceTree = "<group>"; };
+		69E247A207A5527C00DDC096 /* CRS.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRS.h; sourceTree = "<group>"; };
 		69E247A907A5529700DDC096 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69E247C907A5562500DDC096 /* CRSMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSMap.h; sourceTree = "<group>"; };
 		69E247CA07A5562500DDC096 /* CRSMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSMap.m; sourceTree = "<group>"; };
 		69E24E1607A5C21F00DDC096 /* CRSMap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CRSMap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilityFunctions.h; sourceTree = "<group>"; };
-		69E8A0400486D3B700FE06D7 /* GRFEndtrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSEndtrialState.h; sourceTree = "<group>"; };
-		69E8A0410486D3B700FE06D7 /* GRFEndtrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSEndtrialState.m; sourceTree = "<group>"; };
-		69E8A0440486D59800FE06D7 /* GRFStarttrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStarttrialState.h; sourceTree = "<group>"; };
-		69E8A0450486D59800FE06D7 /* GRFStarttrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStarttrialState.m; sourceTree = "<group>"; };
-		69E8A0480486D97300FE06D7 /* GRFBlockedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSBlockedState.h; sourceTree = "<group>"; };
-		69E8A0490486D97300FE06D7 /* GRFBlockedState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSBlockedState.m; sourceTree = "<group>"; };
-		69E8A04C0486DB1300FE06D7 /* GRFFixonState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixonState.h; sourceTree = "<group>"; };
-		69E8A04D0486DB1300FE06D7 /* GRFFixonState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixonState.m; sourceTree = "<group>"; };
-		69E8A05C0486F0A700FE06D7 /* GRFStimulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStimulate.h; sourceTree = "<group>"; };
-		69E8A05D0486F0A700FE06D7 /* GRFStimulate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStimulate.m; sourceTree = "<group>"; };
-		69E8A0640486F23700FE06D7 /* GRFReactState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSReactState.h; sourceTree = "<group>"; };
-		69E8A0650486F23700FE06D7 /* GRFReactState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSReactState.m; sourceTree = "<group>"; };
-		69E96F8D0472CC5C00F95509 /* GRFEyeXYController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSEyeXYController.h; sourceTree = "<group>"; };
-		69E96F8E0472CC5C00F95509 /* GRFEyeXYController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSEyeXYController.m; sourceTree = "<group>"; };
+		69E8A0400486D3B700FE06D7 /* CRSEndtrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSEndtrialState.h; sourceTree = "<group>"; };
+		69E8A0410486D3B700FE06D7 /* CRSEndtrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSEndtrialState.m; sourceTree = "<group>"; };
+		69E8A0440486D59800FE06D7 /* CRSStarttrialState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStarttrialState.h; sourceTree = "<group>"; };
+		69E8A0450486D59800FE06D7 /* CRSStarttrialState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStarttrialState.m; sourceTree = "<group>"; };
+		69E8A0480486D97300FE06D7 /* CRSBlockedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSBlockedState.h; sourceTree = "<group>"; };
+		69E8A0490486D97300FE06D7 /* CRSBlockedState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSBlockedState.m; sourceTree = "<group>"; };
+		69E8A04C0486DB1300FE06D7 /* CRSFixonState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSFixonState.h; sourceTree = "<group>"; };
+		69E8A04D0486DB1300FE06D7 /* CRSFixonState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSFixonState.m; sourceTree = "<group>"; };
+		69E8A05C0486F0A700FE06D7 /* CRSStimulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSStimulate.h; sourceTree = "<group>"; };
+		69E8A05D0486F0A700FE06D7 /* CRSStimulate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSStimulate.m; sourceTree = "<group>"; };
+		69E8A0640486F23700FE06D7 /* CRSReactState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSReactState.h; sourceTree = "<group>"; };
+		69E8A0650486F23700FE06D7 /* CRSReactState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSReactState.m; sourceTree = "<group>"; };
+		69E96F8D0472CC5C00F95509 /* CRSEyeXYController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSEyeXYController.h; sourceTree = "<group>"; };
+		69E96F8E0472CC5C00F95509 /* CRSEyeXYController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSEyeXYController.m; sourceTree = "<group>"; };
 		69E96F960472CCC300F95509 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSEyeXYController.nib; sourceTree = "<group>"; };
-		69EAD86F04352E4F00F95509 /* GRFStimuli.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSStimuli.h; sourceTree = "<group>"; };
-		69EAD87004352E4F00F95509 /* GRFStimuli.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSStimuli.m; sourceTree = "<group>"; };
-		69F13A5F04716CF400F95509 /* GRFSpikeController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSpikeController.h; sourceTree = "<group>"; };
-		69F13A6004716CF400F95509 /* GRFSpikeController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSpikeController.m; sourceTree = "<group>"; };
+		69EAD86F04352E4F00F95509 /* CRSStimuli.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSStimuli.h; sourceTree = "<group>"; };
+		69EAD87004352E4F00F95509 /* CRSStimuli.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSStimuli.m; sourceTree = "<group>"; };
+		69F13A5F04716CF400F95509 /* CRSSpikeController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSpikeController.h; sourceTree = "<group>"; };
+		69F13A6004716CF400F95509 /* CRSSpikeController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSpikeController.m; sourceTree = "<group>"; };
 		69F13A6404716D0D00F95509 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSSpikeController.nib; sourceTree = "<group>"; };
-		69F443A305DEE56D000705E2 /* GRFSaccadeState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSaccadeState.h; sourceTree = "<group>"; };
-		69F443A405DEE56D000705E2 /* GRFSaccadeState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSaccadeState.m; sourceTree = "<group>"; };
-		AF0220F60B36FFEA0029778E /* GRFTooFastState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSTooFastState.h; sourceTree = "<group>"; };
-		AF0220F70B37000B0029778E /* GRFTooFastState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSTooFastState.m; sourceTree = "<group>"; };
-		AFCACCF60B9D2F610033D226 /* GRFRoundToStimCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSRoundToStimCycle.h; sourceTree = "<group>"; };
-		AFCACCF70B9D2F610033D226 /* GRFRoundToStimCycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSRoundToStimCycle.m; sourceTree = "<group>"; };
+		69F443A305DEE56D000705E2 /* CRSSaccadeState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSaccadeState.h; sourceTree = "<group>"; };
+		69F443A405DEE56D000705E2 /* CRSSaccadeState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSaccadeState.m; sourceTree = "<group>"; };
+		AF0220F60B36FFEA0029778E /* CRSTooFastState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSTooFastState.h; sourceTree = "<group>"; };
+		AF0220F70B37000B0029778E /* CRSTooFastState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSTooFastState.m; sourceTree = "<group>"; };
+		AFCACCF60B9D2F610033D226 /* CRSRoundToStimCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSRoundToStimCycle.h; sourceTree = "<group>"; };
+		AFCACCF70B9D2F610033D226 /* CRSRoundToStimCycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSRoundToStimCycle.m; sourceTree = "<group>"; };
 		E7A443DD0132ED6B0ACA2124 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		FC1EC3720F5F3E6300C95582 /* GRFDigitalOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSDigitalOut.m; sourceTree = "<group>"; };
-		FC1EC3790F5F3E9800C95582 /* GRFDigitalOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSDigitalOut.h; sourceTree = "<group>"; };
+		FC1EC3720F5F3E6300C95582 /* CRSDigitalOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSDigitalOut.m; sourceTree = "<group>"; };
+		FC1EC3790F5F3E9800C95582 /* CRSDigitalOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSDigitalOut.h; sourceTree = "<group>"; };
 		FCCE5D130CC7BE8200E610EE /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSStimulusMapping.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				69E247A107A5527C00DDC096 /* CRSMap_Prefix.h */,
-				69E247A207A5527C00DDC096 /* GRF.h */,
+				69E247A207A5527C00DDC096 /* CRS.h */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */,
 				69975550043E645C00F95509 /* UtilityFunctions.m */,
@@ -229,12 +229,12 @@
 			children = (
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				29B97318FDCFA39411CA2CEA /* CRSMap.nib */,
-				69B5A7C70471D9E400F95509 /* GRFBehaviorController.nib */,
-				69E96F950472CCC300F95509 /* GRFEyeXYController.nib */,
-				69F13A6304716D0D00F95509 /* GRFSpikeController.nib */,
-				69B9AE6F0482FB9F00F95509 /* GRFSummaryController.nib */,
-				690B7991047ADABA00A80164 /* GRFXTController.nib */,
-				FCCE5D120CC7BE8200E610EE /* GRFStimulusMapping.nib */,
+				69B5A7C70471D9E400F95509 /* CRSBehaviorController.nib */,
+				69E96F950472CCC300F95509 /* CRSEyeXYController.nib */,
+				69F13A6304716D0D00F95509 /* CRSSpikeController.nib */,
+				69B9AE6F0482FB9F00F95509 /* CRSSummaryController.nib */,
+				690B7991047ADABA00A80164 /* CRSXTController.nib */,
+				FCCE5D120CC7BE8200E610EE /* CRSStimulusMapping.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -251,16 +251,16 @@
 		694879ED0486A83B00FE06D7 /* On-line Display */ = {
 			isa = PBXGroup;
 			children = (
-				690B798D047ADA9F00A80164 /* GRFBehaviorController.h */,
-				690B798E047ADA9F00A80164 /* GRFBehaviorController.m */,
-				69E96F8D0472CC5C00F95509 /* GRFEyeXYController.h */,
-				69E96F8E0472CC5C00F95509 /* GRFEyeXYController.m */,
-				69F13A5F04716CF400F95509 /* GRFSpikeController.h */,
-				69F13A6004716CF400F95509 /* GRFSpikeController.m */,
-				69B9AE720482FBDD00F95509 /* GRFSummaryController.h */,
-				69B9AE730482FBDD00F95509 /* GRFSummaryController.m */,
-				69B5A7CA0471DBA300F95509 /* GRFXTController.h */,
-				69B5A7CB0471DBA300F95509 /* GRFXTController.m */,
+				690B798D047ADA9F00A80164 /* CRSBehaviorController.h */,
+				690B798E047ADA9F00A80164 /* CRSBehaviorController.m */,
+				69E96F8D0472CC5C00F95509 /* CRSEyeXYController.h */,
+				69E96F8E0472CC5C00F95509 /* CRSEyeXYController.m */,
+				69F13A5F04716CF400F95509 /* CRSSpikeController.h */,
+				69F13A6004716CF400F95509 /* CRSSpikeController.m */,
+				69B9AE720482FBDD00F95509 /* CRSSummaryController.h */,
+				69B9AE730482FBDD00F95509 /* CRSSummaryController.m */,
+				69B5A7CA0471DBA300F95509 /* CRSXTController.h */,
+				69B5A7CB0471DBA300F95509 /* CRSXTController.m */,
 			);
 			name = "On-line Display";
 			sourceTree = "<group>";
@@ -268,34 +268,34 @@
 		694879EE0486A85E00FE06D7 /* State System */ = {
 			isa = PBXGroup;
 			children = (
-				694879F10486AA2000FE06D7 /* GRFStateSystem.h */,
-				694879F20486AA2000FE06D7 /* GRFStateSystem.m */,
-				69E8A0480486D97300FE06D7 /* GRFBlockedState.h */,
-				69E8A0490486D97300FE06D7 /* GRFBlockedState.m */,
-				69E8A0400486D3B700FE06D7 /* GRFEndtrialState.h */,
-				69E8A0410486D3B700FE06D7 /* GRFEndtrialState.m */,
-				695982CF080209EB0090B9A6 /* GRFFixGraceState.h */,
-				695982D0080209EB0090B9A6 /* GRFFixGraceState.m */,
-				69E8A04C0486DB1300FE06D7 /* GRFFixonState.h */,
-				69E8A04D0486DB1300FE06D7 /* GRFFixonState.m */,
-				694879FD0486B06A00FE06D7 /* GRFIdleState.h */,
-				694879FE0486B06A00FE06D7 /* GRFIdleState.m */,
-				6983253D0486BE9600FE06D7 /* GRFIntertrialState.h */,
-				6983253E0486BE9600FE06D7 /* GRFIntertrialState.m */,
-				695C12F509B108880021A27D /* GRFFixateState.h */,
-				695C12F609B108880021A27D /* GRFFixateState.m */,
-				69E8A0640486F23700FE06D7 /* GRFReactState.h */,
-				69E8A0650486F23700FE06D7 /* GRFReactState.m */,
-				69F443A305DEE56D000705E2 /* GRFSaccadeState.h */,
-				69F443A405DEE56D000705E2 /* GRFSaccadeState.m */,
-				69E8A0440486D59800FE06D7 /* GRFStarttrialState.h */,
-				69E8A0450486D59800FE06D7 /* GRFStarttrialState.m */,
-				69E8A05C0486F0A700FE06D7 /* GRFStimulate.h */,
-				69E8A05D0486F0A700FE06D7 /* GRFStimulate.m */,
-				694879F90486AF9300FE06D7 /* GRFStopState.h */,
-				694879FA0486AF9300FE06D7 /* GRFStopState.m */,
-				AF0220F60B36FFEA0029778E /* GRFTooFastState.h */,
-				AF0220F70B37000B0029778E /* GRFTooFastState.m */,
+				694879F10486AA2000FE06D7 /* CRSStateSystem.h */,
+				694879F20486AA2000FE06D7 /* CRSStateSystem.m */,
+				69E8A0480486D97300FE06D7 /* CRSBlockedState.h */,
+				69E8A0490486D97300FE06D7 /* CRSBlockedState.m */,
+				69E8A0400486D3B700FE06D7 /* CRSEndtrialState.h */,
+				69E8A0410486D3B700FE06D7 /* CRSEndtrialState.m */,
+				695982CF080209EB0090B9A6 /* CRSFixGraceState.h */,
+				695982D0080209EB0090B9A6 /* CRSFixGraceState.m */,
+				69E8A04C0486DB1300FE06D7 /* CRSFixonState.h */,
+				69E8A04D0486DB1300FE06D7 /* CRSFixonState.m */,
+				694879FD0486B06A00FE06D7 /* CRSIdleState.h */,
+				694879FE0486B06A00FE06D7 /* CRSIdleState.m */,
+				6983253D0486BE9600FE06D7 /* CRSIntertrialState.h */,
+				6983253E0486BE9600FE06D7 /* CRSIntertrialState.m */,
+				695C12F509B108880021A27D /* CRSFixateState.h */,
+				695C12F609B108880021A27D /* CRSFixateState.m */,
+				69E8A0640486F23700FE06D7 /* CRSReactState.h */,
+				69E8A0650486F23700FE06D7 /* CRSReactState.m */,
+				69F443A305DEE56D000705E2 /* CRSSaccadeState.h */,
+				69F443A405DEE56D000705E2 /* CRSSaccadeState.m */,
+				69E8A0440486D59800FE06D7 /* CRSStarttrialState.h */,
+				69E8A0450486D59800FE06D7 /* CRSStarttrialState.m */,
+				69E8A05C0486F0A700FE06D7 /* CRSStimulate.h */,
+				69E8A05D0486F0A700FE06D7 /* CRSStimulate.m */,
+				694879F90486AF9300FE06D7 /* CRSStopState.h */,
+				694879FA0486AF9300FE06D7 /* CRSStopState.m */,
+				AF0220F60B36FFEA0029778E /* CRSTooFastState.h */,
+				AF0220F70B37000B0029778E /* CRSTooFastState.m */,
 			);
 			name = "State System";
 			sourceTree = "<group>";
@@ -305,12 +305,12 @@
 			children = (
 				69E247C907A5562500DDC096 /* CRSMap.h */,
 				69E247CA07A5562500DDC096 /* CRSMap.m */,
-				FC1EC3790F5F3E9800C95582 /* GRFDigitalOut.h */,
-				FC1EC3720F5F3E6300C95582 /* GRFDigitalOut.m */,
-				69EAD86F04352E4F00F95509 /* GRFStimuli.h */,
-				69EAD87004352E4F00F95509 /* GRFStimuli.m */,
-				692E5AAD0CDBECE300E0BCB8 /* GRFMapStimTable.h */,
-				692E5AAE0CDBECE300E0BCB8 /* GRFMapStimTable.m */,
+				FC1EC3790F5F3E9800C95582 /* CRSDigitalOut.h */,
+				FC1EC3720F5F3E6300C95582 /* CRSDigitalOut.m */,
+				69EAD86F04352E4F00F95509 /* CRSStimuli.h */,
+				69EAD87004352E4F00F95509 /* CRSStimuli.m */,
+				692E5AAD0CDBECE300E0BCB8 /* CRSMapStimTable.h */,
+				692E5AAE0CDBECE300E0BCB8 /* CRSMapStimTable.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -327,8 +327,8 @@
 		AFCB086E0B9E0F4600422186 /* Transformers */ = {
 			isa = PBXGroup;
 			children = (
-				AFCACCF60B9D2F610033D226 /* GRFRoundToStimCycle.h */,
-				AFCACCF70B9D2F610033D226 /* GRFRoundToStimCycle.m */,
+				AFCACCF60B9D2F610033D226 /* CRSRoundToStimCycle.h */,
+				AFCACCF70B9D2F610033D226 /* CRSRoundToStimCycle.m */,
 			);
 			name = Transformers;
 			sourceTree = "<group>";
@@ -386,34 +386,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				69E24E1B07A5C25A00DDC096 /* CRSMap.h in Resources */,
-				695982D1080209EB0090B9A6 /* GRFFixGraceState.h in Resources */,
-				69E24E1E07A5C25E00DDC096 /* GRFStimuli.h in Resources */,
-				69E24E2107A5C27000DDC096 /* GRFBehaviorController.h in Resources */,
-				69E24E2307A5C27200DDC096 /* GRFEyeXYController.h in Resources */,
-				69E24E2507A5C27300DDC096 /* GRFSpikeController.h in Resources */,
-				69E24E2707A5C27400DDC096 /* GRFSummaryController.h in Resources */,
-				69E24E2907A5C27700DDC096 /* GRFXTController.h in Resources */,
-				69E24E2D07A5C29700DDC096 /* GRFStateSystem.h in Resources */,
-				69E24E2F07A5C29900DDC096 /* GRFBlockedState.h in Resources */,
-				69E24E3107A5C29B00DDC096 /* GRFEndtrialState.h in Resources */,
-				69E24E3307A5C29C00DDC096 /* GRFFixonState.h in Resources */,
-				69E24E3707A5C29F00DDC096 /* GRFIdleState.h in Resources */,
-				69E24E3907A5C2A000DDC096 /* GRFIntertrialState.h in Resources */,
-				69E24E3B07A5C2A200DDC096 /* GRFStimulate.h in Resources */,
-				69E24E4307A5C2AC00DDC096 /* GRFReactState.h in Resources */,
-				69E24E4507A5C2AD00DDC096 /* GRFSaccadeState.h in Resources */,
-				69E24E4907A5C2B000DDC096 /* GRFStarttrialState.h in Resources */,
-				69E24E4B07A5C2B100DDC096 /* GRFStopState.h in Resources */,
+				695982D1080209EB0090B9A6 /* CRSFixGraceState.h in Resources */,
+				69E24E1E07A5C25E00DDC096 /* CRSStimuli.h in Resources */,
+				69E24E2107A5C27000DDC096 /* CRSBehaviorController.h in Resources */,
+				69E24E2307A5C27200DDC096 /* CRSEyeXYController.h in Resources */,
+				69E24E2507A5C27300DDC096 /* CRSSpikeController.h in Resources */,
+				69E24E2707A5C27400DDC096 /* CRSSummaryController.h in Resources */,
+				69E24E2907A5C27700DDC096 /* CRSXTController.h in Resources */,
+				69E24E2D07A5C29700DDC096 /* CRSStateSystem.h in Resources */,
+				69E24E2F07A5C29900DDC096 /* CRSBlockedState.h in Resources */,
+				69E24E3107A5C29B00DDC096 /* CRSEndtrialState.h in Resources */,
+				69E24E3307A5C29C00DDC096 /* CRSFixonState.h in Resources */,
+				69E24E3707A5C29F00DDC096 /* CRSIdleState.h in Resources */,
+				69E24E3907A5C2A000DDC096 /* CRSIntertrialState.h in Resources */,
+				69E24E3B07A5C2A200DDC096 /* CRSStimulate.h in Resources */,
+				69E24E4307A5C2AC00DDC096 /* CRSReactState.h in Resources */,
+				69E24E4507A5C2AD00DDC096 /* CRSSaccadeState.h in Resources */,
+				69E24E4907A5C2B000DDC096 /* CRSStarttrialState.h in Resources */,
+				69E24E4B07A5C2B100DDC096 /* CRSStopState.h in Resources */,
 				69E24E4F07A5C2BB00DDC096 /* CRSMap_Prefix.h in Resources */,
-				69E24E5007A5C2BC00DDC096 /* GRF.h in Resources */,
+				69E24E5007A5C2BC00DDC096 /* CRS.h in Resources */,
 				69E24E5207A5C2BD00DDC096 /* UtilityFunctions.h in Resources */,
 				69E24E5507A5C2C400DDC096 /* CRSMap.nib in Resources */,
-				69E24E5607A5C2C500DDC096 /* GRFBehaviorController.nib in Resources */,
-				69E24E5707A5C2C500DDC096 /* GRFEyeXYController.nib in Resources */,
-				69E24E5807A5C2C700DDC096 /* GRFSpikeController.nib in Resources */,
-				69E24E5A07A5C2C900DDC096 /* GRFSummaryController.nib in Resources */,
-				69E24E5B07A5C2C900DDC096 /* GRFXTController.nib in Resources */,
-				FCCE5D140CC7BE8200E610EE /* GRFStimulusMapping.nib in Resources */,
+				69E24E5607A5C2C500DDC096 /* CRSBehaviorController.nib in Resources */,
+				69E24E5707A5C2C500DDC096 /* CRSEyeXYController.nib in Resources */,
+				69E24E5807A5C2C700DDC096 /* CRSSpikeController.nib in Resources */,
+				69E24E5A07A5C2C900DDC096 /* CRSSummaryController.nib in Resources */,
+				69E24E5B07A5C2C900DDC096 /* CRSXTController.nib in Resources */,
+				FCCE5D140CC7BE8200E610EE /* CRSStimulusMapping.nib in Resources */,
 				69E24E5C07A5C2D100DDC096 /* UserDefaults.plist in Resources */,
 				69E24E5407A5C2C300DDC096 /* InfoPlist.strings in Resources */,
 			);
@@ -427,31 +427,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				69E24E1C07A5C25B00DDC096 /* CRSMap.m in Sources */,
-				69E24E1F07A5C25F00DDC096 /* GRFStimuli.m in Sources */,
-				69E24E2207A5C27100DDC096 /* GRFBehaviorController.m in Sources */,
-				69E24E2407A5C27200DDC096 /* GRFEyeXYController.m in Sources */,
-				69E24E2807A5C27600DDC096 /* GRFSummaryController.m in Sources */,
-				69E24E2A07A5C27800DDC096 /* GRFXTController.m in Sources */,
-				69E24E2E07A5C29800DDC096 /* GRFStateSystem.m in Sources */,
-				69E24E3007A5C29A00DDC096 /* GRFBlockedState.m in Sources */,
-				69E24E3207A5C29B00DDC096 /* GRFEndtrialState.m in Sources */,
-				69E24E3407A5C29D00DDC096 /* GRFFixonState.m in Sources */,
-				69E24E3807A5C2A000DDC096 /* GRFIdleState.m in Sources */,
-				69E24E3A07A5C2A100DDC096 /* GRFIntertrialState.m in Sources */,
-				69E24E3C07A5C2A300DDC096 /* GRFStimulate.m in Sources */,
-				69E24E4407A5C2AC00DDC096 /* GRFReactState.m in Sources */,
-				69E24E4607A5C2AE00DDC096 /* GRFSaccadeState.m in Sources */,
-				69E24E4A07A5C2B000DDC096 /* GRFStarttrialState.m in Sources */,
-				69E24E4C07A5C2B200DDC096 /* GRFStopState.m in Sources */,
+				69E24E2207A5C27100DDC096 /* CRSBehaviorController.m in Sources */,
+				69E24E2407A5C27200DDC096 /* CRSEyeXYController.m in Sources */,
+				69E24E2807A5C27600DDC096 /* CRSSummaryController.m in Sources */,
+				69E24E2A07A5C27800DDC096 /* CRSXTController.m in Sources */,
+				69E24E2E07A5C29800DDC096 /* CRSStateSystem.m in Sources */,
+				69E24E3007A5C29A00DDC096 /* CRSBlockedState.m in Sources */,
+				69E24E3207A5C29B00DDC096 /* CRSEndtrialState.m in Sources */,
+				69E24E3407A5C29D00DDC096 /* CRSFixonState.m in Sources */,
+				69E24E3807A5C2A000DDC096 /* CRSIdleState.m in Sources */,
+				69E24E3A07A5C2A100DDC096 /* CRSIntertrialState.m in Sources */,
+				69E24E3C07A5C2A300DDC096 /* CRSStimulate.m in Sources */,
+				69E24E4407A5C2AC00DDC096 /* CRSReactState.m in Sources */,
+				69E24E4607A5C2AE00DDC096 /* CRSSaccadeState.m in Sources */,
+				69E24E4A07A5C2B000DDC096 /* CRSStarttrialState.m in Sources */,
+				69E24E4C07A5C2B200DDC096 /* CRSStopState.m in Sources */,
 				69E24E5107A5C2BD00DDC096 /* main.m in Sources */,
 				69E24E5307A5C2BE00DDC096 /* UtilityFunctions.m in Sources */,
-				695982D2080209EB0090B9A6 /* GRFFixGraceState.m in Sources */,
-				69BDCE44098BD2CA00578E91 /* GRFSpikeController.m in Sources */,
-				695C12F709B108880021A27D /* GRFFixateState.m in Sources */,
-				AF0220F80B37000B0029778E /* GRFTooFastState.m in Sources */,
-				AFCACCF80B9D2F610033D226 /* GRFRoundToStimCycle.m in Sources */,
-				692E5AAF0CDBECE300E0BCB8 /* GRFMapStimTable.m in Sources */,
-				FC1EC3730F5F3E6300C95582 /* GRFDigitalOut.m in Sources */,
+				695982D2080209EB0090B9A6 /* CRSFixGraceState.m in Sources */,
+				69BDCE44098BD2CA00578E91 /* CRSSpikeController.m in Sources */,
+				695C12F709B108880021A27D /* CRSFixateState.m in Sources */,
+				AF0220F80B37000B0029778E /* CRSTooFastState.m in Sources */,
+				AFCACCF80B9D2F610033D226 /* CRSRoundToStimCycle.m in Sources */,
+				692E5AAF0CDBECE300E0BCB8 /* CRSMapStimTable.m in Sources */,
+				FC1EC3730F5F3E6300C95582 /* CRSDigitalOut.m in Sources */,
+				A1F6F3E21883BE4B00B32245 /* CRSStimuli.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +474,7 @@
 			name = CRSMap.nib;
 			sourceTree = "<group>";
 		};
-		690B7991047ADABA00A80164 /* GRFXTController.nib */ = {
+		690B7991047ADABA00A80164 /* CRSXTController.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				690B7992047ADABA00A80164 /* English */,
@@ -482,7 +482,7 @@
 			name = CRSXTController.nib;
 			sourceTree = "<group>";
 		};
-		69B5A7C70471D9E400F95509 /* GRFBehaviorController.nib */ = {
+		69B5A7C70471D9E400F95509 /* CRSBehaviorController.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69B5A7C80471D9E400F95509 /* English */,
@@ -490,7 +490,7 @@
 			name = CRSBehaviorController.nib;
 			sourceTree = "<group>";
 		};
-		69B9AE6F0482FB9F00F95509 /* GRFSummaryController.nib */ = {
+		69B9AE6F0482FB9F00F95509 /* CRSSummaryController.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69B9AE700482FB9F00F95509 /* English */,
@@ -498,7 +498,7 @@
 			name = CRSSummaryController.nib;
 			sourceTree = "<group>";
 		};
-		69E96F950472CCC300F95509 /* GRFEyeXYController.nib */ = {
+		69E96F950472CCC300F95509 /* CRSEyeXYController.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69E96F960472CCC300F95509 /* English */,
@@ -506,7 +506,7 @@
 			name = CRSEyeXYController.nib;
 			sourceTree = "<group>";
 		};
-		69F13A6304716D0D00F95509 /* GRFSpikeController.nib */ = {
+		69F13A6304716D0D00F95509 /* CRSSpikeController.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69F13A6404716D0D00F95509 /* English */,
@@ -514,7 +514,7 @@
 			name = CRSSpikeController.nib;
 			sourceTree = "<group>";
 		};
-		FCCE5D120CC7BE8200E610EE /* GRFStimulusMapping.nib */ = {
+		FCCE5D120CC7BE8200E610EE /* CRSStimulusMapping.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FCCE5D130CC7BE8200E610EE /* English */,

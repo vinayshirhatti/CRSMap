@@ -73,6 +73,7 @@
                 blockStatus.validRepsDone[trial.orientationChangeIndex]++;
                 [[(CRSMap *)task mapStimTable0] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
                 [[(CRSMap *)task mapStimTable1] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
+                [[(CRSMap *)task mapStimTable2] tallyStimList:nil upToFrame:[stimuli targetOnFrame]]; // Added by Vinay - for the centre gabor
                 mappingBlockStatus =  [[(CRSMap *)task mapStimTable0] mappingBlockStatus];
             }
         }

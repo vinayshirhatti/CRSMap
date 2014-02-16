@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.SystemVersion">11G63</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">2549</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSArrayController</string>
@@ -36,7 +36,7 @@
 		</object>
 		<array class="NSMutableArray" key="IBDocument.RootObjects" id="116951054">
 			<object class="NSCustomObject" id="88260097">
-				<string key="NSClassName">GRFMappingController</string>
+				<string key="NSClassName">CRSMappingController</string>
 			</object>
 			<object class="NSCustomObject" id="423637973">
 				<string key="NSClassName">FirstResponder</string>
@@ -66,6 +66,7 @@
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{20, 202}, {261, 52}}</string>
 							<reference key="NSSuperview" ref="650266930"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="179595569"/>
 							<bool key="NSEnabled">YES</bool>
 							<int key="NSNumRows">2</int>
@@ -150,11 +151,12 @@
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{13, 10}, {498, 162}}</string>
 							<reference key="NSSuperview" ref="650266930"/>
-							<reference key="NSNextKeyView" ref="920162686"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="688441403"/>
 							<array class="NSMutableArray" key="NSTabViewItems">
 								<object class="NSTabViewItem" id="988143799">
 									<object class="NSView" key="NSView" id="920162686">
-										<reference key="NSNextResponder" ref="179595569"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSScrollView" id="785476889">
@@ -446,7 +448,6 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {478, 116}}</string>
-										<reference key="NSSuperview" ref="179595569"/>
 										<reference key="NSNextKeyView" ref="785476889"/>
 									</object>
 									<string key="NSLabel">Left</string>
@@ -455,7 +456,7 @@
 								</object>
 								<object class="NSTabViewItem" id="151415460">
 									<object class="NSView" key="NSView" id="688441403">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="179595569"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSScrollView" id="34467404">
@@ -471,13 +472,15 @@
 																<int key="NSvFlags">256</int>
 																<string key="NSFrameSize">{436, 58}</string>
 																<reference key="NSSuperview" ref="498578692"/>
-																<reference key="NSNextKeyView" ref="574265753"/>
+																<reference key="NSWindow"/>
+																<reference key="NSNextKeyView"/>
 																<bool key="NSEnabled">YES</bool>
 																<object class="NSTableHeaderView" key="NSHeaderView" id="594116681">
 																	<reference key="NSNextResponder" ref="829406834"/>
 																	<int key="NSvFlags">256</int>
 																	<string key="NSFrameSize">{436, 17}</string>
 																	<reference key="NSSuperview" ref="829406834"/>
+																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="498578692"/>
 																	<reference key="NSTableView" ref="766182581"/>
 																</object>
@@ -661,6 +664,7 @@
 														</array>
 														<string key="NSFrame">{{1, 17}, {436, 58}}</string>
 														<reference key="NSSuperview" ref="34467404"/>
+														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="766182581"/>
 														<reference key="NSDocView" ref="766182581"/>
 														<reference key="NSBGColor" ref="123025622"/>
@@ -671,6 +675,7 @@
 														<int key="NSvFlags">-2147483392</int>
 														<string key="NSFrame">{{-100, -100}, {15, 58}}</string>
 														<reference key="NSSuperview" ref="34467404"/>
+														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="109977179"/>
 														<reference key="NSTarget" ref="34467404"/>
 														<string key="NSAction">_doScroller:</string>
@@ -681,6 +686,7 @@
 														<int key="NSvFlags">-2147483392</int>
 														<string key="NSFrame">{{-100, -100}, {421, 15}}</string>
 														<reference key="NSSuperview" ref="34467404"/>
+														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="829406834"/>
 														<int key="NSsFlags">1</int>
 														<reference key="NSTarget" ref="34467404"/>
@@ -695,6 +701,7 @@
 														</array>
 														<string key="NSFrame">{{1, 0}, {436, 17}}</string>
 														<reference key="NSSuperview" ref="34467404"/>
+														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="594116681"/>
 														<reference key="NSDocView" ref="594116681"/>
 														<reference key="NSBGColor" ref="123025622"/>
@@ -703,7 +710,8 @@
 												</array>
 												<string key="NSFrame">{{20, 20}, {438, 76}}</string>
 												<reference key="NSSuperview" ref="688441403"/>
-												<reference key="NSNextKeyView" ref="498578692"/>
+												<reference key="NSWindow"/>
+												<reference key="NSNextKeyView" ref="574265753"/>
 												<int key="NSsFlags">133122</int>
 												<reference key="NSVScroller" ref="574265753"/>
 												<reference key="NSHScroller" ref="109977179"/>
@@ -713,6 +721,8 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {478, 116}}</string>
+										<reference key="NSSuperview" ref="179595569"/>
+										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="34467404"/>
 									</object>
 									<string key="NSLabel">Right</string>
@@ -720,7 +730,7 @@
 									<reference key="NSTabView" ref="179595569"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="988143799"/>
+							<reference key="NSSelectedTabViewItem" ref="151415460"/>
 							<object class="NSFont" key="NSFont">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">13</double>
@@ -730,18 +740,19 @@
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="920162686"/>
+								<reference ref="688441403"/>
 							</array>
 						</object>
 					</array>
 					<string key="NSFrameSize">{524, 274}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="878167619"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{137, 152}</string>
 				<string key="NSMaxSize">{661, 693}</string>
-				<string key="NSFrameAutosaveName">GRFStimulusMapping</string>
+				<string key="NSFrameAutosaveName">CRSStimulusMapping</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 			<object class="NSUserDefaultsController" id="670064843">
@@ -839,35 +850,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.GRFMapDutyCyclePC</string>
+						<string key="label">value: values.CRSMapDutyCyclePC</string>
 						<reference key="source" ref="1002914772"/>
 						<reference key="destination" ref="793322423"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="1002914772"/>
 							<reference key="NSDestination" ref="793322423"/>
-							<string key="NSLabel">value: values.GRFMapDutyCyclePC</string>
+							<string key="NSLabel">value: values.CRSMapDutyCyclePC</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.GRFMapDutyCyclePC</string>
+							<string key="NSKeyPath">values.CRSMapDutyCyclePC</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">241</int>
+					<int key="connectionID">284</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.GRFMapFreqHz</string>
+						<string key="label">value: values.CRSMapFreqHz</string>
 						<reference key="source" ref="699878863"/>
 						<reference key="destination" ref="793322423"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="699878863"/>
 							<reference key="NSDestination" ref="793322423"/>
-							<string key="NSLabel">value: values.GRFMapFreqHz</string>
+							<string key="NSLabel">value: values.CRSMapFreqHz</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.GRFMapFreqHz</string>
+							<string key="NSKeyPath">values.CRSMapFreqHz</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">240</int>
+					<int key="connectionID">283</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1031,35 +1042,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: values.GRFLeftStimTable</string>
+						<string key="label">contentArray: values.CRSLeftStimTable</string>
 						<reference key="source" ref="280759081"/>
 						<reference key="destination" ref="670064843"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="280759081"/>
 							<reference key="NSDestination" ref="670064843"/>
-							<string key="NSLabel">contentArray: values.GRFLeftStimTable</string>
+							<string key="NSLabel">contentArray: values.CRSLeftStimTable</string>
 							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">values.GRFLeftStimTable</string>
+							<string key="NSKeyPath">values.CRSLeftStimTable</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">245</int>
+					<int key="connectionID">286</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: values.GRFRightStimTable</string>
+						<string key="label">contentArray: values.CRSRightStimTable</string>
 						<reference key="source" ref="107368257"/>
 						<reference key="destination" ref="670064843"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="107368257"/>
 							<reference key="NSDestination" ref="670064843"/>
-							<string key="NSLabel">contentArray: values.GRFRightStimTable</string>
+							<string key="NSLabel">contentArray: values.CRSRightStimTable</string>
 							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">values.GRFRightStimTable</string>
+							<string key="NSKeyPath">values.CRSRightStimTable</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">255</int>
+					<int key="connectionID">288</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1460,6 +1471,11 @@
 				<string key="232.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="233.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="238.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<object class="NSMutableAttributedString" key="238.notes">
+					<object class="NSMutableString" key="NSString">
+						<characters key="NS.bytes"/>
+					</object>
+				</object>
 				<string key="239.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="242.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="243.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1489,7 +1505,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">282</int>
+			<int key="maxID">288</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

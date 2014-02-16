@@ -102,6 +102,7 @@ TrialDesc			trial;
 	}
 	[[(CRSMap *)task mapStimTable0] reset];
 	[[(CRSMap *)task mapStimTable1] reset];
+    [[(CRSMap *)task mapStimTable2] reset];                                         // [Vinay] - added for the centre gabor
 	mappingBlockStatus = [[(CRSMap *)task mapStimTable0] mappingBlockStatus];
 }
 
@@ -115,7 +116,7 @@ TrialDesc			trial;
 	float firingRateHz;
 	StimDesc *pSD = (StimDesc *)[eventData bytes];
 	
-    if (pSD->gaborIndex != kMapGabor1) {
+    if (pSD->gaborIndex != kMapGabor1) { // added this [Vinay] - "&& pSD->gaborIndex != kMapGabor2" and then removed it again. This loop will return for kMapGabor0 and 2
         return;                                                     // do nothing with the task stimuli
     }
 	firingRateHz = kMaxRate;

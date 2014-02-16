@@ -80,6 +80,8 @@
 		[digitalOutDevice digitalOutputBits:(0x4D30 | 0x8000)];
 	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] ) // New for CRS
 		[digitalOutDevice digitalOutputBits:(0x4D31 | 0x8000)];
+    else if ([eventName isEqualTo:@"mapping2"] || [eventName isEqualTo:@"M2"] )                     // [Vinay] - This and next line added for the centre gabor
+		[digitalOutDevice digitalOutputBits:(0x4D32 | 0x8000)];                                     // [Vinay] - !Check the digitalOutputBits here! verified CORRECT! '4D' corresponds to 'M' and '02' to '2'
 	else if ([eventName isEqualTo:@"stimulusOn"] || [eventName isEqualTo:@"ON"] )
 		[digitalOutDevice digitalOutputBits:(0x4F4E | 0x8000)];
 	else if ([eventName isEqualTo:@"stimulusOff"] || [eventName isEqualTo:@"OF"] )
@@ -96,7 +98,7 @@
 		[digitalOutDevice digitalOutputBits:(0x5346 | 0x8000)];
 	else if ([eventName isEqualTo:@"sigma"] || [eventName isEqualTo:@"SI"] )
 		[digitalOutDevice digitalOutputBits:(0x5349 | 0x8000)];
-	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] ) // New for CRS
+	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] ) // New for CRS - Not Vinay
 		[digitalOutDevice digitalOutputBits:(0x5354 | 0x8000)];
 	else if ([eventName isEqualTo:@"trialCertify"] || [eventName isEqualTo:@"TC"] )
 		[digitalOutDevice digitalOutputBits:(0x5443 | 0x8000)];
@@ -104,7 +106,7 @@
 		[digitalOutDevice digitalOutputBits:(0x5445 | 0x8000)];
 	else if ([eventName isEqualTo:@"temporalFreq"] || [eventName isEqualTo:@"TF"] )
 		[digitalOutDevice digitalOutputBits:(0x5446 | 0x8000)];
-	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] ) // New for CRS
+	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] ) // New for CRS - Not Vinay
 		[digitalOutDevice digitalOutputBits:(0x5447 | 0x8000)];
 	else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
 		[digitalOutDevice digitalOutputBits:(0x5453 | 0x8000)];
@@ -112,6 +114,8 @@
 		[digitalOutDevice digitalOutputBits:(0x5430 | 0x8000)];
 	else if ([eventName isEqualTo:@"type1"] || [eventName isEqualTo:@"T1"] )
 		[digitalOutDevice digitalOutputBits:(0x5431 | 0x8000)];
+    else if ([eventName isEqualTo:@"spatialPhase"] || [eventName isEqualTo:@"SP"] )         // [Vinay] - Added this..0x5530 is dummy here...correct this later!! Done now -  '53' corresponds to 'S' and '50' corresponds to 'P'
+		[digitalOutDevice digitalOutputBits:(0x5350 | 0x8000)];
 	
 	else
 		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",
