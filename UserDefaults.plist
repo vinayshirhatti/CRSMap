@@ -513,6 +513,8 @@
 	<false/>
 	<key>CRSMatchCentreRing</key>
 	<false/>
+	<key>CRSFixImage</key>
+	<false/>
 	<key>CRSMatchRingSurround</key>
 	<false/>
 	<key>CRSProtocolNumber</key>

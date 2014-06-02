@@ -263,6 +263,9 @@ extern NSString *CRSProtocolNumberKey;
 extern NSString *CRSMatchCentreRingKey;
 extern NSString *CRSMatchRingSurroundKey;
 
+// [Vinay] - to show just an image at the fixation spot
+extern NSString *CRSFixImageKey;
+
 // [Vinay] - till here
 
 

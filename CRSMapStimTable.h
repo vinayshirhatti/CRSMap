@@ -13,10 +13,18 @@
 	long blocksDone;
 	long blockLimit;
 	// BOOL doneList[kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - commented this
-    BOOL doneList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
+    //BOOL doneList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
+    // [ Vinay] - changing the above doneList to have a separate list for each Gabor. There are kGabors-1 number of stimuli Gabor excluding the Task gabor
+    BOOL doneList[kGabors-1][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
+    
+    //BOOL ********* doneList; // 9 pointers corresponding to 9 dimensions (parameters).
     long mapIndex;                  // index to instance of CRSMapStimTable
-	int stimRemainingInBlock;
+	// [Vinay] - modified the meaning of the next two lines. These quantities now mean the total stimRemaining in the block and total stimInBlock considering the number of variations in all three gabors. The next two variables are maintained individually for each gabor
+    int stimRemainingInBlock;
 	int stimInBlock;
+    int stimRemainingInBlockGabor[3]; // [Vinay] - for 3 gabors
+	int stimInBlockGabor[3]; // [Vinay] - for 3 gabors
+
 	NSMutableArray *currentStimList; //*copyList; [Vinay] - added copyList to copy stimulus list attributes from one gabor to another (surround gabor to the centre gabor). Have removed this later. 
 }
 
@@ -34,6 +42,8 @@
 - (void)tallyStimList:(NSMutableArray *)list  count:(long)count;
 - (void)tallyStimList:(NSMutableArray *)list  upToFrame:(long)frameLimit;
 - (long)stimDoneInBlock;
-- (void)updateBlockParameters:(long)mapIndex; // [Vinay] added the arg 'mapIndec' to have separate updates for different gabors
+//- (void)updateBlockParameters;
+- (void)updateBlockParameters:(long)mapIndex; // [Vinay] added the arg 'mapIndex' to have separate updates for different gabors
+//- (void)doneListDefine:(long)index; // [Vinay] Added to dynamically define doneList depending on the gabor index, to get a flexible size of doneList for each gabor corresponding to the respective mapping parameters
 
 @end

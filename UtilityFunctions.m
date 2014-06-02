@@ -31,6 +31,20 @@ void announceEvents(void) {
 	[[task dataDoc] putEvent:@"mappingGabor0" withData:(Ptr)[[stimuli mappingGabor0] gaborData]];
 	[[task dataDoc] putEvent:@"mappingGabor1" withData:(Ptr)[[stimuli mappingGabor1] gaborData]];
     [[task dataDoc] putEvent:@"mappingGabor2" withData:(Ptr)[[stimuli mappingGabor2] gaborData]];   // [Vinay] - Added for the 3rd gabor - centre gabor
+    /*
+    [[(CRSMap *)task mapStimTable0] updateBlockParameters];
+    settings = [[(CRSMap *)task mapStimTable0] mapSettings];
+    [[task dataDoc] putEvent:@"map0Settings" withData:&settings];
+    [[(CRSMap *)task mapStimTable1] updateBlockParameters];
+    settings = [[(CRSMap *)task mapStimTable1] mapSettings];
+    [[task dataDoc] putEvent:@"map1Settings" withData:&settings];
+    //[Vinay] - added for gabor 2 below
+    [[(CRSMap *)task mapStimTable2] updateBlockParameters];
+    settings = [[(CRSMap *)task mapStimTable2] mapSettings];
+    [[task dataDoc] putEvent:@"map2Settings" withData:&settings];
+    // [Vinay] - till here
+     */
+    
     [[(CRSMap *)task mapStimTable0] updateBlockParameters:0]; // [Vinay] - added arguement '0'
     settings = [[(CRSMap *)task mapStimTable0] mapSettings];
     [[task dataDoc] putEvent:@"map0Settings" withData:&settings];

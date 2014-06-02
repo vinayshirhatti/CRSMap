@@ -247,11 +247,12 @@ by mapStimTable.
     // ------------------------------------------------
     // protocolNumber indicates the following protocol:
     // protocolNumber = 0 - do nothing; 1 - ring protocol; 2 - contrast ring; 3 - dual contrast; 4 - dual ori; 5 - dual phase protocol; 6 - ori ring; 7 - phase ring
+    // 8 - drifting phase protocol; 9 - cross orientation suppression protocol (COS)
     // ------------------------------------------------
     
-    // [Vinay] - Don't match centre and surround for the dual protocols since the surround is off in these cases anyway.
+    // [Vinay] - Don't match centre and surround for the dual protocols since the surround is off in these cases anyway. Same applies to the COS protocol
     // if (([[task defaults] boolForKey:CRSDualContrastProtocolKey]) || ([[task defaults] boolForKey:CRSDualOrientationProtocolKey]) || ([[task defaults] boolForKey:CRSDualPhaseProtocolKey])) { was removed and replaced as following
-    if ((protocolNumber == 3) || (protocolNumber == 4) || (protocolNumber == 5)) {
+    if ((protocolNumber == 3) || (protocolNumber == 4) || (protocolNumber == 5) || (protocolNumber == 9)) {
         //[[task defaults] setBool:NO forKey:CRSMatchCentreSurroundKey]; // [Vinay] This line was commented and replaced as below
         matchCentreSurround = NO;
     }
@@ -267,7 +268,7 @@ by mapStimTable.
     NSValue *val, *val2;
     
     // if (([[task defaults] boolForKey:CRSMatchCentreSurroundKey]) || ([[task defaults] boolForKey:CRSRingProtocolKey]) || ([[task defaults] boolForKey:CRSContrastRingProtocolKey])) -  was replaced as follows -
-    if ((matchCentreSurround == YES) || (protocolNumber == 1) || (protocolNumber == 2) || (protocolNumber == 6) || (protocolNumber == 7)) {
+    if ((matchCentreSurround == YES) || (protocolNumber == 1) || (protocolNumber == 2) || (protocolNumber == 6) || (protocolNumber == 7) || (protocolNumber == 8)) {
         //long sfi,di,ci,tfi,spi;
         //float sf, d, c, tf, sp;
         for (stim = 0; stim < [mapStimList0 count]; stim++) {
@@ -291,7 +292,7 @@ by mapStimTable.
             copyStimDesc.radiusIndex = copyStimDesc2.radiusIndex;
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later. In this case, since the copyStimDesc corresponding to gabor0 is being written to mapStimList2 corresponding to gabor2 we replace the gaborIndex accordingly. Basicially if the same stimDesc as corresponding to the gabor being remapped is being copied then there's no need to change the gaborIndex. However, it needs to be restored to the correct gaborIndex otherwise.
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -354,7 +355,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -406,7 +407,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -458,7 +459,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -510,7 +511,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -563,7 +564,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -617,7 +618,7 @@ by mapStimTable.
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
             
-            copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex;
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
             copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
             copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
             copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
@@ -641,8 +642,63 @@ by mapStimTable.
         }
     }
     
+    
+    // [Vinay] - Match some parameters of ring gabor with the centre gabor for the drifting phase protocol. Except temporal frequency and radius, the rest of the values are changed to be equal to those of the centre gabor. Trivially azimuth, elevation and sigma are also not changed. If required then they may be matched in the future. Changed this: if (([[task defaults] boolForKey:CRSContrastRingProtocolKey])) to read the value from pop up menu
+    if (protocolNumber == 8) {
+        for (stim = 0; stim < [mapStimList1 count]; stim++) {
+            val = [mapStimList1 objectAtIndex:stim]; // ring gabor
+            [val getValue:&copyStimDesc];
+            
+            val2 = [mapStimList2 objectAtIndex:stim]; // centre gabor
+            [val2 getValue:&copyStimDesc2];
+            
+            //copyStimDesc.radiusDeg = copyStimDesc2.radiusDeg; // [Vinay] - this and next line commented because radius is maintained the same for ring gabor
+            //copyStimDesc.radiusIndex = copyStimDesc2.radiusIndex;
+            
+            copyStimDesc.spatialFreqCPD = copyStimDesc2.spatialFreqCPD;
+            copyStimDesc.spatialFreqIndex = copyStimDesc2.spatialFreqIndex;
+            
+            copyStimDesc.contrastPC = copyStimDesc2.contrastPC;
+            copyStimDesc.contrastIndex = copyStimDesc2.contrastIndex;
+            
+            copyStimDesc.directionDeg = copyStimDesc2.directionDeg;
+            copyStimDesc.directionIndex = copyStimDesc2.directionIndex;
+            
+            //copyStimDesc.temporalFreqHz = copyStimDesc2.temporalFreqHz;
+            //copyStimDesc.temporalFreqIndex = copyStimDesc2.temporalFreqIndex;
+            
+            copyStimDesc.spatialPhaseDeg = copyStimDesc2.spatialPhaseDeg; // [Vinay] - because phase is maintained for the ring gabor here
+            copyStimDesc.spatialPhaseIndex = copyStimDesc2.spatialPhaseIndex;
+            
+            // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
+            
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
+            copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
+            copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
+            copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
+            copyStimDesc.stimType = copyStimDesc2.stimType;
+            
+            copyStimDesc.azimuthIndex = copyStimDesc2.azimuthIndex;
+            copyStimDesc.elevationIndex= copyStimDesc2.elevationIndex;
+            copyStimDesc.sigmaIndex = copyStimDesc2.sigmaIndex;
+            
+            copyStimDesc.azimuthDeg = copyStimDesc2.azimuthDeg;
+            copyStimDesc.elevationDeg = copyStimDesc2.elevationDeg;
+            copyStimDesc.sigmaDeg = copyStimDesc2.sigmaDeg;
+            
+            copyStimDesc.temporalModulation = copyStimDesc2.temporalModulation;
+            copyStimDesc.orientationChangeDeg = copyStimDesc2.orientationChangeDeg;
+            
+            
+            // [Vinay] - Basically except the five parameters that have to be matched the rest have been restored to the value assigned originally to gabor2 by makeMapStimList
+            
+            [mapStimList1 replaceObjectAtIndex:stim withObject:[NSValue valueWithBytes:&copyStimDesc objCType:@encode(StimDesc)]];
+        }
+    }
+
+    
     /*
-    // [Vinay] - To match centre and ring if required
+    // [Vinay] - To match centre and ring if required. NOTE: Later this has been commented. This matching is instead achieved by just 'not drawing' the centre gabor by setting its hideStimulus in CRSMapStimTable
     if ((matchCR == YES) && (protocolNumber == 0)) {
         //long sfi,di,ci,tfi,spi;
         //float sf, d, c, tf, sp;
@@ -681,7 +737,7 @@ by mapStimTable.
     }
     
     
-    // [Vinay] - To match ring and surround if required
+     // [Vinay] - To match ring and surround if required. NOTE: Later this has been commented. This matching is instead achieved by just 'not drawing' the centre gabor by setting its hideStimulus in CRSMapStimTable
     if ((matchRS == YES) && (protocolNumber == 0)) {
         //long sfi,di,ci,tfi,spi;
         //float sf, d, c, tf, sp;
@@ -782,6 +838,13 @@ by mapStimTable.
 	NSAutoreleasePool *threadPool;
 	BOOL listDone = NO;
 	long stimCounter = 0;
+    
+    /* [Vinay] - Added these lines and some more ahead to conditionally make the gabors partially transparent by adjusting their alpha values. This way superimposed gabors can look like a plaid */
+    int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"];
+    BOOL crossOrientationProtocol = NO; // [Vinay] - Added to check for the COS protocol condition to draw superimposed, partially transparent gabors so that it looks like a plaid
+    if (protocolNumber == 9)
+        crossOrientationProtocol = YES;
+    // [Vinay] - till here
 	
     threadPool = [[NSAutoreleasePool alloc] init];		// create a threadPool for this thread
 	[LLSystemUtil setThreadPriorityPeriodMS:1.0 computationFraction:0.250 constraintFraction:1.0];
@@ -809,18 +872,233 @@ by mapStimTable.
 
     for (trialFrame = taskGaborFrame = 0; !listDone && !abortStimuli; trialFrame++) {
 		glClear(GL_COLOR_BUFFER_BIT);
+        
+        if (crossOrientationProtocol) {
+            // [Vinay] - adding these lines to test transparency options
+            glDisable(GL_DEPTH_TEST);
+            glActiveTexture(GL_TEXTURE1_ARB);				// activate texture unit 0 and cycle texture
+            glEnable(GL_TEXTURE_2D);
+            
+            glPushMatrix(); // [Vinay]
+            glPushAttrib(GL_COLOR_BUFFER_BIT); // [Vinay] - testing transparency options
+            glEnable (GL_BLEND); // [Vinay] - testing transparency options
+            glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // [Vinay] - testing transparency options
+            //glBlendFunc (GL_ONE, GL_); // [Vinay] - testing transparency options
+        }
 		for (index = 0; index < kGabors; index++) {
 			if (trialFrame >= stimDescs[index].stimOnFrame && trialFrame < stimDescs[index].stimOffFrame) {
 				if (stimDescs[index].stimType != kNullStim) {
                     theGabor = [gabors objectAtIndex:index];
                     // [Vinay] - have commented the line below and now uncommented
                     [theGabor directSetFrame:[NSNumber numberWithLong:gaborFrames[index]]];	// advance for temporal modulation
+                    if (crossOrientationProtocol) {
+                        [theGabor setForeColor:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:0.33]]; // [Vinay] - testing transparency options
+                    }
+                    else {
+                        [theGabor setForeColor:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1]]; // [Vinay] - change alpha back to 1 when it is not the COS protocol
+                    }
                     [theGabor draw];
                 }
 				gaborFrames[index]++;
 			}
 		}
-		[fixSpot draw];
+        
+        if (crossOrientationProtocol) {
+            glDisable(GL_BLEND); // [Vinay] - testing transparency options
+            glPopAttrib();
+            glPopMatrix();
+            glActiveTexture(GL_TEXTURE1_ARB);		// Do texture unit 0 last, so we leave it active (for other tasks)
+            glDisable(GL_TEXTURE_2D);
+            
+            
+            //[fixSpot setForeColor:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:0.33]];
+            //[fixSpot setFixTargetColor:[NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.33]]; // [Vinay] - Added to redraw fixSpot properly
+        }
+		
+        /**** [Vinay] - till here   */
+        
+        
+        /*-----[Vinay] Adding lines to show a centred image */
+        
+        if ([[task defaults] boolForKey:CRSFixImageKey]) {
+            
+            //[[task stimWindow] unlock];
+            //NSString* imageName = [[NSBundle mainBundle] pathForResource:@"/Users/vinay/Downloads/Bonnet Macaque.JPG" ofType:@"JPG"];
+            //NSImage* tempImage = [[NSImage alloc] initWithContentsOfFile:imageName];
+            //NSImage *tempImage = [NSImage imageNamed:@"/Users/vinay/Downloads/R94LG00Z.jpg"];
+            
+            NSImage* tempImage = [[NSImage alloc] initWithContentsOfFile:@"/Users/vinay/Downloads/bm1.tiff"];
+            
+            NSLog(@"size %f %f",tempImage.size.width, tempImage.size.height);
+            if( tempImage ){
+                NSLog(@"Picture is not null");
+            }else {
+                NSLog(@"Picture is null.");
+            }
+            
+            //[tempImage drawAtPoint: NSMakePoint(0.0, 0.0)
+            //              fromRect: NSMakeRect(0.0, 0.0, 100.0, 100.0)
+            //             operation: NSCompositeCopy
+            //              fraction: 1.0];
+            NSSize imageSize = [tempImage size];
+            NSRect imageRect = NSMakeRect(-imageSize.width/2, -imageSize.height/2, imageSize.width/2, imageSize.height/2);
+            /*
+             [tempImage lockFocus];
+             [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
+             NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
+             [tempImage unlockFocus];
+             */
+            [tempImage drawInRect:imageRect fromRect:imageRect operation:NSCompositeSourceAtop fraction:1.0];
+            //[tempImage drawAtPoint:NSMakePoint(10.0, 10.0) fromRect:NSMakeRect(0,0,[tempImage size].width, [tempImage size].height) operation:NSCompositeCopy fraction:1.0];
+            
+            
+            glPushMatrix(); // [Vinay]
+            glPushAttrib(GL_COLOR_BUFFER_BIT); // [Vinay] - testing transparency options
+            glEnable (GL_BLEND); // [Vinay] - testing transparency options
+            glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            
+            glDisable(GL_DEPTH_TEST);
+            glActiveTexture(GL_TEXTURE1_ARB);				// activate texture unit 1
+            glEnable(GL_TEXTURE_2D);
+            
+            //glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, tempImage);
+            glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+            
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_CACHED_APPLE);
+            
+            // There seems to be a rounding problem if we use a bias of 0.5.
+            
+            glPixelTransferf(GL_RED_BIAS, 0.5001);
+            glPixelTransferf(GL_GREEN_BIAS, 0.5001);
+            glPixelTransferf(GL_BLUE_BIAS, 0.5001);
+            glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1);
+            
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_ALPHA, GL_FLOAT, tempImage);
+            
+            glEnable(GL_STENCIL_TEST);
+            glStencilFunc(GL_EQUAL, 0x1, 0x1);
+            glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+            
+            /*
+            glBegin(GL_QUADS);
+            // Front Face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Bottom Left Of The Texture and Quad
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Bottom Right Of The Texture and Quad
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Top Right Of The Texture and Quad
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Top Left Of The Texture and Quad
+            // Back Face
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Top Right Of The Texture and Quad
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Top Left Of The Texture and Quad
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+            // Top Face
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Top Left Of The Texture and Quad
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Bottom Left Of The Texture and Quad
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Bottom Right Of The Texture and Quad
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Top Right Of The Texture and Quad
+            // Bottom Face
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Top Right Of The Texture and Quad
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Top Left Of The Texture and Quad
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Bottom Left Of The Texture and Quad
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Bottom Right Of The Texture and Quad
+            // Right face
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);  // Bottom Right Of The Texture and Quad
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f, -1.0f);  // Top Right Of The Texture and Quad
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  1.0f);  // Top Left Of The Texture and Quad
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);  // Bottom Left Of The Texture and Quad
+            // Left Face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);  // Bottom Left Of The Texture and Quad
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);  // Bottom Right Of The Texture and Quad
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  1.0f);  // Top Right Of The Texture and Quad
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);  // Top Left Of The Texture and Quad
+            glEnd();
+            */
+            
+            //glDrawPixels(imageSize.width, imageSize.height, GL_RGBA, GL_FLOAT, tempImage);
+            
+            //glEnable(GL_BLEND);
+            //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            
+            /*
+            int x = 0; int y = 0;
+            //int w = [tempImage size].width;
+            //int h = [tempImage size].height;
+            
+            //GLfloat Vertices[] = {(float)x, (float)y, 0,
+            //    (float)x + (float)w, (float)y, 0,
+            //    (float)x + (float)w, (float)y + (float)h, 0,
+            //    (float)x, (float)y + (float)h, 0};
+            
+            //GLfloat Vertices[] = {(float)x - (float)w/2, (float)y - (float)h/2, 0,
+            //    (float)x + (float)w/2, (float)y - (float)h/2, 0,
+            //    (float)x + (float)w/2, (float)y + (float)h/2, 0,
+            //    (float)x - (float)w/2, (float)y + (float)h/2, 0};
+            
+            GLfloat Vertices[] = {(float)x-0.5, (float)y-0.5, 0,
+                0.5, -0.5, 0,
+                0.5, 0.5, 0,
+                -0.5, 0.5, 0};
+            
+            
+            GLfloat TexCoord[] = {0, 0,
+                1, 0,
+                1, 1,
+                0, 1,
+            };
+            GLubyte indices[] = {0,1,2, // first triangle (bottom left - top left - top right)
+                0,2,3}; // second triangle (bottom left - top right - bottom right)
+            
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_FLOAT, 0, Vertices);
+            
+            glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
+            
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
+            */
+            //glFlush();
+            
+            //glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            //glDisableClientState(GL_VERTEX_ARRAY);
+            
+            
+            glDisable(GL_BLEND); // [Vinay] - testing transparency options
+            glPopAttrib();
+            glPopMatrix();
+            glActiveTexture(GL_TEXTURE0_ARB);		// Do texture unit 0 last, so we leave it active (for other tasks)
+            glDisable(GL_STENCIL_TEST);
+            glDisable(GL_TEXTURE_2D);
+            
+            
+            glFlush();
+            
+            /*
+             NSData *imdata =[[NSData alloc] initWithContentsOfFile:@"/Users/vinay/Documents/Lablib-Plugins/CRSMap/monkeyPic.jpg"];
+             
+             if(!imdata){
+             NSLog(@"there is data");
+             }
+             
+             NSImage *imag=[[NSImage alloc]initWithData:imdata];
+             NSImageView *imageView = [[NSImageView alloc] initWithFrame:frame];
+             [imageView setImage:imag];
+             [self addSubview:imageView];
+             */
+            
+            
+            
+        }
+        
+        else
+            [fixSpot draw];
+
+        
+        // [Vinay] - till here
+        
+        //[fixSpot draw]; //[Vinay] - have commented this because it's included in the loop above instead
 		[[NSOpenGLContext currentContext] flushBuffer];
 		glFinish();
 		if (trialFrame == 0) {
@@ -954,14 +1232,157 @@ by mapStimTable.
 
 - (void)setFixSpot:(BOOL)state;
 {
-	[fixSpot setState:state];
+	/* Added these lines and some more ahead to check for COS protocol and change the transparency of the fixSpot by adjusting its alpha value */
+    int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"];
+    BOOL crossOrientationProtocol = NO; // [Vinay] - Added to check for the COS protocol condition to draw superimposed, partially transparent gabors so that it looks like a plaid
+    if (protocolNumber == 9)
+        crossOrientationProtocol = YES;
+    // [Vinay] - till here
+    
+    [fixSpot setState:state];
+    
+    //NSColor *foreColorTemp;
+    
 	if (state) {
 		if (!stimulusOn) {
 			[[task stimWindow] lock];
 			[[task stimWindow] setScaleOffsetDeg:[[task eyeCalibrator] offsetDeg]];
 			[[task stimWindow] scaleDisplay];
 			glClear(GL_COLOR_BUFFER_BIT);
-			[fixSpot draw];
+            
+            /**** // [Vinay] - Adding the following lines to show just an image instead of the fixation spot, if required */
+            /**** // [Vinay] - Also adding a loop to explore flickering of the fixation point - doesn't seem to be working. Instead the loop is invoked whne drawing plaid stimuli */
+            
+            if ([[task defaults] boolForKey:CRSFixImageKey]) {
+                
+                //[[task stimWindow] unlock];
+                //NSString* imageName = [[NSBundle mainBundle] pathForResource:@"/Users/vinay/Downloads/Bonnet Macaque.JPG" ofType:@"JPG"];
+                //NSImage* tempImage = [[NSImage alloc] initWithContentsOfFile:imageName];
+                NSImage *tempImage = [NSImage imageNamed:@"/Users/vinay/Downloads/Bonnet Macaque.JPG"];
+                //[tempImage drawAtPoint: NSMakePoint(0.0, 0.0)
+                //              fromRect: NSMakeRect(0.0, 0.0, 100.0, 100.0)
+                //             operation: NSCompositeCopy
+                //              fraction: 1.0];
+                NSSize imageSize = [tempImage size];
+                NSRect imageRect = NSMakeRect(0.0, 0.0, imageSize.width, imageSize.height);
+                /*
+                [tempImage lockFocus];
+                [[NSColor colorWithCalibratedWhite:0.0 alpha:0.1] set];
+                NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
+                [tempImage unlockFocus];
+                 */
+                [tempImage drawInRect:imageRect fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
+                //[tempImage drawAtPoint:NSMakePoint(10.0, 10.0) fromRect:NSMakeRect(0,0,[tempImage size].width, [tempImage size].height) operation:NSCompositeCopy fraction:1.0];
+                
+                glDisable(GL_DEPTH_TEST);
+                glActiveTexture(GL_TEXTURE4);				// activate texture unit 0 and cycle texture
+                glEnable(GL_TEXTURE_2D);
+                
+                glPushMatrix(); // [Vinay]
+                glPushAttrib(GL_COLOR_BUFFER_BIT); // [Vinay] - testing transparency options
+                glEnable (GL_BLEND); // [Vinay] - testing transparency options
+                glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                
+                glEnable(GL_TEXTURE_2D);
+                glBindTexture(GL_TEXTURE_2D, tempImage);
+                
+                //glEnable(GL_BLEND);
+                //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                
+                int x = 0; int y = 0;
+                int w = [tempImage size].width;
+                int h = [tempImage size].height;
+                
+                GLfloat Vertices[] = {(float)x, (float)y, 0,
+                    (float)x + (float)w, (float)y, 0,
+                    (float)x + (float)w, (float)y + (float)h, 0,
+                    (float)x, (float)y + (float)h, 0};
+                
+                GLfloat TexCoord[] = {0, 0,
+                    1, 0,
+                    1, 1,
+                    0, 1,
+                };
+                GLubyte indices[] = {0,1,2, // first triangle (bottom left - top left - top right)
+                    0,2,3}; // second triangle (bottom left - top right - bottom right)
+                
+                glEnableClientState(GL_VERTEX_ARRAY);
+                glVertexPointer(3, GL_FLOAT, 0, Vertices);
+                
+                glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+                glTexCoordPointer(2, GL_FLOAT, 0, TexCoord);
+                
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, indices);
+                
+                //glFlush();
+                
+                glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+                glDisableClientState(GL_VERTEX_ARRAY);
+                
+                
+                glDisable(GL_BLEND); // [Vinay] - testing transparency options
+                glPopAttrib();
+                glPopMatrix();
+                glActiveTexture(GL_TEXTURE4);		// Do texture unit 0 last, so we leave it active (for other tasks)
+                glDisable(GL_TEXTURE_2D);
+                
+                glFlush();
+                
+                /*
+                 NSData *imdata =[[NSData alloc] initWithContentsOfFile:@"/Users/vinay/Documents/Lablib-Plugins/CRSMap/monkeyPic.jpg"];
+                 
+                 if(!imdata){
+                 NSLog(@"there is data");
+                 }
+                 
+                 NSImage *imag=[[NSImage alloc]initWithData:imdata];
+                 NSImageView *imageView = [[NSImageView alloc] initWithFrame:frame];
+                 [imageView setImage:imag];
+                 [self addSubview:imageView];
+                 */
+                
+                
+                
+            }
+            else if(crossOrientationProtocol && ![[task defaults] boolForKey:CRSFixImageKey])
+            {
+                /*
+                [fixSpot setForeColor:[NSColor colorWithCalibratedRed:1.0 green:0 blue:0 alpha:0.1]];
+                //[fixSpot setBackColor:[NSColor colorWithCalibratedRed:0.4 green:0.4 blue:0 alpha:0.4]];
+                
+                long frame;
+                float frameRateHz, framesPerHalfCycle, temporalFreqFlicker;
+                NSNumber *frameNumber = 0;
+                
+                frame = [frameNumber longValue];
+                //frameRateHz = ([fixSpot displays] == nil) ? 60.0 : [[fixSpot displays] frameRateHz:2];
+                frameRateHz = 60;
+                temporalFreqFlicker = 2;
+                framesPerHalfCycle = frameRateHz / temporalFreqFlicker / 2.0;
+                [fixSpot setForeColor:[NSColor colorWithCalibratedRed:1.0 green:0 blue:0 alpha:1.0*(sin(frame / framesPerHalfCycle * kPI * kRadiansPerDeg))]];
+                */
+                
+                //[fixSpot setForeColor:[NSColor colorWithCalibratedRed:[fixSpot->foreColor redComponent] green:[fixSpot->foreColor greenComponent] blue:[fixSpot->foreColor blueComponent] alpha:0.33]];
+                
+                //foreColorTemp = [fixSpot foreColor];
+                
+                //[fixSpot setFixTargetColor:[NSColor colorWithCalibratedRed:[foreColorTemp redComponent] green:[foreColorTemp greenComponent] blue:[foreColorTemp blueComponent] alpha:0.33]];
+                
+                
+                [fixSpot setFixTargetColor:[NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0.33]];
+                //[fixSpot->foreColor alphaComponent];
+                
+                [fixSpot draw];
+            }
+            
+            if (![[task defaults] boolForKey:CRSFixImageKey] && !crossOrientationProtocol)
+            {
+                [fixSpot setFixTargetColor:[NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1]];
+                [fixSpot draw];
+            }
+            // [Vinay] - till here
+			
+            //[fixSpot draw]; // [Vinay] - have commented this
 			[[NSOpenGLContext currentContext] flushBuffer];
 			[[task stimWindow] unlock];
 		}

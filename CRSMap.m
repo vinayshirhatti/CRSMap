@@ -114,6 +114,9 @@ NSString *CRSProtocolNumberKey = @"CRSProtocolNumber";
 NSString *CRSMatchCentreRingKey = @"CRSMatchCentreRing";
 NSString *CRSMatchRingSurroundKey = @"CRSMatchRingSurround";
 
+// [Vinay] Adding an option of showing an image centrally
+NSString *CRSFixImageKey = @"CRSFixImage";
+
 
 // [Vinay] - till here
 
@@ -131,12 +134,13 @@ NSString *keyPaths[] = {@"values.CRSBlockLimit", @"values.CRSRespTimeMS",
 					@"values.CRSMinTargetMS", @"values.CRSMaxTargetMS", @"values.CRSChangeArray",
 					@"values.CRSChangeScale", @"values.CRSMeanTargetMS", @"values.CRSFixateMS",
 					@"values.CRSMapStimRadiusSigmaRatio",@"values.CRSHideTaskGabor",@"values.CRSHideCentre",@"values.CRSHideRing",@"values.CRSHideSurround",
-                    @"values.CRSMatchCentreSurround",@"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",
+                    @"values.CRSMatchCentreSurround",@"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",@"values.CRSFixImage",
 					nil}; // [Vinay] - have added the last 2 lines before nil - related to matching C and S and the protocol
 // [Vinay] - Later removed. Added @"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",
 //"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",@"values.CRSRingProtocol",@"values.CRSContrastRingProtocol",@"values.CRSDualContrastProtocol",@"values.CRSDualOrientationProtocol",@"values.CRSDualPhaseProtocol",
 // and kept only @"values.CRSMatchCentreSurround"
 // and replaced Left and right keys - @"values.CRSHideLeft",@"values.CRSHideRight" - with @"values.CRSHideCentre",@"values.CRSHideRing",@"values.CRSHideSurround",
+// Added - @"values.CRSFixImage",
 
 LLScheduleController	*scheduler = nil;
 CRSStimuli				*stimuli = nil;
@@ -612,9 +616,16 @@ LLTaskPlugIn		*task = nil;
 {
 	long newMode;
 	
+    // [Vinay] - adding lines to read the protocol name and then send it via digital code whenever one hits the 'Run' button and starts the experiment
+    //int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"]; // This variable reads the value of the protocol number
+    // NSString *protocolName; // to store the name
+    // [ Vinay] - till here
+    
+    
     switch ([taskStatus mode]) {
     case kTaskIdle:
 		newMode = kTaskRunning;
+        //[digitalOut outputEventName:@"protocolNumber" withData:(long)(protocolNumber)]; //[Vinay] - send the protocol name via digital code
         break;
     case kTaskRunning:
 		newMode = kTaskStopping;
@@ -732,6 +743,20 @@ LLTaskPlugIn		*task = nil;
 	}
 	key = [keyPath pathExtension];
 	if ([key isEqualTo:CRSStimTablesKey] || [key isEqualTo:CRSStimTableCountsKey]) {
+        /*
+        [mapStimTable0 updateBlockParameters];
+		settings = [mapStimTable0 mapSettings];
+		[dataDoc putEvent:@"map0Settings" withData:&settings];
+		[mapStimTable1 updateBlockParameters];
+		settings = [mapStimTable1 mapSettings];
+		[dataDoc putEvent:@"map1Settings" withData:&settings];
+        //[Vinay] - For gabor2
+        [mapStimTable2 updateBlockParameters];
+		settings = [mapStimTable2 mapSettings];
+		[dataDoc putEvent:@"map1Settings" withData:&settings];
+        // [Vinay] - till here
+		requestReset();
+        */
 		[mapStimTable0 updateBlockParameters:0]; // [Vinay] - added arguement '0'
 		settings = [mapStimTable0 mapSettings];
 		[dataDoc putEvent:@"map0Settings" withData:&settings];

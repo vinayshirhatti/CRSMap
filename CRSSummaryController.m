@@ -22,7 +22,8 @@
 #define kMyLastEOTTypeDisplayed  kMyEOTIgnored				// Count everything up to kEOTIgnored
 #define kPlotBinsDefault		10
 #define kTableRows				(kMyLastEOTTypeDisplayed + 6) // extra for blank rows, total, etc.
-#define kTrialTableRows			9
+//#define kTrialTableRows			9 // [Vinay] - changed this to 10 below to add one more row for displaying protocol information in the summary display table
+#define kTrialTableRows			11 // [Vinay] - row 0 to 10
 #define	kXTickSpacing			100
 
 enum {kBlankRow0 = kMyLastEOTTypeDisplayed + 1, kComputerRow, kBlankRow1, kRewardsRow, kTotalRow};
@@ -320,6 +321,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 			break;
         case 1:
         case 5:
+        case 9: // [Vinay] - I added row 9 and this line
 			string = @"";
 			break;
         case 2:
@@ -378,6 +380,95 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
                 }
             }
 			break;
+        case 10: // [Vinay] - added these extra lines to display protocol related information
+            if (!initialized) {
+                string = @"Experiment hasn't started";
+            }
+            // [Vinay] - If the task is intialized check if it (taskMode) is running or idle and display the status accordingly
+            else {
+                switch (taskMode) {
+                    case kTaskIdle:
+                        // [Vinay] - switch case on the protocol selected
+                        switch ([[task defaults] integerForKey:@"CRSProtocolNumber"]) {
+                            case 0:
+                                string = @"STOPPED: NONE (Manual Set) Protocol";
+                                break;
+                            case 1:
+                                string = @"STOPPED: Ring Protocol";
+                                break;
+                            case 2:
+                                string = @"STOPPED: Contrast Ring Protocol";
+                                break;
+                            case 3:
+                                string = @"STOPPED: Dual Contrast Protocol";
+                                break;
+                            case 4:
+                                string = @"STOPPED: Dual Orientation Protocol";
+                                break;
+                            case 5:
+                                string = @"STOPPED: Dual Phase Protocol";
+                                break;
+                            case 6:
+                                string = @"STOPPED: Orientation Ring Protocol";
+                                break;
+                            case 7:
+                                string = @"STOPPED: Phase Ring Protocol";
+                                break;
+                            case 8:
+                                string = @"STOPPED: Drifting Phase Protocol";
+                                break;
+                            case 9:
+                                string = @"STOPPED: Cross Orientation Protocol (Plaids)";
+                                break;
+                            default:
+                                string = @"???";
+                                break;
+                        }
+                        //--------
+                        break;
+                    default:
+                        // [Vinay] - switch case on the protocol selected
+                        switch ([[task defaults] integerForKey:@"CRSProtocolNumber"]) {
+                            case 0:
+                                string = @"Now running: NONE (Manual Set) Protocol";
+                                break;
+                            case 1:
+                                string = @"Now running: Ring Protocol";
+                                break;
+                            case 2:
+                                string = @"Now running: Contrast Ring Protocol";
+                                break;
+                            case 3:
+                                string = @"Now running: Dual Contrast Protocol";
+                                break;
+                            case 4:
+                                string = @"Now running: Dual Orientation Protocol";
+                                break;
+                            case 5:
+                                string = @"Now running: Dual Phase Protocol";
+                                break;
+                            case 6:
+                                string = @"Now running: Orientation Ring Protocol";
+                                break;
+                            case 7:
+                                string = @"Now running: Phase Ring Protocol";
+                                break;
+                            case 8:
+                                string = @"Now running: Drifting Phase Protocol";
+                                break;
+                            case 9:
+                                string = @"Now running: Cross Orientation Protocol (Plaids)";
+                                break;
+                            default:
+                                string = @"???";
+                                break;
+                        }
+                        //-------------
+                        break;
+                }
+            }
+            break;
+            // [Vinay] - till here
         default:
             string = @"???";
             break;

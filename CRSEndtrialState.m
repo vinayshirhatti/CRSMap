@@ -75,12 +75,20 @@
                 [[(CRSMap *)task mapStimTable1] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
                 [[(CRSMap *)task mapStimTable2] tallyStimList:nil upToFrame:[stimuli targetOnFrame]]; // Added by Vinay - for the centre gabor
                 mappingBlockStatus =  [[(CRSMap *)task mapStimTable0] mappingBlockStatus];
+                //mappingBlockStatus =  [[(CRSMap *)task mapStimTable1] mappingBlockStatus]; // [Vinay] - added this, normally I haven't added if there's only gabor0 related line which isn't followed by a corresponding line for gabor1
+                //mappingBlockStatus =  [[(CRSMap *)task mapStimTable2] mappingBlockStatus]; // [Vinay] - added this
             }
         }
-		//mappingBlockStatus.trialsDone = [[(CRSMap *)task mapStimTable0] trialDoneInBlock];
-		//mappingBlockStatus.blocksDone = [[(CRSMap *)task mapStimTable0] blocksDone];
+            //[Vinay] - the 3 lines below were commented. I have uncommented them temporarily for debugging
+		//mappingBlockStatus.trialsDone = [[(CRSMap *)task mapStimTable0] trialDoneInBlock]; // [Vinay] - changed this line to the next line. No parameter such as trialsDone or trialDoneInBlock
+        mappingBlockStatus.stimDone = [[(CRSMap *)task mapStimTable0] stimDoneInBlock];
+		mappingBlockStatus.blocksDone = [[(CRSMap *)task mapStimTable0] blocksDone];
 		//NSLog(@"endTrial: mappingBlock trials done %d blocksDone %d blockLimit %d",
-		//			mappingBlockStatus.trialsDone, mappingBlockStatus.blocksDone, mappingBlockStatus.blockLimit); 
+		//			mappingBlockStatus.trialsDone, mappingBlockStatus.blocksDone, mappingBlockStatus.blockLimit); // [Vinay] - this line changed 
+        NSLog(@"endTrial: mappingBlock trials done %ld blocksDone %ld blockLimit %ld",
+                  mappingBlockStatus.stimDone, mappingBlockStatus.blocksDone, mappingBlockStatus.blockLimit); // [Vinay] - trialsDone changed to stimDone
+            // [Vinay] - till here
+            
 		break;
 	case kEOTBroke:
 		if (brokeDuringStim) {
