@@ -7,6 +7,7 @@
 
 #import "CRSTooFastState.h"
 #import "UtilityFunctions.h"
+#import "CRSUtilities.h"
 
 #define alpha		2.5
 #define kBeta		2.0
@@ -48,7 +49,7 @@
 		return [[task stateSystem] stateNamed:@"Endtrial"];;
 	}
 	else {
-		if (![fixWindow inWindowDeg:[task currentEyeDeg]]) {   // too fast reaction
+		if (![CRSUtilities inWindow:fixWindow]) {   // too fast reaction
 			eotCode = kMyEOTBroke;
 			return [[task stateSystem] stateNamed:@"CRSSaccade"];;
 		}

@@ -60,7 +60,7 @@ TrialDesc			trial;
 		[self addState:[[[CRSStopState alloc] init] autorelease]];
 		[self setStartState:[self stateNamed:@"CRSIdle"] andStopState:[self stateNamed:@"CRSStop"]];
 
-		[controller setLogging:NO];
+		[controller setLogging:YES];
 	
 		fixWindow = [[LLEyeWindow alloc] init];
 		[fixWindow setWidthAndHeightDeg:[[task defaults] floatForKey:CRSFixWindowWidthDegKey]];
@@ -103,6 +103,7 @@ TrialDesc			trial;
 	[[(CRSMap *)task mapStimTable0] reset];
 	[[(CRSMap *)task mapStimTable1] reset];
 	mappingBlockStatus = [[(CRSMap *)task mapStimTable0] mappingBlockStatus];
+    trialCounter = 0;
 }
 
 #define kMaxRate        100.0

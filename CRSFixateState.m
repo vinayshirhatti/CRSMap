@@ -10,7 +10,8 @@
 //
 
 #import "CRSFixateState.h"
-
+#import "CRSUtilities.h"
+#import "CRSDigitalOut.h"
 
 @implementation CRSFixateState
 
@@ -20,6 +21,8 @@
 	long fixJitterPC = [[task defaults] integerForKey:CRSFixJitterPCKey];
 		
 	if ([[task defaults] boolForKey:CRSFixateKey]) {				// fixation required && fixated
+//        [digitalOut outputEvent:kFixateDigitOutCode withData:(kFixateDigitOutCode+1)]; // Thomas 2014 Feb 25
+        [digitalOut outputEventName:@"fixate" withData:(long)(fixateMS)];
 		[[task dataDoc] putEvent:@"fixate"];
 		[scheduler schedule:@selector(updateCalibration) toTarget:self withObject:nil
 				delayMS:fixateMS * 0.8];
@@ -48,7 +51,7 @@
 		eotCode = kMyEOTQuit;
 		return [[task stateSystem] stateNamed:@"Endtrial"];;
 	}
-	if ([[task defaults] boolForKey:CRSFixateKey] && ![fixWindow inWindowDeg:[task currentEyeDeg]]) {
+	if ([[task defaults] boolForKey:CRSFixateKey] && ![CRSUtilities inWindow:fixWindow]) {
 		eotCode = kMyEOTBroke;
 		return [[task stateSystem] stateNamed:@"Endtrial"];;
 	}
@@ -60,8 +63,8 @@
 
 - (void)updateCalibration;
 {
-	if ([fixWindow inWindowDeg:[task currentEyeDeg]]) {
-		[[task eyeCalibrator] updateCalibration:[task currentEyeDeg]];
+	if ([CRSUtilities inWindow:fixWindow]) {
+		[[task eyeCalibrator] updateCalibration:([task currentEyesDeg])[kLeftEye]];
 	}
 }
 

@@ -19,9 +19,11 @@
 
 - (void)stateAction;
 {
+    [[task dataController] startDevice];
 	expireTime = [LLSystemUtil timeFromNow:[[task defaults] integerForKey:CRSIntertrialMSKey]];
 	eotCode = kMyEOTCorrect;							// default eot code is correct
 	brokeDuringStim = NO;				// flag for fixation break during stimulus presentation	
+	updateBlockStatus();
 	[[task dataDoc] putEvent:@"blockStatus" withData:(void *)&blockStatus];
 	[[task dataDoc] putEvent:@"mappingBlockStatus" withData:(void *)&mappingBlockStatus];
 	if (![self selectTrial] || mappingBlockStatus.blocksDone >= mappingBlockStatus.blockLimit) {
@@ -67,7 +69,6 @@
 
 // First check that the user hasn't changed any of the entries affecting block size
 
-	updateBlockStatus();
 	for (index = repsDone = repsNeeded = 0; index < pBS->changes; index++) {
 		repsNeeded += pBS->validReps[index] + pBS->invalidReps[index];
 		repsDone += pBS->validRepsDone[index] + pBS->invalidRepsDone[index];

@@ -4,7 +4,18 @@
 //
 //  Created by Marlene Cohen on 12/6/07.
 //  Copyright 2007. All rights reserved.
-//
+
+//  20/5/13. Supratim Ray
+//  Including option to control juice system as well as send digital codes using a single ITC.
+
+//  Notes
+//  Each digital code has two letters. We send the ascii value of each letter using 7 bits each. The first bit (least significant) is used for controlling the reward system. The 16th bit is used to indicate a code (rather than a data value).
+
+//  We can actually make a code using only 12 bits (5 bits for the first letter+6 bits for the second+1 bit to indicate code versus data), which will leave us with 4 bits for controlling a device (like the juice reward system). However, 12 bits of data are not enough (we get values only upto -2048 to 2048). So we use 14 bits for code/data (range: -8192 to 8192) and just a single bit (LSB) for controlling the juice.
+
+//  doJuice method in CRSMap.m (used to control the reward system) uses the digitalOutputBitsOff method, therefore putting the first bit to zero to turn the juice system on. To be consistent, we keep the first bit high for any code/data value, making sure that the juice is not turned on. Also, we use digitalOutputBits, not digitalOutputBitsOff, for both code/value and reward control, to make sure that the precise 16 bit code/data is put in the digital stream.
+
+//  In general, we should avoid pressing the juice button because it may interfere with the digital code/value transmission. In CRSEndtrialState, digital codes are put before turning the juice on/off because otherwise they interfere with each other.
 
 #import "CRSDigitalOut.h" 
 
@@ -15,6 +26,31 @@
 	[lock release];
 	[super dealloc];
 }
+
+- (int)getDigitalValue:(NSString *)eventName;
+{
+    int val, val0, val1;
+    
+    val0 = [eventName characterAtIndex:0];
+    val1 = [eventName characterAtIndex:1];
+ 
+/*  Scheme for only 12 bits. Not used
+ 
+    if (val0<65 || val0>90)
+        NSLog(@"First letter of the digital code must be between capital A-Z");
+    
+    if (val1<48 || val1>90)
+        NSLog(@"Second letter of the digital code must be either between capital A-Z or a number between 0-9");
+        
+    val = ((1024*(val0-65) + 16*(val1-48)) | 0x8001); // Use 5 bits (10, 11, 12, 13 and 14th) for the first and 6 bits (4, 5, 6, 7, 8 and 9) for the second letter. Bits 0-3 are reserved for controlling other devices. Bit 15 indicates that this is a digital code (1), not data (0).
+*/
+ 
+// Because each character has an ascii value less than 127, it can be represented using 7 bits. We leave 0th bit (LSB) for reward, 1-7 for second letter, 8-14 for the first letter, and set 15th bit to 1 to indicate a digital code (not a value)
+    
+    val = ((256*val0+2*val1) | 0x8001);
+    return val;
+}
+
 
 -(id) init;
 {
@@ -37,89 +73,121 @@
 
 - (BOOL)outputEvent:(long)event withData:(long)data;
 {
+    BOOL useSingleITC18;
+    
 	if (digitalOutDevice == nil) {
 		return NO;
 	}
 	[lock lock];
-	[digitalOutDevice digitalOutputBits:(event | 0x8000)];
-	[digitalOutDevice digitalOutputBits:(data & 0x7fff)];
-	[lock unlock];
-	NSLog(@"Digital out %ld %ld", (event | 0x8000), (data & 0x7fff));
+	
+    useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];
+    
+    if (useSingleITC18) {
+        [[task dataController] digitalOutputBits:((event | 0x8001))];
+        
+        if ((data>8192) || (data<-8192)) {
+            NSLog(@"Event: %ld, actual dat val: %ld is out of range, val sent: %ld",event, data, (2*data+1 & 0x7fff));
+        }
+        [[task dataController] digitalOutputBits:((2*data+1) & 0x7fff)];
+	}
+    else {
+        [digitalOutDevice digitalOutputBits:(event | 0x8000)];
+        [digitalOutDevice digitalOutputBits:(data & 0x7fff)];
+        //NSLog(@"Digital out %ld %ld", (event | 0x8000), (data & 0x7fff));
+    }
+    
+    [lock unlock];
+	
 	return YES;
 }
 
 - (BOOL)outputEventName:(NSString *)eventName withData:(long)data;
 {
-	
+    NSString *thisEventName;
+	BOOL useSingleITC18;
+    
 	if (digitalOutDevice == nil) {
 		return NO;
 	}
 	[lock lock];
 	
 	if ([eventName isEqualTo:@"attendLoc"] || [eventName isEqualTo:@"AL"] )
-		[digitalOutDevice digitalOutputBits:(0x414C | 0x8000)];
-	else if ([eventName isEqualTo:@"azimuth"] || [eventName isEqualTo:@"AZ"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x415A | 0x8000)];
+        thisEventName = @"AL";
+	else if ([eventName isEqualTo:@"azimuth"] || [eventName isEqualTo:@"AZ"] )
+		thisEventName = @"AZ";
 	else if ([eventName isEqualTo:@"break"] || [eventName isEqualTo:@"BR"] )
-		[digitalOutDevice digitalOutputBits:(0x4252 | 0x8000)];
+		thisEventName = @"BR";
 	else if ([eventName isEqualTo:@"contrast"] || [eventName isEqualTo:@"CO"] )
-		[digitalOutDevice digitalOutputBits:(0x434F | 0x8000)];
+		thisEventName = @"CO";
 	else if ([eventName isEqualTo:@"catchTrial"] || [eventName isEqualTo:@"CT"] )
-		[digitalOutDevice digitalOutputBits:(0x4354 | 0x8000)];
+		thisEventName = @"CT";
 	else if ([eventName isEqualTo:@"eccentricity"] || [eventName isEqualTo:@"EC"] )
-		[digitalOutDevice digitalOutputBits:(0x4543 | 0x8000)];
-	else if ([eventName isEqualTo:@"elevation"] || [eventName isEqualTo:@"EL"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x454C | 0x8000)];
+		thisEventName = @"EC";
+	else if ([eventName isEqualTo:@"elevation"] || [eventName isEqualTo:@"EL"] )
+		thisEventName = @"EL";
 	else if ([eventName isEqualTo:@"fixate"] || [eventName isEqualTo:@"FI"] )
-		[digitalOutDevice digitalOutputBits:(0x4649 | 0x8000)];
+		thisEventName = @"FI";
 	else if ([eventName isEqualTo:@"fixOn"] || [eventName isEqualTo:@"FO"] )
-		[digitalOutDevice digitalOutputBits:(0x464F | 0x8000)];
+		thisEventName = @"FO";
 	else if ([eventName isEqualTo:@"instructTrial"] || [eventName isEqualTo:@"IT"] )
-		[digitalOutDevice digitalOutputBits:(0x4954 | 0x8000)];
-	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x4D30 | 0x8000)];
-	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x4D31 | 0x8000)];
+		thisEventName = @"IT";
+	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] )
+		thisEventName = @"M0";
+	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] )
+		thisEventName = @"M1";
 	else if ([eventName isEqualTo:@"stimulusOn"] || [eventName isEqualTo:@"ON"] )
-		[digitalOutDevice digitalOutputBits:(0x4F4E | 0x8000)];
+		thisEventName = @"ON";
 	else if ([eventName isEqualTo:@"stimulusOff"] || [eventName isEqualTo:@"OF"] )
-		[digitalOutDevice digitalOutputBits:(0x4F46 | 0x8000)];
+		thisEventName = @"OF";
 	else if ([eventName isEqualTo:@"orientation"] || [eventName isEqualTo:@"OR"] )
-		[digitalOutDevice digitalOutputBits:(0x4F52 | 0x8000)];
+		thisEventName = @"OR";
 	else if ([eventName isEqualTo:@"polarAngle"] || [eventName isEqualTo:@"PA"] )
-		[digitalOutDevice digitalOutputBits:(0x5041 | 0x8000)];
+		thisEventName = @"PA";
 	else if ([eventName isEqualTo:@"radius"] || [eventName isEqualTo:@"RA"] )
-		[digitalOutDevice digitalOutputBits:(0x5241 | 0x8000)];
+		thisEventName = @"RA";
 	else if ([eventName isEqualTo:@"saccade"] || [eventName isEqualTo:@"SA"] )
-		[digitalOutDevice digitalOutputBits:(0x5341 | 0x8000)];
+		thisEventName = @"SA";
 	else if ([eventName isEqualTo:@"spatialFreq"] || [eventName isEqualTo:@"SF"] )
-		[digitalOutDevice digitalOutputBits:(0x5346 | 0x8000)];
+		thisEventName = @"SF";
 	else if ([eventName isEqualTo:@"sigma"] || [eventName isEqualTo:@"SI"] )
-		[digitalOutDevice digitalOutputBits:(0x5349 | 0x8000)];
-	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x5354 | 0x8000)];
+		thisEventName = @"SI";
+	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] )
+		thisEventName = @"ST";
 	else if ([eventName isEqualTo:@"trialCertify"] || [eventName isEqualTo:@"TC"] )
-		[digitalOutDevice digitalOutputBits:(0x5443 | 0x8000)];
+		thisEventName = @"TC";
 	else if ([eventName isEqualTo:@"trialEnd"] || [eventName isEqualTo:@"TE"] )
-		[digitalOutDevice digitalOutputBits:(0x5445 | 0x8000)];
+		thisEventName = @"TE";
 	else if ([eventName isEqualTo:@"temporalFreq"] || [eventName isEqualTo:@"TF"] )
-		[digitalOutDevice digitalOutputBits:(0x5446 | 0x8000)];
-	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x5447 | 0x8000)];
-	else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
-		[digitalOutDevice digitalOutputBits:(0x5453 | 0x8000)];
+		thisEventName = @"TF";
+	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] )
+		thisEventName = @"TG";
+    else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
+		thisEventName = @"TS";
 	else if ([eventName isEqualTo:@"type0"] || [eventName isEqualTo:@"T0"] )
-		[digitalOutDevice digitalOutputBits:(0x5430 | 0x8000)];
+		thisEventName = @"T0";
 	else if ([eventName isEqualTo:@"type1"] || [eventName isEqualTo:@"T1"] )
-		[digitalOutDevice digitalOutputBits:(0x5431 | 0x8000)];
-	
+		thisEventName = @"T1";
 	else
 		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",
 						@"OK", nil, nil, eventName);
 	
-	
-	[digitalOutDevice digitalOutputBits:(data & 0x7fff)];
+    useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];
+    
+    if (useSingleITC18) {
+        
+        [[task dataController] digitalOutputBits:[self getDigitalValue:thisEventName]];
+        
+        if ((data>8192) || (data<-8192)) {
+            NSLog(@"Event: %@, actual dat val: %ld is out of range, val sent: %ld",thisEventName,data, (2*data+1 & 0x7fff));
+        }
+        [[task dataController] digitalOutputBits:((2*data+1) & 0x7fff)];
+	}
+    else {
+        [digitalOutDevice digitalOutputBits:[self getDigitalValue:thisEventName]];
+        [digitalOutDevice digitalOutputBits:(data & 0x7fff)];
+    }
 	[lock unlock];
+//	NSLog(@"Digital out %ld %ld", (event | 0x8000), (data & 0x7fff));
 	return YES;
 }
 

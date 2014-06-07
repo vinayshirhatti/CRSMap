@@ -187,10 +187,10 @@ NSString *CRSXTAutosaveKey = @"CRSXTAutosave";
 {
 	DataParam *pParam = (DataParam *)[eventData bytes];
 	
-	if (strcmp((char *)&pParam->dataName, "eyeXData") == 0) {
+	if (strcmp((char *)&pParam->dataName, "eyeRXData") == 0) {
 		[xtView setSamplePeriodMS:pParam->timing];
 	}
-	if (strcmp((char *)&pParam->dataName, "eyeYData") == 0) {
+	if (strcmp((char *)&pParam->dataName, "eyeRYData") == 0) {
 		[xtView setSamplePeriodMS:pParam->timing];
 	}
 	if (strcmp((char *)&pParam->dataName, "spike0") == 0) {
@@ -198,12 +198,12 @@ NSString *CRSXTAutosaveKey = @"CRSXTAutosave";
 	}
 }
 
-- (void)eyeXData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+- (void)eyeRXData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
 	[self processSampleData:eventData channel:0];
 }
 
-- (void)eyeYData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+- (void)eyeRYData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
 	[self processSampleData:eventData channel:1];
 }

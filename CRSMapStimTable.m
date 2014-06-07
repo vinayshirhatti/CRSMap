@@ -34,13 +34,27 @@ static long CRSMapStimTableCounter = 0;
 	NSLog(@"\n");
 }
 
-- (id) init
+- (id)initWithIndex:(long)index;
+{
+	if (!(self = [super init])) {
+		return nil;
+	}
+    mapIndex = index;
+	[self updateBlockParameters];	
+	[self newBlock];
+	return self;
+}
+
+// No one should init without using [initWithIndex:], but if they do, we automatically increment the index counter;
+
+- (id)init;
 {
 	if (!(self = [super init])) {
 		return nil;
 	}
     mapIndex = CRSMapStimTableCounter++;
-	[self updateBlockParameters];	
+    NSLog(@"CRSMapStimTable: initializing with index %ld", mapIndex);
+	[self updateBlockParameters];
 	[self newBlock];
 	return self;
 }
@@ -171,7 +185,32 @@ maxTargetS and a long stimLeadMS).
 	memcpy(&localList, &doneList, sizeof(doneList));
 	localFreshCount = stimRemainingInBlock;
 	frameRateHz = [[task stimWindow] frameRateHz];
-	
+/*
+    // debugging start
+    short a, e, sig, sf, dir, c, debugLocalListCount = 0, debugDoneListCount = 0;
+    NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
+    
+    for (a = 0;  a < [[countsDict objectForKey:@"azimuthCount"] intValue]; a++) {
+        for (e = 0;  e < [[countsDict objectForKey:@"elevationCount"] intValue]; e++) {
+            for (sig = 0;  sig < [[countsDict objectForKey:@"sigmaCount"] intValue]; sig++) {
+                for (sf = 0;  sf < [[countsDict objectForKey:@"spatialFreqCount"] intValue]; sf++) {
+                    for (dir = 0;  dir < [[countsDict objectForKey:@"orientationCount"] intValue]; dir++) {
+                        for (c = 0;  c < [[countsDict objectForKey:@"contrastCount"] intValue]; c++) {
+                            if (localList[a][e][sig][sf][dir][c]) {
+                                debugLocalListCount++;
+                                debugDoneListCount++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    NSLog(@"debugLocalListCount is %d", debugLocalListCount);
+    NSLog(@"debugDoneListCount is %d", debugDoneListCount);
+    // debugging end
+*/
 	mapDurFrames = MAX(1, ceil([[task defaults] integerForKey:CRSMapStimDurationMSKey] / 1000.0 * frameRateHz));
 	interDurFrames = ceil([[task defaults] integerForKey:CRSMapInterstimDurationMSKey] / 1000.0 * frameRateHz);
 	

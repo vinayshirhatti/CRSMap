@@ -18,16 +18,13 @@
 
 1. Include option to change the temporal frequency of the mapping stimuli (7th parameter). kMaxMapValues reduced to 6 otherwise the program crashes. Temporal modulation parameter is also added for mapping stimuli.
 
+% Changes made (May 22, 2013)       Supratim Ray
 
+1. Include option to send digital codes and control reward circuit using a single ITC18.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desired changes (22/03/13) Supratim Ray
 
 At present doneList in GRFMapStimTable is maintained as a 6-D array with kMaxMapValues = 8 entires per dimension, which needs 8^6 bytes. If fewer number of entries are used per parameter (say numAzi=1), we are unnecessarily dealing with a large and sparse matrix. Instead, this list should be constructed dynamically (7-D array of size numAzi*numEle*numSigma*numSF*numOri*numCon*numTF). This will allow us to increase the number of possible entries (kMaxMapValues) as long as all the parameters are not large simultaneously.
 
-Check whether both digital codes and reward/eyedata etc can be controlled using a single ITC.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bugs
-
-The code gives computer errors if contrast is different from 100%.          (22/03/13)  Supratim Ray

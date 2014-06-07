@@ -20,7 +20,9 @@ NSString *CRSEyeXYDoTicksKey = @"CRSEyeXYDoTicks";
 NSString *CRSEyeXYSamplesSavedKey = @"CRSEyeXYSamplesSaved";
 NSString *CRSEyeXYDotSizeDegKey = @"CRSEyeXYDotSizeDeg";
 NSString *CRSEyeXYDrawCalKey = @"CRSEyeXYDrawCal";
-NSString *CRSEyeXYEyeColorKey = @"CRSEyeXYEyeColor";
+//NSString *CRSEyeXYEyeColorKey = @"CRSEyeXYEyeColor";
+NSString *CRSEyeXYLEyeColorKey = @"CRSEyeXYLEyeColor";
+NSString *CRSEyeXYREyeColorKey = @"CRSEyeXYREyeColor";
 NSString *CRSEyeXYFadeDotsKey = @"CRSEyeXYFadeDots";
 NSString *CRSEyeXYGridDegKey = @"CRSEyeXYGridDeg";
 NSString *CRSEyeXYHScrollKey = @"CRSEyeXYHScroll";
@@ -57,6 +59,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 - (void) dealloc;
 {
+    long eyeIndex;
 	NSRect r;
 
 	r = [eyePlot visibleRect];
@@ -65,11 +68,13 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 	[fixWindowColor release];
 	[respWindowColor release];
 	[calColor release];
-	[unitsToDeg release];
-	[degToUnits release];
-	[calBezierPath release];
-	[eyeXSamples release];
-	[eyeYSamples release];
+	for (eyeIndex = kLeftEye; eyeIndex < kEyes; eyeIndex++) {
+        [unitsToDeg[eyeIndex] release];
+        [degToUnits[eyeIndex] release];
+        [calBezierPath[eyeIndex] release];
+        [eyeXSamples[eyeIndex] release];
+        [eyeYSamples[eyeIndex] release];
+    }
 	[sampleLock release];
     [super dealloc];
 }
@@ -90,7 +95,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 // Draw the fixation window
 
-	if (NSPointInRect(currentEyeDeg, eyeWindowRectDeg)) {
+	if (NSPointInRect(currentEyeDeg[kLeftEye], eyeWindowRectDeg)) {
 		[[fixWindowColor highlightWithLevel:0.90] set];
 		[NSBezierPath fillRect:eyeWindowRectDeg];
 	}
@@ -100,7 +105,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 // Draw the response windows
 
-	if (NSPointInRect(currentEyeDeg, respWindowRectDeg)) {
+	if (NSPointInRect(currentEyeDeg[kLeftEye], respWindowRectDeg) || NSPointInRect(currentEyeDeg[kRightEye], respWindowRectDeg))  {
 		[[respWindowColor highlightWithLevel:0.80] set];
 		[NSBezierPath fillRect:respWindowRectDeg];
 	}
@@ -112,8 +117,11 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 // Draw the calibration for the fixation window
 	
 	if ([[task defaults] integerForKey:CRSEyeXYDrawCalKey]) {
-		[calColor set];
-		[calBezierPath stroke];
+		//[calColor set];
+        [[eyePlot eyeLColor] set];
+		[calBezierPath[kLeftEye] stroke];
+        [[eyePlot eyeRColor] set];
+		[calBezierPath[kRightEye] stroke];
 	}
 }
 
@@ -130,9 +138,17 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 		[[task defaults] registerDefaults:
 					[NSDictionary dictionaryWithObject:
 					[NSArchiver archivedDataWithRootObject:[NSColor blueColor]] 
-					forKey:CRSEyeXYEyeColorKey]];
-		eyeXSamples = [[NSMutableData alloc] init];
-		eyeYSamples = [[NSMutableData alloc] init];
+					forKey:CRSEyeXYLEyeColorKey]];
+        [[task defaults] registerDefaults:
+         [NSDictionary dictionaryWithObject:
+          [NSArchiver archivedDataWithRootObject:[NSColor blueColor]]
+                                     forKey:CRSEyeXYREyeColorKey]];
+		//eyeXSamples = [[NSMutableData alloc] init];
+		//eyeYSamples = [[NSMutableData alloc] init];
+        eyeXSamples[kLeftEye] = [[NSMutableData alloc] init];
+		eyeYSamples[kLeftEye] = [[NSMutableData alloc] init];
+		eyeXSamples[kRightEye] = [[NSMutableData alloc] init];
+		eyeYSamples[kRightEye] = [[NSMutableData alloc] init];
 		sampleLock = [[NSLock alloc] init];
  		[self setShouldCascadeWindows:NO];
         [self setWindowFrameAutosaveName:CRSXYAutosaveKey];
@@ -141,20 +157,20 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
     return self;
 }
 
-- (void)processEyeSamplePairs;
+- (void)processEyeSamplePairs:(long)eyeIndex;
 {
 	NSEnumerator *enumerator;
 	NSArray *pairs;
 	NSValue *value;
 	
 	[sampleLock lock];
-	pairs = [LLDataUtil pairXSamples:eyeXSamples withYSamples:eyeYSamples];
+	pairs = [LLDataUtil pairXSamples:eyeXSamples[eyeIndex] withYSamples:eyeYSamples[eyeIndex]];
 	[sampleLock unlock];
 	if (pairs != nil) {
 		enumerator = [pairs objectEnumerator];
 		while ((value = [enumerator nextObject])) {
-			currentEyeDeg = [unitsToDeg transformPoint:[value pointValue]];
-			[eyePlot addSample:currentEyeDeg];
+            currentEyeDeg[eyeIndex] = [unitsToDeg[eyeIndex] transformPoint:[value pointValue]];
+			[eyePlot addSample:currentEyeDeg[eyeIndex] forEye:eyeIndex];
 		}
 	}
 }
@@ -165,7 +181,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 	[eyePlot setDotFade:[[task defaults] boolForKey:CRSEyeXYFadeDotsKey]];
     [eyePlot setEyeColor:[NSUnarchiver 
                 unarchiveObjectWithData:[[task defaults] 
-                objectForKey:CRSEyeXYEyeColorKey]]];
+                objectForKey:CRSEyeXYLEyeColorKey]] forEye:kLeftEye];
 	[eyePlot setGrid:[[task defaults] boolForKey:CRSEyeXYDoGridKey]];
 	[eyePlot setGridDeg:[[task defaults] floatForKey:CRSEyeXYGridDegKey]];
 	[eyePlot setOneInN:[[task defaults] integerForKey:CRSEyeXYOneInNKey]];
@@ -189,6 +205,22 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 	[self centerDisplay:self];
 }
 
+- (void)updateEyeCalibration:(long)eyeIndex eventData:(NSData *)eventData;
+{
+	LLEyeCalibrationData cal;
+    
+	[eventData getBytes:&cal];
+    
+	[unitsToDeg[eyeIndex] setTransformStruct:cal.calibration];
+	[degToUnits[eyeIndex] setTransformStruct:cal.calibration];
+	[degToUnits[eyeIndex] invert];
+    
+	[calBezierPath[eyeIndex] autorelease];
+	calBezierPath[eyeIndex] = [LLEyeCalibrator bezierPathForCalibration:cal];
+	[calBezierPath[eyeIndex] retain];
+}
+
+
 - (void)windowDidBecomeKey:(NSNotification *)aNotification;
 {
 	[[task defaults] setObject:[NSNumber numberWithBool:YES] forKey:CRSEyeXYWindowVisibleKey];
@@ -201,8 +233,10 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
     calColor = [[NSColor colorWithDeviceRed:0.60 green:0.45 blue:0.15 alpha:1.0] retain];
     fixWindowColor = [[NSColor colorWithDeviceRed:0.00 green:0.00 blue:1.00 alpha:1.0] retain];
     respWindowColor = [[NSColor colorWithDeviceRed:0.95 green:0.55 blue:0.50 alpha:1.0] retain];
-	unitsToDeg = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
-	degToUnits = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
+	unitsToDeg[kLeftEye] = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
+	unitsToDeg[kRightEye] = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
+	degToUnits[kLeftEye] = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
+	degToUnits[kRightEye] = [[NSAffineTransform alloc] initWithTransform:[NSAffineTransform transform]];
     [self setScaleFactor:[[task defaults] floatForKey:CRSEyeXYMagKey]];
 	[self setEyePlotValues];
     [eyePlot addDrawable:self];
@@ -236,18 +270,14 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 // Update the display of the calibration in the xy window.  We get the calibration structure
 // and use it to construct crossing lines that mark the current calibration.
 
-- (void)eyeCalibration:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+- (void)eyeLeftCalibration:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	LLEyeCalibrationData cal;
+    [self updateEyeCalibration:kLeftEye eventData:eventData];
+}
 
-	[eventData getBytes:&cal];
-	[unitsToDeg setTransformStruct:cal.calibration];
-	[degToUnits setTransformStruct:cal.calibration];
-	[degToUnits invert];
-
-	[calBezierPath autorelease];
-	calBezierPath = [LLEyeCalibrator bezierPathForCalibration:cal];
-	[calBezierPath retain];
+- (void)eyeRightCalibration:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+{
+    [self updateEyeCalibration:kRightEye eventData:eventData];
 }
 
 - (void)eyeWindow:(NSData *)eventData eventTime:(NSNumber *)eventTime {
@@ -261,20 +291,34 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 // Just save the x eye data until we get the corresponding y eye data
 
-- (void)eyeXData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+- (void)eyeLXData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
 	[sampleLock lock];
-	[eyeXSamples appendData:eventData];
+	[eyeXSamples[kLeftEye] appendData:eventData];
 	[sampleLock unlock];
-	[self processEyeSamplePairs];
+    [self processEyeSamplePairs:kLeftEye];
 }
 
-- (void)eyeYData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+- (void)eyeLYData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
 	[sampleLock lock];
-	[eyeYSamples appendData:eventData];
+	[eyeYSamples[kLeftEye] appendData:eventData];
 	[sampleLock unlock];
-	[self processEyeSamplePairs];
+}
+
+- (void)eyeRXData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+{
+	[sampleLock lock];
+	[eyeXSamples[kRightEye] appendData:eventData];
+	[sampleLock unlock];
+}
+
+- (void)eyeRYData:(NSData *)eventData eventTime:(NSNumber *)eventTime;
+{
+	[sampleLock lock];
+	[eyeYSamples[kRightEye] appendData:eventData];
+	[sampleLock unlock];
+    [self processEyeSamplePairs:kRightEye];
 }
 
 - (void)responseWindow:(NSData *)eventData eventTime:(NSNumber *)eventTime;

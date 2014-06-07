@@ -9,12 +9,12 @@
 
 @interface CRSEyeXYController : NSWindowController <LLDrawable> {
 
-	NSBezierPath			*calBezierPath;
+	NSBezierPath			*calBezierPath[kEyes];
 	NSColor					*calColor;
-	NSPoint					currentEyeDeg;
- 	NSAffineTransform		*degToUnits;
-	NSMutableData			*eyeXSamples;
-	NSMutableData			*eyeYSamples;
+	NSPoint					currentEyeDeg[kEyes];
+ 	NSAffineTransform		*degToUnits[kEyes];
+	NSMutableData			*eyeXSamples[kEyes];
+	NSMutableData			*eyeYSamples[kEyes];
 	NSRect					eyeWindowRectDeg;
 	NSColor					*fixWindowColor;
 	BOOL					inTrial;
@@ -23,7 +23,7 @@
 	NSRect					respWindowRectDeg;
 	NSLock					*sampleLock;
 	TrialDesc				trial;
- 	NSAffineTransform		*unitsToDeg;
+ 	NSAffineTransform		*unitsToDeg[kEyes];
   
     IBOutlet LLEyeXYView 	*eyePlot;
     IBOutlet NSScrollView 	*scrollView;
@@ -37,8 +37,9 @@
 - (IBAction)endOptionSheet:(id)sender;
 
 - (void)deactivate;
-- (void)processEyeSamplePairs;
+- (void)processEyeSamplePairs:(long)eyeIndex;
 - (void)setEyePlotValues;
 - (void)setScaleFactor:(double)factor;
+- (void)updateEyeCalibration:(long)eyeIndex eventData:(NSData *)eventData;
 
 @end

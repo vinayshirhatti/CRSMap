@@ -20,12 +20,13 @@
 // Behavioral parameters
 
 NSString *CRSAcquireMSKey = @"CRSAcquireMS";
+NSString *CRSAlphaTargetDetectionTaskKey = @"CRSAlphaTargetDetectionTask";
 NSString *CRSBlockLimitKey = @"CRSBlockLimit";
 NSString *CRSBreakPunishMSKey = @"CRSBreakPunishMS";
 NSString *CRSChangeScaleKey = @"CRSChangeScale";
 NSString *CRSCatchTrialPCKey = @"CRSCatchTrialPC";
 NSString *CRSCatchTrialMaxPCKey = @"CRSCatchTrialMaxPC";
-//NSString *CRSCueMSKey = @"CRSCueMS";
+NSString *CRSCueMSKey = @"CRSCueMS";
 NSString *CRSDoSoundsKey = @"CRSDoSounds";
 NSString *CRSFixateKey = @"CRSFixate";
 NSString *CRSFixateMSKey = @"CRSFixateMS";
@@ -39,12 +40,13 @@ NSString *CRSInvalidRewardFactorKey = @"CRSInvalidRewardFactor";
 NSString *CRSMinTargetMSKey = @"CRSMinTargetMS";
 NSString *CRSMaxTargetMSKey = @"CRSMaxTargetMS";
 NSString *CRSMeanTargetMSKey = @"CRSMeanTargetMS";
-//NSString *CRSNontargetContrastPCKey = @"CRSNontargetContrastPC";
-//NSString *CRSRespSpotSizeDegKey = @"CRSRespSpotSizeDeg";
+NSString *CRSNontargetContrastPCKey = @"CRSNontargetContrastPC";
+NSString *CRSRespSpotSizeDegKey = @"CRSRespSpotSizeDeg";
 NSString *CRSRespTimeMSKey = @"CRSRespTimeMS";
 NSString *CRSRespWindowWidthDegKey = @"CRSRespWindowWidthDeg";
 NSString *CRSRewardMSKey = @"CRSRewardMS";
 NSString *CRSMinRewardMSKey = @"CRSMinRewardMS";
+NSString *CRSRandTaskGaborDirectionKey = @"CRSRandTaskGaborDirection";
 NSString *CRSRewardScheduleKey = @"CRSRewardSchedule";
 NSString *CRSSaccadeTimeMSKey = @"CRSSaccadeTimeMS";
 NSString *CRSStimRepsPerBlockKey = @"CRSStimRepsPerBlock";
@@ -68,14 +70,17 @@ NSString *CRSChangeRemainKey = @"CRSChangeRemain";
 NSString *CRSChangeArrayKey = @"CRSChangeArray";
 NSString *CRSStimTablesKey = @"CRSStimTables";
 NSString *CRSStimTableCountsKey = @"CRSStimTableCounts";
-//NSString *CRSMapStimContrastPCKey = @"CRSMapStimContrastPC";
+NSString *CRSMapStimContrastPCKey = @"CRSMapStimContrastPC";
 NSString *CRSMapStimRadiusSigmaRatioKey = @"CRSMapStimRadiusSigmaRatio";
+NSString *CRSTargetAlphaKey = @"CRSTargetAlpha";
+NSString *CRSTargetRadiusKey = @"CRSTargetRadius";
 
 NSString *CRSHideLeftKey = @"CRSHideLeft";
 NSString *CRSHideRightKey = @"CRSHideRight";
 NSString *CRSHideLeftDigitalKey = @"CRSHideLeftDigital";
 NSString *CRSHideRightDigitalKey = @"CRSHideRightDigital";
 NSString *CRSConvertToGratingKey = @"CRSConvertToGrating";
+NSString *CRSUseSingleITC18Key = @"CRSUseSingleITC18";
 
 NSString *CRSHideTaskGaborKey = @"CRSHideTaskGabor";
 NSString *CRSIncludeCatchTrialsinDoneListKey = @"CRSIncludeCatchTrialsinDoneList";
@@ -83,8 +88,8 @@ NSString *CRSMapTemporalModulationKey = @"CRSMapTemporalModulation";
 
 // Visual Stimulus Parameters 
 
-//NSString *CRSSpatialPhaseDegKey = @"CRSSpatialPhaseDeg";
-//NSString *CRSTemporalFreqHzKey = @"CRSTemporalFreqHz";
+NSString *CRSSpatialPhaseDegKey = @"CRSSpatialPhaseDeg";
+NSString *CRSTemporalFreqHzKey = @"CRSTemporalFreqHz";
 
 // Keys for change array
 
@@ -220,11 +225,20 @@ LLDataDef mapSettingsDef[] = {
 	{@"struct",	@"temporalFreqHz", 1, offsetof(MapSettings, temporalFreqHz), sizeof(MapParams), mapParamsDef},
     {nil}};
 	
-DataAssignment eyeXDataAssignment = {@"eyeXData",	@"Synthetic", 0, 5.0};	
-DataAssignment eyeYDataAssignment = {@"eyeYData",	@"Synthetic", 1, 5.0};	
+//DataAssignment eyeXDataAssignment = {@"eyeXData",	@"Synthetic", 0, 5.0};	
+//DataAssignment eyeYDataAssignment = {@"eyeYData",	@"Synthetic", 1, 5.0};
+
+DataAssignment eyeRXDataAssignment = {@"eyeRXData",     @"Synthetic", 2, 5.0};
+DataAssignment eyeRYDataAssignment = {@"eyeRYData",     @"Synthetic", 3, 5.0};
+DataAssignment eyeRPDataAssignment = {@"eyeRPData",     @"Synthetic", 4, 5.0};
+DataAssignment eyeLXDataAssignment = {@"eyeLXData",     @"Synthetic", 5, 5.0};
+DataAssignment eyeLYDataAssignment = {@"eyeLYData",     @"Synthetic", 6, 5.0};
+DataAssignment eyeLPDataAssignment = {@"eyeLPData",     @"Synthetic", 7, 5.0};
+
 DataAssignment spike0Assignment =   {@"spike0",     @"Synthetic", 2, 1};
 DataAssignment spike1Assignment =   {@"spike1",     @"Synthetic", 3, 1};
 DataAssignment VBLDataAssignment =  {@"VBLData",	@"Synthetic", 1, 1};
+
 	
 EventDefinition CRSEvents[] = {
     // recorded at start of file, these need to be announced using announceEvents() in UtilityFunctions.m
@@ -255,13 +269,12 @@ EventDefinition CRSEvents[] = {
 
     // declared at start of each trial	
 	{@"trial",				sizeof(TrialDesc),		{@"struct", @"trial", 1, 0, sizeof(TrialDesc), trialDescDef}},
-	{@"trialSync",          sizeof(long),			{@"long"}},
 	{@"responseWindow",		sizeof(FixWindowData),	{@"struct", @"responseWindowData", 1, 0, sizeof(FixWindowData), fixWindowStructDef}},
 
     // marking the course of each trial
 	{@"preStimuli",			0,						{@"no data"}},
 	{@"stimulus",			sizeof(StimDesc),		{@"struct", @"stimDesc", 1, 0, sizeof(StimDesc), stimDescDef}},
-	{@"stimulusOffTime",	0,						{@"no data"}},
+    {@"stimulusOffTime",	0,						{@"no data"}},
 	{@"stimulusOnTime",		0,						{@"no data"}},
 	{@"postStimuli",		0,						{@"no data"}},
 	{@"saccade",			0,						{@"no data"}},
@@ -278,11 +291,12 @@ BlockStatus			blockStatus;
 MappingBlockStatus	mappingBlockStatus;
 BOOL				brokeDuringStim;
 LLTaskPlugIn		*task = nil;
+long                trialCounter;
 
 
 @implementation CRSMap
 
-+ (int)version;
++ (NSInteger)version;
 {
 	return kLLPluginVersion;
 }
@@ -313,8 +327,8 @@ LLTaskPlugIn		*task = nil;
 
 	[stimuli erase];
 	
-	mapStimTable0 = [[CRSMapStimTable alloc] init];
-	mapStimTable1 = [[CRSMapStimTable alloc] init];
+	mapStimTable0 = [[CRSMapStimTable alloc] initWithIndex:0];
+	mapStimTable1 = [[CRSMapStimTable alloc] initWithIndex:1];
 	
 // Create on-line display windows
 
@@ -347,14 +361,21 @@ LLTaskPlugIn		*task = nil;
 
 // Set up the data collector to handle our data types
 
-	[dataController assignSampleData:eyeXDataAssignment];
-	[dataController assignSampleData:eyeYDataAssignment];
+    [dataController assignSampleData:eyeRXDataAssignment];
+	[dataController assignSampleData:eyeRYDataAssignment];
+	[dataController assignSampleData:eyeRPDataAssignment];
+	[dataController assignSampleData:eyeLXDataAssignment];
+	[dataController assignSampleData:eyeLYDataAssignment];
+	[dataController assignSampleData:eyeLPDataAssignment];
+    
 	[dataController assignTimestampData:spike0Assignment];
 	[dataController assignTimestampData:spike1Assignment];
 	[dataController assignTimestampData:VBLDataAssignment];
 	[dataController assignDigitalInputDevice:@"Synthetic"];
 	[dataController assignDigitalOutputDevice:@"Synthetic"];
-	collectorTimer = [NSTimer scheduledTimerWithTimeInterval:0.025 target:self 
+    
+    
+	collectorTimer = [NSTimer scheduledTimerWithTimeInterval:0.004 target:self
 			selector:@selector(dataCollect:) userInfo:nil repeats:YES];
 	[dataDoc addObserver:stateSystem];
     [stateSystem startWithCheckIntervalMS:5];				// Start the experiment state system
@@ -388,15 +409,43 @@ LLTaskPlugIn		*task = nil;
 	NSData *data;
     TimestampData spikeData;
 
-	if ((data = [dataController dataOfType:@"eyeXData"]) != nil) {
-		[dataDoc putEvent:@"eyeXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
-		currentEyeUnits.x = *(short *)([data bytes] + [data length] - sizeof(short));
+//	if ((data = [dataController dataOfType:@"eyeXData"]) != nil) {
+//		[dataDoc putEvent:@"eyeXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+//		currentEyeUnits.x = *(short *)([data bytes] + [data length] - sizeof(short));
+//	}
+//	if ((data = [dataController dataOfType:@"eyeYData"]) != nil) {
+//		[dataDoc putEvent:@"eyeYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+//		currentEyeUnits.y = *(short *)([data bytes] + [data length] - sizeof(short));
+//		currentEyeDeg = [eyeCalibrator degPointFromUnitPoint:currentEyeUnits];
+//	}
+    
+    if ((data = [dataController dataOfType:@"eyeLXData"]) != nil) {
+		[dataDoc putEvent:@"eyeLXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+		currentEyesUnits[kLeftEye].x = *(short *)([data bytes] + [data length] - sizeof(short));
 	}
-	if ((data = [dataController dataOfType:@"eyeYData"]) != nil) {
-		[dataDoc putEvent:@"eyeYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
-		currentEyeUnits.y = *(short *)([data bytes] + [data length] - sizeof(short));
-		currentEyeDeg = [eyeCalibrator degPointFromUnitPoint:currentEyeUnits];
+    
+	if ((data = [dataController dataOfType:@"eyeLYData"]) != nil) {
+        [dataDoc putEvent:@"eyeLYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+		currentEyesUnits[kLeftEye].y = *(short *)([data bytes] + [data length] - sizeof(short));
+        currentEyesDeg[kLeftEye] = [eyeCalibrator degPointFromUnitPoint: currentEyesUnits[kLeftEye] forEye:kLeftEye];
+        }
+	if ((data = [dataController dataOfType:@"eyeLPData"]) != nil) {
+		[dataDoc putEvent:@"eyeLPData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 	}
+	if ((data = [dataController dataOfType:@"eyeRXData"]) != nil) {
+		[dataDoc putEvent:@"eyeRXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+		currentEyesUnits[kRightEye].x = *(short *)([data bytes] + [data length] - sizeof(short));
+	}
+	if ((data = [dataController dataOfType:@"eyeRYData"]) != nil) {
+		[dataDoc putEvent:@"eyeRYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+		currentEyesUnits[kRightEye].y = *(short *)([data bytes] + [data length] - sizeof(short));
+		currentEyesDeg[kRightEye] = [eyeCalibrator degPointFromUnitPoint: currentEyesUnits[kRightEye] forEye:kRightEye];	}
+	if ((data = [dataController dataOfType:@"eyeRPData"]) != nil) {
+		[dataDoc putEvent:@"eyeRPData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
+	}
+
+    
+    
 	if ((data = [dataController dataOfType:@"VBLData"]) != nil) {
 		[dataDoc putEvent:@"VBLData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 	}
@@ -482,7 +531,8 @@ LLTaskPlugIn		*task = nil;
 	[mapStimTable1 release];
 	[digitalOut release];
 	[controlPanel release];
-	[taskStatus dealloc];
+	[taskStatus release];
+    [topLevelObjects release];
 	[super dealloc];
 }
 
@@ -511,7 +561,8 @@ LLTaskPlugIn		*task = nil;
 	long minRewardMS, maxRewardMS;
 	long targetOnTimeMS;
 	float alpha, beta;
-	
+	BOOL useSingleITC18;
+    
 	NSSound *juiceSound;
 	
 	if ([sender respondsToSelector:@selector(juiceMS)]) {
@@ -536,8 +587,17 @@ LLTaskPlugIn		*task = nil;
 		juiceMS = alpha * targetOnTimeMS + beta;
 		juiceMS = abs(juiceMS);
 	}
-	[[task dataController] digitalOutputBitsOff:kRewardBit];
-	[scheduler schedule:@selector(doJuiceOff) toTarget:self withObject:nil delayMS:juiceMS];
+    
+    useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];
+    
+    if (useSingleITC18) {
+        [[task dataController] digitalOutputBits:(0xffff-kRewardBit)];      // Works as long as kRewardBit is either 0x0001 or 0x0000
+    }
+    else {
+        [[task dataController] digitalOutputBitsOff:kRewardBit];
+    }
+	
+    [scheduler schedule:@selector(doJuiceOff) toTarget:self withObject:nil delayMS:juiceMS];
 	if ([[task defaults] boolForKey:CRSDoSoundsKey]) {
 		juiceSound = [NSSound soundNamed:@"Correct"];
 		if ([juiceSound isPlaying]) {   // won't play again if it's still playing
@@ -549,7 +609,15 @@ LLTaskPlugIn		*task = nil;
 
 - (void)doJuiceOff;
 {
-	[[task dataController] digitalOutputBitsOn:kRewardBit];
+    BOOL useSingleITC18;
+    useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];
+    
+    if (useSingleITC18) {
+        [[task dataController] digitalOutputBits:(0xfffe | kRewardBit)];    // Works as long as kRewardBit is either 0x0001 or 0x0000
+    }
+    else {
+        [[task dataController] digitalOutputBitsOn:kRewardBit];
+    }
 }
 
 - (IBAction)doReset:(id)sender;
@@ -634,7 +702,8 @@ LLTaskPlugIn		*task = nil;
 
 // Load the items in the nib
 
-	[NSBundle loadNibNamed:@"CRSMap" owner:self];
+	[[NSBundle bundleForClass:[self class]] loadNibNamed:@"CRSMap" owner:self topLevelObjects:&topLevelObjects];
+	[topLevelObjects retain];
 	
 // Initialize other task objects
 
@@ -774,6 +843,10 @@ LLTaskPlugIn		*task = nil;
 		longValue = [defaults integerForKey:CRSOrientationChangesKey];
 		[dataDoc putEvent:@"stimRepsPerBlock" withData:&longValue];
 	}
+    else if ([key isEqualTo:CRSMapStimContrastPCKey])	{
+		[stimuli clearStimLists:&trial];
+		//[stimuli makeStimLists:&trial];
+	}
     else if ([key isEqualTo:CRSHideTaskGaborKey]) {
         [[task defaults] setBool:YES forKey:CRSIncludeCatchTrialsinDoneListKey];
         [[task defaults] setInteger:100 forKey:CRSCatchTrialPCKey];
@@ -784,19 +857,14 @@ LLTaskPlugIn		*task = nil;
     else if ([key isEqualTo:CRSHideRightKey]) {
         [[task defaults] setBool:YES forKey:CRSHideRightDigitalKey];
     }
-	/*
-    else if ([key isEqualTo:CRSMapStimContrastPCKey])	{
-		[stimuli clearStimLists:&trial];
-		//[stimuli makeStimLists:&trial];
-	}*/
 }
 
 - (DisplayModeParam)requestedDisplayMode;
 {
-	displayMode.widthPix = 1360; //1024;
-	displayMode.heightPix = 768;
+	displayMode.widthPix = 1280; //1024;
+	displayMode.heightPix = 720; //768;
 	displayMode.pixelBits = 32;
-	displayMode.frameRateHz = 60; //100;
+	displayMode.frameRateHz = 100;
 	return displayMode;
 }
 
@@ -875,7 +943,7 @@ LLTaskPlugIn		*task = nil;
 		[changeArray removeObjectsInRange:NSMakeRange(changes, oldChanges - changes)];
 	}
 	else if (changes > oldChanges) {
-		changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
+		changeEntry = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 				[NSNumber numberWithFloat:10.0], CRSChangeKey,
 				[NSNumber numberWithLong:1], CRSValidRepsKey,
 				[NSNumber numberWithLong:0], CRSInvalidRepsKey,
@@ -884,150 +952,6 @@ LLTaskPlugIn		*task = nil;
 			[changeArray addObject:changeEntry];
 		}
 	}
-/*
-	changeSign = 0;
-	minChange = [defaults floatForKey:CRSMinDirChangeDegKey];
-	maxChange = [defaults floatForKey:CRSMaxDirChangeDegKey];
-	
-	changeScale = [defaults integerForKey:CRSChangeScaleKey];
-	
-	if ((minChange > 0) & (maxChange > 0)) {
-		changeSign = 1;
-		logMinChange = log(minChange);
-		logMaxChange = log(maxChange);
-		logGuessThreshold = log(guessThreshold);
-	}
-	else if ((minChange < 0) & (maxChange < 0)) {
-		changeSign = -1;
-		logMinChange = log((-1*minChange));
-		logMaxChange = log((-1*maxChange));
-		logGuessThreshold = log(-1*guessThreshold);
-	} 
-
-	switch (changes) {
-		case 1:
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:maxChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:0 withObject:changeEntry];
-			break;
-
-		case 2:
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:minChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:0 withObject:changeEntry];
-		
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:maxChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:1 withObject:changeEntry];
-			break;
-		
-		case 3:
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:minChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:0 withObject:changeEntry];
-		
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:guessThreshold], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:1 withObject:changeEntry];
-
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:maxChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:2 withObject:changeEntry];
-			break;
-
-		case 4:
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:minChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:0 withObject:changeEntry];
-		
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:guessThreshold], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:1 withObject:changeEntry];
-
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:maxChange], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:2 withObject:changeEntry];
-
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:maxChange * 1.5], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-			[changeArray replaceObjectAtIndex:3 withObject:changeEntry];
-			break;
-
-		default:
-			netChanges = changes -1;
-			halfIndex = changes / 2;
-			for (index = 0; index < changes/2; index++) {
-				if (changeScale == kLinear) {
-					newValue = minChange + (index) * (guessThreshold - minChange) / (changes / 2 - 1);
-				}
-				else if (changeScale == kLogarithmic) {
-				newValue = exp(logMinChange + (index) * (logGuessThreshold - logMinChange) / (changes / 2 - 1));
-				newValue = changeSign * newValue;
-				}
-//				newValue = 0.1;
-				changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:newValue], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-				[changeArray replaceObjectAtIndex:index withObject:changeEntry];
-			}
-			halfIndex = index;
-			for (index = halfIndex; index < changes - 1; index++) {
-				if (changeScale == kLinear) {
-					newValue = guessThreshold + (index - halfIndex + 1) * 
-								(maxChange - guessThreshold) / ((changes + 1) / 2 - 1);
-				}
-				else if (changeScale == kLogarithmic) {
-				newValue = exp(logGuessThreshold + (index - halfIndex + 1) * 
-								(logMaxChange - logGuessThreshold) / ((changes + 1) / 2 - 1));
-				newValue = changeSign * newValue;
-				}
-//				newValue = 0.1;
-				changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-					[NSNumber numberWithFloat:newValue], CRSChangeKey,
-					[NSNumber numberWithLong:1], CRSValidRepsKey,
-					nil];
-				[changeArray replaceObjectAtIndex:index withObject:changeEntry];
-			}
-			
-			changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-				[NSNumber numberWithFloat:maxChange*1.5], CRSChangeKey,
-				[NSNumber numberWithLong:1], CRSValidRepsKey,
-				nil];
-
-			[changeArray replaceObjectAtIndex:changes-1 withObject:changeEntry];
-			break;
-	}
-
-
-
-	changeEntry = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithFloat:1.0*changeSign], CRSChangeKey,
-			[NSNumber numberWithLong:1], CRSValidRepsKey,
-			nil];
-
-	[changeArray replaceObjectAtIndex:0 withObject:changeEntry];
-*/
 	changeScale = [defaults integerForKey:CRSChangeScaleKey];
 	minChange = [defaults floatForKey:CRSMinDirChangeDegKey];
 	maxChange = [defaults floatForKey:CRSMaxDirChangeDegKey];

@@ -6,6 +6,7 @@
 //
 
 #import "CRSBlockedState.h"
+#import "CRSUtilities.h"
 
 @implementation CRSBlockedState
 
@@ -23,7 +24,7 @@
 
 - (LLState *)nextState {
 
-	if (![[task defaults] boolForKey:CRSFixateKey] || ![fixWindow inWindowDeg:[task currentEyeDeg]]) {
+	if (![[task defaults] boolForKey:CRSFixateKey] || ![CRSUtilities inWindow:fixWindow]) {
 		return [[task stateSystem] stateNamed:@"CRSFixon"];
     }
 	if ([task mode] == kTaskIdle) {

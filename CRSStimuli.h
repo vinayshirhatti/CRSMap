@@ -24,6 +24,8 @@ CRSStimuli.h
 	NSMutableArray			*taskStimList;
 	BOOL					stimulusOn;
 	BOOL					targetPresented;
+    TrialDesc               trial;
+    LLFixTarget				*targetSpot;
 //	LLGabor 				*taskGabor;
 }
 
@@ -35,7 +37,7 @@ CRSStimuli.h
 - (LLGabor *)mappingGabor0;
 - (LLGabor *)mappingGabor1;
 - (LLGabor *)taskGabor;
-- (LLGabor *)initGabor;
+- (LLGabor *)initGabor:(BOOL)bindTemporalFreq;
 - (void)loadGabor:(LLGabor *)gabor withStimDesc:(StimDesc *)pSD;
 - (void)makeStimLists:(TrialDesc *)pTrial;
 - (void)clearStimLists:(TrialDesc *)pTrial;

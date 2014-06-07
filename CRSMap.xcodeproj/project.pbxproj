@@ -65,6 +65,7 @@
 		69E24E6207A5C2E200DDC096 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A443DD0132ED6B0ACA2124 /* OpenGL.framework */; };
 		69E24E7407A5C34300DDC096 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		69E24F0907A5C34400DDC096 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		7CDAE31B172085520051D41E /* GRFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAE31A172085520051D41E /* GRFUtilities.m */; };
 		AF0220F80B37000B0029778E /* GRFTooFastState.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0220F70B37000B0029778E /* GRFTooFastState.m */; };
 		AFCACCF80B9D2F610033D226 /* GRFRoundToStimCycle.m in Sources */ = {isa = PBXBuildFile; fileRef = AFCACCF70B9D2F610033D226 /* GRFRoundToStimCycle.m */; };
 		FC1EC3730F5F3E6300C95582 /* GRFDigitalOut.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1EC3720F5F3E6300C95582 /* GRFDigitalOut.m */; };
@@ -134,6 +135,8 @@
 		69F13A6404716D0D00F95509 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSSpikeController.nib; sourceTree = "<group>"; };
 		69F443A305DEE56D000705E2 /* GRFSaccadeState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSSaccadeState.h; sourceTree = "<group>"; };
 		69F443A405DEE56D000705E2 /* GRFSaccadeState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSSaccadeState.m; sourceTree = "<group>"; };
+		7CDAE319172085520051D41E /* GRFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSUtilities.h; sourceTree = "<group>"; };
+		7CDAE31A172085520051D41E /* GRFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSUtilities.m; sourceTree = "<group>"; };
 		AF0220F60B36FFEA0029778E /* GRFTooFastState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSTooFastState.h; sourceTree = "<group>"; };
 		AF0220F70B37000B0029778E /* GRFTooFastState.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSTooFastState.m; sourceTree = "<group>"; };
 		AFCACCF60B9D2F610033D226 /* GRFRoundToStimCycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSRoundToStimCycle.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */,
 				69975550043E645C00F95509 /* UtilityFunctions.m */,
+				7CDAE319172085520051D41E /* GRFUtilities.h */,
+				7CDAE31A172085520051D41E /* GRFUtilities.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -359,7 +364,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 69B8D0ED088DAADA002FCFD4 /* Build configuration list for PBXProject "CRSMap" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -452,6 +457,7 @@
 				AFCACCF80B9D2F610033D226 /* GRFRoundToStimCycle.m in Sources */,
 				692E5AAF0CDBECE300E0BCB8 /* GRFMapStimTable.m in Sources */,
 				FC1EC3730F5F3E6300C95582 /* GRFDigitalOut.m in Sources */,
+				7CDAE31B172085520051D41E /* GRFUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,10 +534,9 @@
 		69B8D0EA088DAADA002FCFD4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -582,7 +587,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -618,7 +623,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -651,7 +656,8 @@
 		69B8D0EE088DAADA002FCFD4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -675,12 +681,15 @@
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Development;
 		};
 		69B8D0EF088DAADA002FCFD4 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -703,12 +712,15 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Deployment;
 		};
 		69B8D0F0088DAADA002FCFD4 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -731,6 +743,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Default;
 		};
