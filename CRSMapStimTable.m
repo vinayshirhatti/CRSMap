@@ -39,11 +39,8 @@ static long CRSMapStimTableCounter = 0;
 	if (!(self = [super init])) {
 		return nil;
 	}
-    mapIndex = CRSMapStimTableCounter++;
-    //[self updateBlockParameters];
-	[self updateBlockParameters:mapIndex];
-    //[self doneListDefine:mapIndex];//[Vinay] - added this, now commented
-    //stimInBlock = stimRemainingInBlock = stimInBlockGabor[0]*stimInBlockGabor[1]*stimInBlockGabor[2]; //[Vinay] - total value as a product of individual gabor values
+    mapIndex = index;
+	[self updateBlockParameters];	
 	[self newBlock];
 	return self;
 }

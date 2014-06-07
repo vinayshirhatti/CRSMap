@@ -119,6 +119,14 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
     //[gabor removeKeysFromBinding:[NSArray arrayWithObjects:LLGaborDirectionDegKey,
     //                LLGaborTemporalPhaseDegKey, LLGaborSpatialPhaseDegKey, nil]]; // [Vinay] - I have commented these just to check their effect
 
+    if (bindTemporalFreq) {
+        [gabor removeKeysFromBinding:[NSArray arrayWithObjects:LLGaborDirectionDegKey, 
+                    LLGaborTemporalPhaseDegKey, LLGaborContrastKey, LLGaborSpatialPhaseDegKey, nil]];
+    }
+    else {
+        [gabor removeKeysFromBinding:[NSArray arrayWithObjects:LLGaborDirectionDegKey, LLGaborTemporalPhaseDegKey,
+                    LLGaborContrastKey, LLGaborSpatialPhaseDegKey, LLGaborTemporalFreqHzKey, nil]];
+    }
 	[gabor bindValuesToKeysWithPrefix:[NSString stringWithFormat:@"CRS%ld", counter++]];
 	return gabor;
 }
@@ -847,6 +855,8 @@ by mapStimTable.
 	LLGabor *theGabor;
 	NSAutoreleasePool *threadPool;
 	BOOL listDone = NO;
+//	long stimCounter = 0;
+    BOOL useSingleITC18;
 	long stimCounter = 0;
     
     /* [Vinay] - Added these lines and some more ahead to conditionally make the gabors partially transparent by adjusting their alpha values. This way superimposed gabors can look like a plaid */

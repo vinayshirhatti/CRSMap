@@ -130,6 +130,11 @@
 	else if ([eventName isEqualTo:@"fixOn"] || [eventName isEqualTo:@"FO"] )
 		thisEventName = @"FO";
 	else if ([eventName isEqualTo:@"instructTrial"] || [eventName isEqualTo:@"IT"] )
+		thisEventName = @"IT";
+	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] )
+		thisEventName = @"M0";
+	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] )
+		thisEventName = @"M1";
 		[digitalOutDevice digitalOutputBits:(0x4954 | 0x8000)];
 	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] ) // New for CRS
 		[digitalOutDevice digitalOutputBits:(0x4D30 | 0x8000)];
@@ -152,6 +157,9 @@
 	else if ([eventName isEqualTo:@"spatialFreq"] || [eventName isEqualTo:@"SF"] )
 		thisEventName = @"SF";
 	else if ([eventName isEqualTo:@"sigma"] || [eventName isEqualTo:@"SI"] )
+		thisEventName = @"SI";
+	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] )
+		thisEventName = @"ST";
 		[digitalOutDevice digitalOutputBits:(0x5349 | 0x8000)];
 	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] ) // New for CRS - Not Vinay. This was new for GRF
 		[digitalOutDevice digitalOutputBits:(0x5354 | 0x8000)];
@@ -160,6 +168,11 @@
 	else if ([eventName isEqualTo:@"trialEnd"] || [eventName isEqualTo:@"TE"] )
 		thisEventName = @"TE";
 	else if ([eventName isEqualTo:@"temporalFreq"] || [eventName isEqualTo:@"TF"] )
+		thisEventName = @"TF";
+	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] )
+		thisEventName = @"TG";
+    else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
+		thisEventName = @"TS";
 		[digitalOutDevice digitalOutputBits:(0x5446 | 0x8000)];
 	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] ) // New for CRS - Not Vinay. This was new for GRF
 		[digitalOutDevice digitalOutputBits:(0x5447 | 0x8000)];
@@ -168,6 +181,7 @@
 	else if ([eventName isEqualTo:@"type0"] || [eventName isEqualTo:@"T0"] )
 		thisEventName = @"T0";
 	else if ([eventName isEqualTo:@"type1"] || [eventName isEqualTo:@"T1"] )
+		thisEventName = @"T1";
 		[digitalOutDevice digitalOutputBits:(0x5431 | 0x8000)];
     else if ([eventName isEqualTo:@"spatialPhase"] || [eventName isEqualTo:@"SP"] )         // [Vinay] - Added this..0x5530 is dummy here...correct this later!! Done now -  '53' corresponds to 'S' and '50' corresponds to 'P'
 		[digitalOutDevice digitalOutputBits:(0x5350 | 0x8000)];
