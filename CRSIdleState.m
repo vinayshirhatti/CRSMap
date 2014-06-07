@@ -12,6 +12,7 @@
 - (void)stateAction;
 {
     [[task dataController] setDataEnabled:[NSNumber numberWithBool:NO]];
+    [[task dataController] stopDevice];
 	blockStatus.instructDone = 0;					// do new instructions trials on restart
 }
 

@@ -6,6 +6,7 @@
 //
 
 #import "CRSStimulate.h" 
+#import "CRSUtilities.h"
 
 @implementation CRSStimulate
 
@@ -32,7 +33,7 @@
 		}
 		return [[task stateSystem] stateNamed:@"CRSTooFast"];
 	}
-	if ([[task defaults] boolForKey:CRSFixateKey] && ![fixWindow inWindowDeg:[task currentEyeDeg]]) {
+	if ([[task defaults] boolForKey:CRSFixateKey] && ![CRSUtilities inWindow:fixWindow]) {
 		eotCode = kMyEOTBroke;
 		return [[task stateSystem] stateNamed:@"CRSSaccade"];;
 	}

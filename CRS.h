@@ -24,6 +24,14 @@ enum {kRewardFixed = 0, kRewardVariable};
 enum {kNullStim = 0, kValidStim, kTargetStim, kFrontPadding, kBackPadding};
 enum {kMyEOTCorrect = 0, kMyEOTMissed, kMyEOTEarlyToValid, kMyEOTEarlyToInvalid, kMyEOTBroke, 
 				kMyEOTIgnored, kMyEOTQuit, kMyEOTTypes};
+enum {  kTrialStartDigitOutCode = 0x0010,
+        kFixateDigitOutCode = 0x0020,
+        kStimulusOnDigitOutCode = 0x0030,
+        kStimulusOffDigitOutCode = 0x0040,
+        kTargetOnDigitOutCode = 0x0050,
+        kSaccadeDigitOutCode = 0x0060,
+        kTrialEndDigitOutCode = 0x0070};
+
 
 #define	kMaxOriChanges	12
 #define kMaxMapValues   6
@@ -162,12 +170,13 @@ typedef struct StimSetting {
 // Behavior settings dialog
 
 extern NSString *CRSAcquireMSKey;
+extern NSString *CRSAlphaTargetDetectionTaskKey;
 extern NSString *CRSBlockLimitKey;
 extern NSString *CRSBreakPunishMSKey;
 extern NSString *CRSCatchTrialPCKey;
 extern NSString *CRSCatchTrialMaxPCKey;
-//extern NSString *CRSCueMSKey;
-extern NSString *CRSChangeScaleKey;
+extern NSString *CRSCueMSKey;
+//extern NSString *CRSChageScaleKey;
 extern NSString *CRSDoSoundsKey;
 extern NSString *CRSFixateKey;
 extern NSString *CRSFixateMSKey;
@@ -181,8 +190,10 @@ extern NSString *CRSInvalidRewardFactorKey;
 extern NSString *CRSMaxTargetMSKey;
 extern NSString *CRSMinTargetMSKey;
 extern NSString *CRSMeanTargetMSKey;
-//extern NSString *CRSNontargetContrastPCKey;
-//extern NSString *CRSRespSpotSizeDegKey;
+extern NSString *CRSNontargetContrastPCKey;
+//extern NSString *CRSNumInstructTrialsKey;
+extern NSString *CRSRandTaskGaborDirectionKey;
+extern NSString *CRSRespSpotSizeDegKey;
 extern NSString *CRSRespTimeMSKey;
 extern NSString *CRSRespWindowWidthDegKey;
 extern NSString *CRSRewardMSKey;
@@ -203,14 +214,16 @@ extern NSString *CRSStimDurationMSKey;
 extern NSString *CRSMapStimDurationMSKey;
 extern NSString *CRSMappingBlocksKey;
 extern NSString *CRSStimJitterPCKey;
-//extern NSString *CRSChangeScaleKey; - already defined above
+extern NSString *CRSChangeScaleKey;
 extern NSString *CRSOrientationChangesKey;
 extern NSString *CRSMaxDirChangeDegKey;
 extern NSString *CRSMinDirChangeDegKey;
 extern NSString *CRSChangeRemainKey;
 extern NSString *CRSChangeArrayKey;
+extern NSString *CRSTargetAlphaKey;
+extern NSString *CRSTargetRadiusKey;
 
-//extern NSString *CRSMapStimContrastPCKey;
+extern NSString *CRSMapStimContrastPCKey;
 extern NSString *CRSMapStimRadiusSigmaRatioKey;
 
 extern NSString *CRSKdlPhiDegKey;
@@ -241,6 +254,7 @@ extern NSString *CRSHideSurroundDigitalKey;
 // [Vinay] - till here
 
 extern NSString *CRSConvertToGratingKey;
+extern NSString *CRSUseSingleITC18Key;
 
 extern NSString *CRSHideTaskGaborKey;
 extern NSString *CRSIncludeCatchTrialsinDoneListKey;
@@ -281,6 +295,7 @@ BOOL							resetFlag;
 LLScheduleController			*scheduler;
 CRSStimuli						*stimuli;
 CRSDigitalOut					*digitalOut;
+long                            trialCounter;
 
 #endif
 

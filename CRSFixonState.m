@@ -6,6 +6,7 @@
 //
 
 #import "CRSFixonState.h"
+#import "CRSUtilities.h"
 #import "CRSDigitalOut.h"
 
 @implementation CRSFixonState
@@ -36,7 +37,7 @@
 	if (![[task defaults] boolForKey:CRSFixateKey]) { 
 		return [[task stateSystem] stateNamed:@"CRSFixate"];
     }
-	else if ([fixWindow inWindowDeg:[task currentEyeDeg]])  {
+	else if ([CRSUtilities inWindow:fixWindow])  {
 		return [[task stateSystem] stateNamed:@"CRSFixGrace"];
     }
 	if ([LLSystemUtil timeIsPast:expireTime]) {

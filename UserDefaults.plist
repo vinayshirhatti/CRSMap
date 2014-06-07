@@ -4,6 +4,8 @@
 <dict>
 	<key>CRSAcquireMS</key>
 	<integer>2000</integer>
+	<key>CRSAlphaTargetDetectionTask</key>
+	<true/>
 	<key>CRSBehaviorWindowVisible</key>
 	<true/>
 	<key>CRSBehaviorWindowZoom</key>
@@ -117,7 +119,7 @@
 			<key>spatialFreqCPD0</key>
 			<real>0.5</real>
 			<key>sigmaDeg0</key>
-			<real>0.2</real>
+			<real>0.5</real>
 			<key>orientationDeg0</key>
 			<real>0</real>
 			<key>contrastPC0</key>
@@ -135,9 +137,9 @@
 			<key>spatialFreqCPD1</key>
 			<real>0.5</real>
 			<key>sigmaDeg1</key>
-			<real>0.2</real>
+			<real>0.5</real>
 			<key>orientationDeg1</key>
-			<integer>0</integer>
+			<real>0</real>
 			<key>contrastPC1</key>
 			<integer>0</integer>
 			<key>temporalFreqHz1</key>
@@ -177,7 +179,7 @@
 			<key>sigmaDeg0</key>
 			<real>0.2</real>
 			<key>orientationDeg0</key>
-			<integer>180</integer>
+			<real>240</real>
 			<key>contrastPC0</key>
 			<integer>100</integer>
 			<key>temporalFreqHz0</key>
@@ -187,7 +189,7 @@
 			<key>radiusDeg0</key>
 			<integer>8</integer>
 			<key>azimuthDeg1</key>
-			<integer>5</integer>
+			<real>3</real>
 			<key>elevationDeg1</key>
 			<integer>-5</integer>
 			<key>spatialFreqCPD1</key>
@@ -195,7 +197,7 @@
 			<key>sigmaDeg1</key>
 			<real>0.2</real>
 			<key>orientationDeg1</key>
-			<integer>180</integer>
+			<real>240</real>
 			<key>contrastPC1</key>
 			<integer>100</integer>
 			<key>temporalFreqHz1</key>
@@ -335,8 +337,12 @@
 	<integer>8</integer>
 	<key>CRSConvertToGrating</key>
 	<false/>
+	<key>CRSUseSingleITC18</key>
+	<true/>
 	<key>CRSCueMS</key>
 	<integer>250</integer>
+	<key>CRSEyeToUse</key>
+	<integer>0</integer>
 	<key>CRSOrientationChanges</key>
 	<integer>8</integer>
 	<key>CRSDoSounds</key>
@@ -423,6 +429,8 @@
 	<integer>2</integer>
 	<key>CRSPrecueMS</key>
 	<integer>250</integer>
+	<key>CRSRandTaskGaborDirection</key>
+	<false/>
 	<key>CRSReactMS</key>
 	<integer>750</integer>
 	<key>CRSRelDistractorProb</key>
@@ -483,6 +491,10 @@
 	<integer>0</integer>
 	<key>CRSSummaryWindowZoom</key>
 	<integer>100</integer>
+	<key>CRSTargetAlpha</key>
+	<integer>0</integer>
+	<key>CRSTargetRadius</key>
+	<integer>0</integer>
 	<key>CRSContrastPC</key>
 	<real>100</real>
 	<key>CRSMaxDirChangeDeg</key>

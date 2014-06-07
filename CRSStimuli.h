@@ -25,6 +25,8 @@ CRSStimuli.h
 	NSMutableArray			*taskStimList;
 	BOOL					stimulusOn;
 	BOOL					targetPresented;
+    TrialDesc               trial;
+    LLFixTarget				*targetSpot;
 //	LLGabor 				*taskGabor;
     //BOOL                    matchSurroundCentre;           // [Vinay] - added this to indicate if surround and centre should have some common attributes
 }
@@ -38,7 +40,7 @@ CRSStimuli.h
 - (LLGabor *)mappingGabor1;
 - (LLGabor *)mappingGabor2; // [Vinay] - Added Gabor2 for the centre gabor
 - (LLGabor *)taskGabor;
-- (LLGabor *)initGabor;
+- (LLGabor *)initGabor:(BOOL)bindTemporalFreq;
 - (void)loadGabor:(LLGabor *)gabor withStimDesc:(StimDesc *)pSD;
 - (void)makeStimLists:(TrialDesc *)pTrial;
 - (void)clearStimLists:(TrialDesc *)pTrial;

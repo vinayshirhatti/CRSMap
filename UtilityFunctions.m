@@ -20,6 +20,8 @@ void announceEvents(void) {
     long lValue;
     MapSettings settings;
 	char *idString = "CRSMap Version 1.0";
+    
+    reset();
 	
  	[[task dataDoc] putEvent:@"text" withData:idString lengthBytes:strlen(idString)];
 
@@ -231,6 +233,7 @@ void updateBlockStatus(void)
 	blockStatus.changes = [[task defaults] integerForKey:CRSOrientationChangesKey];
 	blockStatus.instructTrials = [[task defaults] integerForKey:CRSInstructionTrialsKey];
 	blockStatus.blockLimit = [[task defaults] integerForKey:CRSBlockLimitKey];
+    mappingBlockStatus.blockLimit = [[task defaults] integerForKey:CRSMappingBlocksKey];
 	changeArray = [[task defaults] arrayForKey:CRSChangeArrayKey];
 	for (index = 0; index < blockStatus.changes; index++) {
 		entryDict = [changeArray objectAtIndex:index];
@@ -238,6 +241,8 @@ void updateBlockStatus(void)
 		blockStatus.validReps[index] = [[entryDict valueForKey:CRSValidRepsKey] longValue];
 		blockStatus.invalidReps[index] = [[entryDict valueForKey:CRSInvalidRepsKey] longValue];
 	}
+    
 }
+
 
 

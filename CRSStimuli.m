@@ -35,6 +35,7 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
 	[mapStimList1 release];
     [mapStimList2 release];         // [Vinay] - for centre gabors
 	[fixSpot release];
+    [targetSpot release];
     [gabors release];
 
     [super dealloc];
@@ -100,11 +101,14 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
     [[gabors objectAtIndex:kMapGabor2] setAchromatic:YES];                  // [Vinay] - for centre gabor
 	fixSpot = [[LLFixTarget alloc] init];
 	[fixSpot bindValuesToKeysWithPrefix:@"CRSFix"];
+    targetSpot = [[LLFixTarget alloc] init];
+	//[targetSpot bindValuesToKeysWithPrefix:@"CRSFix"];
+
 
 	return self;
 }
 
-- (LLGabor *)initGabor;
+- (LLGabor *)initGabor:(BOOL)bindTemporalFreq;
 {
 	static long counter = 0;
 	LLGabor *gabor;
@@ -146,6 +150,7 @@ by mapStimTable.
 	LLGabor *taskGabor = [self taskGabor];
     //matchSurroundCentre = 1; // [Vinay] - setting this 1 to check
 	
+    trial = *pTrial;
 	[taskStimList removeAllObjects];
 	targetIndex = MIN(pTrial->targetIndex, pTrial->numStim);
 	
@@ -162,8 +167,14 @@ by mapStimTable.
 	interJitterFrames = round(interDurFrames / 100.0 * interJitterPC);
 	stimDurBase = stimDurFrames - stimJitterFrames;
 	interDurBase = interDurFrames - interJitterFrames;
-
+/*
+    // randomize
+    if ([[task defaults] boolForKey:CRSRandTaskGaborDirectionKey]) {
+        [taskGabor setDirectionDeg:rand() % 180];
+    }
+*/
 	pTrial->targetOnTimeMS = 0;
+    
  	for (stim = nextStimOnFrame = 0; stim < pTrial->numStim; stim++) {
 
 // Set the default values
@@ -177,21 +188,20 @@ by mapStimTable.
 		stimDesc.elevationDeg = [taskGabor elevationDeg];
 		stimDesc.sigmaDeg = [taskGabor sigmaDeg];
 		stimDesc.spatialFreqCPD = [taskGabor spatialFreqCPD];
-		stimDesc.directionDeg = [taskGabor directionDeg];
+        stimDesc.directionDeg = [taskGabor directionDeg];
 		stimDesc.radiusDeg = [taskGabor radiusDeg];
         stimDesc.temporalModulation = [taskGabor temporalModulation];
         stimDesc.spatialPhaseDeg = [taskGabor spatialPhaseDeg];                 // [Vinay] - added for phase of gabor
 	
 // If it's not a catch trial and we're in a target spot, set the target 
-
+        
 		if (!pTrial->catchTrial) {
 			if ((stimDesc.sequenceIndex == targetIndex) ||
-							(stimDesc.sequenceIndex > targetIndex &&
-							[[task defaults] boolForKey:CRSChangeRemainKey])) {
+                (stimDesc.sequenceIndex > targetIndex && [[task defaults] boolForKey:CRSChangeRemainKey])) {
 				stimDesc.stimType = kTargetStim;
 				stimDesc.directionDeg += pTrial->orientationChangeDeg;
 			}
-		}
+        }
 
 // Load the information about the on and off frames
 	
@@ -867,7 +877,18 @@ by mapStimTable.
 		[self loadGabor:[gabors objectAtIndex:index] withStimDesc:&stimDescs[index]];
 		stimOffFrames[index] = stimDescs[index].stimOffFrame;
 	}
-	
+    
+    // Set up the targetSpot if needed
+/*
+    if ([[task defaults] boolForKey:CRSAlphaTargetDetectionTaskKey]) {
+        [targetSpot setState:YES];
+        NSColor *targetColor = [[fixSpot foreColor]retain];
+        [targetSpot setForeColor:[targetColor colorWithAlphaComponent:[[task defaults] floatForKey:CRSTargetAlphaKey]]];
+        [targetSpot setOuterRadiusDeg:[[task defaults]floatForKey:CRSTargetRadiusKey]];
+        [targetSpot setShape:kLLCircle];
+        [targetColor release];
+    }
+*/	
 	targetOnFrame = -1;
 
     for (trialFrame = taskGaborFrame = 0; !listDone && !abortStimuli; trialFrame++) {
@@ -898,8 +919,14 @@ by mapStimTable.
                         [theGabor setForeColor:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1]]; // [Vinay] - change alpha back to 1 when it is not the COS protocol
                     }
                     [theGabor draw];
+/*
+                    if (!trial.catchTrial && index == kTaskGabor && stimDescs[index].stimType == kTargetStim) {
+                        [targetSpot setAzimuthDeg:stimDescs[index].azimuthDeg elevationDeg:stimDescs[index].elevationDeg];
+                        [targetSpot draw];
+                    }
+*/
+                    gaborFrames[index]++;
                 }
-				gaborFrames[index]++;
 			}
 		}
         
@@ -1116,10 +1143,14 @@ by mapStimTable.
  // If this is the frame after the last draw of a stimulus, post an event declaring it off.  We have to do this first,
  // because the off of one stimulus may occur on the same frame as the on of the next
 
+            useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];
+            
 			if (trialFrame == stimOffFrames[index]) {
-				[[task dataDoc] putEvent:@"stimulusOffTime"]; 
-				[[task dataDoc] putEvent:@"stimulusOff" withData:&index];
-                [digitalOut outputEventName:@"stimulusOff" withData:0x0000];
+                [[task dataDoc] putEvent:@"stimulusOff" withData:&index];
+                [[task dataDoc] putEvent:@"stimulusOffTime"];
+                if (!useSingleITC18) {
+                    [digitalOut outputEvent:kStimulusOffDigitOutCode withData:index];
+                }
 				if (++stimIndices[index] >= [[stimLists objectAtIndex:index] count]) {	// no more entries in list
 					listDone = YES;
 				}
@@ -1128,11 +1159,13 @@ by mapStimTable.
 // If this is the first frame of a Gabor, post an event describing it
 
 			if (trialFrame == pSD->stimOnFrame) {
-				[[task dataDoc] putEvent:@"stimulusOnTime"]; 
-				[[task dataDoc] putEvent:@"stimulusOn" withData:&index]; 
-				[[task dataDoc] putEvent:@"stimulus" withData:pSD];
-                [digitalOut outputEvent:0x00Fe withData:stimCounter++];
-                
+				[[task dataDoc] putEvent:@"stimulusOn" withData:&index];
+                [[task dataDoc] putEvent:@"stimulusOnTime"];
+                [[task dataDoc] putEvent:@"stimulus" withData:pSD];
+
+                if (!useSingleITC18) {
+                    [digitalOut outputEvent:kStimulusOnDigitOutCode withData:index];
+                }
 				// put the digital events
 				if (index == kTaskGabor) {
 					[digitalOut outputEventName:@"taskGabor" withData:(long)(pSD->stimType)];
@@ -1152,8 +1185,8 @@ by mapStimTable.
 				if (index == kMapGabor0 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideSurroundDigitalKey])) {
                     // [Vinay] - CRSHideLeftDigitalKey changed to the above
 					//NSLog(@"Sending left digital codes...");
-					[digitalOut outputEventName:@"contrast" withData:(long)(100*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(100*(pSD->temporalFreqHz))];
+					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
 					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
 					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
 					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
@@ -1180,8 +1213,8 @@ by mapStimTable.
                 if (index == kMapGabor2 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideCentreDigitalKey])) {                                            // [Vinay] - for centre gabor. Not sure what would be the equivalent 'digital key' for this case i.e. Left or Right Digital codes as above. Clarify this!
                     // [Vinay] - added the relevant CRSHideCentreDigitalKey
 					//NSLog(@"Sending right digital codes...");
-					[digitalOut outputEventName:@"contrast" withData:(long)(100*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(100*(pSD->temporalFreqHz))];
+					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
 					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
 					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
 					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
@@ -1191,9 +1224,12 @@ by mapStimTable.
                     [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
 				}
                 
-				if (pSD->stimType == kTargetStim) {
+                if (pSD->stimType == kTargetStim) {
 					targetPresented = YES;
 					targetOnFrame = trialFrame;
+                    if (!useSingleITC18) {
+                        [digitalOut outputEvent:kTargetOnDigitOutCode withData:(kTargetOnDigitOutCode+1)];
+                    }
 				}
 				stimOffFrames[index] = stimDescs[index].stimOffFrame;		// previous done by now, save time for this one
 			}

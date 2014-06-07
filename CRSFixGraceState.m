@@ -6,6 +6,7 @@
 //
 
 #import "CRSFixGraceState.h"
+#import "CRSUtilities.h"
 
 
 @implementation CRSFixGraceState
@@ -31,7 +32,7 @@
 		return [[task stateSystem] stateNamed:@"Endtrial"];;
 	}
 	if ([LLSystemUtil timeIsPast:expireTime]) {
-		if ([fixWindow inWindowDeg:[task currentEyeDeg]])  {
+		if ([CRSUtilities inWindow:fixWindow])  {
 			return [[task stateSystem] stateNamed:@"CRSFixate"];
 		}
 		else {

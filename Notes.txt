@@ -18,7 +18,9 @@
 
 1. Include option to change the temporal frequency of the mapping stimuli (7th parameter). kMaxMapValues reduced to 6 otherwise the program crashes. Temporal modulation parameter is also added for mapping stimuli.
 
+% Changes made (May 22, 2013)       Supratim Ray
 
+1. Include option to send digital codes and control reward circuit using a single ITC18.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Desired changes (22/03/13) Supratim Ray

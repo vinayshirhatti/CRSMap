@@ -220,6 +220,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */,
 				69975550043E645C00F95509 /* UtilityFunctions.m */,
+				7CDAE319172085520051D41E /* GRFUtilities.h */,
+				7CDAE31A172085520051D41E /* GRFUtilities.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -359,7 +361,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 69B8D0ED088DAADA002FCFD4 /* Build configuration list for PBXProject "CRSMap" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -528,10 +530,9 @@
 		69B8D0EA088DAADA002FCFD4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -582,7 +583,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -618,7 +619,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				CONFIGURATION_TEMP_DIR = build;
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -651,7 +652,8 @@
 		69B8D0EE088DAADA002FCFD4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -675,12 +677,15 @@
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Development;
 		};
 		69B8D0EF088DAADA002FCFD4 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -703,12 +708,15 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Deployment;
 		};
 		69B8D0F0088DAADA002FCFD4 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
 					"/Documents/Lablib/Frameworks/Lablib/build/**",
@@ -731,6 +739,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = "";
+				SYMROOT = "$(PROJECT_DIR)/$(BUILD_DIR)";
 			};
 			name = Default;
 		};
