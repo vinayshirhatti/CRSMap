@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DA33D0019518B8D00D1C035 /* CRSUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA33CFF19518B8D00D1C035 /* CRSUtilities.m */; };
 		692E5AAF0CDBECE300E0BCB8 /* CRSMapStimTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 692E5AAE0CDBECE300E0BCB8 /* CRSMapStimTable.m */; };
 		693BB74215C8005500390101 /* Lablib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BB74115C8005500390101 /* Lablib.framework */; };
 		695982D1080209EB0090B9A6 /* CRSFixGraceState.h in Resources */ = {isa = PBXBuildFile; fileRef = 695982CF080209EB0090B9A6 /* CRSFixGraceState.h */; };
@@ -78,6 +79,8 @@
 		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSMap.nib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		5DA33CFE19518B8D00D1C035 /* CRSUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSUtilities.h; sourceTree = "<group>"; };
+		5DA33CFF19518B8D00D1C035 /* CRSUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSUtilities.m; sourceTree = "<group>"; };
 		690B798D047ADA9F00A80164 /* CRSBehaviorController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRSBehaviorController.h; sourceTree = "<group>"; };
 		690B798E047ADA9F00A80164 /* CRSBehaviorController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CRSBehaviorController.m; sourceTree = "<group>"; };
 		690B7992047ADABA00A80164 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CRSXTController.nib; sourceTree = "<group>"; };
@@ -220,8 +223,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				69E7FC6E04DBE6EF00F95507 /* UtilityFunctions.h */,
 				69975550043E645C00F95509 /* UtilityFunctions.m */,
-				7CDAE319172085520051D41E /* GRFUtilities.h */,
-				7CDAE31A172085520051D41E /* GRFUtilities.m */,
+				5DA33CFE19518B8D00D1C035 /* CRSUtilities.h */,
+				5DA33CFF19518B8D00D1C035 /* CRSUtilities.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				695982D2080209EB0090B9A6 /* CRSFixGraceState.m in Sources */,
 				69BDCE44098BD2CA00578E91 /* CRSSpikeController.m in Sources */,
 				695C12F709B108880021A27D /* CRSFixateState.m in Sources */,
+				5DA33D0019518B8D00D1C035 /* CRSUtilities.m in Sources */,
 				AF0220F80B37000B0029778E /* CRSTooFastState.m in Sources */,
 				AFCACCF80B9D2F610033D226 /* CRSRoundToStimCycle.m in Sources */,
 				692E5AAF0CDBECE300E0BCB8 /* CRSMapStimTable.m in Sources */,
@@ -652,7 +656,7 @@
 		69B8D0EE088DAADA002FCFD4 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -684,7 +688,7 @@
 		69B8D0EF088DAADA002FCFD4 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",
@@ -715,7 +719,7 @@
 		69B8D0F0088DAADA002FCFD4 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "~/Library/Application Support/Knot/Plugins/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/$(BUILD_DIR)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Documents/Lablib/Frameworks/LablibITC18/build/**",

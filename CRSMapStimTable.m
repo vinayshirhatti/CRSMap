@@ -40,7 +40,7 @@ static long CRSMapStimTableCounter = 0;
 		return nil;
 	}
     mapIndex = index;
-	[self updateBlockParameters];	
+	[self updateBlockParameters:mapIndex]; // [Vinay] added mapIndex argument here because updateBlockParameters has been redefined here to work on each gabor separately
 	[self newBlock];
 	return self;
 }
@@ -54,7 +54,7 @@ static long CRSMapStimTableCounter = 0;
 	}
     mapIndex = CRSMapStimTableCounter++;
     NSLog(@"CRSMapStimTable: initializing with index %ld", mapIndex);
-	[self updateBlockParameters];
+	[self updateBlockParameters:mapIndex]; // [Vinay] added mapIndex argument here because updateBlockParameters has been redefined here to work on each gabor separately
 	[self newBlock];
 	return self;
 }

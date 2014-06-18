@@ -131,18 +131,25 @@
 		thisEventName = @"FO";
 	else if ([eventName isEqualTo:@"instructTrial"] || [eventName isEqualTo:@"IT"] )
 		thisEventName = @"IT";
-	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] )
+	
+    // [Vinay] - have commented and changed the next few lines to be consistent with the latest changes in GaborRFMap
+    /*    [digitalOutDevice digitalOutputBits:(0x4954 | 0x8000)];
+     else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] ) // New for CRS
+     [digitalOutDevice digitalOutputBits:(0x4D30 | 0x8000)];
+     else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] ) // New for CRS
+     [digitalOutDevice digitalOutputBits:(0x4D31 | 0x8000)];
+     else if ([eventName isEqualTo:@"mapping2"] || [eventName isEqualTo:@"M2"] )                     // [Vinay] - This and next line added for the centre gabor
+     [digitalOutDevice digitalOutputBits:(0x4D32 | 0x8000)];                                     // [Vinay] - !Check the digitalOutputBits here! verified CORRECT! '4D' corresponds to 'M' and '32' to '2'
+     */ // [Vinay] - till here
+    
+    else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] )
 		thisEventName = @"M0";
 	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] )
 		thisEventName = @"M1";
-		[digitalOutDevice digitalOutputBits:(0x4954 | 0x8000)];
-	else if ([eventName isEqualTo:@"mapping0"] || [eventName isEqualTo:@"M0"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x4D30 | 0x8000)];
-	else if ([eventName isEqualTo:@"mapping1"] || [eventName isEqualTo:@"M1"] ) // New for CRS
-		[digitalOutDevice digitalOutputBits:(0x4D31 | 0x8000)];
-    else if ([eventName isEqualTo:@"mapping2"] || [eventName isEqualTo:@"M2"] )                     // [Vinay] - This and next line added for the centre gabor
-		[digitalOutDevice digitalOutputBits:(0x4D32 | 0x8000)];                                     // [Vinay] - !Check the digitalOutputBits here! verified CORRECT! '4D' corresponds to 'M' and '32' to '2'
-	else if ([eventName isEqualTo:@"stimulusOn"] || [eventName isEqualTo:@"ON"] )
+    else if ([eventName isEqualTo:@"mapping2"] || [eventName isEqualTo:@"M2"] )
+		thisEventName = @"M2";
+    
+    else if ([eventName isEqualTo:@"stimulusOn"] || [eventName isEqualTo:@"ON"] )
 		thisEventName = @"ON";
 	else if ([eventName isEqualTo:@"stimulusOff"] || [eventName isEqualTo:@"OF"] )
 		thisEventName = @"OF";
@@ -160,9 +167,12 @@
 		thisEventName = @"SI";
 	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] )
 		thisEventName = @"ST";
-		[digitalOutDevice digitalOutputBits:(0x5349 | 0x8000)];
+    // [Vinay]  have commented some lines ahead because they are now modified as in the latest GaborRFMap and included above
+    /*
+    [digitalOutDevice digitalOutputBits:(0x5349 | 0x8000)];
 	else if ([eventName isEqualTo:@"stimType"] || [eventName isEqualTo:@"ST"] ) // New for CRS - Not Vinay. This was new for GRF
 		[digitalOutDevice digitalOutputBits:(0x5354 | 0x8000)];
+     */
 	else if ([eventName isEqualTo:@"trialCertify"] || [eventName isEqualTo:@"TC"] )
 		thisEventName = @"TC";
 	else if ([eventName isEqualTo:@"trialEnd"] || [eventName isEqualTo:@"TE"] )
@@ -173,18 +183,27 @@
 		thisEventName = @"TG";
     else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
 		thisEventName = @"TS";
+    // [Vinay]  have commented some lines ahead because they are now modified as in the latest GaborRFMap and included above
+    /*
 		[digitalOutDevice digitalOutputBits:(0x5446 | 0x8000)];
 	else if ([eventName isEqualTo:@"taskGabor"] || [eventName isEqualTo:@"TG"] ) // New for CRS - Not Vinay. This was new for GRF
 		[digitalOutDevice digitalOutputBits:(0x5447 | 0x8000)];
 	else if ([eventName isEqualTo:@"trialStart"] || [eventName isEqualTo:@"TS"] )
 		[digitalOutDevice digitalOutputBits:(0x5453 | 0x8000)];
+     */
 	else if ([eventName isEqualTo:@"type0"] || [eventName isEqualTo:@"T0"] )
 		thisEventName = @"T0";
 	else if ([eventName isEqualTo:@"type1"] || [eventName isEqualTo:@"T1"] )
 		thisEventName = @"T1";
+    // [Vinay]  have commented some lines ahead because they are now modified as in the latest GaborRFMap
+    /*
 		[digitalOutDevice digitalOutputBits:(0x5431 | 0x8000)];
     else if ([eventName isEqualTo:@"spatialPhase"] || [eventName isEqualTo:@"SP"] )         // [Vinay] - Added this..0x5530 is dummy here...correct this later!! Done now -  '53' corresponds to 'S' and '50' corresponds to 'P'
 		[digitalOutDevice digitalOutputBits:(0x5350 | 0x8000)];
+     */
+    else if ([eventName isEqualTo:@"spatialPhase"] || [eventName isEqualTo:@"SP"] )
+        thisEventName = @"SP";
+     
 	//else if ([eventName isEqualTo:@"protocolNumber"] || [eventName isEqualTo:@"PN"] )         // [Vinay] - Added this to send the specific protocol Number - '50' corresponds to 'P' and '4E' corresponds to 'N'
 	//	[digitalOutDevice digitalOutputBits:(0x504E | 0x8000)];
         

@@ -94,8 +94,9 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
 	
 // Create and initialize the visual stimuli
 
-	gabors = [[NSArray arrayWithObjects:[self initGabor],
-                            [self initGabor], [self initGabor], [self initGabor], nil] retain];         // [Vinay] - one extra [self initGabor] added here for centre gabor
+	gabors = [[NSArray arrayWithObjects:[self initGabor:YES],
+               [self initGabor:NO], [self initGabor:NO], [self initGabor:NO], nil] retain];         // [Vinay] - one extra [self initGabor] added here for centre gabor
+    // [Vinay] - added YES, NO arguments as per the latest GaborRFMap protocol (07/06/2014 version)
 	[[gabors objectAtIndex:kMapGabor0] setAchromatic:YES];
 	[[gabors objectAtIndex:kMapGabor1] setAchromatic:YES];
     [[gabors objectAtIndex:kMapGabor2] setAchromatic:YES];                  // [Vinay] - for centre gabor
@@ -857,7 +858,7 @@ by mapStimTable.
 	BOOL listDone = NO;
 //	long stimCounter = 0;
     BOOL useSingleITC18;
-	long stimCounter = 0;
+//	long stimCounter = 0; // [Vinay] = commented because it is not being used
     
     /* [Vinay] - Added these lines and some more ahead to conditionally make the gabors partially transparent by adjusting their alpha values. This way superimposed gabors can look like a plaid */
     int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"];

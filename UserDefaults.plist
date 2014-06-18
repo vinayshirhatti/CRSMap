@@ -113,13 +113,13 @@
 			<key>row</key>
 			<string>min</string>
 			<key>azimuthDeg0</key>
-			<real>1</real>
+			<real>2</real>
 			<key>elevationDeg0</key>
-			<real>1</real>
+			<real>2</real>
 			<key>spatialFreqCPD0</key>
 			<real>0.5</real>
 			<key>sigmaDeg0</key>
-			<real>0.5</real>
+			<real>0.2</real>
 			<key>orientationDeg0</key>
 			<real>0</real>
 			<key>contrastPC0</key>
@@ -131,13 +131,13 @@
 			<key>radiusDeg0</key>
 			<integer>8</integer>
 			<key>azimuthDeg1</key>
-			<real>1</real>
+			<real>5</real>
 			<key>elevationDeg1</key>
-			<real>1</real>
+			<real>5</real>
 			<key>spatialFreqCPD1</key>
 			<real>0.5</real>
 			<key>sigmaDeg1</key>
-			<real>0.5</real>
+			<real>0.2</real>
 			<key>orientationDeg1</key>
 			<real>0</real>
 			<key>contrastPC1</key>
@@ -171,15 +171,15 @@
 			<key>row</key>
 			<string>max</string>
 			<key>azimuthDeg0</key>
-			<real>3</real>
-			<key>elevationDeg0</key>
-			<real>3</real>
-			<key>spatialFreqCPD0</key>
-			<real>4</real>
-			<key>sigmaDeg0</key>
 			<real>2</real>
+			<key>elevationDeg0</key>
+			<real>2</real>
+			<key>spatialFreqCPD0</key>
+			<real>8</real>
+			<key>sigmaDeg0</key>
+			<real>0.2</real>
 			<key>orientationDeg0</key>
-			<real>240</real>
+			<real>180</real>
 			<key>contrastPC0</key>
 			<integer>100</integer>
 			<key>temporalFreqHz0</key>
@@ -189,15 +189,15 @@
 			<key>radiusDeg0</key>
 			<integer>8</integer>
 			<key>azimuthDeg1</key>
-			<real>3</real>
+			<real>5</real>
 			<key>elevationDeg1</key>
-			<real>3</real>
+			<real>5</real>
 			<key>spatialFreqCPD1</key>
-			<real>4</real>
+			<real>8</real>
 			<key>sigmaDeg1</key>
-			<real>2</real>
+			<real>0.2</real>
 			<key>orientationDeg1</key>
-			<real>240</real>
+			<real>180</real>
 			<key>contrastPC1</key>
 			<integer>100</integer>
 			<key>temporalFreqHz1</key>
