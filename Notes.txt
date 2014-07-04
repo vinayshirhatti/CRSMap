@@ -40,3 +40,10 @@ VINAY: All the changes made here (from GRFMap to CRSMap code) are indicated in c
 vinay: 03 July 2014
 While merging the changes from the updated GaborRFMap into CRSMap, only the nib files weren't copied/updated. Therefore the EyeXY window wasn't the updated version (with additional options' buttons). Therefore, I have copied just this nib file - 'CRSEyeXYController.nib' from the cloned version of the updated GabroRFMap to this CRSMap. This is working now.
 The same can't be done in the case of the 'Stimulus Mapping' window in CRSMap.nib since there are a lot of additional buttons in the case of CRSMap. Therefore, I am just adding this option 'Use Single ITC18' by copying just this button from GaborRFMap.nib to CRSMap.nib and making the necessary customizations/changes for CRSMap.
+
+vinay: 04 July 2014
+Somehow I can't change the tags in CRSEyeXYController.nib file from 'GRF' to 'CRS' in the version editor (bare text format). So there are some 'GRF' tags in this file. Need to change them to 'CRS'
+
+vinay: 04 July 2014
+Added the 'Annulus Fixed Protocol' to CRSMap. This now corresponds to protocolNumber = 10
+Added 'Tool Tip's in the 'specific protocol' selection panel. These tips tell which of C, R, S and which of their parameters have to be set for every protocol

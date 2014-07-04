@@ -413,12 +413,12 @@
                     <popUpButton verticalHuggingPriority="750" id="1479">
                         <rect key="frame" x="400" y="185" width="124" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Fixed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2547">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2547">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="1480">
                                 <items>
-                                    <menuItem title="Fixed" state="on" id="1482"/>
+                                    <menuItem title="Fixed" id="1482"/>
                                     <menuItem title="Variable" id="1481"/>
                                 </items>
                             </menu>
@@ -456,8 +456,8 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="498" name="enabled" keyPath="values.CRSRewardSchedule" id="2977"/>
                             <binding destination="498" name="value" keyPath="values.CRSMinRewardMS" id="2911"/>
+                            <binding destination="498" name="enabled" keyPath="values.CRSRewardSchedule" id="2977"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1655">
@@ -538,12 +538,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSStimDurationMS" id="2917"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2950">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSStimDurationMS" id="2917"/>
                             <outlet property="nextKeyView" destination="1243" id="1252"/>
                         </connections>
                     </textField>
@@ -572,12 +572,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSStimJitterPC" id="2918"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2952">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSStimJitterPC" id="2918"/>
                             <outlet property="nextKeyView" destination="1291" id="1295"/>
                         </connections>
                     </textField>
@@ -604,23 +604,23 @@
                     <popUpButton verticalHuggingPriority="750" id="1431">
                         <rect key="frame" x="113" y="285" width="130" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Uniform" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2564">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2564">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="1432">
                                 <items>
-                                    <menuItem title="Uniform" state="on" id="1434"/>
+                                    <menuItem title="Uniform" id="1434"/>
                                     <menuItem title="Exponential" id="1433"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                         <connections>
+                            <binding destination="498" name="selectedIndex" keyPath="values.CRSStimDistribution" id="2964"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2963">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="selectedIndex" keyPath="values.CRSStimDistribution" id="2964"/>
                         </connections>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" id="1436">
@@ -675,12 +675,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSMeanTargetMS" id="2928"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2968">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSMeanTargetMS" id="2928"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1449">
@@ -708,14 +708,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2970">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
-                                </dictionary>
-                            </binding>
                             <binding destination="498" name="value" keyPath="values.CRSMaxTargetMS" id="2929">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">RoundToStimCycle</string>
+                                </dictionary>
+                            </binding>
+                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2970">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
                         </connections>
@@ -745,14 +745,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2966">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
-                                </dictionary>
-                            </binding>
                             <binding destination="498" name="value" keyPath="values.CRSMinTargetMS" id="2927">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">RoundToStimCycle</string>
+                                </dictionary>
+                            </binding>
+                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2966">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
                         </connections>
@@ -766,14 +766,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2954">
-                                <dictionary key="options">
-                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
-                                </dictionary>
-                            </binding>
                             <binding destination="498" name="value" keyPath="values.CRSInterstimMS" id="2919">
                                 <dictionary key="options">
                                     <bool key="NSConditionallySetsEnabled" value="YES"/>
+                                </dictionary>
+                            </binding>
+                            <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2954">
+                                <dictionary key="options">
+                                    <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
                         </connections>
@@ -813,12 +813,12 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSChangeRemain" id="2926"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2962">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSChangeRemain" id="2926"/>
                         </connections>
                     </button>
                     <textField toolTip="Duration of each of the two intervals" verticalHuggingPriority="750" id="1291">
@@ -837,12 +837,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSInterstimJitterPC" id="2920"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2955">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSInterstimJitterPC" id="2920"/>
                         </connections>
                     </textField>
                     <textField toolTip="Time between fixation and first interval" verticalHuggingPriority="750" id="1311">
@@ -861,12 +861,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSMaxDirChangeDeg" id="2924"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2960">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSMaxDirChangeDeg" id="2924"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1484">
@@ -894,23 +894,23 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSOrientationChanges" id="2923"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2959">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSOrientationChanges" id="2923"/>
                         </connections>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="1513">
                         <rect key="frame" x="373" y="289" width="130" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Linear" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2579">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2579">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="1514">
                                 <items>
-                                    <menuItem title="Linear" state="on" id="1516"/>
+                                    <menuItem title="Linear" id="1516"/>
                                     <menuItem title="Logarithmic" id="1517"/>
                                 </items>
                             </menu>
@@ -935,13 +935,13 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="maxValue" keyPath="values.CRSCatchTrialMaxPC" id="2956"/>
+                            <binding destination="498" name="value" keyPath="values.CRSCatchTrialPC" previousBinding="2956" id="2957"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSHideTaskGabor" id="2958">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="maxValue" keyPath="values.CRSCatchTrialMaxPC" id="2956"/>
-                            <binding destination="498" name="value" keyPath="values.CRSCatchTrialPC" previousBinding="2956" id="2957"/>
                         </connections>
                     </textField>
                     <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="1495">
@@ -1064,12 +1064,12 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSMinDirChangeDeg" id="2925"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2961">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSMinDirChangeDeg" id="2925"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" id="1486">
@@ -1144,12 +1144,12 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSHideTaskGabor" id="2930"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2972">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSHideTaskGabor" id="2930"/>
                         </connections>
                     </button>
                     <button id="2672">
@@ -1286,12 +1286,12 @@
                                     <font key="font" metaFont="system"/>
                                     <font key="titleFont" metaFont="system"/>
                                     <connections>
+                                        <binding destination="498" name="value" keyPath="values.CRSMapStimDurationMS" id="2938"/>
                                         <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="3594">
                                             <dictionary key="options">
                                                 <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                             </dictionary>
                                         </binding>
-                                        <binding destination="498" name="value" keyPath="values.CRSMapStimDurationMS" id="2938"/>
                                     </connections>
                                 </formCell>
                                 <formCell scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="justified" tag="1" title="Interstim (ms):" id="2151">
@@ -1305,12 +1305,12 @@
                                     <font key="font" metaFont="system"/>
                                     <font key="titleFont" metaFont="system"/>
                                     <connections>
+                                        <binding destination="498" name="value" keyPath="values.CRSMapInterstimDurationMS" id="2939"/>
                                         <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="3105">
                                             <dictionary key="options">
                                                 <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                             </dictionary>
                                         </binding>
-                                        <binding destination="498" name="value" keyPath="values.CRSMapInterstimDurationMS" id="2939"/>
                                     </connections>
                                 </formCell>
                                 <formCell scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="justified" tag="2" title="Radius to Sigma Ratio:" id="2152">
@@ -1324,12 +1324,12 @@
                                     <font key="font" metaFont="system"/>
                                     <font key="titleFont" metaFont="system"/>
                                     <connections>
+                                        <binding destination="498" name="value" keyPath="values.CRSMapStimRadiusSigmaRatio" id="2940"/>
                                         <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="3107">
                                             <dictionary key="options">
                                                 <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                             </dictionary>
                                         </binding>
-                                        <binding destination="498" name="value" keyPath="values.CRSMapStimRadiusSigmaRatio" id="2940"/>
                                     </connections>
                                 </formCell>
                             </column>
@@ -1395,6 +1395,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg2" id="3728">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3473">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1403,12 +1409,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3473" id="3474">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg2" id="3728">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1426,6 +1426,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg2" id="3734">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3732">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1436,15 +1442,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg2" id="3734">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="53" minWidth="10" maxWidth="1000" id="3805" userLabel="Table Column - TF">
+                                                            <tableColumn width="54" minWidth="10" maxWidth="1000" id="3805" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1457,6 +1457,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz2" id="3810">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3807">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1467,15 +1473,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz2" id="3810">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="48" minWidth="10" maxWidth="1000" id="3811" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3811" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1488,6 +1488,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg2" id="3816">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3814">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1496,12 +1502,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3814" id="3815">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg2" id="3816">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1519,6 +1519,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD2" id="3727">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3725">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1527,12 +1533,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3725" id="3726">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD2" id="3727">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1557,6 +1557,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg2" id="3652">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3454">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1565,12 +1571,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3454" id="3455">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg2" id="3652">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1595,6 +1595,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC2" id="3654">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3478">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1603,12 +1609,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3478" id="3479">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC2" id="3654">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1626,6 +1626,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg2" id="3656">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3468">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1634,12 +1640,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3468" id="3469">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg2" id="3656">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1657,6 +1657,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg2" id="3658">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3476">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1665,12 +1671,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3476" id="3477">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg2" id="3658">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -1749,6 +1749,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount2" id="3715"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3449">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1759,7 +1760,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount2" id="3715"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="62" minWidth="10" maxWidth="1000" id="3716">
@@ -1779,6 +1779,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount2" id="3722"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3719">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1789,10 +1790,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount2" id="3722"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="52" minWidth="10" maxWidth="1000" id="3789" userLabel="Table Column - TF">
+                                                            <tableColumn width="53" minWidth="10" maxWidth="1000" id="3789" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1809,6 +1809,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount2" id="3797"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3793">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1819,10 +1820,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount2" id="3797"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="48" minWidth="10" maxWidth="1000" id="3798" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3798" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sigma">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1839,6 +1839,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount2" id="3804"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3801">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1849,7 +1850,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount2" id="3804"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="47" minWidth="10" maxWidth="1000" id="3705">
@@ -1869,6 +1869,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount2" id="3714"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3709">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1879,7 +1880,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount2" id="3714"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="68" minWidth="56.56005859375" maxWidth="1000" id="3415">
@@ -1899,6 +1899,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount2" id="3488"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3452">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1909,7 +1910,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount2" id="3488"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="64" minWidth="10" maxWidth="100" id="3416">
@@ -1929,6 +1929,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount2" id="3489"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3460">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1939,7 +1940,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount2" id="3489"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="73" minWidth="10" maxWidth="100" id="3417">
@@ -1959,6 +1959,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount2" id="3490"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3463">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1969,7 +1970,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount2" id="3490"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="56.56005859375" minWidth="56.56005859375" maxWidth="1000" id="3418">
@@ -1989,6 +1989,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount2" id="3491"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3466">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -1999,7 +2000,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount2" id="3491"/>
                                                                 </connections>
                                                             </tableColumn>
                                                         </tableColumns>
@@ -2085,6 +2085,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg1" id="3756">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3292">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2093,12 +2099,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3292" id="3293">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg1" id="3756">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -2116,6 +2116,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg1" id="3762">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3760">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2126,15 +2132,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg1" id="3762">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="46" minWidth="10" maxWidth="1000" id="3831" userLabel="Table Column - TF">
+                                                            <tableColumn width="47" minWidth="10" maxWidth="1000" id="3831" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2147,6 +2147,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz1" id="3836">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3834">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2157,15 +2163,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz1" id="3836">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3837" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="50" minWidth="10" maxWidth="1000" id="3837" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2178,6 +2178,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg1" id="3842">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3839">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2188,15 +2194,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg1" id="3842">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="57" minWidth="10" maxWidth="1000" id="3751">
+                                                            <tableColumn width="58" minWidth="10" maxWidth="1000" id="3751">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2209,6 +2209,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD1" id="3755">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3753">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2219,15 +2225,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD1" id="3755">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="71" minWidth="10" maxWidth="1000" id="3252">
+                                                            <tableColumn width="72" minWidth="10" maxWidth="1000" id="3252">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Orientation">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2247,6 +2247,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg1" id="3662">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3289">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2257,15 +2263,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg1" id="3662">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="69" minWidth="10" maxWidth="1000" id="3250">
+                                                            <tableColumn width="70" minWidth="10" maxWidth="1000" id="3250">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Contrast %">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2285,6 +2285,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC1" id="3664">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3286">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2293,12 +2299,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3286" id="3287">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC1" id="3664">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -2316,6 +2316,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg1" id="3666">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3313">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2324,12 +2330,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3313" id="3314">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg1" id="3666">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -2347,6 +2347,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg1" id="3668">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3304">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2355,12 +2361,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3304" id="3305">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg1" id="3668">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -2439,6 +2439,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount1" id="3743"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3309">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2449,7 +2450,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount1" id="3743"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="58" minWidth="10" maxWidth="1000" id="3744" userLabel="Table Column - Elevation">
@@ -2469,6 +2469,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount1" id="3750"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3747">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2479,10 +2480,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount1" id="3750"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="44" minWidth="10" maxWidth="1000" id="3817" userLabel="Table Column - TF">
+                                                            <tableColumn width="45" minWidth="10" maxWidth="1000" id="3817" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2499,6 +2499,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount1" id="3823"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3820">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2509,10 +2510,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount1" id="3823"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="50" minWidth="10" maxWidth="1000" id="3824" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="51" minWidth="10" maxWidth="1000" id="3824" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sigma">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2529,6 +2529,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount1" id="3830"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3827">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2539,10 +2540,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount1" id="3830"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="57" minWidth="10" maxWidth="1000" id="3737">
+                                                            <tableColumn width="58" minWidth="10" maxWidth="1000" id="3737">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2559,6 +2559,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount1" id="3742"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3740">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2569,10 +2570,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount1" id="3742"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="70" minWidth="56.56005859375" maxWidth="1000" id="3270">
+                                                            <tableColumn width="71" minWidth="56.56005859375" maxWidth="1000" id="3270">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Orientation">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2589,6 +2589,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount1" id="3401"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3307">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2599,10 +2600,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount1" id="3401"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="70" minWidth="10" maxWidth="100" id="3269">
+                                                            <tableColumn width="71" minWidth="10" maxWidth="100" id="3269">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Contrast %">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2619,6 +2619,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount1" id="3402"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3294">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2629,7 +2630,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount1" id="3402"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="78" minWidth="10" maxWidth="100" id="3268">
@@ -2649,6 +2649,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount1" id="3403"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3284">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2659,7 +2660,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount1" id="3403"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="60.56005859375" minWidth="56.56005859375" maxWidth="1000" id="3267">
@@ -2679,6 +2679,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount1" id="3404"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3297">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2689,7 +2690,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount1" id="3404"/>
                                                                 </connections>
                                                             </tableColumn>
                                                         </tableColumns>
@@ -2775,6 +2775,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg0" id="3782">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3560">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2783,12 +2789,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3560" id="3561">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.azimuthDeg0" id="3782">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -2806,6 +2806,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg0" id="3788">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3785">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2816,15 +2822,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.elevationDeg0" id="3788">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="45" minWidth="10" maxWidth="1000" id="3857" userLabel="Table Column - TF">
+                                                            <tableColumn width="46" minWidth="10" maxWidth="1000" id="3857" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2837,6 +2837,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz0" id="3862">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3860">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2847,15 +2853,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.temporalFreqHz0" id="3862">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3863" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="50" minWidth="10" maxWidth="1000" id="3863" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2868,6 +2868,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg0" id="3868">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3865">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2878,15 +2884,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.sigmaDeg0" id="3868">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="56" minWidth="10" maxWidth="1000" id="3777">
+                                                            <tableColumn width="57" minWidth="10" maxWidth="1000" id="3777">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2899,6 +2899,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD0" id="3779">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3780">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2909,15 +2915,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialFreqCPD0" id="3779">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="67" minWidth="10" maxWidth="1000" id="3521">
+                                                            <tableColumn width="68" minWidth="10" maxWidth="1000" id="3521">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Orientation">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2937,6 +2937,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg0" id="3672">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3541">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2947,15 +2953,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.orientationDeg0" id="3672">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
-                                                                        </dictionary>
-                                                                    </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="66" minWidth="10" maxWidth="1000" id="3523">
+                                                            <tableColumn width="67" minWidth="10" maxWidth="1000" id="3523">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Contrast %">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2975,6 +2975,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC0" id="3674">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3565">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -2983,12 +2989,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3565" id="3566">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.contrastPC0" id="3674">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -3006,6 +3006,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg0" id="3676">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3555">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3014,12 +3020,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3555" id="3556">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.spatialPhaseDeg0" id="3676">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -3037,6 +3037,12 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg0" id="3678">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                                                        </dictionary>
+                                                                    </binding>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3563">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3045,12 +3051,6 @@
                                                                     <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" previousBinding="3563" id="3564">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
-                                                                        </dictionary>
-                                                                    </binding>
-                                                                    <binding destination="1851" name="value" keyPath="arrangedObjects.radiusDeg0" id="3678">
-                                                                        <dictionary key="options">
-                                                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
-                                                                            <bool key="NSConditionallySetsEditable" value="NO"/>
                                                                         </dictionary>
                                                                     </binding>
                                                                 </connections>
@@ -3129,6 +3129,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount0" id="3769"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3536">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3139,7 +3140,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.azimuthCount0" id="3769"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="58" minWidth="10" maxWidth="1000" id="3770" userLabel="Table Column - Elevation">
@@ -3159,6 +3159,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount0" id="3776"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3774">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3169,10 +3170,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.elevationCount0" id="3776"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="45" minWidth="10" maxWidth="1000" id="3843" userLabel="Table Column - TF">
+                                                            <tableColumn width="46" minWidth="10" maxWidth="1000" id="3843" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3189,6 +3189,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount0" id="3849"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3847">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3199,10 +3200,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.temporalFreqCount0" id="3849"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="48" minWidth="10" maxWidth="1000" id="3850" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3850" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sigma">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3219,6 +3219,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount0" id="3856"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3853">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3229,10 +3230,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.sigmaCount0" id="3856"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="56" minWidth="10" maxWidth="1000" id="3763">
+                                                            <tableColumn width="57" minWidth="10" maxWidth="1000" id="3763">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3249,6 +3249,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount0" id="3766"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3767">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3259,10 +3260,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialFreqCount0" id="3766"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="68" minWidth="56.56005859375" maxWidth="1000" id="3502">
+                                                            <tableColumn width="69" minWidth="56.56005859375" maxWidth="1000" id="3502">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Orientation">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3279,6 +3279,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount0" id="3575"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3539">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3289,10 +3290,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.orientationCount0" id="3575"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="66" minWidth="10" maxWidth="100" id="3503">
+                                                            <tableColumn width="67" minWidth="10" maxWidth="100" id="3503">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Contrast %">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3309,6 +3309,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount0" id="3576"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3547">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3319,10 +3320,9 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.contrastCount0" id="3576"/>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="75" minWidth="10" maxWidth="100" id="3504">
+                                                            <tableColumn width="76" minWidth="10" maxWidth="100" id="3504">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="spatialPhase">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3339,6 +3339,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount0" id="3577"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3550">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3349,7 +3350,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.spatialPhaseCount0" id="3577"/>
                                                                 </connections>
                                                             </tableColumn>
                                                             <tableColumn width="69" minWidth="56.56005859375" maxWidth="1000" id="3505">
@@ -3369,6 +3369,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <connections>
+                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount0" id="3578"/>
                                                                     <binding destination="498" name="editable" keyPath="values.CRSTaskStatus" id="3553">
                                                                         <dictionary key="options">
                                                                             <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
@@ -3379,7 +3380,6 @@
                                                                             <string key="NSValueTransformerName">TaskStatusNoFileTransformer</string>
                                                                         </dictionary>
                                                                     </binding>
-                                                                    <binding destination="2030" name="value" keyPath="arrangedObjects.radiusCount0" id="3578"/>
                                                                 </connections>
                                                             </tableColumn>
                                                         </tableColumns>
@@ -3486,12 +3486,12 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSHideCentreDigital" id="3928"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSHideLeft" id="2980">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="value" keyPath="values.CRSHideCentreDigital" id="3928"/>
                         </connections>
                     </button>
                     <button id="2648">
@@ -3548,7 +3548,7 @@
                             <binding destination="498" name="value" keyPath="values.CRSUseSingleITC18" id="E0Y-AL-Pr6"/>
                         </connections>
                     </button>
-                    <button id="3894">
+                    <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3894">
                         <rect key="frame" x="31" y="142" width="309" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Match Centre and Surround (in Manual mode)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3895">
@@ -3562,24 +3562,24 @@
                     <popUpButton verticalHuggingPriority="750" id="2876">
                         <rect key="frame" x="526" y="309" width="130" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Counterphase" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2879">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="2879">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="2880">
                                 <items>
-                                    <menuItem title="Counterphase" state="on" id="2883"/>
+                                    <menuItem title="Counterphase" id="2883"/>
                                     <menuItem title="Drifting" id="2882"/>
                                     <menuItem title="Random" id="2881"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                         <connections>
+                            <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTemporalModulation" id="2982"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="2984">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTemporalModulation" id="2982"/>
                         </connections>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" id="2877">
@@ -3591,7 +3591,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="3869">
+                    <textField toolTip="Select the specific protocol to run" verticalHuggingPriority="750" id="3869">
                         <rect key="frame" x="175" y="104" width="137" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Specific Protocol " id="3870">
@@ -3603,34 +3603,35 @@
                     <popUpButton verticalHuggingPriority="750" id="3903">
                         <rect key="frame" x="342" y="98" width="253" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="None (Manual set)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3906" id="3904">
+                        <popUpButtonCell key="cell" type="push" title="Dual Phase Protocol" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3915" id="3904">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="3905" userLabel="Menu - AllViews">
                                 <items>
-                                    <menuItem title="None (Manual set)" state="on" toolTip="Free running protocol; Set C, R, S" id="3906"/>
-                                    <menuItem title="Ring Protocol" id="3907"/>
-                                    <menuItem title="Contrast Ring Protocol" id="3908"/>
-                                    <menuItem title="Dual Contrast Protocol" id="3912"/>
-                                    <menuItem title="Dual Orientation Protocol" id="3913"/>
-                                    <menuItem title="Dual Phase Protocol" id="3915"/>
-                                    <menuItem title="Orientation Ring Protocol" id="3917"/>
-                                    <menuItem title="Phase Ring Protocol" id="3918"/>
-                                    <menuItem title="Drifting Phase Protocol" id="3942" userLabel="Menu Item - Drifting Phase Protocol"/>
-                                    <menuItem title="Cross Orientation Protocol (Plaids)" id="3947" userLabel="Menu Item - Cross Orientation Protocol"/>
+                                    <menuItem title="None (Manual set)" toolTip="Free running protocol; Set C, R, S" id="3906"/>
+                                    <menuItem title="Ring Protocol" toolTip="Set S and R radius" id="3907"/>
+                                    <menuItem title="Contrast Ring Protocol" toolTip="Set S; C rad only; R rad and cont" id="3908"/>
+                                    <menuItem title="Dual Contrast Protocol" toolTip="set C; R rad and cont" id="3912"/>
+                                    <menuItem title="Dual Orientation Protocol" toolTip="set C; R rad and ori" id="3913"/>
+                                    <menuItem title="Dual Phase Protocol" state="on" toolTip="set C; R rad and phase" id="3915"/>
+                                    <menuItem title="Orientation Ring Protocol" toolTip="Set S; C rad only; R ori and rad" id="3917"/>
+                                    <menuItem title="Phase Ring Protocol" toolTip="Set S; C rad only; R phase and rad" id="3918"/>
+                                    <menuItem title="Drifting Phase Protocol" toolTip="Set S; C rad only; R TF and rad" id="3942" userLabel="Menu Item - Drifting Phase Protocol"/>
+                                    <menuItem title="Cross Orientation Protocol (Plaids)" toolTip="Don't Use this as yet!" id="3947" userLabel="Menu Item - Cross Orientation Protocol"/>
+                                    <menuItem title="Annulus Fixed Protocol" toolTip="Set S; C rad only; R rad for annulus width" id="HRq-Gj-heK" userLabel="Menu Item - Annulus Fixed Protocol"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
                         <connections>
+                            <binding destination="498" name="selectedIndex" keyPath="values.CRSProtocolNumber" id="3911"/>
                             <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="3909">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                 </dictionary>
                             </binding>
-                            <binding destination="498" name="selectedIndex" keyPath="values.CRSProtocolNumber" id="3911"/>
                         </connections>
                     </popUpButton>
-                    <button id="3919">
+                    <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3919">
                         <rect key="frame" x="31" y="50" width="280" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Match Centre and Ring (in Manual mode)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3920">
@@ -3641,7 +3642,7 @@
                             <binding destination="498" name="value" keyPath="values.CRSMatchCentreRing" id="3922"/>
                         </connections>
                     </button>
-                    <button id="3923">
+                    <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3923">
                         <rect key="frame" x="31" y="18" width="296" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Match Ring and Surround (in Manual mode)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3924">

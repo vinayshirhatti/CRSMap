@@ -158,7 +158,7 @@ maxTargetS and a long stimLeadMS).
     
 	
     float azimuthDegMin, azimuthDegMax, elevationDegMin, elevationDegMax, sigmaDegMin, sigmaDegMax, spatialFreqCPDMin, spatialFreqCPDMax, directionDegMin, directionDegMax, radiusSigmaRatio, contrastPCMin, contrastPCMax, temporalFreqHzMin, temporalFreqHzMax, spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax; //[Vinay] -  Added spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax
-	BOOL hideStimulus, convertToGrating, noneProtocol=NO, ringProtocol=NO, contrastRingProtocol=NO, dualContrastProtocol=NO, dualOrientationProtocol=NO, dualPhaseProtocol=NO, orientationRingProtocol=NO, phaseRingProtocol=NO, driftingPhaseProtocol=NO, crossOrientationProtocol=NO; // [Vinay] - added matchCentreSurround to indicate similarity between the centre and surround attributes whenever required. , matchCentreSurround=NO was removed because it isn't being used in this loop
+	BOOL hideStimulus, convertToGrating, noneProtocol=NO, ringProtocol=NO, contrastRingProtocol=NO, dualContrastProtocol=NO, dualOrientationProtocol=NO, dualPhaseProtocol=NO, orientationRingProtocol=NO, phaseRingProtocol=NO, driftingPhaseProtocol=NO, crossOrientationProtocol=NO, annulusFixedProtocol = NO; // [Vinay] - added matchCentreSurround to indicate similarity between the centre and surround attributes whenever required. , matchCentreSurround=NO was removed because it isn't being used in this loop
     
 	NSArray *stimTableDefaults = [[task defaults] arrayForKey:@"CRSStimTables"];
 	NSDictionary *minDefaults = [stimTableDefaults objectAtIndex:0];
@@ -206,6 +206,9 @@ maxTargetS and a long stimLeadMS).
             break;
         case 9:
             crossOrientationProtocol = YES;
+            break;
+        case 10:
+            annulusFixedProtocol = YES;
             break;
         default:
             break;
@@ -264,7 +267,7 @@ maxTargetS and a long stimLeadMS).
             hideStimulus = ((([[task defaults] boolForKey:CRSHideRingKey]) || ([[task defaults] boolForKey:CRSMatchRingSurroundKey])) && noneProtocol); // for match ring-surround, just don't draw the ring gabor. Explicitly hide only when there's no specific mode selected
             
             // [Vinay] - have added the following lines for protocol specific changes in mapping; since this gabor1 corresponds to the ring gabor
-            if(ringProtocol){
+            if(ringProtocol || annulusFixedProtocol){
                 contrastPCMin = 0;
                 contrastPCMax = 0;
             }
@@ -729,6 +732,32 @@ maxTargetS and a long stimLeadMS).
                 radiusCount0 = 1;
                 
                 break;
+            case 10:
+                //annulusFixedProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+                azimuthCount2 = 1;
+                elevationCount2 = 1;
+                sigmaCount2 = 1;
+                spatialFreqCount2 = 1;
+                directionCount2 = 1;
+                contrastCount2 = 1;
+                temporalFreqCount2 = 1;
+                spatialPhaseCount2 = 1;
+                //radiusCount2 = 1;
+                
+                // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+                azimuthCount1 = 1;
+                elevationCount1 = 1;
+                sigmaCount1 = 1;
+                spatialFreqCount1 = 1;
+                directionCount1 = 1;
+                contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+                temporalFreqCount1 = 1;
+                spatialPhaseCount1 = 1;
+                //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+                
+                break;
+
             default:
                 break;
         }
@@ -1666,6 +1695,32 @@ maxTargetS and a long stimLeadMS).
             radiusCount0 = 1;
             
             break;
+        case 10:
+            //annulusFixedProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            //radiusCount2 = 1;
+            
+            // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionCount1 = 1;
+            contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+            
+            break;
+
         default:
             break;
     }

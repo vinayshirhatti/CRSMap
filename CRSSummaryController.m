@@ -420,6 +420,9 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
                             case 9:
                                 string = @"STOPPED: Cross Orientation Protocol (Plaids)";
                                 break;
+                            case 10:
+                                string = @"STOPPED: Annulus Fixed Protocol";
+                                break;
                             default:
                                 string = @"???";
                                 break;
@@ -458,6 +461,9 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
                                 break;
                             case 9:
                                 string = @"Now running: Cross Orientation Protocol (Plaids)";
+                                break;
+                            case 10:
+                                string = @"Now running: Annulus Fixed Protocol";
                                 break;
                             default:
                                 string = @"???";

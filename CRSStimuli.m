@@ -266,7 +266,7 @@ by mapStimTable.
     // ------------------------------------------------
     // protocolNumber indicates the following protocol:
     // protocolNumber = 0 - do nothing; 1 - ring protocol; 2 - contrast ring; 3 - dual contrast; 4 - dual ori; 5 - dual phase protocol; 6 - ori ring; 7 - phase ring
-    // 8 - drifting phase protocol; 9 - cross orientation suppression protocol (COS)
+    // 8 - drifting phase protocol; 9 - cross orientation suppression protocol (COS) (Don't use this as yet); 10 - Annulus fixed protocol (annulus width is fixed, but radius changes)
     // ------------------------------------------------
     
     // [Vinay] - Don't match centre and surround for the dual protocols since the surround is off in these cases anyway. Same applies to the COS protocol
@@ -287,7 +287,7 @@ by mapStimTable.
     NSValue *val, *val2;
     
     // if (([[task defaults] boolForKey:CRSMatchCentreSurroundKey]) || ([[task defaults] boolForKey:CRSRingProtocolKey]) || ([[task defaults] boolForKey:CRSContrastRingProtocolKey])) -  was replaced as follows -
-    if ((matchCentreSurround == YES) || (protocolNumber == 1) || (protocolNumber == 2) || (protocolNumber == 6) || (protocolNumber == 7) || (protocolNumber == 8)) {
+    if ((matchCentreSurround == YES) || (protocolNumber == 1) || (protocolNumber == 2) || (protocolNumber == 6) || (protocolNumber == 7) || (protocolNumber == 8) || (protocolNumber == 10)) {
         //long sfi,di,ci,tfi,spi;
         //float sf, d, c, tf, sp;
         for (stim = 0; stim < [mapStimList0 count]; stim++) {
@@ -687,6 +687,58 @@ by mapStimTable.
             //copyStimDesc.temporalFreqIndex = copyStimDesc2.temporalFreqIndex;
             
             copyStimDesc.spatialPhaseDeg = copyStimDesc2.spatialPhaseDeg; // [Vinay] - because phase is maintained for the ring gabor here
+            copyStimDesc.spatialPhaseIndex = copyStimDesc2.spatialPhaseIndex;
+            
+            // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
+            
+            //copyStimDesc.gaborIndex = copyStimDesc2.gaborIndex; // [Vinay] - keep the gaborIndex the same, else there are two gabors with same index number and it would become difficult to read their parameters later
+            copyStimDesc.sequenceIndex = copyStimDesc2.sequenceIndex;
+            copyStimDesc.stimOnFrame = copyStimDesc2.stimOnFrame;
+            copyStimDesc.stimOffFrame = copyStimDesc2.stimOffFrame;
+            copyStimDesc.stimType = copyStimDesc2.stimType;
+            
+            copyStimDesc.azimuthIndex = copyStimDesc2.azimuthIndex;
+            copyStimDesc.elevationIndex= copyStimDesc2.elevationIndex;
+            copyStimDesc.sigmaIndex = copyStimDesc2.sigmaIndex;
+            
+            copyStimDesc.azimuthDeg = copyStimDesc2.azimuthDeg;
+            copyStimDesc.elevationDeg = copyStimDesc2.elevationDeg;
+            copyStimDesc.sigmaDeg = copyStimDesc2.sigmaDeg;
+            
+            copyStimDesc.temporalModulation = copyStimDesc2.temporalModulation;
+            copyStimDesc.orientationChangeDeg = copyStimDesc2.orientationChangeDeg;
+            
+            
+            // [Vinay] - Basically except the five parameters that have to be matched the rest have been restored to the value assigned originally to gabor2 by makeMapStimList
+            
+            [mapStimList1 replaceObjectAtIndex:stim withObject:[NSValue valueWithBytes:&copyStimDesc objCType:@encode(StimDesc)]];
+        }
+    }
+
+    
+    // [Vinay] - Centre is matched to the Surround already (in an earlier loop). Ring contrast is set to zero in CRSMapStimTable.m. However, if required we can have a non-zero contrast (by removing that option from CRSMapStimTable.m). The properties of ring are matched to those of the centre keeping that option in mind. When the contrast is zero, this part is redundant anyway.
+    //  [Vinay] - Key operation here is that the annulus width is set by the radius specified for the ring gabor. So the ring radius has to be reset to be equal to "ring radius + centre radius" so that the annulus is of the required width.
+    if (protocolNumber == 10) {
+        for (stim = 0; stim < [mapStimList1 count]; stim++) {
+            val = [mapStimList1 objectAtIndex:stim]; // ring gabor
+            [val getValue:&copyStimDesc];
+            
+            val2 = [mapStimList2 objectAtIndex:stim]; // centre gabor
+            [val2 getValue:&copyStimDesc2];
+            
+            copyStimDesc.radiusDeg = copyStimDesc.radiusDeg + copyStimDesc2.radiusDeg; // [Vinay] - adjusting the ring radius to get teh required annulus width
+            copyStimDesc.radiusIndex = copyStimDesc2.radiusIndex;
+            
+            copyStimDesc.spatialFreqCPD = copyStimDesc2.spatialFreqCPD;
+            copyStimDesc.spatialFreqIndex = copyStimDesc2.spatialFreqIndex;
+            
+            copyStimDesc.directionDeg = copyStimDesc2.directionDeg;
+            copyStimDesc.directionIndex = copyStimDesc2.directionIndex;
+            
+            copyStimDesc.temporalFreqHz = copyStimDesc2.temporalFreqHz;
+            copyStimDesc.temporalFreqIndex = copyStimDesc2.temporalFreqIndex;
+            
+            copyStimDesc.spatialPhaseDeg = copyStimDesc2.spatialPhaseDeg;
             copyStimDesc.spatialPhaseIndex = copyStimDesc2.spatialPhaseIndex;
             
             // [Vinay] - The following line were added later to copy some more parameters so that LL data can be read consistently
