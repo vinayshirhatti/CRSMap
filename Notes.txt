@@ -35,3 +35,8 @@ The code gives computer errors if contrast is different from 100%.          (22/
 ================================^^^=====================^^^============================================
 
 VINAY: All the changes made here (from GRFMap to CRSMap code) are indicated in comments alongside the change. Changes made in the list are not indicated by comments however. 
+
+----------
+vinay: 03 July 2014
+While merging the changes from the updated GaborRFMap into CRSMap, only the nib files weren't copied/updated. Therefore the EyeXY window wasn't the updated version (with additional options' buttons). Therefore, I have copied just this nib file - 'CRSEyeXYController.nib' from the cloned version of the updated GabroRFMap to this CRSMap. This is working now.
+The same can't be done in the case of the 'Stimulus Mapping' window in CRSMap.nib since there are a lot of additional buttons in the case of CRSMap. Therefore, I am just adding this option 'Use Single ITC18' by copying just this button from GaborRFMap.nib to CRSMap.nib and making the necessary customizations/changes for CRSMap.
