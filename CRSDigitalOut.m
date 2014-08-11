@@ -206,6 +206,8 @@
      
 	//else if ([eventName isEqualTo:@"protocolNumber"] || [eventName isEqualTo:@"PN"] )         // [Vinay] - Added this to send the specific protocol Number - '50' corresponds to 'P' and '4E' corresponds to 'N'
 	//	[digitalOutDevice digitalOutputBits:(0x504E | 0x8000)];
+    else if ([eventName isEqualTo:@"protocolNumber"] || [eventName isEqualTo:@"PN"] )
+        thisEventName = @"PN";
         
 	else
 		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",

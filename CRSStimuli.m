@@ -862,6 +862,10 @@ by mapStimTable.
 	[gabor directSetDirectionDeg:pSD->directionDeg];
 	[gabor directSetContrast:pSD->contrastPC / 100.0];
     [gabor directSetTemporalFreqHz:pSD->temporalFreqHz];
+    if (pSD->temporalFreqHz == [[task stimWindow] frameRateHz]/2) { // [Vinay] - added this to adjust the temporal phase when the temporal frequency = (refresh rate)/2 (the maximum level allowed) so that each frame doesn't capture the zero level but the max and min levels every alternate frame
+        [gabor directSetTemporalPhaseDeg:90.0];
+    }
+    
     [gabor setTemporalModulation:pSD->temporalModulation];
     [gabor directSetSpatialPhaseDeg:pSD->spatialPhaseDeg];          // [Vinay] - added for gabor phase
 }
