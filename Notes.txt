@@ -47,3 +47,7 @@ Somehow I can't change the tags in CRSEyeXYController.nib file from 'GRF' to 'CR
 vinay: 04 July 2014
 Added the 'Annulus Fixed Protocol' to CRSMap. This now corresponds to protocolNumber = 10
 Added 'Tool Tip's in the 'specific protocol' selection panel. These tips tell which of C, R, S and which of their parameters have to be set for every protocol
+
+vinay: 11 August 2014
+Code to send the protocolNumber (to identify the specific sub-protocol) as a digital code added. Sending with the first trial of a protocol (at the beginning or after ‘RESET’). This part was added to CRSDigitalOut.m and CRSStarttrialState.m. Here we check for the value of trialNumber and send the code if it is 1. Whenever the experiment begins or is 'RESET' trialNumber is reset to 0 and it increments to 1 for the first trial.
+Changes to map temporal frequency similar to contrast added (from GaborRFMap (modified)). Limit the tf max value to frameRate/2 and change the temporalPhase to 90 deg at this max value to capture the maximum’s rather than the minimum’s and draw the stimulus correctly. These modifications have been copied from the modified GaborRFMap. Choose this if you want to enable static as well as moving gratings. With log mapping if the min is set to 0 (for static gratings) then all the values are pulled to 0 and one gets only static gratings. Change this to linear mapping (if required so) otherwise. 
