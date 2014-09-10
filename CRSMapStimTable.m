@@ -130,7 +130,10 @@ static long CRSMapStimTableCounter = 0;
 
 - (float)logValueWithIndex:(long)index count:(long)count min:(float)min max:(float)max;
 {
-	return (count < 2) ? min : min * (powf(max / min, (float)index/(count - 1)));
+	if (count==2) { // [Vinay] - adding this condition to cover the case where only two values are required
+        return (index == 0) ? min : max;
+    }
+    return (count < 2) ? min : min * (powf(max / min, (float)index/(count - 1)));
 }
 
 /* makeMapStimList

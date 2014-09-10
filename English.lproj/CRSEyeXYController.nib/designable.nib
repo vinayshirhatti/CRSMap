@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1070" defaultVersion="1090" identifier="macosx"/>
+        <deployment version="1080" defaultVersion="1090" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="GRFEyeXYController">
+        <customObject id="-2" userLabel="File's Owner" customClass="CRSEyeXYController">
             <connections>
                 <outlet property="eyePlot" destination="179" id="182"/>
                 <outlet property="optionsSheet" destination="193" id="203"/>
@@ -83,14 +83,14 @@
                         </connections>
                     </button>
                     <popUpButton verticalHuggingPriority="750" id="317">
-                        <rect key="frame" x="179" y="53" width="100" height="26"/>
+                        <rect key="frame" x="179" y="53" width="135" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="318">
+                        <popUpButtonCell key="cell" type="push" title="Left Eye" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="320" id="318">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="319">
                                 <items>
-                                    <menuItem title="Left Eye" id="320"/>
+                                    <menuItem title="Left Eye" state="on" id="320"/>
                                     <menuItem title="Right Eye" id="321"/>
                                     <menuItem title="Both Eyes" id="322"/>
                                 </items>
@@ -159,7 +159,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYDotSizeDeg" id="285"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYDotSizeDeg" id="wI4-DZ-qYc"/>
                         </connections>
                     </textField>
                     <textField toolTip="Lifetime  of Dots in Seconds" verticalHuggingPriority="750" id="198">
@@ -178,7 +178,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYSamplesSaved" id="286"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYSamplesSaved" id="Di2-8q-PDG"/>
                         </connections>
                     </textField>
                     <button toolTip="Close Dialog" verticalHuggingPriority="750" id="199">
@@ -213,7 +213,7 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYOneInN" id="287"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYOneInN" id="TPo-cS-q5y"/>
                         </connections>
                     </textField>
                     <button toolTip="Select Whether Dots Fade with Time" id="202">
@@ -224,7 +224,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYFadeDots" id="291"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYFadeDots" id="wkX-Pe-rDK"/>
                         </connections>
                     </button>
                     <colorWell toolTip="Change Eye Plot Color" id="215">
@@ -232,7 +232,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="color" red="0.058130499000000002" green="0.055541898999999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYEyeColor" id="290">
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYEyeColor" id="CjP-2S-9Xp">
                                 <dictionary key="options">
                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                     <string key="NSValueTransformerName">NSUnarchiveFromData</string>
@@ -257,7 +257,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYDoTicks" id="293"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYDoTicks" id="LCe-XP-PGD"/>
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" id="229">
@@ -276,7 +276,7 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYTickDeg" id="288"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYTickDeg" id="9h7-2Q-lpa"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="230">
@@ -296,7 +296,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYDoGrid" id="294"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYDoGrid" id="A3s-ya-MO3"/>
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" id="232">
@@ -315,7 +315,7 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYGridDeg" id="289"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYGridDeg" id="aXv-i7-D92"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="233">
@@ -335,7 +335,7 @@ DQ
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="248" name="value" keyPath="values.GRFEyeXYDrawCal" id="292"/>
+                            <binding destination="248" name="value" keyPath="values.CRSEyeXYDrawCal" id="LoO-nk-t8J"/>
                         </connections>
                     </button>
                 </subviews>

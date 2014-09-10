@@ -852,7 +852,9 @@ by mapStimTable.
 	
 - (void)loadGabor:(LLGabor *)gabor withStimDesc:(StimDesc *)pSD;
 {	
-	if (pSD->spatialFreqCPD == 0) {					// Change made by Incheol and Kaushik to get gaussians
+	[gabor directSetSpatialPhaseDeg:pSD->spatialPhaseDeg];          // [Vinay] - added for gabor phase
+    // [Vinay] - later moved this above the following loop, otherwise that loop is overridden by this assignment
+    if (pSD->spatialFreqCPD == 0) {					// Change made by Incheol and Kaushik to get gaussians
 		[gabor directSetSpatialPhaseDeg:90.0];
 	}
 	[gabor directSetSigmaDeg:pSD->sigmaDeg];		// *** Should be directSetSigmaDeg
@@ -867,7 +869,6 @@ by mapStimTable.
     }
     
     [gabor setTemporalModulation:pSD->temporalModulation];
-    [gabor directSetSpatialPhaseDeg:pSD->spatialPhaseDeg];          // [Vinay] - added for gabor phase
 }
 
 - (void)clearStimLists:(TrialDesc *)pTrial
@@ -1266,8 +1267,8 @@ by mapStimTable.
 				if (index == kMapGabor1 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideRingDigitalKey])) {
 					// [Vinay] - CRSHideRightDigitalKey changed to the above
                     //NSLog(@"Sending right digital codes...");
-					[digitalOut outputEventName:@"contrast" withData:(long)(100*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(100*(pSD->temporalFreqHz))];
+					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
 					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
 					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
 					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
