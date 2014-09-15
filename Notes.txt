@@ -41,13 +41,31 @@ vinay: 03 July 2014
 While merging the changes from the updated GaborRFMap into CRSMap, only the nib files weren't copied/updated. Therefore the EyeXY window wasn't the updated version (with additional options' buttons). Therefore, I have copied just this nib file - 'CRSEyeXYController.nib' from the cloned version of the updated GabroRFMap to this CRSMap. This is working now.
 The same can't be done in the case of the 'Stimulus Mapping' window in CRSMap.nib since there are a lot of additional buttons in the case of CRSMap. Therefore, I am just adding this option 'Use Single ITC18' by copying just this button from GaborRFMap.nib to CRSMap.nib and making the necessary customizations/changes for CRSMap.
 
+---------
 vinay: 04 July 2014
 Somehow I can't change the tags in CRSEyeXYController.nib file from 'GRF' to 'CRS' in the version editor (bare text format). So there are some 'GRF' tags in this file. Need to change them to 'CRS'
 
+---------
 vinay: 04 July 2014
 Added the 'Annulus Fixed Protocol' to CRSMap. This now corresponds to protocolNumber = 10
 Added 'Tool Tip's in the 'specific protocol' selection panel. These tips tell which of C, R, S and which of their parameters have to be set for every protocol
 
+---------
 vinay: 11 August 2014
 Code to send the protocolNumber (to identify the specific sub-protocol) as a digital code added. Sending with the first trial of a protocol (at the beginning or after ‘RESET’). This part was added to CRSDigitalOut.m and CRSStarttrialState.m. Here we check for the value of trialNumber and send the code if it is 1. Whenever the experiment begins or is 'RESET' trialNumber is reset to 0 and it increments to 1 for the first trial.
-Changes to map temporal frequency similar to contrast added (from GaborRFMap (modified)). Limit the tf max value to frameRate/2 and change the temporalPhase to 90 deg at this max value to capture the maximum’s rather than the minimum’s and draw the stimulus correctly. These modifications have been copied from the modified GaborRFMap. Choose this if you want to enable static as well as moving gratings. With log mapping if the min is set to 0 (for static gratings) then all the values are pulled to 0 and one gets only static gratings. Change this to linear mapping (if required so) otherwise. 
+Changes to map temporal frequency similar to contrast added (from GaborRFMap (modified)). Limit the tf max value to frameRate/2 and change the temporalPhase to 90 deg at this max value to capture the maximum’s rather than the minimum’s and draw the stimulus correctly. These modifications have been copied from the modified GaborRFMap. Choose this if you want to enable static as well as moving gratings. With log mapping if the min is set to 0 (for static gratings) then all the values are pulled to 0 and one gets only static gratings. Change this to linear mapping (if required so) otherwise.
+
+---------
+vinay 10 Sep 2014:
+   - Changed some remaining GRF’ instances in CRSEyeXYController.nib to ‘CRS’
+   - Modified logValueWithIndex for count=2 case. min and max are the 2 values assigned now in this case
+   Commit these changes before modifying the digital out parameters under specific protocols to reduce the digital out load
+   
+   The dual phase protocol does not draw the phase shifts between centre and ring gabors for non-zero TFs i.e. for drifting gabors. May have to change the temporal modulation code to correct this
+   The corss-orientation protocol also does not show both the two gabors, but only the ring gabor. Have to check this
+   
+---------
+vinay 15 Sep 2014:
+Modified the amount of digital code sent for each gabor depending on the specific protocol that is being run.
+This prevents computer errors that were happening for all protocols where 3 gabors were being drawn (and subsequently digital codes for all 3 were being sent)
+The digtal codes sent for each such protocol have been reduced now and the computer errors are not arising any more for those protocols.
