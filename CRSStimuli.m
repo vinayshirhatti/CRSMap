@@ -1267,7 +1267,7 @@ by mapStimTable.
 					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
 					[digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
 					[digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-					[digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
+					[digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
                     [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
 				}
 				
@@ -1295,7 +1295,7 @@ by mapStimTable.
                         [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
                         [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
                         [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                        [digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
+                        [digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
                         [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
                     }
                     
@@ -1352,7 +1352,7 @@ by mapStimTable.
                         [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
                         [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
                         [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                        [digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
+                        [digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
                         [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
                     }
                     else // for all other protocols only the 'radius' is required to be sent

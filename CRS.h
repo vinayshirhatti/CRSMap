@@ -34,7 +34,7 @@ enum {  kTrialStartDigitOutCode = 0x0010,
 
 
 #define	kMaxOriChanges	12
-#define kMaxMapValues   6
+#define kMaxMapValues   7    // [Vinay] - adjust this value as per the conditions; changed from 6 to 7 and this works because 7^6 < 6^7 (which was the working size in GRF). 8 will work as well because even 8^6 < 6^7, but 9^6 > 6^7
 #define kMaxMapValuesFixed 1 // [Vinay] - added this variable to represent fixed quantities/variables in the stimulus mapping list 
 
 typedef struct {

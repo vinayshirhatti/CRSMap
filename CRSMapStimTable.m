@@ -1023,12 +1023,13 @@ maxTargetS and a long stimLeadMS).
         stimDesc.spatialFreqCPD = [self logValueWithIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
 		stimDesc.directionDeg = [self linearValueWithIndex:directionDegIndex count:directionDegCount min:directionDegMin max:directionDegMax];
 		
-		stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+		//stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+        stimDesc.contrastPC = [self linearValueWithIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
 		//stimDesc.temporalFreqHz = [self logValueWithIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
         stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax]; // [Vinay] - commented the above line and added this to temporarily map tf values differently, for monitor calibration
         
         stimDesc.spatialPhaseDeg = [self linearValueWithIndex:spatialPhaseIndex count:spatialPhaseCount min:spatialPhaseDegMin max:spatialPhaseDegMax]; // [Vinay] - added this for spatial phase. 'logValueWithIndex' was giving a 'nan' value for spatial phase (because of 0deg phase). Therefore using 'linearValueWithIndex' instead.
-        stimDesc.radiusDeg = [self logValueWithIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax]; // [Vinay] - added this for radius. Have commented this temporarily; now uncommented
+        stimDesc.radiusDeg = [self contrastValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax]; // [Vinay] - added this for radius. Have commented this temporarily; now uncommented
         
         stimDesc.temporalModulation = [[task defaults] integerForKey:@"CRSMapTemporalModulation"];
 		
