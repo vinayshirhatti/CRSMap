@@ -867,6 +867,9 @@ by mapStimTable.
     if (pSD->temporalFreqHz == [[task stimWindow] frameRateHz]/2) { // [Vinay] - added this to adjust the temporal phase when the temporal frequency = (refresh rate)/2 (the maximum level allowed) so that each frame doesn't capture the zero level but the max and min levels every alternate frame
         [gabor directSetTemporalPhaseDeg:90.0];
     }
+    else {
+        [gabor directSetTemporalPhaseDeg:0];
+    }
     
     //[Vinay] - For the dual phase protocol and the phase ring protocol, if TF is non-zero then the spatial phase is reset as per the temporal phase while enabling the drifting for the gabors. Therefore the phase shift between centre and ring is not drawn (they have the same phase). To avoid this set the value of temporal phase to that of spatial phase in case TF is non-zero
     if ([[task defaults] integerForKey:@"CRSProtocolNumber"] == 5 || [[task defaults] integerForKey:@"CRSProtocolNumber"] == 7) {
@@ -978,7 +981,9 @@ by mapStimTable.
             glPushMatrix(); // [Vinay]
             glPushAttrib(GL_COLOR_BUFFER_BIT); // [Vinay] - testing transparency options
             glEnable (GL_BLEND); // [Vinay] - testing transparency options
+            //glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
             glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // [Vinay] - testing transparency options
+            //glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
             //glBlendFunc (GL_ONE, GL_); // [Vinay] - testing transparency options
         }
 		for (index = 0; index < kGabors; index++) {
