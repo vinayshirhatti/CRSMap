@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -1336,24 +1336,24 @@
                         </cells>
                     </form>
                     <tabView id="1827" userLabel="Tab View (Centre, Ring, Surround)">
-                        <rect key="frame" x="13" y="156" width="647" height="150"/>
+                        <rect key="frame" x="13" y="124" width="647" height="182"/>
                         <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Centre" identifier="" id="3405">
                                 <view key="view" id="3406">
-                                    <rect key="frame" x="10" y="33" width="627" height="104"/>
+                                    <rect key="frame" x="10" y="33" width="627" height="136"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3407">
-                                            <rect key="frame" x="0.0" y="10" width="610" height="42"/>
+                                            <rect key="frame" x="0.0" y="42" width="630" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="NnD-AT-Yb0">
-                                                <rect key="frame" x="1" y="1" width="608" height="40"/>
+                                                <rect key="frame" x="1" y="1" width="628" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3430">
-                                                        <rect key="frame" x="0.0" y="0.0" width="608" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1382,7 +1382,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="56" minWidth="10" maxWidth="1000" id="3435" userLabel="Table Column - Azimuth">
+                                                            <tableColumn width="68" minWidth="10" maxWidth="1000" id="3435" userLabel="Table Column - Azimuth">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1413,7 +1413,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="60" minWidth="10" maxWidth="1000" id="3729" userLabel="Table Column - Elevation">
+                                                            <tableColumn width="62" minWidth="10" maxWidth="1000" id="3729" userLabel="Table Column - Elevation">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1444,7 +1444,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="54" minWidth="10" maxWidth="1000" id="3805" userLabel="Table Column - TF">
+                                                            <tableColumn width="56" minWidth="10" maxWidth="1000" id="3805" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1475,7 +1475,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3811" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="51" minWidth="10" maxWidth="1000" id="3811" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1506,7 +1506,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="48" minWidth="10" maxWidth="1000" id="3723">
+                                                            <tableColumn width="50" minWidth="10" maxWidth="1000" id="3723">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1697,14 +1697,14 @@
                                             </scroller>
                                         </scrollView>
                                         <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3408">
-                                            <rect key="frame" x="0.0" y="60" width="610" height="40"/>
+                                            <rect key="frame" x="0.0" y="92" width="630" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="j5g-Fa-nbe">
-                                                <rect key="frame" x="1" y="17" width="608" height="22"/>
+                                                <rect key="frame" x="1" y="17" width="628" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3411" id="3409">
-                                                        <rect key="frame" x="0.0" y="0.0" width="608" height="22"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1732,7 +1732,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="55" minWidth="10" maxWidth="1000" id="3414" userLabel="Table Column - Azimuth">
+                                                            <tableColumn width="67" minWidth="10" maxWidth="1000" id="3414" userLabel="Table Column - Azimuth">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Azimuth">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1762,7 +1762,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="62" minWidth="10" maxWidth="1000" id="3716">
+                                                            <tableColumn width="64" minWidth="10" maxWidth="1000" id="3716">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Elevation">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1792,7 +1792,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="53" minWidth="10" maxWidth="1000" id="3789" userLabel="Table Column - TF">
+                                                            <tableColumn width="55" minWidth="10" maxWidth="1000" id="3789" userLabel="Table Column - TF">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="TF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1822,7 +1822,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3798" userLabel="Table Column - Sigma">
+                                                            <tableColumn width="51" minWidth="10" maxWidth="1000" id="3798" userLabel="Table Column - Sigma">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Sigma">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1852,7 +1852,7 @@
                                                                     </binding>
                                                                 </connections>
                                                             </tableColumn>
-                                                            <tableColumn width="47" minWidth="10" maxWidth="1000" id="3705">
+                                                            <tableColumn width="49" minWidth="10" maxWidth="1000" id="3705">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="SF">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2023,24 +2023,116 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="3411">
-                                                <rect key="frame" x="0.0" y="0.0" width="608" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="628" height="17"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
+                                        <popUpButton verticalHuggingPriority="750" id="1Tw-ED-sFL">
+                                            <rect key="frame" x="563" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="PVJ-7d-2h0" id="7KR-3P-W9i">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="Xjo-B1-Ump">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="PVJ-7d-2h0"/>
+                                                        <menuItem title="Log (min to max)" id="O5B-MU-TUJ"/>
+                                                        <menuItem title="Linear" id="8Yw-6A-AiC"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="1rl-D3-Bz8">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingCentre" id="L9C-55-A8g"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="oUL-lB-g8K">
+                                            <rect key="frame" x="427" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="RAN-7A-JKb" id="2lR-N6-LAq">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="K9e-R7-yz0">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="RAN-7A-JKb"/>
+                                                        <menuItem title="Log (min to max)" id="CaZ-qJ-jzp"/>
+                                                        <menuItem title="Linear" id="a54-km-Ium"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="fC9-g1-fR7">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingCentre" id="hjd-BW-WwM"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="pzx-Or-ZIi">
+                                            <rect key="frame" x="295" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="gSq-ad-8lX" id="EvW-Zf-5sQ">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="8yA-iQ-9jI">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="gSq-ad-8lX"/>
+                                                        <menuItem title="Log (min to max)" id="lHT-6e-Udk"/>
+                                                        <menuItem title="Linear" id="B3U-LI-Zpp"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="OsO-X0-ICG">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingCentre" id="xa1-g3-tRD"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="Erc-v0-Dy2">
+                                            <rect key="frame" x="185" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="igo-0i-4GA" id="haQ-In-cNY">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="ggz-j3-gdv">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="igo-0i-4GA"/>
+                                                        <menuItem title="Log (min to max)" id="b6H-wV-Lbt"/>
+                                                        <menuItem title="Linear" id="GYx-eO-E3D"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="EUh-O5-9m2">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingCentre" id="KlQ-3D-uOg"/>
+                                            </connections>
+                                        </popUpButton>
                                     </subviews>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Ring" identifier="" id="3241">
                                 <view key="view" id="3242">
-                                    <rect key="frame" x="10" y="33" width="627" height="104"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="10" y="33" width="627" height="136"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3244">
-                                            <rect key="frame" x="0.0" y="10" width="630" height="42"/>
+                                            <rect key="frame" x="0.0" y="42" width="630" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="Pz2-XF-6eO">
                                                 <rect key="frame" x="1" y="1" width="628" height="40"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3247">
                                                         <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
@@ -2387,11 +2479,11 @@
                                             </scroller>
                                         </scrollView>
                                         <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3243">
-                                            <rect key="frame" x="0.0" y="60" width="630" height="40"/>
+                                            <rect key="frame" x="0.0" y="92" width="630" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="ocM-8B-7qp">
                                                 <rect key="frame" x="1" y="17" width="628" height="22"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3264" id="3266">
                                                         <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
@@ -2717,20 +2809,112 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
+                                        <popUpButton verticalHuggingPriority="750" id="qGE-si-n3m">
+                                            <rect key="frame" x="563" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="SYH-3p-J91" id="cgY-yF-CbS">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="B6W-jQ-Obv">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="SYH-3p-J91"/>
+                                                        <menuItem title="Log (min to max)" id="6lj-un-TEQ"/>
+                                                        <menuItem title="Linear" id="SOg-1x-z2d"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="jrO-hf-bee">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingRing" id="jH6-np-kPq"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="vR1-9Q-aVc">
+                                            <rect key="frame" x="414" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="oQQ-bh-EzT" id="h2z-fy-1BI">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="Te2-2L-LqH">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="oQQ-bh-EzT"/>
+                                                        <menuItem title="Log (min to max)" id="hnS-Pp-sIf"/>
+                                                        <menuItem title="Linear" id="aCO-Lz-6LQ"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="0eD-X4-Hb0">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingRing" id="svS-Au-Dmu"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="f24-M8-b4e">
+                                            <rect key="frame" x="271" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="uXC-Sn-3n0" id="4Y0-RV-VV3">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="MYO-am-hWF">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="uXC-Sn-3n0"/>
+                                                        <menuItem title="Log (min to max)" id="esQ-Rh-iBy"/>
+                                                        <menuItem title="Linear" id="7xx-Kz-yTz"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="ppS-Kk-nUR">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingRing" id="QcN-Y1-v4J"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="nIY-Mn-0Te">
+                                            <rect key="frame" x="162" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Xeq-M7-Z1f" id="oV3-Ya-FcF">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="gJR-Va-N9Q">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="Xeq-M7-Z1f"/>
+                                                        <menuItem title="Log (min to max)" id="9HI-NB-KZL"/>
+                                                        <menuItem title="Linear" id="y5W-iJ-xoj"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="ILu-5M-INH">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingRing" id="8Rk-Tr-5Ez"/>
+                                            </connections>
+                                        </popUpButton>
                                     </subviews>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Surround" identifier="" id="3492">
                                 <view key="view" id="3493">
-                                    <rect key="frame" x="10" y="33" width="627" height="104"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="10" y="33" width="627" height="136"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3494">
-                                            <rect key="frame" x="0.0" y="10" width="630" height="42"/>
+                                            <rect key="frame" x="0.0" y="42" width="630" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="yKq-cQ-bg9">
                                                 <rect key="frame" x="1" y="1" width="628" height="40"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3517">
                                                         <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
@@ -3077,11 +3261,11 @@
                                             </scroller>
                                         </scrollView>
                                         <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" id="3495">
-                                            <rect key="frame" x="0.0" y="60" width="630" height="40"/>
+                                            <rect key="frame" x="0.0" y="92" width="630" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="Zw0-zK-dEn">
                                                 <rect key="frame" x="1" y="17" width="628" height="22"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3498" id="3496">
                                                         <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
@@ -3407,6 +3591,98 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
+                                        <popUpButton verticalHuggingPriority="750" id="7PZ-mj-1to">
+                                            <rect key="frame" x="563" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="EFt-7z-JCl" id="JTn-HK-6QD">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="AOL-Cw-Zhh">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="EFt-7z-JCl"/>
+                                                        <menuItem title="Log (min to max)" id="PkK-6N-NSr"/>
+                                                        <menuItem title="Linear" id="vUi-Xl-3U7"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="9lC-m3-dnl">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingSurround" id="viD-Vd-ZLX"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="aNo-Zb-gsD">
+                                            <rect key="frame" x="411" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Yg9-Zo-J09" id="aMw-It-0KS">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="e8B-KF-BKi">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="Yg9-Zo-J09"/>
+                                                        <menuItem title="Log (min to max)" id="dDO-Y8-v7f"/>
+                                                        <menuItem title="Linear" id="jUC-NU-SrA"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="aa9-nV-Ugz">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingSurround" id="vfk-Lw-aaa"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="Hbc-PA-CNa">
+                                            <rect key="frame" x="272" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="r3x-Sl-1oD" id="Bhe-S7-kgX">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="5Mk-Yj-sOW">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="r3x-Sl-1oD"/>
+                                                        <menuItem title="Log (min to max)" id="oDS-fY-r16"/>
+                                                        <menuItem title="Linear" id="s1T-xH-09e"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="Pzf-K6-vcV">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingSurround" id="3s7-mg-hZo"/>
+                                            </connections>
+                                        </popUpButton>
+                                        <popUpButton verticalHuggingPriority="750" id="EOE-rP-dLM">
+                                            <rect key="frame" x="165" y="10" width="70" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <popUpButtonCell key="cell" type="push" title="Default (Log)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="mtE-64-Q9x" id="OGX-1e-who">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="I5R-nQ-kJR">
+                                                    <items>
+                                                        <menuItem title="Default (Log)" state="on" id="mtE-64-Q9x"/>
+                                                        <menuItem title="Log (min to max)" id="j65-7e-S1s"/>
+                                                        <menuItem title="Linear" id="xrc-dG-VBZ"/>
+                                                    </items>
+                                                </menu>
+                                            </popUpButtonCell>
+                                            <connections>
+                                                <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="rNK-G6-N1Z">
+                                                    <dictionary key="options">
+                                                        <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingSurround" id="jUp-71-Umg"/>
+                                            </connections>
+                                        </popUpButton>
                                     </subviews>
                                 </view>
                             </tabViewItem>
@@ -3549,7 +3825,7 @@
                         </connections>
                     </button>
                     <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3894">
-                        <rect key="frame" x="31" y="142" width="309" height="18"/>
+                        <rect key="frame" x="31" y="88" width="309" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Match Centre and Surround (in Manual mode)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3895">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -3592,7 +3868,7 @@
                         </textFieldCell>
                     </textField>
                     <textField toolTip="Select the specific protocol to run" verticalHuggingPriority="750" id="3869">
-                        <rect key="frame" x="175" y="104" width="137" height="17"/>
+                        <rect key="frame" x="175" y="65" width="137" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Specific Protocol " id="3870">
                             <font key="font" metaFont="system"/>
@@ -3601,7 +3877,7 @@
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="3903">
-                        <rect key="frame" x="342" y="98" width="253" height="26"/>
+                        <rect key="frame" x="342" y="59" width="253" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Dual Phase Protocol" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3915" id="3904">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -3632,7 +3908,7 @@
                         </connections>
                     </popUpButton>
                     <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3919">
-                        <rect key="frame" x="31" y="50" width="280" height="18"/>
+                        <rect key="frame" x="31" y="38" width="280" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Match Centre and Ring (in Manual mode)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3920">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

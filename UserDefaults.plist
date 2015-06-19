@@ -38,73 +38,73 @@
 			<key>elevationCount</key>
 			<integer>1</integer>
 			<key>spatialFreqCount</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>sigmaCount</key>
 			<integer>1</integer>
 			<key>orientationCount</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>contrastCount</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>temporalFreqCount</key>
 			<integer>1</integer>
 			<key>spatialPhaseCount</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>radiusCount</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>azimuthCount0</key>
 			<integer>1</integer>
 			<key>elevationCount0</key>
 			<integer>1</integer>
 			<key>spatialFreqCount0</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>sigmaCount0</key>
 			<integer>1</integer>
 			<key>orientationCount0</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>contrastCount0</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>temporalFreqCount0</key>
 			<integer>1</integer>
 			<key>spatialPhaseCount0</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>radiusCount0</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>azimuthCount1</key>
 			<integer>1</integer>
 			<key>elevationCount1</key>
 			<integer>1</integer>
 			<key>spatialFreqCount1</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>sigmaCount1</key>
 			<integer>1</integer>
 			<key>orientationCount1</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>contrastCount1</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>temporalFreqCount1</key>
 			<integer>1</integer>
 			<key>spatialPhaseCount1</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>radiusCount1</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>azimuthCount2</key>
 			<integer>1</integer>
 			<key>elevationCount2</key>
 			<integer>1</integer>
 			<key>spatialFreqCount2</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>sigmaCount2</key>
 			<integer>1</integer>
 			<key>orientationCount2</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>contrastCount2</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>temporalFreqCount2</key>
 			<integer>1</integer>
 			<key>spatialPhaseCount2</key>
-			<integer>6</integer>
+			<integer>7</integer>
 			<key>radiusCount2</key>
-			<integer>6</integer>
+			<integer>7</integer>
 		</dict>
 	</array>
 	<key>CRSStimTables</key>
@@ -417,6 +417,30 @@
 	<real>90</real>
 	<key>CRSMapTemporalModulation</key>
 	<integer>1</integer>
+	<key>CRSMapRadiusMappingCentre</key>
+	<integer>0</integer>
+	<key>CRSMapRadiusMappingRing</key>
+	<integer>0</integer>
+	<key>CRSMapRadiusMappingSurround</key>
+	<integer>0</integer>
+	<key>CRSMapContrastMappingCentre</key>
+	<integer>0</integer>
+	<key>CRSMapContrastMappingRing</key>
+	<integer>0</integer>
+	<key>CRSMapContrastMappingSurround</key>
+	<integer>0</integer>
+	<key>CRSMapSFMappingCentre</key>
+	<integer>0</integer>
+	<key>CRSMapSFMappingRing</key>
+	<integer>0</integer>
+	<key>CRSMapSFMappingSurround</key>
+	<integer>0</integer>
+	<key>CRSMapTFMappingCentre</key>
+	<integer>0</integer>
+	<key>CRSMapTFMappingRing</key>
+	<integer>0</integer>
+	<key>CRSMapTFMappingSurround</key>
+	<integer>0</integer>
 	<key>CRSMaxContrast</key>
 	<integer>100</integer>
 	<key>CRSMinTargetMS</key>

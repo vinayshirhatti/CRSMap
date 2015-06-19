@@ -122,6 +122,27 @@ NSString *CRSMatchRingSurroundKey = @"CRSMatchRingSurround";
 // [Vinay] Adding an option of showing an image centrally
 NSString *CRSFixImageKey = @"CRSFixImage";
 
+// [Vinay] - to decide the mapping method for radius
+NSString *CRSMapRadiusMappingCentreKey = @"CRSMapRadiusMappingCentre";
+NSString *CRSMapRadiusMappingRingKey = @"CRSMapRadiusMappingRing";
+NSString *CRSMapRadiusMappingSurroundKey = @"CRSMapRadiusMappingSurround";
+
+
+// [Vinay] - to decide the mapping method for contrast
+NSString *CRSMapContrastMappingCentreKey = @"CRSMapContrastMappingCentre";
+NSString *CRSMapContrastMappingRingKey = @"CRSMapContrastMappingRing";
+NSString *CRSMapContrastMappingSurroundKey = @"CRSMapContrastMappingSurround";
+
+// [Vinay] - to decide the mapping method for SF
+NSString *CRSMapSFMappingCentreKey = @"CRSMapSFMappingCentre";
+NSString *CRSMapSFMappingRingKey = @"CRSMapSFMappingRing";
+NSString *CRSMapSFMappingSurroundKey = @"CRSMapSFMappingSurround";
+
+// [Vinay] - to decide the mapping method for TF
+NSString *CRSMapTFMappingCentreKey = @"CRSMapTFMappingCentre";
+NSString *CRSMapTFMappingRingKey = @"CRSMapTFMappingRing";
+NSString *CRSMapTFMappingSurroundKey = @"CRSMapTFMappingSurround";
+
 
 // [Vinay] - till here
 

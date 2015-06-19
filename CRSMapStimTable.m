@@ -88,6 +88,35 @@ static long CRSMapStimTableCounter = 0;
 	return(stimValue);
 }
 
+// [Vinay] - to map values logarithmically from max to min with a factor of 0.5
+- (float)logMaxToMinValueFromIndex:(long)index count:(long)count min:(float)min max:(float)max;
+{
+	short c, stimLevels;
+	float stimValue, level, stimFactor;
+	
+	stimLevels = count;
+	stimFactor = 0.5;
+	switch (stimLevels) {
+		case 1:								// Just the 100% stimulus
+			stimValue = max;
+			break;
+		case 2:								// Just 100% and 0% stimuli
+			stimValue = (index == 0) ? min : max;
+			break;
+		default:							// Other values as well
+			if (index == 0) {
+				stimValue = min;
+			}
+			else {
+				level = max-min;
+				for (c = stimLevels - 1; c > index; c--) {
+					level *= stimFactor;
+				}
+				stimValue = level+min;
+			}
+	}
+	return(stimValue);
+}
 
 //[Vinay] - to map tf values the same way as for contrast. However the max limit is (frame refresh rate)/2 set as per the refresh rate of the monitor
 - (float)tfValueFromIndex:(long)index count:(long)count min:(float)min max:(float)max;
@@ -1010,26 +1039,177 @@ maxTargetS and a long stimLeadMS).
 		stimDesc.azimuthDeg = [self linearValueWithIndex:azimuthIndex count:azimuthCount min:azimuthDegMin max:azimuthDegMax];
 		stimDesc.elevationDeg = [self linearValueWithIndex:elevationIndex count:elevationCount min:elevationDegMin max:elevationDegMax];
         
+        // [Vinay] - since sigma calculation depends on radius value, it is now pushed after radius value is determined
+        /*
 		if (convertToGrating) { // Sigma very high
 			stimDesc.sigmaDeg = 100000;
 			//stimDesc.radiusDeg = [self linearValueWithIndex:sigmaIndex count:sigmaCount min:sigmaDegMin max:sigmaDegMax] * radiusSigmaRatio; //[Vinay] I have commented this to check its effect
 		}
 		else {
-			stimDesc.sigmaDeg = [self linearValueWithIndex:sigmaIndex count:sigmaCount min:sigmaDegMin max:sigmaDegMax];
+			//stimDesc.sigmaDeg = [self linearValueWithIndex:sigmaIndex count:sigmaCount min:sigmaDegMin max:sigmaDegMax];
 			//stimDesc.radiusDeg = stimDesc.sigmaDeg * radiusSigmaRatio; //[Vinay] I have commented this to check its effect
+            stimDesc.sigmaDeg = stimDesc.radiusDeg/radiusSigmaRatio; // [Vinay] - since sigma count is always 1, sigma is instead calculated based on the radius and the radiusSigmaRatio
 
 		}
+         */
         
-        stimDesc.spatialFreqCPD = [self logValueWithIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
-		stimDesc.directionDeg = [self linearValueWithIndex:directionDegIndex count:directionDegCount min:directionDegMin max:directionDegMax];
+        
+        // [Vinay] - calculating spatial frequency (SF) depending on the selected mapping method
+        int sfMapping;
+        switch (index) {
+            case 0:
+            default:
+                sfMapping = [[task defaults] integerForKey:@"CRSMapSFMappingSurround"];
+                break;
+                
+            case 1:
+                sfMapping = [[task defaults] integerForKey:@"CRSMapSFMappingRing"];
+                break;
+                
+            case 2:
+                sfMapping = [[task defaults] integerForKey:@"CRSMapSFMappingCentre"];
+                break;
+        }
+        
+        switch (sfMapping) {
+            case 0: // [Vinay] - default log mapping with a factor of 0.5
+                stimDesc.spatialFreqCPD = [self contrastValueFromIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
+                break;
+            case 1: // [Vinay] - log mapping from max to min with a factor of 0.5
+                stimDesc.spatialFreqCPD = [self logMaxToMinValueFromIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
+                break;
+            case 2: // [Vinay] - linear mapping
+                stimDesc.spatialFreqCPD = [self linearValueWithIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
+                break;
+            default:
+                stimDesc.spatialFreqCPD = [self contrastValueFromIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
+                break;
+        }
+
+        //stimDesc.spatialFreqCPD = [self logValueWithIndex:spatialFreqIndex count:spatialFreqCount min:spatialFreqCPDMin max:spatialFreqCPDMax];
 		
-		stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+        stimDesc.directionDeg = [self linearValueWithIndex:directionDegIndex count:directionDegCount min:directionDegMin max:directionDegMax];
+		
+        // [Vinay] - calculating contrast depending on the selected mapping method
+        int contrastMapping;
+        switch (index) {
+            case 0:
+            default:
+                contrastMapping = [[task defaults] integerForKey:@"CRSMapContrastMappingSurround"];
+                break;
+                
+            case 1:
+                contrastMapping = [[task defaults] integerForKey:@"CRSMapContrastMappingRing"];
+                break;
+                
+            case 2:
+                contrastMapping = [[task defaults] integerForKey:@"CRSMapContrastMappingCentre"];
+                break;
+        }
+        
+        switch (contrastMapping) {
+            case 0: // [Vinay] - default log mapping with a factor of 0.5
+                stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+                break;
+            case 1: // [Vinay] - log mapping from max to min with a factor of 0.5
+                stimDesc.contrastPC = [self logMaxToMinValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+                break;
+            case 2: // [Vinay] - linear mapping
+                stimDesc.contrastPC = [self linearValueWithIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+                break;
+            default:
+                stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+                break;
+        }
+
+		//stimDesc.contrastPC = [self contrastValueFromIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
         //stimDesc.contrastPC = [self linearValueWithIndex:contrastIndex count:contrastCount min:contrastPCMin max:contrastPCMax];
+        
+        
+        
+        // [Vinay] - calculating contrast depending on the selected mapping method
+        int tfMapping;
+        switch (index) {
+            case 0:
+            default:
+                tfMapping = [[task defaults] integerForKey:@"CRSMapTFMappingSurround"];
+                break;
+                
+            case 1:
+                tfMapping = [[task defaults] integerForKey:@"CRSMapTFMappingRing"];
+                break;
+                
+            case 2:
+                tfMapping = [[task defaults] integerForKey:@"CRSMapTFMappingCentre"];
+                break;
+        }
+        
+        switch (contrastMapping) {
+            case 0: // [Vinay] - default log mapping with a factor of 0.5
+                stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
+                break;
+            case 1: // [Vinay] - log mapping from max to min with a factor of 0.5
+                stimDesc.temporalFreqHz = [self logMaxToMinValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
+                break;
+            case 2: // [Vinay] - linear mapping
+                stimDesc.temporalFreqHz = [self linearValueWithIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
+                break;
+            default:
+                stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
+                break;
+        }
+
 		//stimDesc.temporalFreqHz = [self logValueWithIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
-        stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax]; // [Vinay] - commented the above line and added this to temporarily map tf values differently, for monitor calibration
+        //stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax]; // [Vinay] - commented the above line and added this to temporarily map tf values differently, for monitor calibration
         
         stimDesc.spatialPhaseDeg = [self linearValueWithIndex:spatialPhaseIndex count:spatialPhaseCount min:spatialPhaseDegMin max:spatialPhaseDegMax]; // [Vinay] - added this for spatial phase. 'logValueWithIndex' was giving a 'nan' value for spatial phase (because of 0deg phase). Therefore using 'linearValueWithIndex' instead.
-        stimDesc.radiusDeg = [self contrastValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax]; // [Vinay] - added this for radius. Have commented this temporarily; now uncommented
+        
+        // [Vinay] - calculating radius depending on the selected mapping method
+        int radiusMapping;
+        switch (index) {
+            case 0:
+            default:
+                radiusMapping = [[task defaults] integerForKey:@"CRSMapRadiusMappingSurround"];
+                break;
+                
+            case 1:
+                radiusMapping = [[task defaults] integerForKey:@"CRSMapRadiusMappingRing"];
+                break;
+                
+            case 2:
+                radiusMapping = [[task defaults] integerForKey:@"CRSMapRadiusMappingCentre"];
+                break;
+        }
+
+        switch (radiusMapping) {
+            case 0: // [Vinay] - default log mapping with a factor of 0.5
+                stimDesc.radiusDeg = [self contrastValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax];
+                break;
+            case 1: // [Vinay] - log mapping from max to min with a factor of 0.5
+                stimDesc.radiusDeg = [self logMaxToMinValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax];
+                break;
+            case 2: // [Vinay] - linear mapping
+                stimDesc.radiusDeg = [self linearValueWithIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax];
+                break;
+            default:
+                stimDesc.radiusDeg = [self contrastValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax];
+                break;
+        }
+
+        //[Vinay] - commenting the earlier calculation method
+        //stimDesc.radiusDeg = [self contrastValueFromIndex:radiusIndex count:radiusCount min:radiusDegMin max:radiusDegMax]; // [Vinay] - added this for radius. Have commented this temporarily; now uncommented
+        
+        // [Vinay] - Now calculate sigma
+        if (convertToGrating) { // Sigma very high
+			stimDesc.sigmaDeg = 100000;
+			//stimDesc.radiusDeg = [self linearValueWithIndex:sigmaIndex count:sigmaCount min:sigmaDegMin max:sigmaDegMax] * radiusSigmaRatio; //[Vinay] I have commented this to check its effect
+		}
+		else {
+			//stimDesc.sigmaDeg = [self linearValueWithIndex:sigmaIndex count:sigmaCount min:sigmaDegMin max:sigmaDegMax];
+			//stimDesc.radiusDeg = stimDesc.sigmaDeg * radiusSigmaRatio; //[Vinay] I have commented this to check its effect
+            stimDesc.sigmaDeg = stimDesc.radiusDeg/radiusSigmaRatio; // [Vinay] - since sigma count is always 1, sigma is instead calculated based on the radius and the radiusSigmaRatio. This enables proper drawing of gabors
+            
+		}
         
         stimDesc.temporalModulation = [[task defaults] integerForKey:@"CRSMapTemporalModulation"];
 		

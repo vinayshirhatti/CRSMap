@@ -280,6 +280,26 @@ extern NSString *CRSMatchRingSurroundKey;
 // [Vinay] - to show just an image at the fixation spot
 extern NSString *CRSFixImageKey;
 
+// [Vinay] - to decide the mapping method for radius
+extern NSString *CRSMapRadiusMappingCentreKey;
+extern NSString *CRSMapRadiusMappingRingKey;
+extern NSString *CRSMapRadiusMappingSurroundKey;
+
+// [Vinay] - to decide the mapping method for contrast
+extern NSString *CRSMapContrastMappingCentreKey;
+extern NSString *CRSMapContrastMappingRingKey;
+extern NSString *CRSMapContrastMappingSurroundKey;
+
+// [Vinay] - to decide the mapping method for SF
+extern NSString *CRSMapSFMappingCentreKey;
+extern NSString *CRSMapSFMappingRingKey;
+extern NSString *CRSMapSFMappingSurroundKey;
+
+// [Vinay] - to decide the mapping method for TF
+extern NSString *CRSMapTFMappingCentreKey;
+extern NSString *CRSMapTFMappingRingKey;
+extern NSString *CRSMapTFMappingSurroundKey;
+
 // [Vinay] - till here
 
 
