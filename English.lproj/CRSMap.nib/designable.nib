@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13F1112" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -949,7 +949,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="LRG-Hx-qKZ">
                             <rect key="frame" x="1" y="17" width="268" height="220"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveName="CRSChangeArrayTable" headerView="2616" id="1496">
                                     <rect key="frame" x="0.0" y="0.0" width="268" height="220"/>
@@ -1549,7 +1549,7 @@
                                                                             <fragment content="0"/>
                                                                         </attributedString>
                                                                         <decimal key="minimum" value="0"/>
-                                                                        <decimal key="maximum" value="180"/>
+                                                                        <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2042,12 +2042,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingCentre" id="L9C-55-A8g"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="1rl-D3-Bz8">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingCentre" id="L9C-55-A8g"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="oUL-lB-g8K">
@@ -2065,12 +2065,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingCentre" id="hjd-BW-WwM"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="fC9-g1-fR7">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingCentre" id="hjd-BW-WwM"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="pzx-Or-ZIi">
@@ -2088,12 +2088,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingCentre" id="xa1-g3-tRD"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="OsO-X0-ICG">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingCentre" id="xa1-g3-tRD"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="Erc-v0-Dy2">
@@ -2111,12 +2111,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingCentre" id="KlQ-3D-uOg"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="EUh-O5-9m2">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingCentre" id="KlQ-3D-uOg"/>
                                             </connections>
                                         </popUpButton>
                                     </subviews>
@@ -2331,7 +2331,7 @@
                                                                             <fragment content="0"/>
                                                                         </attributedString>
                                                                         <decimal key="minimum" value="0"/>
-                                                                        <decimal key="maximum" value="180"/>
+                                                                        <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2824,12 +2824,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingRing" id="jH6-np-kPq"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="jrO-hf-bee">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingRing" id="jH6-np-kPq"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="vR1-9Q-aVc">
@@ -2847,12 +2847,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingRing" id="svS-Au-Dmu"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="0eD-X4-Hb0">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingRing" id="svS-Au-Dmu"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="f24-M8-b4e">
@@ -2870,12 +2870,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingRing" id="QcN-Y1-v4J"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="ppS-Kk-nUR">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingRing" id="QcN-Y1-v4J"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="nIY-Mn-0Te">
@@ -2893,12 +2893,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingRing" id="8Rk-Tr-5Ez"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="ILu-5M-INH">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingRing" id="8Rk-Tr-5Ez"/>
                                             </connections>
                                         </popUpButton>
                                     </subviews>
@@ -3113,7 +3113,7 @@
                                                                             <fragment content="0"/>
                                                                         </attributedString>
                                                                         <decimal key="minimum" value="0"/>
-                                                                        <decimal key="maximum" value="180"/>
+                                                                        <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -3606,12 +3606,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingSurround" id="viD-Vd-ZLX"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="9lC-m3-dnl">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapRadiusMappingSurround" id="viD-Vd-ZLX"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="aNo-Zb-gsD">
@@ -3629,12 +3629,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingSurround" id="vfk-Lw-aaa"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="aa9-nV-Ugz">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapContrastMappingSurround" id="vfk-Lw-aaa"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="Hbc-PA-CNa">
@@ -3652,12 +3652,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingSurround" id="3s7-mg-hZo"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="Pzf-K6-vcV">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapSFMappingSurround" id="3s7-mg-hZo"/>
                                             </connections>
                                         </popUpButton>
                                         <popUpButton verticalHuggingPriority="750" id="EOE-rP-dLM">
@@ -3675,12 +3675,12 @@
                                                 </menu>
                                             </popUpButtonCell>
                                             <connections>
+                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingSurround" id="jUp-71-Umg"/>
                                                 <binding destination="498" name="enabled" keyPath="values.CRSTaskStatus" id="rNK-G6-N1Z">
                                                     <dictionary key="options">
                                                         <string key="NSValueTransformerName">TaskStatusIdleAndNoFileTransformer</string>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="498" name="selectedIndex" keyPath="values.CRSMapTFMappingSurround" id="jUp-71-Umg"/>
                                             </connections>
                                         </popUpButton>
                                     </subviews>
@@ -3813,6 +3813,17 @@
                             <binding destination="498" name="value" keyPath="values.CRSConvertToGrating" id="2937"/>
                         </connections>
                     </button>
+                    <button id="53u-P0-D6Z">
+                        <rect key="frame" x="31" y="294" width="164" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Convert to Color" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="dWq-TK-fgR">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSConvertToColor" id="Swk-29-hUt"/>
+                        </connections>
+                    </button>
                     <button id="iGk-jB-bR5">
                         <rect key="frame" x="206" y="314" width="127" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -3877,19 +3888,19 @@
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" id="3903">
-                        <rect key="frame" x="342" y="59" width="253" height="26"/>
+                        <rect key="frame" x="342" y="59" width="249" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Dual Phase Protocol" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3915" id="3904">
+                        <popUpButtonCell key="cell" type="push" title="Contrast Ring Protocol" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3908" id="3904">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="3905" userLabel="Menu - AllViews">
                                 <items>
                                     <menuItem title="None (Manual set)" toolTip="Free running protocol; Set C, R, S" id="3906"/>
                                     <menuItem title="Ring Protocol" toolTip="Set S and R radius" id="3907"/>
-                                    <menuItem title="Contrast Ring Protocol" toolTip="Set S; C rad only; R rad and cont" id="3908"/>
-                                    <menuItem title="Dual Contrast Protocol" toolTip="set C; R rad and cont" id="3912"/>
+                                    <menuItem title="Contrast Ring Protocol" state="on" toolTip="Set S; C rad only; R rad and cont" id="3908"/>
+                                    <menuItem title="Dual Contrast Protocol" state="on" toolTip="set C; R rad and cont" id="3912"/>
                                     <menuItem title="Dual Orientation Protocol" toolTip="set C; R rad and ori" id="3913"/>
-                                    <menuItem title="Dual Phase Protocol" state="on" toolTip="set C; R rad and phase" id="3915"/>
+                                    <menuItem title="Dual Phase Protocol" toolTip="set C; R rad and phase" id="3915"/>
                                     <menuItem title="Orientation Ring Protocol" toolTip="Set S; C rad only; R ori and rad" id="3917"/>
                                     <menuItem title="Phase Ring Protocol" toolTip="Set S; C rad only; R phase and rad" id="3918"/>
                                     <menuItem title="Drifting Phase Protocol" toolTip="Set S; C rad only; R TF and rad" id="3942" userLabel="Menu Item - Drifting Phase Protocol"/>

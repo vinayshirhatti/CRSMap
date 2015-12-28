@@ -29,6 +29,8 @@ CRSStimuli.h
     LLFixTarget				*targetSpot;
 //	LLGabor 				*taskGabor;
     //BOOL                    matchSurroundCentre;           // [Vinay] - added this to indicate if surround and centre should have some common attributes
+    LLFixTarget             *colorSpot;
+    RGBFloat                rgb;
 }
 
 - (void)doFixSettings;
@@ -53,5 +55,6 @@ CRSStimuli.h
 - (void)tallyStimLists:(long)count;
 - (long)targetOnFrame;
 - (BOOL)targetPresented;
+- (RGBFloat)RGBFromIndex:(int)index factor:(int)factor;
 
 @end

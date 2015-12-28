@@ -67,6 +67,8 @@
     if (trialCounter == 1) { // first trial
         [digitalOut outputEventName:@"protocolNumber" withData:(long)[[task defaults] integerForKey:@"CRSProtocolNumber"]];
         //NSLog(@"trial number %ld , protocol number is %ld", trialCounter, [[task defaults] integerForKey:@"CRSProtocolNumber"]);
+        int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"]; // This variable reads the value of the protocol number
+        [[task dataDoc] putEvent:@"protocolNumber" withData:&protocolNumber];
     }
 }
 

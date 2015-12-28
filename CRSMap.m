@@ -143,6 +143,9 @@ NSString *CRSMapTFMappingCentreKey = @"CRSMapTFMappingCentre";
 NSString *CRSMapTFMappingRingKey = @"CRSMapTFMappingRing";
 NSString *CRSMapTFMappingSurroundKey = @"CRSMapTFMappingSurround";
 
+// [Vinay] - to opt color stimuli
+NSString *CRSConvertToColorKey = @"CRSConvertToColor";
+
 
 // [Vinay] - till here
 
@@ -320,6 +323,7 @@ EventDefinition CRSEvents[] = {
     {@"map2Settings",		sizeof(MapSettings),    {@"struct", @"mapSettings", 1, 0, sizeof(MapSettings), mapSettingsDef}},                    // [Vinay] - for the centre gabor
 	{@"eccentricityDeg",	sizeof(float),			{@"float"}},
 	{@"polarAngleDeg",		sizeof(float),			{@"float"}},
+    {@"protocolNumber", 	sizeof(long),			{@"long"}},//[Vinay] - to record the protocolNumber
 
     // timing parameters
 	{@"stimDurationMS",		sizeof(long),			{@"long"}},

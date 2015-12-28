@@ -300,6 +300,9 @@ extern NSString *CRSMapTFMappingCentreKey;
 extern NSString *CRSMapTFMappingRingKey;
 extern NSString *CRSMapTFMappingSurroundKey;
 
+// [Vinay] - to opt color stimuli
+extern NSString *CRSConvertToColorKey;
+
 // [Vinay] - till here
 
 

@@ -199,9 +199,11 @@ maxTargetS and a long stimLeadMS).
      */
     // [Vinay] - following lines have been commented and the modified lines follow next
 	// BOOL localList[kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - commented this
-    BOOL localList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
+    BOOL localList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
     // [Vinay] - changed the localList to include another dimension for gabor index
     // BOOL localList[kGabors-1][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
+    
+    // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
     
     /*
     int aziCount, eleCount, sfCount, sigCount, oriCount, conCount,tfCount, spCount, radCount; // int variables to hold the count values for the parameters
@@ -1355,7 +1357,10 @@ maxTargetS and a long stimLeadMS).
 		//doneList[a][e][sig][sf][o][c][t][p][r] = TRUE;                // [Vinay] - Have to increase the dimension of donelist and add [p] and [r] here. Have done so now.
         // doneList[a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
         // [Vinay] - chaned the above to include the extra dimension for the gabor index
-        doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
+        // doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
+        
+        // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
+        doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
         
 		if (--stimRemainingInBlock == 0 ) {
 			[self newBlock];
@@ -1393,7 +1398,11 @@ maxTargetS and a long stimLeadMS).
 		//doneList[a][e][sig][sf][o][c][t][p][r] = YES;     // [Vinay] - Have to increase the dimension of donelist and add [p] and [r] here. Have done so now.
 		//doneList[a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
         // [Vinay] - chaned the above to include the extra dimension for the gabor index
-        doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
+        // doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
+        
+        // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
+        doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
+        
         
         // [Vinay] - added the following lines to update stimRemainingInBlock for each Gabor
         if ((--stimRemainingInBlockGabor[stimDesc.gaborIndex - 1] == 0) && stimRemainingInBlock != 0) {

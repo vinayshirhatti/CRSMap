@@ -37,6 +37,8 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
 	[fixSpot release];
     [targetSpot release];
     [gabors release];
+    
+    [colorSpot release]; // [Vinay] - release the color Spot
 
     [super dealloc];
 }
@@ -104,6 +106,9 @@ NSString *stimulusMonitorID = @"CRSMap Stimulus";
 	[fixSpot bindValuesToKeysWithPrefix:@"CRSFix"];
     targetSpot = [[LLFixTarget alloc] init];
 	//[targetSpot bindValuesToKeysWithPrefix:@"CRSFix"];
+    
+    // [Vinay] - Initialize the color spot
+    colorSpot = [[LLFixTarget alloc] init];
 
 
 	return self;
@@ -932,6 +937,16 @@ by mapStimTable.
     BOOL crossOrientationProtocol = NO; // [Vinay] - Added to check for the COS protocol condition to draw superimposed, partially transparent gabors so that it looks like a plaid
     if (protocolNumber == 9)
         crossOrientationProtocol = YES;
+
+    // [Vinay] - Check if color stimulus is chosen
+    BOOL convertToColor = [[task defaults] boolForKey:CRSConvertToColorKey];
+    NSColor *colorSpotColor = NULL;
+    int rgbIndex,colorfactor;
+    BOOL setRGB = NO;
+    BOOL useGaborColorStim = NO;
+    CGFloat hue,satu,value;
+
+    
     // [Vinay] - till here
 	
     threadPool = [[NSAutoreleasePool alloc] init];		// create a threadPool for this thread
@@ -998,7 +1013,73 @@ by mapStimTable.
                     else {
                         [theGabor setForeColor:[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1]]; // [Vinay] - change alpha back to 1 when it is not the COS protocol
                     }
-                    [theGabor draw];
+                    
+                    
+                    
+                    if (convertToColor) {
+                        
+                        if (useGaborColorStim) {
+                            [theGabor setAchromatic:NO];
+                            [theGabor setKdlThetaDeg:0];
+                            [theGabor setKdlPhiDeg:([theGabor directionDeg])];
+                            [theGabor directSetContrast:[theGabor contrast]*sqrt(2)];
+                            //[fixSpot setFixTargetColor:[NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:1]];
+                            //[theGabor setForeColor:[NSColor colorWithCalibratedRed:1 green:0 blue:0 alpha:1]];
+                            //[theGabor setForeOnRed:1 green:0 blue:0];
+                            
+                            [theGabor draw];
+                            
+                        }
+                        
+                        else {
+                            [colorSpot setState:YES];
+                            [colorSpot setShape:0]; // [Vinay] - 0:circle,1:square
+                            
+                            if (setRGB) {
+                                rgbIndex = (int)[theGabor directionDeg];
+                                colorfactor = (int)[theGabor spatialFreqCPD];
+                                rgb = [self RGBFromIndex:rgbIndex factor:colorfactor];
+                                rgb.red = rgb.red*(float)[theGabor contrast];
+                                rgb.green = rgb.green*(float)[theGabor contrast];
+                                rgb.blue = rgb.blue*(float)[theGabor contrast];
+                                colorSpotColor = [NSColor colorWithCalibratedRed:rgb.red green:rgb.green blue:rgb.blue alpha:1];
+                                [colorSpot setForeColor:colorSpotColor];
+                                
+                            }
+                            else {
+                                //hue = (CGFloat)((float)[theGabor directionDeg]*(float)(1/360));
+                                hue = (CGFloat)((float)[theGabor directionDeg]/360.0);
+                                satu = (CGFloat)[theGabor spatialFreqCPD];
+                                value = (CGFloat)[theGabor contrast]*sqrt(2);
+                                colorSpotColor = [NSColor colorWithCalibratedHue:hue saturation:satu brightness:value alpha:1];
+                                [colorSpot setForeColor:colorSpotColor];
+                            }
+                            [colorSpot directSetAzimuthDeg:[theGabor azimuthDeg] elevationDeg:[theGabor elevationDeg]];
+                            //[colorSpot setForeColor:[NSColor colorWithCalibratedRed:0 green:1 blue:0 alpha:1]];
+                            //[colorSpot setKdlPhiDeg:([theGabor directionDeg]*10)];
+                            //[colorSpot setKdlThetaDeg:0];
+                            //[colorSpot directSetRadiusDeg:[theGabor radiusDeg]];
+                            [colorSpot setOuterRadiusDeg:[theGabor radiusDeg]];
+                            [colorSpot setInnerRadiusDeg:0];
+                            [colorSpot draw];
+                        }
+                    }
+                    else {
+                        [theGabor draw];
+                    }
+
+                    
+                    /*
+                    if (convertToColor) {
+                        [theGabor setAchromatic:NO];
+                        [theGabor setKdlThetaDeg:0];
+                        //[theGabor setKdlPhiDeg:([theGabor spatialFreqCPD]*10)];
+                        [theGabor setKdlPhiDeg:([theGabor directionDeg]*10)];
+                        //[theGabor setSpatialFreqCPD:0];
+                    }
+
+                    
+                    [theGabor draw];*/
 /*
                     if (!trial.catchTrial && index == kTaskGabor && stimDescs[index].stimType == kTargetStim) {
                         [targetSpot setAzimuthDeg:stimDescs[index].azimuthDeg elevationDeg:stimDescs[index].elevationDeg];
@@ -1643,6 +1724,21 @@ by mapStimTable.
 - (LLGabor *)taskGabor;
 {
 	return [gabors objectAtIndex:kTaskGabor];
+}
+
+- (RGBFloat)RGBFromIndex:(int)index factor:(int)factor;
+{
+    //RGBDouble rgb;
+    float mulfactor = 1/(float)(factor-1);
+    float rGain = (float)(index % factor);
+    float gGain = (float)((index/factor)%factor);
+    float bGain = (float)(((index/factor)/factor)%factor);
+    
+    rgb.red = rGain*mulfactor;
+    rgb.green = gGain*mulfactor;
+    rgb.blue = bGain*mulfactor;
+    
+    return (rgb);
 }
 
 @end
