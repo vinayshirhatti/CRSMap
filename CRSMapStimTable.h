@@ -15,11 +15,26 @@
 	// BOOL doneList[kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - commented this
     //BOOL doneList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
     // [ Vinay] - changing the above doneList to have a separate list for each Gabor. There are kGabors-1 number of stimuli Gabor excluding the Task gabor
-    BOOL doneList[kGabors-1][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
+    // [Vinay] - final maintained version entry, 12 Jan 2016
+    // BOOL doneList[kGabors-1][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - changed it from 7 to a 9 dimensional List, to include dimensions for spatialPhase and radius // [Vinay] - Also changed kMaxMapValues to kMaxMapValuesFixed, corresponding to azimuth, elevation and sigma, since will be kept fixed and therefore take just 1 value in session/block
     
     //BOOL ********* doneList; // 9 pointers corresponding to 9 dimensions (parameters).
     
     // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
+    
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //[Vinay] - incorporating changes from GaborRFMap for maintaining doneList, 12 Jan 2016
+    CFMutableBitVectorRef doneList[3]; // maintained as a 1-D bit vector
+    long azimuthCount;
+    long elevationCount;
+    long sigmaCount;
+    long spatialFreqCount;
+    long directionDegCount;
+    long contrastCount;
+    long temporalFreqCount;
+    long spatialPhaseCount;
+    long radiusCount;
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     long mapIndex;                  // index to instance of CRSMapStimTable
 	// [Vinay] - modified the meaning of the next two lines. These quantities now mean the total stimRemaining in the block and total stimInBlock considering the number of variations in all three gabors. The next two variables are maintained individually for each gabor

@@ -557,5 +557,7 @@
 	<false/>
 	<key>CRSProtocolNumber</key>
 	<integer>0</integer>
+	<key>CRSEyeFilterWeight</key>
+	<real>0.5</real>
 </dict>
 </plist>

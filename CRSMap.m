@@ -28,6 +28,7 @@ NSString *CRSCatchTrialPCKey = @"CRSCatchTrialPC";
 NSString *CRSCatchTrialMaxPCKey = @"CRSCatchTrialMaxPC";
 NSString *CRSCueMSKey = @"CRSCueMS";
 NSString *CRSDoSoundsKey = @"CRSDoSounds";
+NSString *CRSEyeFilterWeightKey = @"CRSEyeFilterWeight";
 NSString *CRSFixateKey = @"CRSFixate";
 NSString *CRSFixateMSKey = @"CRSFixateMS";
 NSString *CRSFixateOnlyKey = @"CRSFixateOnly";
@@ -164,6 +165,7 @@ NSString *keyPaths[] = {@"values.CRSBlockLimit", @"values.CRSRespTimeMS",
 					@"values.CRSChangeScale", @"values.CRSMeanTargetMS", @"values.CRSFixateMS",
 					@"values.CRSMapStimRadiusSigmaRatio",@"values.CRSHideTaskGabor",@"values.CRSHideCentre",@"values.CRSHideRing",@"values.CRSHideSurround",
                     @"values.CRSMatchCentreSurround",@"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",@"values.CRSFixImage",
+                    @"values.CRSEyeFilterWeight",
 					nil}; // [Vinay] - have added the last 2 lines before nil - related to matching C and S and the protocol
 // [Vinay] - Later removed. Added @"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",
 //"values.CRSMatchCentreRing",@"values.CRSMatchRingSurround",@"values.CRSRingProtocol",@"values.CRSContrastRingProtocol",@"values.CRSDualContrastProtocol",@"values.CRSDualOrientationProtocol",@"values.CRSDualPhaseProtocol",
@@ -399,10 +401,10 @@ long                trialCounter;
     // Erase the stimulus display
 
 	[stimuli erase];
-	
-	mapStimTable0 = [[CRSMapStimTable alloc] init];
-	mapStimTable1 = [[CRSMapStimTable alloc] init];
-    mapStimTable2 = [[CRSMapStimTable alloc] init];         // [Vinay] - for centre gabor
+    
+	mapStimTable0 = [[CRSMapStimTable alloc] initWithIndex:0];
+	mapStimTable1 = [[CRSMapStimTable alloc] initWithIndex:1];
+    mapStimTable2 = [[CRSMapStimTable alloc] initWithIndex:2];         // [Vinay] - for centre gabor
 	
 // Create on-line display windows
 
@@ -447,6 +449,10 @@ long                trialCounter;
 	[dataController assignTimestampData:VBLDataAssignment];
 	[dataController assignDigitalInputDevice:@"Synthetic"];
 	[dataController assignDigitalOutputDevice:@"Synthetic"];
+    xFilter = [[LLFilterExp alloc] init];
+    [xFilter setStepWeight:(1.0 - [defaults floatForKey:CRSEyeFilterWeightKey])];
+    yFilter = [[LLFilterExp alloc] init];
+    [yFilter setStepWeight:(1.0 - [defaults floatForKey:CRSEyeFilterWeightKey])];
     
     
 	collectorTimer = [NSTimer scheduledTimerWithTimeInterval:0.004 target:self
@@ -494,11 +500,13 @@ long                trialCounter;
 //	}
     
     if ((data = [dataController dataOfType:@"eyeLXData"]) != nil) {
+        data = [xFilter filteredValues:data];
 		[dataDoc putEvent:@"eyeLXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyesUnits[kLeftEye].x = *(short *)([data bytes] + [data length] - sizeof(short));
 	}
     
 	if ((data = [dataController dataOfType:@"eyeLYData"]) != nil) {
+        data = [yFilter filteredValues:data];
         [dataDoc putEvent:@"eyeLYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyesUnits[kLeftEye].y = *(short *)([data bytes] + [data length] - sizeof(short));
         currentEyesDeg[kLeftEye] = [eyeCalibrator degPointFromUnitPoint: currentEyesUnits[kLeftEye] forEye:kLeftEye];
@@ -507,10 +515,12 @@ long                trialCounter;
 		[dataDoc putEvent:@"eyeLPData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 	}
 	if ((data = [dataController dataOfType:@"eyeRXData"]) != nil) {
+        data = [xFilter filteredValues:data];
 		[dataDoc putEvent:@"eyeRXData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyesUnits[kRightEye].x = *(short *)([data bytes] + [data length] - sizeof(short));
 	}
 	if ((data = [dataController dataOfType:@"eyeRYData"]) != nil) {
+        data = [yFilter filteredValues:data];
 		[dataDoc putEvent:@"eyeRYData" withData:(Ptr)[data bytes] lengthBytes:[data length]];
 		currentEyesUnits[kRightEye].y = *(short *)([data bytes] + [data length] - sizeof(short));
 		currentEyesDeg[kRightEye] = [eyeCalibrator degPointFromUnitPoint: currentEyesUnits[kRightEye] forEye:kRightEye];	}
@@ -553,6 +563,8 @@ long                trialCounter;
     [dataController setDataEnabled:[NSNumber numberWithBool:NO]];
     [stateSystem stop];
 	[collectorTimer invalidate];
+    [xFilter release];
+    [yFilter release];
     [dataDoc removeObserver:stateSystem];
     [dataDoc removeObserver:behaviorController];
     [dataDoc removeObserver:spikeController];
@@ -1026,6 +1038,10 @@ long                trialCounter;
     }
     */
     // [Vinay] - till here
+    else if ([key isEqualTo:CRSEyeFilterWeightKey]) {
+        [xFilter setStepWeight:(1.0 - [defaults floatForKey:CRSEyeFilterWeightKey])];
+        [yFilter setStepWeight:(1.0 - [defaults floatForKey:CRSEyeFilterWeightKey])];
+    }
 }
 
 - (DisplayModeParam)requestedDisplayMode;

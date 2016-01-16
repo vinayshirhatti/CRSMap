@@ -41,7 +41,13 @@ static long CRSMapStimTableCounter = 0;
 	}
     mapIndex = index;
 	[self updateBlockParameters:mapIndex]; // [Vinay] added mapIndex argument here because updateBlockParameters has been redefined here to work on each gabor separately
-	[self newBlock];
+    
+    for (index = 0; index<kGabors-1; index++) {
+        doneList[index] = CFBitVectorCreateMutable(NULL, stimInBlockGabor[index]);
+        CFBitVectorSetCount(doneList[index], stimInBlockGabor[index]);
+    }
+    
+    [self newBlock];
 	return self;
 }
 
@@ -199,7 +205,8 @@ maxTargetS and a long stimLeadMS).
      */
     // [Vinay] - following lines have been commented and the modified lines follow next
 	// BOOL localList[kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] - commented this
-    BOOL localList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
+    //~~~~~Final version, 12 Jan 2016 -
+    // BOOL localList[kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
     // [Vinay] - changed the localList to include another dimension for gabor index
     // BOOL localList[kGabors-1][kMaxMapValuesFixed][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValuesFixed][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues][kMaxMapValues]; // [Vinay] : changed it from a 7 to a 9 dimensional list to include dimensions for spatial phase and radius. The order is: [a][e][sf][sig][o][c][tf][p][r]
     
@@ -224,6 +231,10 @@ maxTargetS and a long stimLeadMS).
     */
     /*----------------[Vinay] - Till here-----------------*/
     
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // [Vinay] 12 Jan 2016
+    CFMutableBitVectorRef localList;
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
     float azimuthDegMin, azimuthDegMax, elevationDegMin, elevationDegMax, sigmaDegMin, sigmaDegMax, spatialFreqCPDMin, spatialFreqCPDMax, directionDegMin, directionDegMax, radiusSigmaRatio, contrastPCMin, contrastPCMax, temporalFreqHzMin, temporalFreqHzMax, spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax; //[Vinay] -  Added spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax
 	BOOL hideStimulus, convertToGrating, noneProtocol=NO, ringProtocol=NO, contrastRingProtocol=NO, dualContrastProtocol=NO, dualOrientationProtocol=NO, dualPhaseProtocol=NO, orientationRingProtocol=NO, phaseRingProtocol=NO, driftingPhaseProtocol=NO, crossOrientationProtocol=NO, annulusFixedProtocol = NO; // [Vinay] - added matchCentreSurround to indicate similarity between the centre and surround attributes whenever required. , matchCentreSurround=NO was removed because it isn't being used in this loop
@@ -377,8 +388,12 @@ maxTargetS and a long stimLeadMS).
     convertToGrating = [[task defaults] boolForKey:CRSConvertToGratingKey];
 	
 	//memcpy(&localList, &doneList, sizeof(doneList)); [Vinay] - changed this line to the line below so that the corresponding doneList is copied as per the gabor index
-    memcpy(&localList, &doneList[index], sizeof(doneList[index]));
+    //~~~~~12 Jan 2016
+    //memcpy(&localList, &doneList[index], sizeof(doneList[index]));
 	//localFreshCount = stimRemainingInBlock; //[Vinay] commented
+    
+    localList = CFBitVectorCreateMutableCopy(NULL, stimInBlockGabor[index], doneList[index]);
+    CFBitVectorSetCount(localList, stimInBlockGabor[index]);
     localFreshCount = stimRemainingInBlockGabor[index]; // [Vinay] - separate index for separate gabors
 	frameRateHz = [[task stimWindow] frameRateHz];
 /*
@@ -416,8 +431,8 @@ maxTargetS and a long stimLeadMS).
 		
 		int azimuthIndex, elevationIndex, sigmaIndex, spatialFreqIndex, directionDegIndex, contrastIndex, temporalFreqIndex, spatialPhaseIndex, radiusIndex; // spatialFreqIndexCopy=0, directionDegIndexCopy=0, contrastIndexCopy=0, temporalFreqIndexCopy=0, spatialPhaseIndexCopy=0; // [Vinay] - Added spatialPhaseIndex, radiusIndex. Added - spatialFreqIndexCopy, directionDegIndexCopy, contrastIndexCopy, temporalFreqIndexCopy, spatialPhaseIndexCopy to store their alues for one gabor to be assigned to another gabor when required. They have been initialized because otherwise an error was throwing up. Now commented
 		NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
-		int azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionDegCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount; // [Vinay - Added spatialPhaseCount, radiusCount
-		int startAzimuthIndex, startElevationIndex, startSigmaIndex, startSpatialFreqIndex, startDirectionDegIndex, startContrastIndex,startTemporalFreqIndex, startSpatialPhaseIndex, startRadiusIndex; // [Vinay] - Added startSpatialPhaseIndex, startRadiusIndex
+		//int azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionDegCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount; // [Vinay - Added spatialPhaseCount, radiusCount
+		int startAzimuthIndex, startElevationIndex, startSigmaIndex, startSpatialFreqIndex, startDirectionDegIndex, startContrastIndex,startTemporalFreqIndex, startSpatialPhaseIndex, startRadiusIndex, stimIndex; // [Vinay] - Added startSpatialPhaseIndex, startRadiusIndex
 		BOOL stimDone = YES;
         
         
@@ -498,13 +513,13 @@ maxTargetS and a long stimLeadMS).
         
         // [Vinay] New code to evaluate the count values
         
-        long azimuthCount0, elevationCount0, sigmaCount0, spatialFreqCount0, directionCount0, contrastCount0, temporalFreqCount0, spatialPhaseCount0, radiusCount0, azimuthCount1, elevationCount1, sigmaCount1, spatialFreqCount1, directionCount1, contrastCount1, temporalFreqCount1, spatialPhaseCount1, radiusCount1, azimuthCount2, elevationCount2, sigmaCount2, spatialFreqCount2, directionCount2, contrastCount2, temporalFreqCount2, spatialPhaseCount2, radiusCount2;   // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
+        long azimuthCount0, elevationCount0, sigmaCount0, spatialFreqCount0, directionDegCount0, contrastCount0, temporalFreqCount0, spatialPhaseCount0, radiusCount0, azimuthCount1, elevationCount1, sigmaCount1, spatialFreqCount1, directionDegCount1, contrastCount1, temporalFreqCount1, spatialPhaseCount1, radiusCount1, azimuthCount2, elevationCount2, sigmaCount2, spatialFreqCount2, directionDegCount2, contrastCount2, temporalFreqCount2, spatialPhaseCount2, radiusCount2;   // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
         
         azimuthCount0 = [[countsDict objectForKey:@"azimuthCount0"] intValue];
         elevationCount0 = [[countsDict objectForKey:@"elevationCount0"] intValue];
         sigmaCount0 = [[countsDict objectForKey:@"sigmaCount0"] intValue];
         spatialFreqCount0 = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
-        directionCount0 = [[countsDict objectForKey:@"orientationCount0"] intValue];
+        directionDegCount0 = [[countsDict objectForKey:@"orientationCount0"] intValue];
         contrastCount0 = [[countsDict objectForKey:@"contrastCount0"] intValue];
         temporalFreqCount0 = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
         spatialPhaseCount0 = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
@@ -514,7 +529,7 @@ maxTargetS and a long stimLeadMS).
         elevationCount1 = [[countsDict objectForKey:@"elevationCount1"] intValue];
         sigmaCount1 = [[countsDict objectForKey:@"sigmaCount1"] intValue];
         spatialFreqCount1 = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
-        directionCount1 = [[countsDict objectForKey:@"orientationCount1"] intValue];
+        directionDegCount1 = [[countsDict objectForKey:@"orientationCount1"] intValue];
         contrastCount1 = [[countsDict objectForKey:@"contrastCount1"] intValue];
         temporalFreqCount1 = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
         spatialPhaseCount1 = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
@@ -524,7 +539,7 @@ maxTargetS and a long stimLeadMS).
         elevationCount2 = [[countsDict objectForKey:@"elevationCount2"] intValue];
         sigmaCount2 = [[countsDict objectForKey:@"sigmaCount2"] intValue];
         spatialFreqCount2 = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
-        directionCount2 = [[countsDict objectForKey:@"orientationCount2"] intValue];
+        directionDegCount2 = [[countsDict objectForKey:@"orientationCount2"] intValue];
         contrastCount2 = [[countsDict objectForKey:@"contrastCount2"] intValue];
         temporalFreqCount2 = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
         spatialPhaseCount2 = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
@@ -545,7 +560,7 @@ maxTargetS and a long stimLeadMS).
                     elevationCount0 = 1;
                     sigmaCount0 = 1;
                     spatialFreqCount0 = 1;
-                    directionCount0 = 1;
+                    directionDegCount0 = 1;
                     contrastCount0 = 1;
                     temporalFreqCount0 = 1;
                     spatialPhaseCount0 = 1;
@@ -557,7 +572,7 @@ maxTargetS and a long stimLeadMS).
                     elevationCount1 = 1;
                     sigmaCount1 = 1;
                     spatialFreqCount1 = 1;
-                    directionCount1 = 1;
+                    directionDegCount1 = 1;
                     contrastCount1 = 1;
                     temporalFreqCount1 = 1;
                     spatialPhaseCount1 = 1;
@@ -569,7 +584,7 @@ maxTargetS and a long stimLeadMS).
                     elevationCount1 = 1;
                     sigmaCount1 = 1;
                     spatialFreqCount1 = 1;
-                    directionCount1 = 1;
+                    directionDegCount1 = 1;
                     contrastCount1 = 1;
                     temporalFreqCount1 = 1;
                     spatialPhaseCount1 = 1;
@@ -581,7 +596,7 @@ maxTargetS and a long stimLeadMS).
                     elevationCount2 = 1;
                     sigmaCount2 = 1;
                     spatialFreqCount2 = 1;
-                    directionCount2 = 1;
+                    directionDegCount2 = 1;
                     contrastCount2 = 1;
                     temporalFreqCount2 = 1;
                     spatialPhaseCount2 = 1;
@@ -592,7 +607,7 @@ maxTargetS and a long stimLeadMS).
                     elevationCount2 = 1;
                     sigmaCount2 = 1;
                     spatialFreqCount2 = 1;
-                    directionCount2 = 1;
+                    directionDegCount2 = 1;
                     contrastCount2 = 1;
                     temporalFreqCount2 = 1;
                     spatialPhaseCount2 = 1;
@@ -606,7 +621,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -616,7 +631,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -629,7 +644,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -639,7 +654,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 //contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -651,7 +666,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount0 = 1;
                 sigmaCount0 = 1;
                 spatialFreqCount0 = 1;
-                directionCount0 = 1;
+                directionDegCount0 = 1;
                 contrastCount0 = 1;
                 temporalFreqCount0 = 1;
                 spatialPhaseCount0 = 1;
@@ -662,7 +677,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 //contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -676,7 +691,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount0 = 1;
                 sigmaCount0 = 1;
                 spatialFreqCount0 = 1;
-                directionCount0 = 1;
+                directionDegCount0 = 1;
                 contrastCount0 = 1;
                 temporalFreqCount0 = 1;
                 spatialPhaseCount0 = 1;
@@ -687,7 +702,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                //directionCount1 = 1;
+                //directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -701,7 +716,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount0 = 1;
                 sigmaCount0 = 1;
                 spatialFreqCount0 = 1;
-                directionCount0 = 1;
+                directionDegCount0 = 1;
                 contrastCount0 = 1;
                 temporalFreqCount0 = 1;
                 spatialPhaseCount0 = 1;
@@ -712,7 +727,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 //spatialPhaseCount1 = 1;
@@ -726,7 +741,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -736,7 +751,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                //directionCount1 = 1;
+                //directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -748,7 +763,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -758,7 +773,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 //spatialPhaseCount1 = 1;
@@ -770,7 +785,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -780,7 +795,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 //temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -793,7 +808,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount0 = 1;
                 sigmaCount0 = 1;
                 spatialFreqCount0 = 1;
-                directionCount0 = 1;
+                directionDegCount0 = 1;
                 contrastCount0 = 1;
                 temporalFreqCount0 = 1;
                 spatialPhaseCount0 = 1;
@@ -807,7 +822,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -818,7 +833,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -842,7 +857,7 @@ maxTargetS and a long stimLeadMS).
          elevationCount = [[countsDict objectForKey:@"elevationCount0"] intValue];
          sigmaCount = [[countsDict objectForKey:@"sigmaCount0"] intValue];
          spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
-         directionCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
+         directionDegCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
          contrastCount = [[countsDict objectForKey:@"contrastCount0"] intValue];
          temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
          spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
@@ -854,7 +869,7 @@ maxTargetS and a long stimLeadMS).
          elevationCount = [[countsDict objectForKey:@"elevationCount1"] intValue];
          sigmaCount = [[countsDict objectForKey:@"sigmaCount1"] intValue];
          spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
-         directionCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
+         directionDegCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
          contrastCount = [[countsDict objectForKey:@"contrastCount1"] intValue];
          temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
          spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
@@ -866,7 +881,7 @@ maxTargetS and a long stimLeadMS).
          elevationCount = [[countsDict objectForKey:@"elevationCount2"] intValue];
          sigmaCount = [[countsDict objectForKey:@"sigmaCount2"] intValue];
          spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
-         directionCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
+         directionDegCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
          contrastCount = [[countsDict objectForKey:@"contrastCount2"] intValue];
          temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
          spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
@@ -882,7 +897,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount = elevationCount0;
                 sigmaCount = sigmaCount0;
                 spatialFreqCount = spatialFreqCount0;
-                directionDegCount = directionCount0; // [Vinay] - In this loop directionCount is directionDegCount. Hence the difference from the code in updateBlockParameters
+                directionDegCount = directionDegCount0; // [Vinay] - In this loop directionDegCount is directionDegCount. Hence the difference from the code in updateBlockParameters
                 contrastCount = contrastCount0;
                 temporalFreqCount = temporalFreqCount0;
                 spatialPhaseCount = spatialPhaseCount0;
@@ -894,7 +909,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount = elevationCount1;
                 sigmaCount = sigmaCount1;
                 spatialFreqCount = spatialFreqCount1;
-                directionDegCount = directionCount1; // [Vinay] - In this loop directionCount is directionDegCount. Hence the difference from the code in updateBlockParameters
+                directionDegCount = directionDegCount1; // [Vinay] - In this loop directionDegCount is directionDegCount. Hence the difference from the code in updateBlockParameters
                 contrastCount = contrastCount1;
                 temporalFreqCount = temporalFreqCount1;
                 spatialPhaseCount = spatialPhaseCount1;
@@ -906,7 +921,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount = elevationCount2;
                 sigmaCount = sigmaCount2;
                 spatialFreqCount = spatialFreqCount2;
-                directionDegCount = directionCount2; // [Vinay] - In this loop directionCount is directionDegCount. Hence the difference from the code in updateBlockParameters
+                directionDegCount = directionDegCount2; // [Vinay] - In this loop directionDegCount is directionDegCount. Hence the difference from the code in updateBlockParameters
                 contrastCount = contrastCount2;
                 temporalFreqCount = temporalFreqCount2;
                 spatialPhaseCount = spatialPhaseCount2;
@@ -964,7 +979,21 @@ maxTargetS and a long stimLeadMS).
         
         
 		for (;;) {
-			stimDone=localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex]; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
+			//~~~~~~~~~~~~~~~ 12 Jan 2016
+            //stimDone=localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex]; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
+            //~~~~~~~~~~~~~~~
+            
+            stimIndex = azimuthIndex;
+            stimIndex = stimIndex * elevationCount + elevationIndex;
+            stimIndex = stimIndex * sigmaCount + sigmaIndex;
+            stimIndex = stimIndex * spatialFreqCount + spatialFreqIndex;
+            stimIndex = stimIndex * directionDegCount + directionDegIndex;
+            stimIndex = stimIndex * contrastCount + contrastIndex;
+            stimIndex = stimIndex * temporalFreqCount + temporalFreqIndex;
+            stimIndex = stimIndex * spatialPhaseCount + spatialPhaseIndex;
+            stimIndex = stimIndex * radiusCount + radiusIndex;
+			stimDone = CFBitVectorGetBitAtIndex(localList, stimIndex);
+            
 			if (!stimDone) {
 				break;
 			}
@@ -1228,13 +1257,20 @@ maxTargetS and a long stimLeadMS).
         }
 		*/
          
-		localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex] = TRUE; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
+		//~~~~~~~~~~~~~~~~~~~~~ 12 Jan 2016
+        //localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex] = TRUE; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
+        //~~~~~~~~~~~~~~~~~~~~~
+        CFBitVectorSetBitAtIndex(localList, stimIndex, 1);
 		//		NSLog(@"%d %d %d %d %d",stimDesc.azimuthIndex,stimDesc.elevationIndex,stimDesc.sigmaIndex,stimDesc.spatialFreqIndex,stimDesc.directionIndex);
 		if (--localFreshCount == 0) {
-			//bzero(&localList,sizeof(doneList)); //[Vinay] - changed this line to assign the corresponding doneList as per the gabor index
-            bzero(&localList,sizeof(doneList[index]));
+			//~~~~~~~~~~~~~~~~~~~~~~~~ 12 Jan 2016
+            //bzero(&localList,sizeof(doneList)); //[Vinay] - changed this line to assign the corresponding doneList as per the gabor index
+            //bzero(&localList,sizeof(doneList[index]));
 			//localFreshCount = stimInBlock; //[Vinay] - changed this to the line below
-            localFreshCount = stimInBlockGabor[index];
+            //localFreshCount = stimInBlockGabor[index];
+            //~~~~~~~~~~~~~~~~~~~~~~~~
+            CFBitVectorSetAllBits(localList, 0);
+			localFreshCount = stimInBlockGabor[index];
 		}
 	}
 //	[self dumpStimList:list listIndex:index];
@@ -1307,8 +1343,14 @@ maxTargetS and a long stimLeadMS).
 
 - (void)newBlock;
 {
-	bzero(&doneList, sizeof(doneList));
-	stimRemainingInBlock = stimInBlock;
+	//~~~~~~~~~~~~ 12 Jan 2016
+    //bzero(&doneList, sizeof(doneList));
+    //~~~~~~~~~~~~
+    int index;
+	for (index = 0; index<kGabors-1; index++) {
+        CFBitVectorSetAllBits(doneList[index], 0);
+    }
+    stimRemainingInBlock = stimInBlock;
 }
 
 - (void)reset;
@@ -1321,6 +1363,11 @@ maxTargetS and a long stimLeadMS).
     //[self updateBlockParameters];
     [self newBlock];
     blocksDone = 0;
+	for (index = 0; index<kGabors-1; index++) {
+        doneList[index] = CFBitVectorCreateMutable(NULL, stimInBlock);
+        CFBitVectorSetCount(doneList[index], stimInBlockGabor[index]);
+    }
+
 }
 
 - (void)tallyStimList:(NSMutableArray *)list  count:(long)count;
@@ -1341,7 +1388,8 @@ maxTargetS and a long stimLeadMS).
 	
 	for (stim = 0; stim < count; stim++) {
 		short a=0, e=0, sf=0, sig=0, o=0, c=0, t=0, p=0, r=0;        // [Vinay] - Added 'p=0' for spatial phase and 'r=0' for radius
-		NSValue *val = [l objectAtIndex:stim];
+		int stimIndex = 0;
+        NSValue *val = [l objectAtIndex:stim];
 		
 		[val getValue:&stimDesc];
 		a=stimDesc.azimuthIndex;
@@ -1360,9 +1408,20 @@ maxTargetS and a long stimLeadMS).
         // doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
         
         // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
-        doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
-        
-		if (--stimRemainingInBlock == 0 ) {
+        //doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
+        //^^^~~~~~~~~~~ 12 Jan 2016
+		
+        stimIndex = a;
+        stimIndex = stimIndex * elevationCount + e;
+        stimIndex = stimIndex * sigmaCount + sig;
+        stimIndex = stimIndex * spatialFreqCount + sf;
+        stimIndex = stimIndex * directionDegCount + o;
+        stimIndex = stimIndex * contrastCount + c;
+        stimIndex = stimIndex * temporalFreqCount + t;
+        stimIndex = stimIndex * spatialPhaseCount + p;
+        stimIndex = stimIndex * radiusCount + r;
+        CFBitVectorSetBitAtIndex(doneList[stimDesc.gaborIndex-1], stimIndex, 1);
+        if (--stimRemainingInBlock == 0 ) {
 			[self newBlock];
 			blocksDone++;
 		}
@@ -1378,6 +1437,7 @@ maxTargetS and a long stimLeadMS).
 	long a, e, sf, sig, o, stim, c, t, p, r;       // [Vinay] - Added 'p' for spatial phase and 'r' for radius
 	NSValue *val;
 	NSMutableArray *l;
+    int stimIndex = 0;
 	
 	l = (list == nil) ? currentStimList : list;
 	for (stim = 0; stim < [l count]; stim++) {
@@ -1401,12 +1461,26 @@ maxTargetS and a long stimLeadMS).
         // doneList[stimDesc.gaborIndex-1][a][e][sf][sig][o][c][t][p][r] = TRUE;                // [Vinay] - and swapped [sf] and [sig] since [sig] is the 4th dimension. It was causing errors otherwise
         
         // [Vinay] - 06/09/15 Changed the dimension order: sigma and sf interchanged from [sf][sigma] to [sigma][sf] (dim[3][4])
-        doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
+        //doneList[stimDesc.gaborIndex-1][a][e][sig][sf][o][c][t][p][r] = TRUE;
+        //^^^~~~~~~~~ 12 Jan 2016
         
-        
+        stimIndex = a;
+        stimIndex = stimIndex * elevationCount + e;
+        stimIndex = stimIndex * sigmaCount + sig;
+        stimIndex = stimIndex * spatialFreqCount + sf;
+        stimIndex = stimIndex * directionDegCount + o;
+        stimIndex = stimIndex * contrastCount + c;
+        stimIndex = stimIndex * temporalFreqCount + t;
+        stimIndex = stimIndex * spatialPhaseCount + p;
+        stimIndex = stimIndex * radiusCount + r;
+        CFBitVectorSetBitAtIndex(doneList[stimDesc.gaborIndex-1], stimIndex, 1);
+
         // [Vinay] - added the following lines to update stimRemainingInBlock for each Gabor
         if ((--stimRemainingInBlockGabor[stimDesc.gaborIndex - 1] == 0) && stimRemainingInBlock != 0) {
-            bzero(&doneList[stimDesc.gaborIndex-1], sizeof(doneList[stimDesc.gaborIndex-1])); //[Vinay] - reset the doneList of the corresponding gabor only
+            //~~~~~~~~~~~~ 12 Jan 2016
+            //bzero(&doneList[stimDesc.gaborIndex-1], sizeof(doneList[stimDesc.gaborIndex-1])); //[Vinay] - reset the doneList of the corresponding gabor only
+            //~~~~~~~~~~~~
+            CFBitVectorSetAllBits(doneList[stimDesc.gaborIndex-1], 0);
             stimRemainingInBlockGabor[stimDesc.gaborIndex - 1] = stimInBlockGabor[stimDesc.gaborIndex -1]; //[Vinay] - reset the stimRemaining number for the corresponding gabor only
         }
         NSLog(@"stim remaining this gabor %ld: %d",stimDesc.gaborIndex,stimRemainingInBlockGabor[stimDesc.gaborIndex - 1]);
@@ -1440,10 +1514,10 @@ maxTargetS and a long stimLeadMS).
 - (void)updateBlockParameters:(long)index;
 //- (void)updateBlockParameters;
 {
-	long azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount; // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
+	//long azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionDegCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount; // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
     
     // [Vinay] - added these additional variables to use them for determining stim numbers in specific protocols
-    long azimuthCount0, elevationCount0, sigmaCount0, spatialFreqCount0, directionCount0, contrastCount0, temporalFreqCount0, spatialPhaseCount0, radiusCount0, azimuthCount1, elevationCount1, sigmaCount1, spatialFreqCount1, directionCount1, contrastCount1, temporalFreqCount1, spatialPhaseCount1, radiusCount1, azimuthCount2, elevationCount2, sigmaCount2, spatialFreqCount2, directionCount2, contrastCount2, temporalFreqCount2, spatialPhaseCount2, radiusCount2;   // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
+    long azimuthCount0, elevationCount0, sigmaCount0, spatialFreqCount0, directionDegCount0, contrastCount0, temporalFreqCount0, spatialPhaseCount0, radiusCount0, azimuthCount1, elevationCount1, sigmaCount1, spatialFreqCount1, directionDegCount1, contrastCount1, temporalFreqCount1, spatialPhaseCount1, radiusCount1, azimuthCount2, elevationCount2, sigmaCount2, spatialFreqCount2, directionDegCount2, contrastCount2, temporalFreqCount2, spatialPhaseCount2, radiusCount2;   // [Vinay] - Added spatialPhaseCount, radiusCount and later added the parameters for the other two gabors
      
      NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
     
@@ -1462,7 +1536,7 @@ maxTargetS and a long stimLeadMS).
                 [countsDict setValue:1 forKey:@"elevationCount0"];
                 [countsDict setValue:1 forKey:@"sigmaCount0"];
                 [countsDict setValue:1 forKey:@"spatialFreqCount0"];
-                [countsDict setValue:1 forKey:@"directionCount0"];
+                [countsDict setValue:1 forKey:@"directionDegCount0"];
                 [countsDict setValue:1 forKey:@"contrastCount0"];
                 [countsDict setValue:1 forKey:@"temporalFreqCount0"];
                 [countsDict setValue:1 forKey:@"spatialPhaseCount0"];
@@ -1473,7 +1547,7 @@ maxTargetS and a long stimLeadMS).
                 [countsDict setValue:1 forKey:@"elevationCount1"];
                 [countsDict setValue:1 forKey:@"sigmaCount1"];
                 [countsDict setValue:1 forKey:@"spatialFreqCount1"];
-                [countsDict setValue:1 forKey:@"directionCount1"];
+                [countsDict setValue:1 forKey:@"directionDegCount1"];
                 [countsDict setValue:1 forKey:@"contrastCount1"];
                 [countsDict setValue:1 forKey:@"temporalFreqCount1"];
                 [countsDict setValue:1 forKey:@"spatialPhaseCount1"];
@@ -1484,7 +1558,7 @@ maxTargetS and a long stimLeadMS).
                 [countsDict setValue:1 forKey:@"elevationCount2"];
                 [countsDict setValue:1 forKey:@"sigmaCount2"];
                 [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-                [countsDict setValue:1 forKey:@"directionCount2"];
+                [countsDict setValue:1 forKey:@"directionDegCount2"];
                 [countsDict setValue:1 forKey:@"contrastCount2"];
                 [countsDict setValue:1 forKey:@"temporalFreqCount2"];
                 [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1498,7 +1572,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount2"];
             [countsDict setValue:1 forKey:@"sigmaCount2"];
             [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-            [countsDict setValue:1 forKey:@"directionCount2"];
+            [countsDict setValue:1 forKey:@"directionDegCount2"];
             [countsDict setValue:1 forKey:@"contrastCount2"];
             [countsDict setValue:1 forKey:@"temporalFreqCount2"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1510,7 +1584,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount2"];
             [countsDict setValue:1 forKey:@"sigmaCount2"];
             [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-            [countsDict setValue:1 forKey:@"directionCount2"];
+            [countsDict setValue:1 forKey:@"directionDegCount2"];
             [countsDict setValue:1 forKey:@"contrastCount2"];
             [countsDict setValue:1 forKey:@"temporalFreqCount2"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1522,7 +1596,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount0"];
             [countsDict setValue:1 forKey:@"sigmaCount0"];
             [countsDict setValue:1 forKey:@"spatialFreqCount0"];
-            [countsDict setValue:1 forKey:@"directionCount0"];
+            [countsDict setValue:1 forKey:@"directionDegCount0"];
             [countsDict setValue:1 forKey:@"contrastCount0"];
             [countsDict setValue:1 forKey:@"temporalFreqCount0"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount0"];
@@ -1535,7 +1609,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount0"];
             [countsDict setValue:1 forKey:@"sigmaCount0"];
             [countsDict setValue:1 forKey:@"spatialFreqCount0"];
-            [countsDict setValue:1 forKey:@"directionCount0"];
+            [countsDict setValue:1 forKey:@"directionDegCount0"];
             [countsDict setValue:1 forKey:@"contrastCount0"];
             [countsDict setValue:1 forKey:@"temporalFreqCount0"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount0"];
@@ -1548,7 +1622,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount0"];
             [countsDict setValue:1 forKey:@"sigmaCount0"];
             [countsDict setValue:1 forKey:@"spatialFreqCount0"];
-            [countsDict setValue:1 forKey:@"directionCount0"];
+            [countsDict setValue:1 forKey:@"directionDegCount0"];
             [countsDict setValue:1 forKey:@"contrastCount0"];
             [countsDict setValue:1 forKey:@"temporalFreqCount0"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount0"];
@@ -1561,7 +1635,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount2"];
             [countsDict setValue:1 forKey:@"sigmaCount2"];
             [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-            [countsDict setValue:1 forKey:@"directionCount2"];
+            [countsDict setValue:1 forKey:@"directionDegCount2"];
             [countsDict setValue:1 forKey:@"contrastCount2"];
             [countsDict setValue:1 forKey:@"temporalFreqCount2"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1573,7 +1647,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount2"];
             [countsDict setValue:1 forKey:@"sigmaCount2"];
             [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-            [countsDict setValue:1 forKey:@"directionCount2"];
+            [countsDict setValue:1 forKey:@"directionDegCount2"];
             [countsDict setValue:1 forKey:@"contrastCount2"];
             [countsDict setValue:1 forKey:@"temporalFreqCount2"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1585,7 +1659,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount2"];
             [countsDict setValue:1 forKey:@"sigmaCount2"];
             [countsDict setValue:1 forKey:@"spatialFreqCount2"];
-            [countsDict setValue:1 forKey:@"directionCount2"];
+            [countsDict setValue:1 forKey:@"directionDegCount2"];
             [countsDict setValue:1 forKey:@"contrastCount2"];
             [countsDict setValue:1 forKey:@"temporalFreqCount2"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount2"];
@@ -1597,7 +1671,7 @@ maxTargetS and a long stimLeadMS).
             [countsDict setValue:1 forKey:@"elevationCount0"];
             [countsDict setValue:1 forKey:@"sigmaCount0"];
             [countsDict setValue:1 forKey:@"spatialFreqCount0"];
-            [countsDict setValue:1 forKey:@"directionCount0"];
+            [countsDict setValue:1 forKey:@"directionDegCount0"];
             [countsDict setValue:1 forKey:@"contrastCount0"];
             [countsDict setValue:1 forKey:@"temporalFreqCount0"];
             [countsDict setValue:1 forKey:@"spatialPhaseCount0"];
@@ -1615,7 +1689,7 @@ maxTargetS and a long stimLeadMS).
 	elevationCount = [[countsDict objectForKey:@"elevationCount"] intValue];
 	sigmaCount = [[countsDict objectForKey:@"sigmaCount"] intValue];
 	spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount"] intValue];
-	directionCount = [[countsDict objectForKey:@"orientationCount"] intValue];
+	directionDegCount = [[countsDict objectForKey:@"orientationCount"] intValue];
 	contrastCount = [[countsDict objectForKey:@"contrastCount"] intValue];
 	temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount"] intValue];
     spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount"] intValue];              // [Vinay] - Added this for spatialPhase
@@ -1627,7 +1701,7 @@ maxTargetS and a long stimLeadMS).
     elevationCount0 = [[countsDict objectForKey:@"elevationCount0"] intValue];
     sigmaCount0 = [[countsDict objectForKey:@"sigmaCount0"] intValue];
     spatialFreqCount0 = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
-    directionCount0 = [[countsDict objectForKey:@"orientationCount0"] intValue];
+    directionDegCount0 = [[countsDict objectForKey:@"orientationCount0"] intValue];
     contrastCount0 = [[countsDict objectForKey:@"contrastCount0"] intValue];
     temporalFreqCount0 = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
     spatialPhaseCount0 = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
@@ -1637,7 +1711,7 @@ maxTargetS and a long stimLeadMS).
     elevationCount1 = [[countsDict objectForKey:@"elevationCount1"] intValue];
     sigmaCount1 = [[countsDict objectForKey:@"sigmaCount1"] intValue];
     spatialFreqCount1 = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
-    directionCount1 = [[countsDict objectForKey:@"orientationCount1"] intValue];
+    directionDegCount1 = [[countsDict objectForKey:@"orientationCount1"] intValue];
     contrastCount1 = [[countsDict objectForKey:@"contrastCount1"] intValue];
     temporalFreqCount1 = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
     spatialPhaseCount1 = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
@@ -1647,7 +1721,7 @@ maxTargetS and a long stimLeadMS).
     elevationCount2 = [[countsDict objectForKey:@"elevationCount2"] intValue];
     sigmaCount2 = [[countsDict objectForKey:@"sigmaCount2"] intValue];
     spatialFreqCount2 = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
-    directionCount2 = [[countsDict objectForKey:@"orientationCount2"] intValue];
+    directionDegCount2 = [[countsDict objectForKey:@"orientationCount2"] intValue];
     contrastCount2 = [[countsDict objectForKey:@"contrastCount2"] intValue];
     temporalFreqCount2 = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
     spatialPhaseCount2 = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
@@ -1668,7 +1742,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount0 = 1;
                 sigmaCount0 = 1;
                 spatialFreqCount0 = 1;
-                directionCount0 = 1;
+                directionDegCount0 = 1;
                 contrastCount0 = 1;
                 temporalFreqCount0 = 1;
                 spatialPhaseCount0 = 1;
@@ -1680,7 +1754,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -1692,7 +1766,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount1 = 1;
                 sigmaCount1 = 1;
                 spatialFreqCount1 = 1;
-                directionCount1 = 1;
+                directionDegCount1 = 1;
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
@@ -1704,7 +1778,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -1715,7 +1789,7 @@ maxTargetS and a long stimLeadMS).
                 elevationCount2 = 1;
                 sigmaCount2 = 1;
                 spatialFreqCount2 = 1;
-                directionCount2 = 1;
+                directionDegCount2 = 1;
                 contrastCount2 = 1;
                 temporalFreqCount2 = 1;
                 spatialPhaseCount2 = 1;
@@ -1729,7 +1803,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1739,7 +1813,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1752,7 +1826,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1762,7 +1836,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             //contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1774,7 +1848,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount0 = 1;
             sigmaCount0 = 1;
             spatialFreqCount0 = 1;
-            directionCount0 = 1;
+            directionDegCount0 = 1;
             contrastCount0 = 1;
             temporalFreqCount0 = 1;
             spatialPhaseCount0 = 1;
@@ -1785,7 +1859,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             //contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1799,7 +1873,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount0 = 1;
             sigmaCount0 = 1;
             spatialFreqCount0 = 1;
-            directionCount0 = 1;
+            directionDegCount0 = 1;
             contrastCount0 = 1;
             temporalFreqCount0 = 1;
             spatialPhaseCount0 = 1;
@@ -1810,7 +1884,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            //directionCount1 = 1;
+            //directionDegCount1 = 1;
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1824,7 +1898,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount0 = 1;
             sigmaCount0 = 1;
             spatialFreqCount0 = 1;
-            directionCount0 = 1;
+            directionDegCount0 = 1;
             contrastCount0 = 1;
             temporalFreqCount0 = 1;
             spatialPhaseCount0 = 1;
@@ -1835,7 +1909,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             //spatialPhaseCount1 = 1;
@@ -1849,7 +1923,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1859,7 +1933,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            //directionCount1 = 1;
+            //directionDegCount1 = 1;
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1871,7 +1945,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1881,7 +1955,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             //spatialPhaseCount1 = 1;
@@ -1893,7 +1967,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1903,7 +1977,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             contrastCount1 = 1;
             //temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1916,7 +1990,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount0 = 1;
             sigmaCount0 = 1;
             spatialFreqCount0 = 1;
-            directionCount0 = 1;
+            directionDegCount0 = 1;
             contrastCount0 = 1;
             temporalFreqCount0 = 1;
             spatialPhaseCount0 = 1;
@@ -1930,7 +2004,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount2 = 1;
             sigmaCount2 = 1;
             spatialFreqCount2 = 1;
-            directionCount2 = 1;
+            directionDegCount2 = 1;
             contrastCount2 = 1;
             temporalFreqCount2 = 1;
             spatialPhaseCount2 = 1;
@@ -1941,7 +2015,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount1 = 1;
             sigmaCount1 = 1;
             spatialFreqCount1 = 1;
-            directionCount1 = 1;
+            directionDegCount1 = 1;
             contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
@@ -1965,7 +2039,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount0"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount0"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount0"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
@@ -1977,7 +2051,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount1"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount1"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount1"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
@@ -1989,7 +2063,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount2"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount2"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount2"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
@@ -2005,7 +2079,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = elevationCount0;
             sigmaCount = sigmaCount0;
             spatialFreqCount = spatialFreqCount0;
-            directionCount = directionCount0;
+            directionDegCount = directionDegCount0;
             contrastCount = contrastCount0;
             temporalFreqCount = temporalFreqCount0;
             spatialPhaseCount = spatialPhaseCount0;
@@ -2017,7 +2091,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = elevationCount1;
             sigmaCount = sigmaCount1;
             spatialFreqCount = spatialFreqCount1;
-            directionCount = directionCount1;
+            directionDegCount = directionDegCount1;
             contrastCount = contrastCount1;
             temporalFreqCount = temporalFreqCount1;
             spatialPhaseCount = spatialPhaseCount1;
@@ -2029,7 +2103,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = elevationCount2;
             sigmaCount = sigmaCount2;
             spatialFreqCount = spatialFreqCount2;
-            directionCount = directionCount2;
+            directionDegCount = directionDegCount2;
             contrastCount = contrastCount2;
             temporalFreqCount = temporalFreqCount2;
             spatialPhaseCount = spatialPhaseCount2;
@@ -2040,9 +2114,9 @@ maxTargetS and a long stimLeadMS).
     //---------------------------------------
     
     // [Vinay] - modified the next line to assign separate values for each gabor
-    //stimInBlock = stimRemainingInBlock = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount;  // [Vinay] - Added the factor spatialPhaseCount*radiusCount
+    //stimInBlock = stimRemainingInBlock = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionDegCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount;  // [Vinay] - Added the factor spatialPhaseCount*radiusCount
     
-    stimInBlockGabor[index] = stimRemainingInBlockGabor[index] = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount;  // [Vinay] - Added the factor spatialPhaseCount*radiusCount
+    stimInBlockGabor[index] = stimRemainingInBlockGabor[index] = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionDegCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount;  // [Vinay] - Added the factor spatialPhaseCount*radiusCount
     
     // ================================================================
     // *************[Vinay] - Decide the total number of stimuli in the protocol based on the stim numbers of all the gabors and the particular protocol that is running
@@ -2111,7 +2185,7 @@ maxTargetS and a long stimLeadMS).
     // [Vinay] - till here
     // ================================================================
     
-	//stimInBlock = stimRemainingInBlock = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * azimuthCount1 * elevationCount1 * sigmaCount1 * spatialFreqCount1 * directionCount1 * contrastCount1 * temporalFreqCount1 * spatialPhaseCount1 * radiusCount1 * azimuthCount2 * elevationCount2 * sigmaCount2 * spatialFreqCount2 * directionCount2 * contrastCount2 * temporalFreqCount2 * spatialPhaseCount2 * radiusCount2;        // [Vinay] - Added the factor spatialPhaseCount*radiusCount
+	//stimInBlock = stimRemainingInBlock = azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionDegCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * azimuthCount1 * elevationCount1 * sigmaCount1 * spatialFreqCount1 * directionDegCount1 * contrastCount1 * temporalFreqCount1 * spatialPhaseCount1 * radiusCount1 * azimuthCount2 * elevationCount2 * sigmaCount2 * spatialFreqCount2 * directionDegCount2 * contrastCount2 * temporalFreqCount2 * spatialPhaseCount2 * radiusCount2;        // [Vinay] - Added the factor spatialPhaseCount*radiusCount
 	blockLimit = [[task defaults] integerForKey:CRSMappingBlocksKey];
     
     /*------[Vinay] - Initializing doneList in this new approach of dynamically assigning its size------*/
@@ -2129,7 +2203,7 @@ maxTargetS and a long stimLeadMS).
     radCount = fmax([[countsDict objectForKey:@"radiusCount0"] intValue],fmax([[countsDict objectForKey:@"radiusCount1"] intValue], [[countsDict objectForKey:@"radiusCount2"] intValue])); //sigCount is assigned the bigger of the three counts corresponding to the three gabors
     */ // [Vinay] - These line above aren't required now
     
-    //doneList = malloc(azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * sizeof(BOOL)); // [Vinay] : Initializing doneList here depending upon the gabor index. Therefore doneList will be different for each gabor depending upon the respective counts. Have put this in newBlock now
+    //doneList = malloc(azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionDegCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * sizeof(BOOL)); // [Vinay] : Initializing doneList here depending upon the gabor index. Therefore doneList will be different for each gabor depending upon the respective counts. Have put this in newBlock now
     
     //--------[Vinay] - till here------------
 }
@@ -2138,7 +2212,7 @@ maxTargetS and a long stimLeadMS).
 - (void)doneListDefine:(long)index;
 {
     //------[Vinay] --- Adding the following lines o initialize doneList dynamically depending on the current gabor
-    long azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount;   // [Vinay] - Added spatialPhaseCount, radiusCount
+    long azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionDegCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount;   // [Vinay] - Added spatialPhaseCount, radiusCount
 	NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
     
     switch (index){
@@ -2148,7 +2222,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount0"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount0"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount0"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount0"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
@@ -2160,7 +2234,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount1"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount1"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount1"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount1"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
@@ -2172,7 +2246,7 @@ maxTargetS and a long stimLeadMS).
             elevationCount = [[countsDict objectForKey:@"elevationCount2"] intValue];
             sigmaCount = [[countsDict objectForKey:@"sigmaCount2"] intValue];
             spatialFreqCount = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
-            directionCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
+            directionDegCount = [[countsDict objectForKey:@"orientationCount2"] intValue];
             contrastCount = [[countsDict objectForKey:@"contrastCount2"] intValue];
             temporalFreqCount = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
             spatialPhaseCount = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
@@ -2180,7 +2254,7 @@ maxTargetS and a long stimLeadMS).
             break;
     }
     
-    doneList = malloc(azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * sizeof(BOOL*)); // [Vinay] : Initializing doneList here depending upon the gabor index. Therefore doneList will be different for each gabor depending upon the respective counts
+    doneList = malloc(azimuthCount * elevationCount * sigmaCount * spatialFreqCount * directionDegCount * contrastCount * temporalFreqCount * spatialPhaseCount * radiusCount * sizeof(BOOL*)); // [Vinay] : Initializing doneList here depending upon the gabor index. Therefore doneList will be different for each gabor depending upon the respective counts
 
 }
 */

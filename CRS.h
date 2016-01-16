@@ -178,6 +178,7 @@ extern NSString *CRSCatchTrialMaxPCKey;
 extern NSString *CRSCueMSKey;
 //extern NSString *CRSChageScaleKey;
 extern NSString *CRSDoSoundsKey;
+extern NSString *CRSEyeFilterWeightKey;
 extern NSString *CRSFixateKey;
 extern NSString *CRSFixateMSKey;
 extern NSString *CRSFixateOnlyKey;
