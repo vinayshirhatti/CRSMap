@@ -34,7 +34,8 @@ enum {  kTrialStartDigitOutCode = 0x0010,
 
 
 #define	kMaxOriChanges	12
-#define kMaxMapValues   7    // [Vinay] - adjust this value as per the conditions; changed from 6 to 7 and this works because 7^6 < 6^7 (which was the working size in GRF). 8 will work as well because even 8^6 < 6^7, but 9^6 > 6^7
+#define kMaxMapValues   12    // [Vinay] - adjust this value as per the conditions; changed from 6 to 7 and this works because 7^6 < 6^7 (which was the working size in GRF). 8 will work as well because even 8^6 < 6^7, but 9^6 > 6^7
+    // [Vinay] - 23 March 2016: Today Knot kept crashing while running a DCProtocol with 9 contrast values. kMaxMapValues was set to 7. It is used in spikeController and since this value was lesser than the count it was throwing an exception. Therefore we have to make sure that kMaxMapValues is always greater than any count that we set (although this variable is used only in the spikeController as of now). I have set it to 12 for now.  
 #define kMaxMapValuesFixed 1 // [Vinay] - added this variable to represent fixed quantities/variables in the stimulus mapping list 
 
 typedef struct {

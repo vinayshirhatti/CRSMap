@@ -1572,11 +1572,11 @@
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
                                                                 <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="3445">
-                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" hasThousandSeparators="NO" thousandSeparator="," id="3446">
+                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" hasThousandSeparators="NO" thousandSeparator="," id="3446">
                                                                         <attributedString key="attributedStringForZero">
-                                                                            <fragment content="0"/>
+                                                                            <fragment content="0.00"/>
                                                                         </attributedString>
-                                                                        <decimal key="minimum" value="0"/>
+                                                                        <real key="minimum" value="-360"/>
                                                                         <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
@@ -2345,11 +2345,11 @@
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
                                                                 <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="3255">
-                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" hasThousandSeparators="NO" thousandSeparator="," id="3256">
+                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" hasThousandSeparators="NO" thousandSeparator="," id="3256">
                                                                         <attributedString key="attributedStringForZero">
-                                                                            <fragment content="0"/>
+                                                                            <fragment content="0.00"/>
                                                                         </attributedString>
-                                                                        <decimal key="minimum" value="0"/>
+                                                                        <real key="minimum" value="-360"/>
                                                                         <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
@@ -3118,11 +3118,11 @@
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                 </tableHeaderCell>
                                                                 <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="center" id="3532">
-                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" hasThousandSeparators="NO" thousandSeparator="," id="3533">
+                                                                    <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.00" negativeFormat="-0.00" hasThousandSeparators="NO" thousandSeparator="," id="3533">
                                                                         <attributedString key="attributedStringForZero">
-                                                                            <fragment content="0"/>
+                                                                            <fragment content="0.00"/>
                                                                         </attributedString>
-                                                                        <decimal key="minimum" value="0"/>
+                                                                        <real key="minimum" value="-360"/>
                                                                         <real key="maximum" value="360"/>
                                                                     </numberFormatter>
                                                                     <font key="font" metaFont="system"/>
