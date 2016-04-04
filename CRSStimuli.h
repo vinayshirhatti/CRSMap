@@ -31,6 +31,8 @@ CRSStimuli.h
     //BOOL                    matchSurroundCentre;           // [Vinay] - added this to indicate if surround and centre should have some common attributes
     LLFixTarget             *colorSpot;
     RGBFloat                rgb;
+    int                     *stimIndexList;
+    
 }
 
 - (void)doFixSettings;

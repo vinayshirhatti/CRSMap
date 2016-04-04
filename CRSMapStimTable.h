@@ -25,6 +25,8 @@
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //[Vinay] - incorporating changes from GaborRFMap for maintaining doneList, 12 Jan 2016
     CFMutableBitVectorRef doneList[3]; // maintained as a 1-D bit vector
+    CFMutableBitVectorRef doneStimIndexList;
+    long *trialStimIndexList[kMaxNumofStimuli];
     long azimuthCount;
     long elevationCount;
     long sigmaCount;
@@ -43,7 +45,8 @@
     int stimRemainingInBlockGabor[3]; // [Vinay] - for 3 gabors
 	int stimInBlockGabor[3]; // [Vinay] - for 3 gabors
 
-	NSMutableArray *currentStimList; //*copyList; [Vinay] - added copyList to copy stimulus list attributes from one gabor to another (surround gabor to the centre gabor). Have removed this later. 
+	NSMutableArray *currentStimList,*currentStimList0,*currentStimList1,*currentStimList2; //*copyList; [Vinay] - added copyList to copy stimulus list attributes from one gabor to another (surround gabor to the centre gabor). Have removed this later.
+        // [Vinay] - Added currentStimList0/1/2 to maintain the stim lists separately for all gabors for tallying later
 }
 
 - (long)blocksDone;
@@ -54,7 +57,7 @@
 - (id)initWithIndex:(long)index;
 - (float)linearValueWithIndex:(long)index count:(long)count min:(float)min max:(float)max;
 - (float)logValueWithIndex:(long)index count:(long)count min:(float)min max:(float)max;
-- (void)makeMapStimList:(NSMutableArray *)list index:(long)index lastFrame:(long)lastFrame pTrial:(TrialDesc *)pTrial;
+- (void)makeMapStimList:(NSMutableArray *)list index:(long)index lastFrame:(long)lastFrame pTrial:(TrialDesc *)pTrial trialStimIndicesList:(int *)trialStimIndicesList;
 - (MappingBlockStatus)mappingBlockStatus;
 - (MapSettings)mapSettings;
 - (void)newBlock;
@@ -62,9 +65,11 @@
 - (long)stimInBlock;
 - (void)tallyStimList:(NSMutableArray *)list  count:(long)count;
 - (void)tallyStimList:(NSMutableArray *)list  upToFrame:(long)frameLimit;
+- (void)tallyStimList:(NSMutableArray *)list0  listOne:(NSMutableArray *)list1 listTwo:(NSMutableArray *)list2 upToFrame:(long)frameLimit;
 - (long)stimDoneInBlock;
 //- (void)updateBlockParameters;
 - (void)updateBlockParameters:(long)mapIndex; // [Vinay] added the arg 'mapIndex' to have separate updates for different gabors
 //- (void)doneListDefine:(long)index; // [Vinay] Added to dynamically define doneList depending on the gabor index, to get a flexible size of doneList for each gabor corresponding to the respective mapping parameters
+- (long)computeStimulusIndices:(TrialDesc *)pTrial; // [Vinay] - Added to compute the indices of all gabor stimuli to be presented in the trial
 
 @end

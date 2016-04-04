@@ -76,9 +76,10 @@
 		else  {
             if ((!trial.catchTrial) || ([[task defaults] boolForKey:CRSIncludeCatchTrialsinDoneListKey])) { // update if it is not a catch trial or if CRSIncludeCatchTrialsinDoneList is set to YES
                 blockStatus.validRepsDone[trial.orientationChangeIndex]++;
-                [[(CRSMap *)task mapStimTable0] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
-                [[(CRSMap *)task mapStimTable1] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
-                [[(CRSMap *)task mapStimTable2] tallyStimList:nil upToFrame:[stimuli targetOnFrame]]; // Added by Vinay - for the centre gabor
+                [[(CRSMap *)task mapStimTable0] tallyStimList:nil listOne:nil listTwo:nil upToFrame:[stimuli targetOnFrame]];
+                //[[(CRSMap *)task mapStimTable0] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
+                //[[(CRSMap *)task mapStimTable1] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
+                //[[(CRSMap *)task mapStimTable2] tallyStimList:nil upToFrame:[stimuli targetOnFrame]]; // Added by Vinay - for the centre gabor
                 mappingBlockStatus =  [[(CRSMap *)task mapStimTable0] mappingBlockStatus];
                 //mappingBlockStatus =  [[(CRSMap *)task mapStimTable1] mappingBlockStatus]; // [Vinay] - added this, normally I haven't added if there's only gabor0 related line which isn't followed by a corresponding line for gabor1
                 //mappingBlockStatus =  [[(CRSMap *)task mapStimTable2] mappingBlockStatus]; // [Vinay] - added this

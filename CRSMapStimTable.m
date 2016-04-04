@@ -47,6 +47,9 @@ static long CRSMapStimTableCounter = 0;
         CFBitVectorSetCount(doneList[index], stimInBlockGabor[index]);
     }
     
+    doneStimIndexList = CFBitVectorCreateMutable(NULL, stimInBlock);
+    CFBitVectorSetCount(doneStimIndexList, stimInBlock);
+    
     [self newBlock];
 	return self;
 }
@@ -194,12 +197,12 @@ so that there will never be anything except targets and padding stimuli (e.g., w
 maxTargetS and a long stimLeadMS).
 */
 
-- (void)makeMapStimList:(NSMutableArray *)list index:(long)index lastFrame:(long)lastFrame pTrial:(TrialDesc *)pTrial
+- (void)makeMapStimList:(NSMutableArray *)list index:(long)index lastFrame:(long)lastFrame pTrial:(TrialDesc *)pTrial trialStimIndicesList:(int *)trialStimIndicesList
 {
 	long stim, frame, mapDurFrames, interDurFrames;
 	float frameRateHz;
 	StimDesc stimDesc; // [Vinay] - have added copyStimDesc to copy some stimulus attributes of the centre gabor and assign to the surround gabor when required. Now removed
-	int localFreshCount;
+	//int localFreshCount;
     
     /*----------------------[Vinay] - Have changed the doneList strategy to a dynamically updating doneList size now-------------
      */
@@ -233,7 +236,7 @@ maxTargetS and a long stimLeadMS).
     
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // [Vinay] 12 Jan 2016
-    CFMutableBitVectorRef localList;
+    //CFMutableBitVectorRef localList;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
     float azimuthDegMin, azimuthDegMax, elevationDegMin, elevationDegMax, sigmaDegMin, sigmaDegMax, spatialFreqCPDMin, spatialFreqCPDMax, directionDegMin, directionDegMax, radiusSigmaRatio, contrastPCMin, contrastPCMax, temporalFreqHzMin, temporalFreqHzMax, spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax; //[Vinay] -  Added spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax
@@ -391,10 +394,11 @@ maxTargetS and a long stimLeadMS).
     //~~~~~12 Jan 2016
     //memcpy(&localList, &doneList[index], sizeof(doneList[index]));
 	//localFreshCount = stimRemainingInBlock; //[Vinay] commented
-    
+    /*
     localList = CFBitVectorCreateMutableCopy(NULL, stimInBlockGabor[index], doneList[index]);
     CFBitVectorSetCount(localList, stimInBlockGabor[index]);
     localFreshCount = stimRemainingInBlockGabor[index]; // [Vinay] - separate index for separate gabors
+    */
 	frameRateHz = [[task stimWindow] frameRateHz];
 /*
     // debugging start
@@ -433,7 +437,7 @@ maxTargetS and a long stimLeadMS).
 		NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
 		//int azimuthCount, elevationCount, sigmaCount, spatialFreqCount, directionDegCount, contrastCount, temporalFreqCount, spatialPhaseCount, radiusCount; // [Vinay - Added spatialPhaseCount, radiusCount
 		int startAzimuthIndex, startElevationIndex, startSigmaIndex, startSpatialFreqIndex, startDirectionDegIndex, startContrastIndex,startTemporalFreqIndex, startSpatialPhaseIndex, startRadiusIndex, stimIndex; // [Vinay] - Added startSpatialPhaseIndex, startRadiusIndex
-		BOOL stimDone = YES;
+		//BOOL stimDone = YES;
         
         
         // [Vinay] - The following code for reading the count values has been changed to instead read and assign values as per the specific protocol. Hence the follwoing code is commented temporarily and the new code is placed ahead. This code has been taken from updateBlockParameters which is a function ahead in this program.
@@ -681,7 +685,7 @@ maxTargetS and a long stimLeadMS).
                 //contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
-                radiusCount1 = 1;
+                //radiusCount1 = 1; //[Vinay], 01/04/16: radius count can be >1 for dual protocols
                 
                 break;
             case 4:
@@ -706,7 +710,7 @@ maxTargetS and a long stimLeadMS).
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
-                radiusCount1 = 1;
+                //radiusCount1 = 1;
                 
                 break;
             case 5:
@@ -731,7 +735,7 @@ maxTargetS and a long stimLeadMS).
                 contrastCount1 = 1;
                 temporalFreqCount1 = 1;
                 //spatialPhaseCount1 = 1;
-                radiusCount1 = 1;
+                //radiusCount1 = 1;
                 
                 break;
             case 6:
@@ -932,7 +936,7 @@ maxTargetS and a long stimLeadMS).
         //---------------------------------------
         
         
-        
+        /*
         startAzimuthIndex = azimuthIndex = rand() % azimuthCount;
 		startElevationIndex = elevationIndex = rand() % elevationCount;
 		startSigmaIndex = sigmaIndex = rand() % sigmaCount;
@@ -942,6 +946,28 @@ maxTargetS and a long stimLeadMS).
         startTemporalFreqIndex = temporalFreqIndex = rand() % temporalFreqCount;
         startSpatialPhaseIndex = spatialPhaseIndex = rand() % spatialPhaseCount; // [Vinay] - Added for spatial phase
         startRadiusIndex = radiusIndex = rand() % radiusCount; // [Vinay] - Added for radius
+        */
+        
+        stimIndex = trialStimIndicesList[stim];
+        
+        int factor=1; // default, for index=0
+        if (index==1) {
+            factor=stimInBlockGabor[0];
+        }
+        else if (index==2){
+            factor=stimInBlockGabor[0]*stimInBlockGabor[1];
+        }
+        
+        
+        startAzimuthIndex = azimuthIndex = (long)(floor(stimIndex / factor)) % azimuthCount;
+        startElevationIndex = elevationIndex = (long)(stimIndex / (factor*azimuthCount)) % elevationCount;
+        startSigmaIndex = sigmaIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount)) % sigmaCount;
+		startSpatialFreqIndex = spatialFreqIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount)) % spatialFreqCount;
+		startDirectionDegIndex = directionDegIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount)) % directionDegCount;
+		startContrastIndex = contrastIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount)) % contrastCount;
+        startTemporalFreqIndex = temporalFreqIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount)) % temporalFreqCount;
+        startSpatialPhaseIndex = spatialPhaseIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount)) % spatialPhaseCount; // [Vinay] - Added for spatial phase
+        startRadiusIndex = radiusIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount*spatialPhaseCount)) % radiusCount; // [Vinay] - Added for radius
         
         // [Vinay] - added the following loop to copy the index values of centre gabor to those of surround gabor when they need to have some similar attributes
         // This doesn't work!
@@ -977,7 +1003,7 @@ maxTargetS and a long stimLeadMS).
 		*/
         
         
-        
+        /*
 		for (;;) {
 			//~~~~~~~~~~~~~~~ 12 Jan 2016
             //stimDone=localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex]; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
@@ -996,7 +1022,7 @@ maxTargetS and a long stimLeadMS).
             
 			if (!stimDone) {
 				break;
-			}
+			}*/
             /* // [Vinay] - have commented out from here
 			if ((azimuthIndex = ((azimuthIndex+1)%azimuthCount)) == startAzimuthIndex) {
 				if ((elevationIndex = ((elevationIndex+1)%elevationCount)) == startElevationIndex) {
@@ -1016,7 +1042,7 @@ maxTargetS and a long stimLeadMS).
 			}
 		}
 			*/ // [Vinay] - have commented out till here
-            
+            /*
             // [Vinay] - This is the modified loop. I have added two extra loops for spatial phase and radius
             if ((azimuthIndex = ((azimuthIndex+1)%azimuthCount)) == startAzimuthIndex) {
 				if ((elevationIndex = ((elevationIndex+1)%elevationCount)) == startElevationIndex) {
@@ -1039,6 +1065,7 @@ maxTargetS and a long stimLeadMS).
 				}
 			}
 		}
+        */
 
 		// this stimulus has not been done - add it to the list
 
@@ -1260,6 +1287,7 @@ maxTargetS and a long stimLeadMS).
 		//~~~~~~~~~~~~~~~~~~~~~ 12 Jan 2016
         //localList[azimuthIndex][elevationIndex][sigmaIndex][spatialFreqIndex][directionDegIndex][contrastIndex][temporalFreqIndex][spatialPhaseIndex][radiusIndex] = TRUE; // [Vinay] - added [spatialPhaseIndex][radiusIndex] term
         //~~~~~~~~~~~~~~~~~~~~~
+        /*
         CFBitVectorSetBitAtIndex(localList, stimIndex, 1);
 		//		NSLog(@"%d %d %d %d %d",stimDesc.azimuthIndex,stimDesc.elevationIndex,stimDesc.sigmaIndex,stimDesc.spatialFreqIndex,stimDesc.directionIndex);
 		if (--localFreshCount == 0) {
@@ -1271,11 +1299,27 @@ maxTargetS and a long stimLeadMS).
             //~~~~~~~~~~~~~~~~~~~~~~~~
             CFBitVectorSetAllBits(localList, 0);
 			localFreshCount = stimInBlockGabor[index];
-		}
+		}*/
 	}
 //	[self dumpStimList:list listIndex:index];
-	[currentStimList release];
-	currentStimList = [list retain];
+    switch (index) {
+        case 0:
+            [currentStimList0 release];
+            currentStimList0 = [list retain];
+            break;
+        case 1:
+            [currentStimList1 release];
+            currentStimList1 = [list retain];
+            break;
+        case 2:
+            [currentStimList2 release];
+            currentStimList2 = [list retain];
+            break;
+        default:
+            [currentStimList release];
+            currentStimList = [list retain];
+            break;
+    }
 	// Count the stimlist as completed
     
 }
@@ -1350,6 +1394,8 @@ maxTargetS and a long stimLeadMS).
 	for (index = 0; index<kGabors-1; index++) {
         CFBitVectorSetAllBits(doneList[index], 0);
     }
+    CFBitVectorSetAllBits(doneStimIndexList, 0);
+    
     stimRemainingInBlock = stimInBlock;
 }
 
@@ -1361,12 +1407,16 @@ maxTargetS and a long stimLeadMS).
     }
     //stimInBlock = stimRemainingInBlock = stimInBlockGabor[0]*stimInBlockGabor[1]*stimInBlockGabor[2]; //[Vinay] - total value as a product of individual gabor values
     //[self updateBlockParameters];
-    [self newBlock];
     blocksDone = 0;
 	for (index = 0; index<kGabors-1; index++) {
         doneList[index] = CFBitVectorCreateMutable(NULL, stimInBlock);
         CFBitVectorSetCount(doneList[index], stimInBlockGabor[index]);
     }
+    
+    doneStimIndexList = CFBitVectorCreateMutable(NULL, stimInBlock);
+    CFBitVectorSetCount(doneStimIndexList, stimInBlock);
+    
+    [self newBlock];
 
 }
 
@@ -1497,6 +1547,445 @@ maxTargetS and a long stimLeadMS).
 	}
 	return;
 }
+
+// [Vinay] - Adding this function to compute the stimIndex back from the index values of all parameters of the stimuli drawn
+- (void)tallyStimList:(NSMutableArray *)list0  listOne:(NSMutableArray *)list1 listTwo:(NSMutableArray *)list2 upToFrame:(long)frameLimit;
+{
+    StimDesc stimDesc0,stimDesc1,stimDesc2;
+	long i,stim,a0,e0,sf0,sig0,o0,c0,t0,p0,r0,a1,e1,sf1,sig1,o1,c1,t1,p1,r1,a2,e2,sf2,sig2,o2,c2,t2,p2,r2;
+	NSValue *val0,*val1,*val2;
+	NSMutableArray *l0,*l1,*l2;
+    int stimIndex = 0;
+    NSInteger ilist[27],clist[27];
+    
+    NSDictionary *countsDict = (NSDictionary *)[[[task defaults] arrayForKey:@"CRSStimTableCounts"] objectAtIndex:0];
+    long azimuthCount0, elevationCount0, sigmaCount0, spatialFreqCount0, directionDegCount0, contrastCount0, temporalFreqCount0, spatialPhaseCount0, radiusCount0, azimuthCount1, elevationCount1, sigmaCount1, spatialFreqCount1, directionDegCount1, contrastCount1, temporalFreqCount1, spatialPhaseCount1, radiusCount1, azimuthCount2, elevationCount2, sigmaCount2, spatialFreqCount2, directionDegCount2, contrastCount2, temporalFreqCount2, spatialPhaseCount2, radiusCount2;
+    
+    azimuthCount0 = [[countsDict objectForKey:@"azimuthCount0"] intValue];
+    elevationCount0 = [[countsDict objectForKey:@"elevationCount0"] intValue];
+    sigmaCount0 = [[countsDict objectForKey:@"sigmaCount0"] intValue];
+    spatialFreqCount0 = [[countsDict objectForKey:@"spatialFreqCount0"] intValue];
+    directionDegCount0 = [[countsDict objectForKey:@"orientationCount0"] intValue];
+    contrastCount0 = [[countsDict objectForKey:@"contrastCount0"] intValue];
+    temporalFreqCount0 = [[countsDict objectForKey:@"temporalFreqCount0"] intValue];
+    spatialPhaseCount0 = [[countsDict objectForKey:@"spatialPhaseCount0"] intValue]; // [Vinay] - added for spatial phase
+    radiusCount0 = [[countsDict objectForKey:@"radiusCount0"] intValue]; // [Vinay] - added for radius
+    
+    azimuthCount1 = [[countsDict objectForKey:@"azimuthCount1"] intValue];
+    elevationCount1 = [[countsDict objectForKey:@"elevationCount1"] intValue];
+    sigmaCount1 = [[countsDict objectForKey:@"sigmaCount1"] intValue];
+    spatialFreqCount1 = [[countsDict objectForKey:@"spatialFreqCount1"] intValue];
+    directionDegCount1 = [[countsDict objectForKey:@"orientationCount1"] intValue];
+    contrastCount1 = [[countsDict objectForKey:@"contrastCount1"] intValue];
+    temporalFreqCount1 = [[countsDict objectForKey:@"temporalFreqCount1"] intValue];
+    spatialPhaseCount1 = [[countsDict objectForKey:@"spatialPhaseCount1"] intValue]; // [Vinay] - added for spatial phase
+    radiusCount1 = [[countsDict objectForKey:@"radiusCount1"] intValue]; // [Vinay] - added for radius
+    
+    azimuthCount2 = [[countsDict objectForKey:@"azimuthCount2"] intValue];
+    elevationCount2 = [[countsDict objectForKey:@"elevationCount2"] intValue];
+    sigmaCount2 = [[countsDict objectForKey:@"sigmaCount2"] intValue];
+    spatialFreqCount2 = [[countsDict objectForKey:@"spatialFreqCount2"] intValue];
+    directionDegCount2 = [[countsDict objectForKey:@"orientationCount2"] intValue];
+    contrastCount2 = [[countsDict objectForKey:@"contrastCount2"] intValue];
+    temporalFreqCount2 = [[countsDict objectForKey:@"temporalFreqCount2"] intValue];
+    spatialPhaseCount2 = [[countsDict objectForKey:@"spatialPhaseCount2"] intValue]; // [Vinay] - added for spatial phase
+    radiusCount2 = [[countsDict objectForKey:@"radiusCount2"] intValue]; // [Vinay] - added for radius
+    
+    
+    //==========================^^^^^^^^
+    // [Vinay] - change the counts based on specific protocols. This is necessary because some features of the gabors are matched as per the requirements of the specific protocols and therefore the total count actually reduces
+    
+    //### [Vinay] - this method of setting the values for the count keys as used below is failing! So comment this out!
+    
+    switch ([[task defaults] integerForKey:@"CRSProtocolNumber"]) {
+        case 0:
+            //noneProtocol
+            // Do nothing, except for when particular keys are raised. Eg. hide a certain gabor => pull all its counts to 1 OR in match conditions pull the redundant counts to 1
+            if ([[task defaults] boolForKey:CRSHideSurroundKey]) {
+                azimuthCount0 = 1;
+                elevationCount0 = 1;
+                sigmaCount0 = 1;
+                spatialFreqCount0 = 1;
+                directionDegCount0 = 1;
+                contrastCount0 = 1;
+                temporalFreqCount0 = 1;
+                spatialPhaseCount0 = 1;
+                radiusCount0 = 1;
+            }
+            
+            if ([[task defaults] boolForKey:CRSHideRingKey]) {
+                azimuthCount1 = 1;
+                elevationCount1 = 1;
+                sigmaCount1 = 1;
+                spatialFreqCount1 = 1;
+                directionDegCount1 = 1;
+                contrastCount1 = 1;
+                temporalFreqCount1 = 1;
+                spatialPhaseCount1 = 1;
+                radiusCount1 = 1;
+                
+            }
+            else if (![[task defaults] boolForKey:CRSHideRingKey] && [[task defaults] boolForKey:CRSMatchRingSurroundKey]) {
+                azimuthCount1 = 1;
+                elevationCount1 = 1;
+                sigmaCount1 = 1;
+                spatialFreqCount1 = 1;
+                directionDegCount1 = 1;
+                contrastCount1 = 1;
+                temporalFreqCount1 = 1;
+                spatialPhaseCount1 = 1;
+                //radiusCount1 = 1; //[Vinay] - make every count 1 except radiusCount
+            }
+            
+            if ([[task defaults] boolForKey:CRSHideCentreKey]) {
+                azimuthCount2 = 1;
+                elevationCount2 = 1;
+                sigmaCount2 = 1;
+                spatialFreqCount2 = 1;
+                directionDegCount2 = 1;
+                contrastCount2 = 1;
+                temporalFreqCount2 = 1;
+                spatialPhaseCount2 = 1;
+                radiusCount2 = 1;
+            }
+            else if (![[task defaults] boolForKey:CRSHideCentreKey] && ([[task defaults] boolForKey:CRSMatchCentreRingKey] || [[task defaults] boolForKey:CRSMatchCentreSurroundKey])) {
+                azimuthCount2 = 1;
+                elevationCount2 = 1;
+                sigmaCount2 = 1;
+                spatialFreqCount2 = 1;
+                directionDegCount2 = 1;
+                contrastCount2 = 1;
+                temporalFreqCount2 = 1;
+                spatialPhaseCount2 = 1;
+                //radiusCount2 = 1; //[Vinay] - make every count 1 except radiusCount
+            }
+            break;
+        case 1:
+            //ringProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            
+            // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1 except radius
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            
+            break;
+        case 2:
+            //contrastRingProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            
+            // [Vinay] - Therefore take all the counts to 1 except contrast and radius
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            //contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            break;
+        case 3:
+            //dualContrastProtocol
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            //[Vinay] - ring radius set to maximum => radiusCount = 1. Except contrast rest are matched to the centre => theirCount = 1
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            //contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1; //[Vinay], 01/04/16: radius count can be >1 for dual protocols
+            
+            break;
+        case 4:
+            //dualOrientationProtocol
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction rest are matched to the centre => theirCount = 1
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1;
+            
+            break;
+        case 5:
+            //dualPhaseProtocol
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            //[Vinay] - ring radius set to maximum => radiusCount = 1. Except spatial phase rest are matched to the centre => theirCount = 1
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            //spatialPhaseCount1 = 1;
+            //radiusCount1 = 1;
+            
+            break;
+        case 6:
+            //orientationRingProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            
+            // [Vinay] - Therefore take all the counts to 1 except orientation i.e. direction and radius
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            break;
+        case 7:
+            //phaseRingProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            
+            // [Vinay] - Therefore take all the counts to 1 except spatial phase and radius
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            //spatialPhaseCount1 = 1;
+            break;
+        case 8:
+            //driftingPhaseProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            
+            // [Vinay] - Therefore take all the counts to 1 except temporal frequency and radius
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            contrastCount1 = 1;
+            //temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            
+            break;
+        case 9:
+            //crossOrientationProtocol
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            break;
+        case 10:
+            //annulusFixedProtocol
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            //radiusCount2 = 1;
+            
+            // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            spatialFreqCount1 = 1;
+            directionDegCount1 = 1;
+            contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    // [Vinay] - just using shorter names
+    clist[26] = azimuthCount0;
+    clist[25] = elevationCount0;
+    clist[24] = spatialFreqCount0;
+    clist[23] = sigmaCount0;
+    clist[22] = directionDegCount0;
+    clist[21] = contrastCount0;
+    clist[20] = temporalFreqCount0;
+    clist[19] = spatialPhaseCount0;
+    clist[18] = radiusCount0;
+    
+    clist[17] = azimuthCount1;
+    clist[16] = elevationCount1;
+    clist[15] = spatialFreqCount1;
+    clist[14] = sigmaCount1;
+    clist[13] = directionDegCount1;
+    clist[12] = contrastCount1;
+    clist[11] = temporalFreqCount1;
+    clist[10] = spatialPhaseCount1;
+    clist[9] = radiusCount1;
+    
+    clist[8] = azimuthCount2;
+    clist[7] = elevationCount2;
+    clist[6] = spatialFreqCount2;
+    clist[5] = sigmaCount2;
+    clist[4] = directionDegCount2;
+    clist[3] = contrastCount2;
+    clist[2] = temporalFreqCount2;
+    clist[1] = spatialPhaseCount2;
+    clist[0] = radiusCount2;
+
+	
+	l0 = (list0 == nil) ? currentStimList0 : list0;
+    l1 = (list1 == nil) ? currentStimList1 : list1;
+    l2 = (list2 == nil) ? currentStimList2 : list2;
+    
+	for (stim = 0; stim < [l2 count]; stim++) {
+		val0 = [l0 objectAtIndex:stim];
+        val1 = [l1 objectAtIndex:stim];
+        val2 = [l2 objectAtIndex:stim];
+		[val0 getValue:&stimDesc0];
+        [val1 getValue:&stimDesc1];
+        [val2 getValue:&stimDesc2];
+		if (stimDesc2.stimOffFrame > frameLimit) {
+			break;
+		}
+		ilist[26] = a0 = stimDesc0.azimuthIndex;
+		ilist[25] = e0 = stimDesc0.elevationIndex;
+        ilist[24] = sig0 = stimDesc0.sigmaIndex;
+		ilist[23] = sf0 = stimDesc0.spatialFreqIndex;
+		ilist[22] = o0 = stimDesc0.directionIndex;
+		ilist[21] = c0 = stimDesc0.contrastIndex;
+        ilist[20] = t0=stimDesc0.temporalFreqIndex;
+        ilist[19] = p0=stimDesc0.spatialPhaseIndex;
+        ilist[18] = r0=stimDesc0.radiusIndex;
+        
+        ilist[17] = a1 = stimDesc1.azimuthIndex;
+		ilist[16] = e1 = stimDesc1.elevationIndex;
+        ilist[15] = sig1 = stimDesc1.sigmaIndex;
+		ilist[14] = sf1 = stimDesc1.spatialFreqIndex;
+		ilist[13] = o1 = stimDesc1.directionIndex;
+		ilist[12] = c1 = stimDesc1.contrastIndex;
+        ilist[11] = t1=stimDesc1.temporalFreqIndex;
+        ilist[10] = p1=stimDesc1.spatialPhaseIndex;
+        ilist[9] = r1=stimDesc1.radiusIndex;
+        
+        ilist[8] = a2 = stimDesc2.azimuthIndex;
+		ilist[7] = e2 = stimDesc2.elevationIndex;
+        ilist[6] = sig2 = stimDesc2.sigmaIndex;
+		ilist[5] = sf2 = stimDesc2.spatialFreqIndex;
+		ilist[4] = o2 = stimDesc2.directionIndex;
+		ilist[3] = c2 = stimDesc2.contrastIndex;
+        ilist[2] = t2=stimDesc2.temporalFreqIndex;
+        ilist[1] = p2=stimDesc2.spatialPhaseIndex;
+        ilist[0] = r2=stimDesc2.radiusIndex;
+        
+        stimIndex = 0;
+        int range = stimInBlock;
+        for (i=0; i<28; i++) {
+            stimIndex = stimIndex + (range/clist[i])*ilist[i];
+            range = range/clist[i];
+        }
+        
+        CFBitVectorSetBitAtIndex(doneStimIndexList, stimIndex, 1);
+        
+        if (--stimRemainingInBlock == 0 ) {
+			[self newBlock];
+			blocksDone++;
+		}
+        // [Vinay] - added display line for debugging
+        NSLog(@"Stim remaining in this block = %d",stimRemainingInBlock);
+    }
+    return;
+}
+
 
 - (long)stimDoneInBlock;
 {
@@ -1863,7 +2352,7 @@ maxTargetS and a long stimLeadMS).
             //contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
-            radiusCount1 = 1;
+            //radiusCount1 = 1; //[Vinay], 01/04/16: radius count can be >1 for dual protocols
             
             break;
         case 4:
@@ -1888,7 +2377,7 @@ maxTargetS and a long stimLeadMS).
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
-            radiusCount1 = 1;
+            //radiusCount1 = 1; //[Vinay], 01/04/16: radius count can be >1 for dual protocols. This was already done in makeMapStimList for DOP
 
             break;
         case 5:
@@ -1913,7 +2402,7 @@ maxTargetS and a long stimLeadMS).
             contrastCount1 = 1;
             temporalFreqCount1 = 1;
             //spatialPhaseCount1 = 1;
-            radiusCount1 = 1;
+            //radiusCount1 = 1; //[Vinay], 01/04/16: radius count can be >1 for dual protocols. This was already done in makeMapStimList for DPP
 
             break;
         case 6:
@@ -2258,5 +2747,40 @@ maxTargetS and a long stimLeadMS).
 
 }
 */
+
+- (long)computeStimulusIndices:(TrialDesc *)pTrial;
+{
+    int numStim = pTrial->numStim;
+    int localFreshCount,stimIndex,i;
+    BOOL stimDone = YES;
+    
+    CFMutableBitVectorRef localList;
+    
+    localList = CFBitVectorCreateMutableCopy(NULL, stimInBlock, doneStimIndexList);
+    CFBitVectorSetCount(localList, stimInBlock);
+    localFreshCount = stimRemainingInBlock;
+    
+    for (i=0; i<numStim; i++) {
+        
+        for (;;) {
+        stimIndex = rand() % stimInBlock;
+        stimDone = CFBitVectorGetBitAtIndex(localList, stimIndex);
+            
+            if (!stimDone) {
+				break;
+			}
+        }
+        trialStimIndexList[i] = stimIndex;
+        CFBitVectorSetBitAtIndex(localList, stimIndex, 1);
+        NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~ Stim Index: %d",stimIndex);
+        if (--localFreshCount == 0) {
+            CFBitVectorSetAllBits(localList, 0);
+            localFreshCount = stimInBlock;
+        }
+    }
+    
+    return trialStimIndexList;
+    
+}
 
 @end

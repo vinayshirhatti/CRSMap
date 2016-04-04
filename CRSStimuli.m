@@ -251,12 +251,14 @@ by mapStimTable.
 		}
 	}
 //	[self dumpStimList];
+    
+    stimIndexList = [[(CRSMap*)task mapStimTable0] computeStimulusIndices:pTrial];
 	
 // The task stim list is done, now we need to get the mapping stim lists
 
-    [[(CRSMap*)task mapStimTable0] makeMapStimList:mapStimList0 index:0 lastFrame:lastStimOffFrame pTrial:pTrial];
-	[[(CRSMap*)task mapStimTable1] makeMapStimList:mapStimList1 index:1 lastFrame:lastStimOffFrame pTrial:pTrial];
-    [[(CRSMap*)task mapStimTable2] makeMapStimList:mapStimList2 index:2 lastFrame:lastStimOffFrame pTrial:pTrial];          // [Vinay] - for the centre gabor
+    [[(CRSMap*)task mapStimTable0] makeMapStimList:mapStimList0 index:0 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];
+	[[(CRSMap*)task mapStimTable1] makeMapStimList:mapStimList1 index:1 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];
+    [[(CRSMap*)task mapStimTable2] makeMapStimList:mapStimList2 index:2 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];          // [Vinay] - for the centre gabor
     
     //===================^^^==========================
     // [Vinay] - the following lines have been added to change stimulus parameters mapping as per the specific protocol requirements
