@@ -26,7 +26,7 @@
     //[Vinay] - incorporating changes from GaborRFMap for maintaining doneList, 12 Jan 2016
     CFMutableBitVectorRef doneList[3]; // maintained as a 1-D bit vector
     CFMutableBitVectorRef doneStimIndexList;
-    long *trialStimIndexList[kMaxNumofStimuli];
+    //long *trialStimIndexList[kMaxNumofStimuli];
     long azimuthCount;
     long elevationCount;
     long sigmaCount;
@@ -70,6 +70,6 @@
 //- (void)updateBlockParameters;
 - (void)updateBlockParameters:(long)mapIndex; // [Vinay] added the arg 'mapIndex' to have separate updates for different gabors
 //- (void)doneListDefine:(long)index; // [Vinay] Added to dynamically define doneList depending on the gabor index, to get a flexible size of doneList for each gabor corresponding to the respective mapping parameters
-- (long)computeStimulusIndices:(TrialDesc *)pTrial; // [Vinay] - Added to compute the indices of all gabor stimuli to be presented in the trial
+- (int *)computeStimulusIndices:(TrialDesc *)pTrial; // [Vinay] - Added to compute the indices of all gabor stimuli to be presented in the trial
 
 @end

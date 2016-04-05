@@ -948,7 +948,7 @@ maxTargetS and a long stimLeadMS).
         startRadiusIndex = radiusIndex = rand() % radiusCount; // [Vinay] - Added for radius
         */
         
-        stimIndex = trialStimIndicesList[stim];
+        stimIndex = *(trialStimIndicesList+stim);
         
         int factor=1; // default, for index=0
         if (index==1) {
@@ -2748,11 +2748,12 @@ maxTargetS and a long stimLeadMS).
 }
 */
 
-- (long)computeStimulusIndices:(TrialDesc *)pTrial;
+- (int *)computeStimulusIndices:(TrialDesc *)pTrial;
 {
     int numStim = pTrial->numStim;
     int localFreshCount,stimIndex,i;
     BOOL stimDone = YES;
+    static int tStimIndexList[kMaxNumofStimuli];
     
     CFMutableBitVectorRef localList;
     
@@ -2770,16 +2771,19 @@ maxTargetS and a long stimLeadMS).
 				break;
 			}
         }
-        trialStimIndexList[i] = stimIndex;
+        //trialStimIndexList[i] = stimIndex;
+        tStimIndexList[i] = stimIndex;
         CFBitVectorSetBitAtIndex(localList, stimIndex, 1);
         NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~ Stim Index: %d",stimIndex);
         if (--localFreshCount == 0) {
             CFBitVectorSetAllBits(localList, 0);
+            
             localFreshCount = stimInBlock;
         }
     }
     
-    return trialStimIndexList;
+    //return *trialStimIndexList;
+    return tStimIndexList;
     
 }
 
