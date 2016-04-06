@@ -50,6 +50,10 @@ static long CRSMapStimTableCounter = 0;
     doneStimIndexList = CFBitVectorCreateMutable(NULL, stimInBlock);
     CFBitVectorSetCount(doneStimIndexList, stimInBlock);
     
+    currentStimList0 = [[NSMutableArray alloc] init];
+	currentStimList1 = [[NSMutableArray alloc] init];
+    currentStimList2 = [[NSMutableArray alloc] init];
+    
     [self newBlock];
 	return self;
 }
@@ -1304,16 +1308,19 @@ maxTargetS and a long stimLeadMS).
 //	[self dumpStimList:list listIndex:index];
     switch (index) {
         case 0:
-            [currentStimList0 release];
-            currentStimList0 = [list retain];
+            //[currentStimList0 release];
+            //currentStimList0 = [list retain];
+            currentStimList0 = list;
             break;
         case 1:
-            [currentStimList1 release];
-            currentStimList1 = [list retain];
+            //[currentStimList1 release];
+            //currentStimList1 = [list retain];
+            currentStimList1 = list;
             break;
         case 2:
-            [currentStimList2 release];
-            currentStimList2 = [list retain];
+            //[currentStimList2 release];
+            //currentStimList2 = [list retain];
+            currentStimList2 = list;
             break;
         default:
             [currentStimList release];
