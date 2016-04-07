@@ -76,7 +76,8 @@
 		else  {
             if ((!trial.catchTrial) || ([[task defaults] boolForKey:CRSIncludeCatchTrialsinDoneListKey])) { // update if it is not a catch trial or if CRSIncludeCatchTrialsinDoneList is set to YES
                 blockStatus.validRepsDone[trial.orientationChangeIndex]++;
-                [[(CRSMap *)task mapStimTable0] tallyStimList:nil listOne:nil listTwo:nil upToFrame:[stimuli targetOnFrame]];
+                //[[(CRSMap *)task mapStimTable0] tallyStimList:nil listOne:nil listTwo:nil upToFrame:[stimuli targetOnFrame]];
+                [[(CRSMap *)task stimuli] tallyStimListsUpToFrame:[stimuli targetOnFrame]];
                 //[[(CRSMap *)task mapStimTable0] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
                 //[[(CRSMap *)task mapStimTable1] tallyStimList:nil upToFrame:[stimuli targetOnFrame]];
                 //[[(CRSMap *)task mapStimTable2] tallyStimList:nil upToFrame:[stimuli targetOnFrame]]; // Added by Vinay - for the centre gabor

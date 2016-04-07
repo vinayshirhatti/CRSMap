@@ -50,10 +50,6 @@ static long CRSMapStimTableCounter = 0;
     doneStimIndexList = CFBitVectorCreateMutable(NULL, stimInBlock);
     CFBitVectorSetCount(doneStimIndexList, stimInBlock);
     
-    currentStimList0 = [[NSMutableArray alloc] init];
-	currentStimList1 = [[NSMutableArray alloc] init];
-    currentStimList2 = [[NSMutableArray alloc] init];
-    
     [self newBlock];
 	return self;
 }
@@ -1306,27 +1302,8 @@ maxTargetS and a long stimLeadMS).
 		}*/
 	}
 //	[self dumpStimList:list listIndex:index];
-    switch (index) {
-        case 0:
-            //[currentStimList0 release];
-            //currentStimList0 = [list retain];
-            currentStimList0 = list;
-            break;
-        case 1:
-            //[currentStimList1 release];
-            //currentStimList1 = [list retain];
-            currentStimList1 = list;
-            break;
-        case 2:
-            //[currentStimList2 release];
-            //currentStimList2 = [list retain];
-            currentStimList2 = list;
-            break;
-        default:
-            [currentStimList release];
-            currentStimList = [list retain];
-            break;
-    }
+    [currentStimList release];
+    currentStimList = [list retain];
 	// Count the stimlist as completed
     
 }
@@ -1930,11 +1907,11 @@ maxTargetS and a long stimLeadMS).
     clist[0] = radiusCount2;
 
 	
-	l0 = (list0 == nil) ? currentStimList0 : list0;
-    l1 = (list1 == nil) ? currentStimList1 : list1;
-    l2 = (list2 == nil) ? currentStimList2 : list2;
+	l0 = (list0 == nil) ? currentStimList : list0;
+    l1 = (list1 == nil) ? currentStimList : list1;
+    l2 = (list2 == nil) ? currentStimList : list2;
     
-	for (stim = 0; stim < [l2 count]; stim++) {
+	for (stim = 0; stim < [l0 count]; stim++) {
 		val0 = [l0 objectAtIndex:stim];
         val1 = [l1 objectAtIndex:stim];
         val2 = [l2 objectAtIndex:stim];
@@ -1976,13 +1953,13 @@ maxTargetS and a long stimLeadMS).
         
         stimIndex = 0;
         int range = stimInBlock;
-        for (i=0; i<28; i++) {
+        for (i=0; i<27; i++) {
             stimIndex = stimIndex + (range/clist[i])*ilist[i];
             range = range/clist[i];
         }
         
         CFBitVectorSetBitAtIndex(doneStimIndexList, stimIndex, 1);
-        
+        NSLog(@"~~~~~~~~~~~ Stim Index calculated: %d",stimIndex);
         if (--stimRemainingInBlock == 0 ) {
 			[self newBlock];
 			blocksDone++;

@@ -58,5 +58,9 @@ CRSStimuli.h
 - (long)targetOnFrame;
 - (BOOL)targetPresented;
 - (RGBFloat)RGBFromIndex:(int)index factor:(int)factor;
+- (void)tallyStimListsUpToFrame:(long)frameLimit;
+- (NSMutableArray *)mapStimList0;
+- (NSMutableArray *)mapStimList1;
+- (NSMutableArray *)mapStimList2;
 
 @end

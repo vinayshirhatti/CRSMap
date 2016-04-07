@@ -1743,4 +1743,25 @@ by mapStimTable.
     return (rgb);
 }
 
+- (void)tallyStimListsUpToFrame:(long)frameLimit;
+{
+    [[(CRSMap *)task mapStimTable0] tallyStimList:mapStimList0 listOne:mapStimList1 listTwo:mapStimList2 upToFrame:frameLimit];
+}
+
+- (NSMutableArray *)mapStimList0
+{
+    return mapStimList0;
+}
+
+- (NSMutableArray *)mapStimList1
+{
+    return mapStimList1;
+}
+
+- (NSMutableArray *)mapStimList2
+{
+    return mapStimList2;
+}
+
+
 @end

@@ -45,7 +45,7 @@
     int stimRemainingInBlockGabor[3]; // [Vinay] - for 3 gabors
 	int stimInBlockGabor[3]; // [Vinay] - for 3 gabors
 
-	NSMutableArray *currentStimList,*currentStimList0,*currentStimList1,*currentStimList2; //*copyList; [Vinay] - added copyList to copy stimulus list attributes from one gabor to another (surround gabor to the centre gabor). Have removed this later.
+	NSMutableArray *currentStimList; //*copyList; [Vinay] - added copyList to copy stimulus list attributes from one gabor to another (surround gabor to the centre gabor). Have removed this later.
         // [Vinay] - Added currentStimList0/1/2 to maintain the stim lists separately for all gabors for tallying later
 }
 
