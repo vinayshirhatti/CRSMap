@@ -960,14 +960,14 @@ maxTargetS and a long stimLeadMS).
         
         
         startAzimuthIndex = azimuthIndex = (long)(floor(stimIndex / factor)) % azimuthCount;
-        startElevationIndex = elevationIndex = (long)(stimIndex / (factor*azimuthCount)) % elevationCount;
-        startSigmaIndex = sigmaIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount)) % sigmaCount;
-		startSpatialFreqIndex = spatialFreqIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount)) % spatialFreqCount;
-		startDirectionDegIndex = directionDegIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount)) % directionDegCount;
-		startContrastIndex = contrastIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount)) % contrastCount;
-        startTemporalFreqIndex = temporalFreqIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount)) % temporalFreqCount;
-        startSpatialPhaseIndex = spatialPhaseIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount)) % spatialPhaseCount; // [Vinay] - Added for spatial phase
-        startRadiusIndex = radiusIndex = (long)(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount*spatialPhaseCount)) % radiusCount; // [Vinay] - Added for radius
+        startElevationIndex = elevationIndex = (long)(floor(stimIndex / (factor*azimuthCount))) % elevationCount;
+        startSigmaIndex = sigmaIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount))) % sigmaCount;
+		startSpatialFreqIndex = spatialFreqIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount))) % spatialFreqCount;
+		startDirectionDegIndex = directionDegIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount))) % directionDegCount;
+		startContrastIndex = contrastIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount))) % contrastCount;
+        startTemporalFreqIndex = temporalFreqIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount))) % temporalFreqCount;
+        startSpatialPhaseIndex = spatialPhaseIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount))) % spatialPhaseCount; // [Vinay] - Added for spatial phase
+        startRadiusIndex = radiusIndex = (long)(floor(stimIndex / (factor*azimuthCount*elevationCount*sigmaCount*spatialFreqCount*directionDegCount*contrastCount*temporalFreqCount*spatialPhaseCount))) % radiusCount; // [Vinay] - Added for radius
         
         // [Vinay] - added the following loop to copy the index values of centre gabor to those of surround gabor when they need to have some similar attributes
         // This doesn't work!
@@ -1878,8 +1878,8 @@ maxTargetS and a long stimLeadMS).
     // [Vinay] - just using shorter names
     clist[26] = azimuthCount0;
     clist[25] = elevationCount0;
-    clist[24] = spatialFreqCount0;
-    clist[23] = sigmaCount0;
+    clist[24] = sigmaCount0;
+    clist[23] = spatialFreqCount0;
     clist[22] = directionDegCount0;
     clist[21] = contrastCount0;
     clist[20] = temporalFreqCount0;
@@ -1888,8 +1888,8 @@ maxTargetS and a long stimLeadMS).
     
     clist[17] = azimuthCount1;
     clist[16] = elevationCount1;
-    clist[15] = spatialFreqCount1;
-    clist[14] = sigmaCount1;
+    clist[15] = sigmaCount1;
+    clist[14] = spatialFreqCount1;
     clist[13] = directionDegCount1;
     clist[12] = contrastCount1;
     clist[11] = temporalFreqCount1;
@@ -1898,8 +1898,8 @@ maxTargetS and a long stimLeadMS).
     
     clist[8] = azimuthCount2;
     clist[7] = elevationCount2;
-    clist[6] = spatialFreqCount2;
-    clist[5] = sigmaCount2;
+    clist[6] = sigmaCount2;
+    clist[5] = spatialFreqCount2;
     clist[4] = directionDegCount2;
     clist[3] = contrastCount2;
     clist[2] = temporalFreqCount2;
@@ -1964,8 +1964,6 @@ maxTargetS and a long stimLeadMS).
 			[self newBlock];
 			blocksDone++;
 		}
-        // [Vinay] - added display line for debugging
-        NSLog(@"Stim remaining in this block = %d",stimRemainingInBlock);
     }
     return;
 }

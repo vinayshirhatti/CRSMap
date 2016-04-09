@@ -733,8 +733,8 @@ by mapStimTable.
             val2 = [mapStimList2 objectAtIndex:stim]; // centre gabor
             [val2 getValue:&copyStimDesc2];
             
-            copyStimDesc.radiusDeg = copyStimDesc.radiusDeg + copyStimDesc2.radiusDeg; // [Vinay] - adjusting the ring radius to get teh required annulus width
-            copyStimDesc.radiusIndex = copyStimDesc2.radiusIndex;
+            copyStimDesc.radiusDeg = copyStimDesc.radiusDeg + copyStimDesc2.radiusDeg; // [Vinay] - adjusting the ring radius to get the required annulus width
+            //copyStimDesc.radiusIndex = copyStimDesc2.radiusIndex; //[Vinay] - 09 April 2016: radiusIndex should remain the same as the mapped index for ring, it shouldn't be replaced with the centre's index value since radius index is independent for centre and ring gabors. Only the actual radius in deg for the ring is the sum of their mapped radius values in deg (which is assigned in the previous line)
             
             copyStimDesc.spatialFreqCPD = copyStimDesc2.spatialFreqCPD;
             copyStimDesc.spatialFreqIndex = copyStimDesc2.spatialFreqIndex;
