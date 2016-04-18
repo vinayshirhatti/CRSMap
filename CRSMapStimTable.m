@@ -1202,7 +1202,7 @@ maxTargetS and a long stimLeadMS).
                 break;
         }
         
-        switch (contrastMapping) {
+        switch (tfMapping) {
             case 0: // [Vinay] - default log mapping with a factor of 0.5
                 stimDesc.temporalFreqHz = [self tfValueFromIndex:temporalFreqIndex count:temporalFreqCount min:temporalFreqHzMin max:temporalFreqHzMax];
                 break;
@@ -1921,35 +1921,366 @@ maxTargetS and a long stimLeadMS).
 		if (stimDesc2.stimOffFrame > frameLimit) {
 			break;
 		}
-		ilist[26] = a0 = stimDesc0.azimuthIndex;
-		ilist[25] = e0 = stimDesc0.elevationIndex;
-        ilist[24] = sig0 = stimDesc0.sigmaIndex;
-		ilist[23] = sf0 = stimDesc0.spatialFreqIndex;
-		ilist[22] = o0 = stimDesc0.directionIndex;
-		ilist[21] = c0 = stimDesc0.contrastIndex;
-        ilist[20] = t0=stimDesc0.temporalFreqIndex;
-        ilist[19] = p0=stimDesc0.spatialPhaseIndex;
-        ilist[18] = r0=stimDesc0.radiusIndex;
         
-        ilist[17] = a1 = stimDesc1.azimuthIndex;
-		ilist[16] = e1 = stimDesc1.elevationIndex;
-        ilist[15] = sig1 = stimDesc1.sigmaIndex;
-		ilist[14] = sf1 = stimDesc1.spatialFreqIndex;
-		ilist[13] = o1 = stimDesc1.directionIndex;
-		ilist[12] = c1 = stimDesc1.contrastIndex;
-        ilist[11] = t1=stimDesc1.temporalFreqIndex;
-        ilist[10] = p1=stimDesc1.spatialPhaseIndex;
-        ilist[9] = r1=stimDesc1.radiusIndex;
+        a0 = stimDesc0.azimuthIndex;
+		e0 = stimDesc0.elevationIndex;
+        sig0 = stimDesc0.sigmaIndex;
+		sf0 = stimDesc0.spatialFreqIndex;
+		o0 = stimDesc0.directionIndex;
+		c0 = stimDesc0.contrastIndex;
+        t0=stimDesc0.temporalFreqIndex;
+        p0=stimDesc0.spatialPhaseIndex;
+        r0=stimDesc0.radiusIndex;
         
-        ilist[8] = a2 = stimDesc2.azimuthIndex;
-		ilist[7] = e2 = stimDesc2.elevationIndex;
-        ilist[6] = sig2 = stimDesc2.sigmaIndex;
-		ilist[5] = sf2 = stimDesc2.spatialFreqIndex;
-		ilist[4] = o2 = stimDesc2.directionIndex;
-		ilist[3] = c2 = stimDesc2.contrastIndex;
-        ilist[2] = t2=stimDesc2.temporalFreqIndex;
-        ilist[1] = p2=stimDesc2.spatialPhaseIndex;
-        ilist[0] = r2=stimDesc2.radiusIndex;
+        a1 = stimDesc1.azimuthIndex;
+		e1 = stimDesc1.elevationIndex;
+        sig1 = stimDesc1.sigmaIndex;
+		sf1 = stimDesc1.spatialFreqIndex;
+		o1 = stimDesc1.directionIndex;
+		c1 = stimDesc1.contrastIndex;
+        t1 = stimDesc1.temporalFreqIndex;
+        p1 = stimDesc1.spatialPhaseIndex;
+        r1 = stimDesc1.radiusIndex;
+        
+        a2 = stimDesc2.azimuthIndex;
+		e2 = stimDesc2.elevationIndex;
+        sig2 = stimDesc2.sigmaIndex;
+		sf2 = stimDesc2.spatialFreqIndex;
+		o2 = stimDesc2.directionIndex;
+		c2 = stimDesc2.contrastIndex;
+        t2=stimDesc2.temporalFreqIndex;
+        p2=stimDesc2.spatialPhaseIndex;
+        r2=stimDesc2.radiusIndex;
+        
+        switch ([[task defaults] integerForKey:@"CRSProtocolNumber"]) {
+            case 0:
+                //noneProtocol
+                // Do nothing, except for when particular keys are raised. Eg. hide a certain gabor => pull all its counts to 1 OR in match conditions pull the redundant counts to 1
+                if ([[task defaults] boolForKey:CRSHideSurroundKey]) {
+                    a0 = 0;
+                    e0 = 0;
+                    sig0 = 0;
+                    sf0 = 0;
+                    o0 = 0;
+                    c0 = 0;
+                    t0 = 0;
+                    p0 = 0;
+                    r0 = 0;
+                }
+                
+                if ([[task defaults] boolForKey:CRSHideRingKey]) {
+                    a1 = 0;
+                    e1 = 0;
+                    sig1 = 0;
+                    sf1 = 0;
+                    o1 = 0;
+                    c1 = 0;
+                    t1 = 0;
+                    p1 = 0;
+                    r1 = 0;
+                    
+                }
+                else if (![[task defaults] boolForKey:CRSHideRingKey] && [[task defaults] boolForKey:CRSMatchRingSurroundKey]) {
+                    a1 = 0;
+                    e1 = 0;
+                    sig1 = 0;
+                    sf1 = 0;
+                    o1 = 0;
+                    c1 = 0;
+                    t1 = 0;
+                    p1 = 0;
+                    //r1 = 0; //[Vinay] - make every index 0 (i.e. default) except radiusIndex
+                }
+                
+                if ([[task defaults] boolForKey:CRSHideCentreKey]) {
+                    a2 = 0;
+                    e2 = 0;
+                    sig2 = 0;
+                    sf2 = 0;
+                    o2 = 0;
+                    c2 = 0;
+                    t2 = 0;
+                    p2 = 0;
+                    r2 = 0;
+                }
+                else if (![[task defaults] boolForKey:CRSHideCentreKey] && ([[task defaults] boolForKey:CRSMatchCentreRingKey] || [[task defaults] boolForKey:CRSMatchCentreSurroundKey])) {
+                    a2 = 0;
+                    e2 = 0;
+                    sig2 = 0;
+                    sf2 = 0;
+                    o2 = 0;
+                    c2 = 0;
+                    t2 = 0;
+                    p2 = 0;
+                    //r2 = 0; //[Vinay] - make every index 0 (i.e. default) except radiusIndex
+                }
+                break;
+            case 1:
+                //ringProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                
+                // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1 except radius
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                
+                break;
+            case 2:
+                //contrastRingProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - Therefore take all the counts to 1 except contrast and radius
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                //c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                break;
+            case 3:
+                //dualContrastProtocol
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                a0 = 0;
+                e0 = 0;
+                sig0 = 0;
+                sf0 = 0;
+                o0 = 0;
+                c0 = 0;
+                t0 = 0;
+                p0 = 0;
+                r0 = 0;
+                
+                //[Vinay] - ring radius set to maximum => radiusCount = 1. Except contrast rest are matched to the centre => theirCount = 1
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                //c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                //r1 = 0; //[Vinay], 01/04/16: radius count can be >1 for dual protocols
+                
+                break;
+            case 4:
+                //dualOrientationProtocol
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                a0 = 0;
+                e0 = 0;
+                sig0 = 0;
+                sf0 = 0;
+                o0 = 0;
+                c0 = 0;
+                t0 = 0;
+                p0 = 0;
+                r0 = 0;
+                
+                //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction rest are matched to the centre => theirCount = 1
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                //o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                //r1 = 0;
+                
+                break;
+            case 5:
+                //dualPhaseProtocol
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                a0 = 0;
+                e0 = 0;
+                sig0 = 0;
+                sf0 = 0;
+                o0 = 0;
+                c0 = 0;
+                t0 = 0;
+                p0 = 0;
+                r0 = 0;
+                
+                //[Vinay] - ring radius set to maximum => radiusCount = 1. Except spatial phase rest are matched to the centre => theirCount = 1
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                //p1 = 0;
+                //r1 = 0;
+                
+                break;
+            case 6:
+                //orientationRingProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - Therefore take all the counts to 1 except orientation i.e. direction and radius
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                //o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                break;
+            case 7:
+                //phaseRingProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - Therefore take all the counts to 1 except spatial phase and radius
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                //p1 = 0;
+                break;
+            case 8:
+                //driftingPhaseProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround)
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - Therefore take all the counts to 1 except temporal frequency and radius
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                c1 = 0;
+                //t1 = 0;
+                p1 = 0;
+                
+                break;
+            case 9:
+                //crossOrientationProtocol
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                a0 = 0;
+                e0 = 0;
+                sig0 = 0;
+                sf0 = 0;
+                o0 = 0;
+                c0 = 0;
+                t0 = 0;
+                p0 = 0;
+                r0 = 0;
+                
+                break;
+            case 10:
+                //annulusFixedProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                sf1 = 0;
+                o1 = 0;
+                c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                //r1 = 0; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+                
+                break;
+                
+            default:
+                break;
+        }
+
+
+        
+		ilist[26] = a0;
+		ilist[25] = e0;
+        ilist[24] = sig0;
+		ilist[23] = sf0 ;
+		ilist[22] = o0;
+		ilist[21] = c0;
+        ilist[20] = t0;
+        ilist[19] = p0;
+        ilist[18] = r0;
+        
+        ilist[17] = a1;
+		ilist[16] = e1;
+        ilist[15] = sig1;
+		ilist[14] = sf1;
+		ilist[13] = o1;
+		ilist[12] = c1;
+        ilist[11] = t1;
+        ilist[10] = p1;
+        ilist[9] = r1;
+        
+        ilist[8] = a2;
+		ilist[7] = e2;
+        ilist[6] = sig2;
+		ilist[5] = sf2;
+		ilist[4] = o2;
+		ilist[3] = c2;
+        ilist[2] = t2;
+        ilist[1] = p2;
+        ilist[0] = r2;
         
         stimIndex = 0;
         int range = stimInBlock;
