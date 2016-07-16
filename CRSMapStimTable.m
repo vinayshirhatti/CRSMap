@@ -240,7 +240,8 @@ maxTargetS and a long stimLeadMS).
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
     float azimuthDegMin, azimuthDegMax, elevationDegMin, elevationDegMax, sigmaDegMin, sigmaDegMax, spatialFreqCPDMin, spatialFreqCPDMax, directionDegMin, directionDegMax, radiusSigmaRatio, contrastPCMin, contrastPCMax, temporalFreqHzMin, temporalFreqHzMax, spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax; //[Vinay] -  Added spatialPhaseDegMin, spatialPhaseDegMax, radiusDegMin, radiusDegMax
-	BOOL hideStimulus, convertToGrating, noneProtocol=NO, ringProtocol=NO, contrastRingProtocol=NO, dualContrastProtocol=NO, dualOrientationProtocol=NO, dualPhaseProtocol=NO, orientationRingProtocol=NO, phaseRingProtocol=NO, driftingPhaseProtocol=NO, crossOrientationProtocol=NO, annulusFixedProtocol = NO; // [Vinay] - added matchCentreSurround to indicate similarity between the centre and surround attributes whenever required. , matchCentreSurround=NO was removed because it isn't being used in this loop
+	BOOL hideStimulus, convertToGrating, noneProtocol=NO, ringProtocol=NO, contrastRingProtocol=NO, dualContrastProtocol=NO, dualOrientationProtocol=NO, dualPhaseProtocol=NO, orientationRingProtocol=NO, phaseRingProtocol=NO, driftingPhaseProtocol=NO, crossOrientationProtocol=NO, annulusFixedProtocol = NO,
+        colourDualProtocol=NO, colourRingProtocol=NO; // [Vinay] - added matchCentreSurround to indicate similarity between the centre and surround attributes whenever required. , matchCentreSurround=NO was removed because it isn't being used in this loop
     
 	NSArray *stimTableDefaults = [[task defaults] arrayForKey:@"CRSStimTables"];
 	NSDictionary *minDefaults = [stimTableDefaults objectAtIndex:0];
@@ -292,6 +293,12 @@ maxTargetS and a long stimLeadMS).
         case 10:
             annulusFixedProtocol = YES;
             break;
+        case 11:
+            colourDualProtocol = YES;
+            break;
+        case 12:
+            colourRingProtocol = YES;
+            break;
         default:
             break;
     }
@@ -322,7 +329,7 @@ maxTargetS and a long stimLeadMS).
             radiusDegMax = [[maxDefaults objectForKey:@"radiusDeg0"] floatValue]; // [Vinay] - Added for radius max value
             
             //hideStimulus = [[task defaults] boolForKey:CRSHideLeftKey]; // [Vinay] - Have commented this and have instead added the next line
-            hideStimulus = (dualContrastProtocol || dualOrientationProtocol || dualPhaseProtocol || crossOrientationProtocol || ([[task defaults] boolForKey:CRSHideSurroundKey] && noneProtocol)); // [Vinay] - To hide the surround stimulus if the protocol is any of these three dual protocols or if it is COS protocol where plaids are drawn. The stimulus is drawn completely with just the centre and the surround stimulus. Also hide if explicitly asked to do so, but only during none protocol mode. gabor0 corresponds to the surround gabor.
+            hideStimulus = (dualContrastProtocol || dualOrientationProtocol || dualPhaseProtocol || crossOrientationProtocol || colourDualProtocol || ([[task defaults] boolForKey:CRSHideSurroundKey] && noneProtocol)); // [Vinay] - To hide the surround stimulus if the protocol is any of these three dual protocols or if it is COS protocol where plaids are drawn. The stimulus is drawn completely with just the centre and the surround stimulus. Also hide if explicitly asked to do so, but only during none protocol mode. gabor0 corresponds to the surround gabor.
             break;
         case 1:
             azimuthDegMin = [[minDefaults objectForKey:@"azimuthDeg1"] floatValue];
@@ -839,6 +846,58 @@ maxTargetS and a long stimLeadMS).
                 spatialFreqCount1 = 1;
                 directionDegCount1 = 1;
                 contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+                temporalFreqCount1 = 1;
+                spatialPhaseCount1 = 1;
+                //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+                
+                break;
+                
+            case 11:
+                //colour protocol, dual mode
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                azimuthCount0 = 1;
+                elevationCount0 = 1;
+                sigmaCount0 = 1;
+                spatialFreqCount0 = 1;
+                directionDegCount0 = 1;
+                contrastCount0 = 1;
+                temporalFreqCount0 = 1;
+                spatialPhaseCount0 = 1;
+                radiusCount0 = 1;
+                
+                //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction rest are matched to the centre => theirCount = 1
+                azimuthCount1 = 1;
+                elevationCount1 = 1;
+                sigmaCount1 = 1;
+                //spatialFreqCount1 = 1;
+                //directionDegCount1 = 1;
+                //contrastCount1 = 1;
+                temporalFreqCount1 = 1;
+                spatialPhaseCount1 = 1;
+                //radiusCount1 = 1;
+                
+                break;
+                
+            case 12:
+                //colour protocol, ring mode
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+                azimuthCount2 = 1;
+                elevationCount2 = 1;
+                sigmaCount2 = 1;
+                spatialFreqCount2 = 1;
+                directionDegCount2 = 1;
+                contrastCount2 = 1;
+                temporalFreqCount2 = 1;
+                spatialPhaseCount2 = 1;
+                //radiusCount2 = 1;
+                
+                // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+                azimuthCount1 = 1;
+                elevationCount1 = 1;
+                sigmaCount1 = 1;
+                //spatialFreqCount1 = 1;
+                //directionDegCount1 = 1;
+                //contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
                 temporalFreqCount1 = 1;
                 spatialPhaseCount1 = 1;
                 //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
@@ -1871,6 +1930,58 @@ maxTargetS and a long stimLeadMS).
             
             break;
             
+        case 11:
+            //colour protocol, dual mode
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction rest are matched to the centre => theirCount = 1
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            //spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            //contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1;
+            
+            break;
+            
+        case 12:
+            //colour protocol, ring mode
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            //radiusCount2 = 1;
+            
+            // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            //spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            //contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+            
+            break;
+            
         default:
             break;
     }
@@ -2240,6 +2351,58 @@ maxTargetS and a long stimLeadMS).
                 sf1 = 0;
                 o1 = 0;
                 c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                //r1 = 0; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+                
+                break;
+                
+            case 11:
+                //dual mode colour Protocol
+                //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+                a0 = 0;
+                e0 = 0;
+                sig0 = 0;
+                sf0 = 0;
+                o0 = 0;
+                c0 = 0;
+                t0 = 0;
+                p0 = 0;
+                r0 = 0;
+                
+                //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction, sf and contrast rest are matched to the centre => theirCount = 1
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                //sf1 = 0;
+                //o1 = 0;
+                //c1 = 0;
+                t1 = 0;
+                p1 = 0;
+                //r1 = 0;
+                
+                break;
+                
+            case 12:
+                //annulusFixedProtocol
+                //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+                a2 = 0;
+                e2 = 0;
+                sig2 = 0;
+                sf2 = 0;
+                o2 = 0;
+                c2 = 0;
+                t2 = 0;
+                p2 = 0;
+                //r2 = 0;
+                
+                // [Vinay] - set all counts to 0 except for sf, ori, cont and rad
+                a1 = 0;
+                e1 = 0;
+                sig1 = 0;
+                //sf1 = 0;
+                //o1 = 0;
+                //c1 = 0;
                 t1 = 0;
                 p1 = 0;
                 //r1 = 0; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
@@ -2819,6 +2982,58 @@ maxTargetS and a long stimLeadMS).
             spatialFreqCount1 = 1;
             directionDegCount1 = 1;
             contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths
+            
+            break;
+            
+        case 11:
+            //colour protocol, dual mode
+            //Set all counts for gabor0(surround) to 1, since gabor0 has been made null in this protocol
+            azimuthCount0 = 1;
+            elevationCount0 = 1;
+            sigmaCount0 = 1;
+            spatialFreqCount0 = 1;
+            directionDegCount0 = 1;
+            contrastCount0 = 1;
+            temporalFreqCount0 = 1;
+            spatialPhaseCount0 = 1;
+            radiusCount0 = 1;
+            
+            //[Vinay] - ring radius set to maximum => radiusCount = 1. Except orientation i.e. direction rest are matched to the centre => theirCount = 1
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            //spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            //contrastCount1 = 1;
+            temporalFreqCount1 = 1;
+            spatialPhaseCount1 = 1;
+            //radiusCount1 = 1;
+            
+            break;
+            
+        case 12:
+            //colour protocol, ring mode
+            //Set all counts for gabor2(centre) to 1 except the radiusCount. All other parameters are mapped to the same values as for gabor0(surround). Their counts are therefore accounted for by the counts for gabor0(surround).
+            azimuthCount2 = 1;
+            elevationCount2 = 1;
+            sigmaCount2 = 1;
+            spatialFreqCount2 = 1;
+            directionDegCount2 = 1;
+            contrastCount2 = 1;
+            temporalFreqCount2 = 1;
+            spatialPhaseCount2 = 1;
+            //radiusCount2 = 1;
+            
+            // [Vinay] - ring contrast is set to 0. Therefore take all the counts to 1. The radiusCount for gabor1 (ring) is also accounted for by the count for gabor2 i.e. the centre gabor. Therefore set this to 1 as well.
+            azimuthCount1 = 1;
+            elevationCount1 = 1;
+            sigmaCount1 = 1;
+            //spatialFreqCount1 = 1;
+            //directionDegCount1 = 1;
+            //contrastCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of varying contrasts
             temporalFreqCount1 = 1;
             spatialPhaseCount1 = 1;
             //radiusCount1 = 1; // [Vinay] - comment this if using a ring (fixed annulus in this case) of multiple widths

@@ -3891,15 +3891,15 @@
                     <popUpButton verticalHuggingPriority="750" id="3903">
                         <rect key="frame" x="342" y="59" width="249" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="Contrast Ring Protocol" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="3908" id="3904">
+                        <popUpButtonCell key="cell" type="push" title="Colour Protocol (Dual mode)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="ZGz-wm-fFj" id="3904">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="3905" userLabel="Menu - AllViews">
                                 <items>
                                     <menuItem title="None (Manual set)" toolTip="Free running protocol; Set C, R, S" id="3906"/>
                                     <menuItem title="Ring Protocol" toolTip="Set S and R radius" id="3907"/>
-                                    <menuItem title="Contrast Ring Protocol" state="on" toolTip="Set S; C rad only; R rad and cont" id="3908"/>
-                                    <menuItem title="Dual Contrast Protocol" state="on" toolTip="set C; R rad and cont" id="3912"/>
+                                    <menuItem title="Contrast Ring Protocol" toolTip="Set S; C rad only; R rad and cont" id="3908"/>
+                                    <menuItem title="Dual Contrast Protocol" toolTip="set C; R rad and cont" id="3912"/>
                                     <menuItem title="Dual Orientation Protocol" toolTip="set C; R rad and ori" id="3913"/>
                                     <menuItem title="Dual Phase Protocol" toolTip="set C; R rad and phase" id="3915"/>
                                     <menuItem title="Orientation Ring Protocol" toolTip="Set S; C rad only; R ori and rad" id="3917"/>
@@ -3907,6 +3907,8 @@
                                     <menuItem title="Drifting Phase Protocol" toolTip="Set S; C rad only; R TF and rad" id="3942" userLabel="Menu Item - Drifting Phase Protocol"/>
                                     <menuItem title="Cross Orientation Protocol (Plaids)" toolTip="Don't Use this as yet!" id="3947" userLabel="Menu Item - Cross Orientation Protocol"/>
                                     <menuItem title="Annulus Fixed Protocol" toolTip="Set S; C rad only; R rad for annulus width" id="HRq-Gj-heK" userLabel="Menu Item - Annulus Fixed Protocol"/>
+                                    <menuItem title="Colour Protocol (Dual mode)" state="on" toolTip="hue->ori, sat->sf, val->cont" id="ZGz-wm-fFj" userLabel="Menu Item - Colour Protocol (Dual mode)"/>
+                                    <menuItem title="Colour Protocol (Ring mode)" toolTip="hue->ori, sat->sf, val->cont" id="QdP-jT-4s6" userLabel="Menu Item - Colour Protocol (Ring mode)"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>

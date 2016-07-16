@@ -423,6 +423,12 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
                             case 10:
                                 string = @"STOPPED: Annulus Fixed Protocol";
                                 break;
+                            case 11:
+                                string = @"STOPPED: Colour Dual Protocol";
+                                break;
+                            case 12:
+                                string = @"STOPPED: Colour Ring Protocol";
+                                break;
                             default:
                                 string = @"???";
                                 break;
@@ -464,6 +470,12 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
                                 break;
                             case 10:
                                 string = @"Now running: Annulus Fixed Protocol";
+                                break;
+                            case 11:
+                                string = @"Now running: Colour Dual Protocol";
+                                break;
+                            case 12:
+                                string = @"Now running: Colour Ring Protocol";
                                 break;
                             default:
                                 string = @"???";
