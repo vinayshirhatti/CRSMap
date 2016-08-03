@@ -19,10 +19,18 @@
 	long fixDurBase, fixJitterMS;
 	long fixateMS = [[task defaults] integerForKey:CRSFixateMSKey];
 	long fixJitterPC = [[task defaults] integerForKey:CRSFixJitterPCKey];
+    bool useFewDigitalCodes;
+    
+    useFewDigitalCodes = [[task defaults] boolForKey:CRSUseFewDigitalCodesKey];
 		
 	if ([[task defaults] boolForKey:CRSFixateKey]) {				// fixation required && fixated
 //        [digitalOut outputEvent:kFixateDigitOutCode withData:(kFixateDigitOutCode+1)]; // Thomas 2014 Feb 25
-        [digitalOut outputEventName:@"fixate" withData:(long)(fixateMS)];
+        
+        if (useFewDigitalCodes)
+            [digitalOut outputEvent:kFixateDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+        else
+            [digitalOut outputEventName:@"fixate" withData:(long)(fixateMS)];
+        
 		[[task dataDoc] putEvent:@"fixate"];
 		[scheduler schedule:@selector(updateCalibration) toTarget:self withObject:nil
 				delayMS:fixateMS * 0.8];

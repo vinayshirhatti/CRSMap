@@ -3836,6 +3836,17 @@
                             <binding destination="498" name="value" keyPath="values.CRSUseSingleITC18" id="E0Y-AL-Pr6"/>
                         </connections>
                     </button>
+                    <button id="46c-yI-rse">
+                        <rect key="frame" x="259" y="471" width="154" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="use few digital codes" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pWt-uG-cJ8">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSUseFewDigitalCodes" id="Fnk-QC-1jy"/>
+                        </connections>
+                    </button>
                     <button toolTip="Set the specific protocol to 'NONE' for activating this option" id="3894">
                         <rect key="frame" x="31" y="88" width="309" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

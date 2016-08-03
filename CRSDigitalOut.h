@@ -16,7 +16,10 @@
 
 }
 
+- (NSString *)digitalCodeDictionary:(NSString *)eventName;
 - (int)getDigitalValue:(NSString *)eventName;
 - (BOOL)outputEvent:(long)event withData:(long)data;
+- (BOOL)outputEvent:(long)event sleepInMicrosec:(int)sleepTimeInMicrosec;
 - (BOOL)outputEventName:(NSString *)eventName withData:(long)data;
+- (BOOL)outputEventName:(NSString *)eventName withData:(long)data sleepInMicrosec:(int)sleepTimeInMicrosec;
 @end

@@ -24,6 +24,8 @@
 	long trialCertify;
 	long codeTranslation[kMyEOTTypes] = {kEOTCorrect, kEOTFailed, kEOTWrong, kEOTWrong, kEOTBroke,
 					kEOTIgnored, kEOTQuit};
+    
+    bool useFewDigitalCodes;
 	
 	[stimuli stopAllStimuli];
 
@@ -41,11 +43,20 @@
 		trialCertify |= (0x1 << kCertifyVideoBit);
 	}
     
-    // While using a single ITC, these codes have to be sent before juice control because that happens in a separate thread.
-    [[task dataDoc] putEvent:@"trialCertify" withData:(void *)&trialCertify];
-    [digitalOut outputEventName:@"trialCertify" withData:(long)(trialCertify)];
-	[[task dataDoc] putEvent:@"trialEnd" withData:(void *)&eotCode];
-    [digitalOut outputEventName:@"trialEnd" withData:(long)(eotCode)];
+    useFewDigitalCodes = [[task defaults] boolForKey:CRSUseFewDigitalCodesKey];
+    
+    if (useFewDigitalCodes) {
+        [[task dataDoc] putEvent:@"trialCertify" withData:(void *)&trialCertify];
+        [[task dataDoc] putEvent:@"trialEnd" withData:(void *)&eotCode];
+        [digitalOut outputEvent:kTrialEndDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+    }
+    else {
+        // While using a single ITC, these codes have to be sent before juice control because that happens in a separate thread.
+        [[task dataDoc] putEvent:@"trialCertify" withData:(void *)&trialCertify];
+        [digitalOut outputEventName:@"trialCertify" withData:(long)(trialCertify)];
+        [[task dataDoc] putEvent:@"trialEnd" withData:(void *)&eotCode];
+        [digitalOut outputEventName:@"trialEnd" withData:(long)(eotCode) sleepInMicrosec:kSleepInMicrosec];
+    }
     
 	expireTime = [LLSystemUtil timeFromNow:0];					// no delay, except for breaks (below)
 	switch (eotCode) {

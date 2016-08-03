@@ -13,9 +13,16 @@
 
 - (void)stateAction {
 
-	[[task dataDoc] putEvent:@"saccade"];
+	bool useFewDigitalCodes;
+    
+    useFewDigitalCodes = [[task defaults] boolForKey:CRSUseFewDigitalCodesKey];
+    
+    [[task dataDoc] putEvent:@"saccade"];
 //    [digitalOut outputEvent:kSaccadeDigitOutCode withData:(kSaccadeDigitOutCode+1)];
-    [digitalOut outputEventName:@"saccade" withData:0.0];
+    if (useFewDigitalCodes)
+        [digitalOut outputEvent:kSaccadeDigitOutCode sleepInMicrosec:kSleepInMicrosec];
+    else
+        [digitalOut outputEventName:@"saccade" withData:0.0];
 	expireTime = [LLSystemUtil timeFromNow:[[task defaults] integerForKey:CRSSaccadeTimeMSKey]];
 }
 

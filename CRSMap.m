@@ -93,6 +93,7 @@ NSString *CRSHideSurroundDigitalKey = @"CRSHideSurroundDigital";
 
 NSString *CRSConvertToGratingKey = @"CRSConvertToGrating";
 NSString *CRSUseSingleITC18Key = @"CRSUseSingleITC18";
+NSString *CRSUseFewDigitalCodesKey = @"CRSUseFewDigitalCodes";
 
 NSString *CRSHideTaskGaborKey = @"CRSHideTaskGabor";
 NSString *CRSIncludeCatchTrialsinDoneListKey = @"CRSIncludeCatchTrialsinDoneList";

@@ -1051,9 +1051,13 @@ by mapStimTable.
     BOOL setRGB = NO;
     BOOL useGaborColorStim = NO;
     CGFloat hue,satu,value;
-
     
     // [Vinay] - till here
+    
+    bool useFewDigitalCodes;
+    
+    useFewDigitalCodes = [[task defaults] boolForKey:CRSUseFewDigitalCodesKey];
+
 	
     threadPool = [[NSAutoreleasePool alloc] init];		// create a threadPool for this thread
 	[LLSystemUtil setThreadPriorityPeriodMS:1.0 computationFraction:0.250 constraintFraction:1.0];
@@ -1415,8 +1419,12 @@ by mapStimTable.
 			if (trialFrame == stimOffFrames[index]) {
                 [[task dataDoc] putEvent:@"stimulusOff" withData:&index];
                 [[task dataDoc] putEvent:@"stimulusOffTime"];
+                /*
                 if (!useSingleITC18) {
                     [digitalOut outputEvent:kStimulusOffDigitOutCode withData:index];
+                }*/
+                if (useFewDigitalCodes && (index==0)) {
+                    [digitalOut outputEvent:kStimulusOffDigitOutCode sleepInMicrosec:kSleepInMicrosec];
                 }
 				if (++stimIndices[index] >= [[stimLists objectAtIndex:index] count]) {	// no more entries in list
 					listDone = YES;
@@ -1430,56 +1438,34 @@ by mapStimTable.
                 [[task dataDoc] putEvent:@"stimulusOnTime"];
                 [[task dataDoc] putEvent:@"stimulus" withData:pSD];
 
+                /*
                 if (!useSingleITC18) {
                     [digitalOut outputEvent:kStimulusOnDigitOutCode withData:index];
+                }*/
+                if (useFewDigitalCodes) {
+                    if (index==0)
+                        [digitalOut outputEvent:kStimulusOnDigitOutCode sleepInMicrosec:kSleepInMicrosec];
                 }
-				// put the digital events
-				if (index == kTaskGabor) {
-					[digitalOut outputEventName:@"taskGabor" withData:(long)(pSD->stimType)];
-				}
-				else {
-					if (pSD->stimType != kNullStim) {
-						if (index == kMapGabor0)
-							[digitalOut outputEventName:@"mapping0" withData:(long)(pSD->stimType)];
-						if (index == kMapGabor1)
-							[digitalOut outputEventName:@"mapping1" withData:(long)(pSD->stimType)];
-                        if (index == kMapGabor2)
-							[digitalOut outputEventName:@"mapping2" withData:(long)(pSD->stimType)];            // [Vinay] - for centre gabor
-					}
-				}
-				
-				// Other prperties of the Gabor
-				if (index == kMapGabor0 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideSurroundDigitalKey])) {
-                    // [Vinay] - CRSHideLeftDigitalKey changed to the above
-					//NSLog(@"Sending left digital codes...");
-					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
-					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
-					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
-					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
-					[digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
-					[digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-					[digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
-                    [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
-				}
-				
-				if (index == kMapGabor1 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideRingDigitalKey])) {
-					// [Vinay] - CRSHideRightDigitalKey changed to the above
-                    //NSLog(@"Sending right digital codes...");
-                    // [Vinay] - commenting the lines below to avoid sending all the digital codes (since, some might be redundant
-                    /*
-					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
-					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
-					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
-					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
-					[digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
-					[digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-					[digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
-                    [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
-                     */
-                    // [Vinay] selectively sending digital codes as per the specific protocol
-                    if (protocolNumber == 0 || protocolNumber == 9) { // noneProtocol and crossOrientationProtocol - fill list of parameters
+                else {
+                    // put the digital events
+                    if (index == kTaskGabor) {
+                        [digitalOut outputEventName:@"taskGabor" withData:(long)(pSD->stimType)];
+                    }
+                    else {
+                        if (pSD->stimType != kNullStim) {
+                            if (index == kMapGabor0)
+                                [digitalOut outputEventName:@"mapping0" withData:(long)(pSD->stimType)];
+                            if (index == kMapGabor1)
+                                [digitalOut outputEventName:@"mapping1" withData:(long)(pSD->stimType)];
+                            if (index == kMapGabor2)
+                                [digitalOut outputEventName:@"mapping2" withData:(long)(pSD->stimType)];            // [Vinay] - for centre gabor
+                        }
+                    }
+                    
+                    // Other prperties of the Gabor
+                    if (index == kMapGabor0 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideSurroundDigitalKey])) {
+                        // [Vinay] - CRSHideLeftDigitalKey changed to the above
+                        //NSLog(@"Sending left digital codes...");
                         [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
                         [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
                         [digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
@@ -1491,59 +1477,11 @@ by mapStimTable.
                         [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
                     }
                     
-                    else if (protocolNumber == 1) // ringProtocol
-                    {
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
-                    else if (protocolNumber == 2 || protocolNumber == 3 || protocolNumber == 10) // contrastRing, dualContrast, annulusFixed protocols
-                    {
-                        [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
-                    else if (protocolNumber == 4 || protocolNumber == 6) // dualOrientation, orientationRing protocols
-                    {
-                        [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
-                    else if (protocolNumber == 5 || protocolNumber == 7) // dualPhase, phaseRing protocols
-                    {
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                        [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
-                    }
-                    else if (protocolNumber == 8) // driftingPhaseProtocol
-                    {
-                        [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
-                    else if (protocolNumber == 11 || protocolNumber == 12) // colourProtocol
-                    {
-                        [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
-                        [digitalOut outputEventName:@"spatialFreq" withData:(long)((pSD->spatialFreqCPD))];
-                        [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
-                        [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
-                    
-				}
-                
-                if (index == kMapGabor2 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideCentreDigitalKey])) {                                            // [Vinay] - for centre gabor. Not sure what would be the equivalent 'digital key' for this case i.e. Left or Right Digital codes as above. Clarify this!
-                    // [Vinay] - added the relevant CRSHideCentreDigitalKey
-					//NSLog(@"Sending right digital codes...");
-                    // [Vinay] - commenting the lines below to avoid sending all the digital codes (since, some might be redundant
-                    /*
-					[digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
-                    [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
-					[digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
-					[digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
-					[digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
-					[digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
-					[digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-					[digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
-                    [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
-                     */
-                    // [Vinay] selectively sending digital codes as per the specific protocol
-                    
-                    if (protocolNumber == 0 || protocolNumber == 3 || protocolNumber == 4 || protocolNumber == 5 || protocolNumber == 9 || protocolNumber == 11) {
-                        // none, dualContrast, dualOrientation, dualPhase, crossOrientation protocols - send the full list of parameters
+                    if (index == kMapGabor1 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideRingDigitalKey])) {
+                        // [Vinay] - CRSHideRightDigitalKey changed to the above
+                        //NSLog(@"Sending right digital codes...");
+                        // [Vinay] - commenting the lines below to avoid sending all the digital codes (since, some might be redundant
+                        /*
                         [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
                         [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
                         [digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
@@ -1551,21 +1489,101 @@ by mapStimTable.
                         [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
                         [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
                         [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                        [digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
+                        [digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
                         [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
+                         */
+                        // [Vinay] selectively sending digital codes as per the specific protocol
+                        if (protocolNumber == 0 || protocolNumber == 9) { // noneProtocol and crossOrientationProtocol - fill list of parameters
+                            [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                            [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
+                            [digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
+                            [digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
+                            [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
+                            [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                            [digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
+                            [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
+                        }
+                        
+                        else if (protocolNumber == 1) // ringProtocol
+                        {
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
+                        else if (protocolNumber == 2 || protocolNumber == 3 || protocolNumber == 10) // contrastRing, dualContrast, annulusFixed protocols
+                        {
+                            [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
+                        else if (protocolNumber == 4 || protocolNumber == 6) // dualOrientation, orientationRing protocols
+                        {
+                            [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
+                        else if (protocolNumber == 5 || protocolNumber == 7) // dualPhase, phaseRing protocols
+                        {
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                            [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
+                        }
+                        else if (protocolNumber == 8) // driftingPhaseProtocol
+                        {
+                            [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
+                        else if (protocolNumber == 11 || protocolNumber == 12) // colourProtocol
+                        {
+                            [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
+                            [digitalOut outputEventName:@"spatialFreq" withData:(long)((pSD->spatialFreqCPD))];
+                            [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
+                        
                     }
-                    else // for all other protocols only the 'radius' is required to be sent
-                    {
+                    
+                    if (index == kMapGabor2 && pSD->stimType != kNullStim && !([[task defaults] boolForKey:CRSHideCentreDigitalKey])) {                                            // [Vinay] - for centre gabor. Not sure what would be the equivalent 'digital key' for this case i.e. Left or Right Digital codes as above. Clarify this!
+                        // [Vinay] - added the relevant CRSHideCentreDigitalKey
+                        //NSLog(@"Sending right digital codes...");
+                        // [Vinay] - commenting the lines below to avoid sending all the digital codes (since, some might be redundant
+                        /*
+                        [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                        [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
+                        [digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
+                        [digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
+                        [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
+                        [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
                         [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
-                    }
+                        [digitalOut outputEventName:@"sigma" withData:(long)(100*(pSD->sigmaDeg))];
+                        [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
+                         */
+                        // [Vinay] selectively sending digital codes as per the specific protocol
+                        
+                        if (protocolNumber == 0 || protocolNumber == 3 || protocolNumber == 4 || protocolNumber == 5 || protocolNumber == 9 || protocolNumber == 11) {
+                            // none, dualContrast, dualOrientation, dualPhase, crossOrientation protocols - send the full list of parameters
+                            [digitalOut outputEventName:@"contrast" withData:(long)(10*(pSD->contrastPC))];
+                            [digitalOut outputEventName:@"temporalFreq" withData:(long)(10*(pSD->temporalFreqHz))];
+                            [digitalOut outputEventName:@"azimuth" withData:(long)(100*(pSD->azimuthDeg))];
+                            [digitalOut outputEventName:@"elevation" withData:(long)(100*(pSD->elevationDeg))];
+                            [digitalOut outputEventName:@"orientation" withData:(long)((pSD->directionDeg))];
+                            [digitalOut outputEventName:@"spatialFreq" withData:(long)(100*(pSD->spatialFreqCPD))];
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                            [digitalOut outputEventName:@"sigma" withData:(long)((pSD->sigmaDeg))];
+                            [digitalOut outputEventName:@"spatialPhase" withData:(long)(pSD->spatialPhaseDeg)];
+                        }
+                        else // for all other protocols only the 'radius' is required to be sent
+                        {
+                            [digitalOut outputEventName:@"radius" withData:(long)(100*(pSD->radiusDeg))];
+                        }
 
-				}
+                    }
+                }
                 
                 if (pSD->stimType == kTargetStim) {
 					targetPresented = YES;
 					targetOnFrame = trialFrame;
-                    if (!useSingleITC18) {
+                    /*if (!useSingleITC18) {
                         [digitalOut outputEvent:kTargetOnDigitOutCode withData:(kTargetOnDigitOutCode+1)];
+                    }*/
+                    if (useFewDigitalCodes && (index==0)) {
+                        [digitalOut outputEvent:kTargetOnDigitOutCode sleepInMicrosec:kSleepInMicrosec];
                     }
 				}
 				stimOffFrames[index] = stimDescs[index].stimOffFrame;		// previous done by now, save time for this one

@@ -24,20 +24,30 @@ enum {kRewardFixed = 0, kRewardVariable};
 enum {kNullStim = 0, kValidStim, kTargetStim, kFrontPadding, kBackPadding};
 enum {kMyEOTCorrect = 0, kMyEOTMissed, kMyEOTEarlyToValid, kMyEOTEarlyToInvalid, kMyEOTBroke, 
 				kMyEOTIgnored, kMyEOTQuit, kMyEOTTypes};
-enum {  kTrialStartDigitOutCode = 0x0010,
+/*enum {  kTrialStartDigitOutCode = 0x0010,
         kFixateDigitOutCode = 0x0020,
         kStimulusOnDigitOutCode = 0x0030,
         kStimulusOffDigitOutCode = 0x0040,
         kTargetOnDigitOutCode = 0x0050,
         kSaccadeDigitOutCode = 0x0060,
         kTrialEndDigitOutCode = 0x0070};
+*/
+enum {  kDefaultStateDigitOutCode = 1,
+    kTrialStartDigitOutCode = 2,
+    kFixateDigitOutCode = 4,
+    kStimulusOnDigitOutCode = 8,
+    kStimulusOffDigitOutCode = 16,
+    kTargetOnDigitOutCode = 32,
+    kSaccadeDigitOutCode = 64,
+    kTrialEndDigitOutCode = 128};
 
+#define	kSleepInMicrosec	2000
 
 #define	kMaxOriChanges	12
 #define kMaxMapValues   12    // [Vinay] - adjust this value as per the conditions; changed from 6 to 7 and this works because 7^6 < 6^7 (which was the working size in GRF). 8 will work as well because even 8^6 < 6^7, but 9^6 > 6^7
     // [Vinay] - 23 March 2016: Today Knot kept crashing while running a DCProtocol with 9 contrast values. kMaxMapValues was set to 7. It is used in spikeController and since this value was lesser than the count it was throwing an exception. Therefore we have to make sure that kMaxMapValues is always greater than any count that we set (although this variable is used only in the spikeController as of now). I have set it to 12 for now.  
 #define kMaxMapValuesFixed 1 // [Vinay] - added this variable to represent fixed quantities/variables in the stimulus mapping list 
-#define kMaxNumofStimuli 30 // [Vinay] - maximum number of stimuli in a trial. Change this if necessary
+#define kMaxNumofStimuli 100 // [Vinay] - maximum number of stimuli in a trial. Change this if necessary
 
 
 typedef struct {
@@ -259,6 +269,7 @@ extern NSString *CRSHideSurroundDigitalKey;
 
 extern NSString *CRSConvertToGratingKey;
 extern NSString *CRSUseSingleITC18Key;
+extern NSString *CRSUseFewDigitalCodesKey;
 
 extern NSString *CRSHideTaskGaborKey;
 extern NSString *CRSIncludeCatchTrialsinDoneListKey;
