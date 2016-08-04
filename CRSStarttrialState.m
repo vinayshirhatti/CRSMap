@@ -76,7 +76,9 @@
     // [Vinay] - iff this is the first trial then send the protocolNumber as a digital code.
     // 'trialCounter' gets reset only at the beginning or whenever you press 'RESET'. So whenever a new protocol is run, it is mandatory to press RESET as well
     if (trialCounter == 1) { // first trial
-        [digitalOut outputEventName:@"protocolNumber" withData:(long)[[task defaults] integerForKey:@"CRSProtocolNumber"]];
+        if (!useFewDigitalCodes) {
+            [digitalOut outputEventName:@"protocolNumber" withData:(long)[[task defaults] integerForKey:@"CRSProtocolNumber"]];
+        }
         //NSLog(@"trial number %ld , protocol number is %ld", trialCounter, [[task defaults] integerForKey:@"CRSProtocolNumber"]);
         int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"]; // This variable reads the value of the protocol number
         [[task dataDoc] putEvent:@"protocolNumber" withData:&protocolNumber];
