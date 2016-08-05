@@ -41,7 +41,7 @@ enum {  kDefaultStateDigitOutCode = 1,
     kSaccadeDigitOutCode = 64,
     kTrialEndDigitOutCode = 128};
 
-#define	kSleepInMicrosec	2000
+#define	kSleepInMicrosec	3000
 
 #define	kMaxOriChanges	12
 #define kMaxMapValues   12    // [Vinay] - adjust this value as per the conditions; changed from 6 to 7 and this works because 7^6 < 6^7 (which was the working size in GRF). 8 will work as well because even 8^6 < 6^7, but 9^6 > 6^7
