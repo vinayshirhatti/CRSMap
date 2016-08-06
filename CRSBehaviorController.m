@@ -321,20 +321,20 @@
 
 - (void)blockStatus:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&blockStatus];
+	[eventData getBytes:&blockStatus length:sizeof(BlockStatus)];
 	[self checkParams];
 }
 
 
 - (void)maxTargetTimeMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&maxTargetTimeMS];
+	[eventData getBytes:&maxTargetTimeMS length:sizeof(long)];
 	[self checkTimeParams];
 }
 
 - (void)minTargetTimeMS:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&minTargetTimeMS];
+	[eventData getBytes:&minTargetTimeMS length:sizeof(long)];
 	[self checkTimeParams];
 }
 
@@ -367,7 +367,7 @@
 
     long newResponseTimeMS;
     
-    [eventData getBytes:&newResponseTimeMS];
+    [eventData getBytes:&newResponseTimeMS length:sizeof(long)];
     if (responseTimeMS != newResponseTimeMS) {
         responseTimeMS = newResponseTimeMS;
         [self changeResponseTimeMS];
@@ -381,7 +381,7 @@
 	if (stimStartTimeMS == 0) {
 		stimStartTimeMS = [eventTime unsignedLongValue];
 	}
-	[eventData getBytes:&stimDesc];
+	[eventData getBytes:&stimDesc length:sizeof(StimDesc)];
 	if (stimDesc.stimType == kTargetStim) {
 		targetOnTimeMS = [eventTime unsignedLongValue];
 	}
@@ -391,7 +391,7 @@
 {
     long taskMode;
     
-	[eventData getBytes:&taskMode];
+	[eventData getBytes:&taskMode length:sizeof(long)];
     if (taskMode == kTaskIdle) {
         if (histHighlightIndex >= 0) {
             [hist[histHighlightIndex] setHighlightHist:NO];
@@ -407,7 +407,7 @@
 
 	long timeIndex, targetOnEstimateMS;
 	
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
 //	trialStartTimeMS = [eventTime unsignedLongValue];
 	saccadeStartTimeMS = stimStartTimeMS = targetOnTimeMS = 0;
 	
@@ -450,7 +450,7 @@
 	
 	dirChangeIndex = trial.orientationChangeIndex;
 	
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 	
 // Process reaction time on correct trials only
 

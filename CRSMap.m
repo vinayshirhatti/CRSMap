@@ -673,7 +673,7 @@ long                trialCounter;
 		beta = minRewardMS - alpha * minTargetMS;
 		targetOnTimeMS = trial.targetOnTimeMS;
 		juiceMS = alpha * targetOnTimeMS + beta;
-		juiceMS = abs(juiceMS);
+		juiceMS = labs(juiceMS);
 	}
     
     useSingleITC18 = [[task defaults] boolForKey:CRSUseSingleITC18Key];

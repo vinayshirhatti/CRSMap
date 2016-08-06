@@ -94,8 +94,9 @@
     else if ([eventName isEqualTo:@"protocolNumber"] || [eventName isEqualTo:@"PN"] )
         thisEventName = @"PN";
 	else
-		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",
-						@"OK", nil, nil, eventName);
+        thisEventName = @"";
+//		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",
+//						@"OK", nil, nil, eventName);
 
     
     return thisEventName;
@@ -131,12 +132,12 @@
 	if ((self = [super init])) {
 		digitalOutDevice = (LLITC18DataDevice *)[[task dataController] deviceWithName:@"ITC-18 1"];
 		if (digitalOutDevice == nil) {
-			NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find data device named \"%@\", trying ITC-18 instead.", 
-						@"OK", nil, nil, @"ITC-18 1");
+//			NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find data device named \"%@\", trying ITC-18 instead.",
+//						@"OK", nil, nil, @"ITC-18 1");
 			digitalOutDevice = (LLITC18DataDevice *)[[task dataController] deviceWithName:@"ITC-18"];
 			if (digitalOutDevice == nil) {
-				NSRunAlertPanel(@"CRSMap",  @"Can't find data device named \"%@\" (Quitting)", 
-							@"OK", nil, nil, @"ITC-18");
+//				NSRunAlertPanel(@"CRSMap",  @"Can't find data device named \"%@\" (Quitting)",
+//							@"OK", nil, nil, @"ITC-18");
 				//exit(0);
 			}
 		}

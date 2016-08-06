@@ -500,17 +500,17 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 
 - (void)blockStatus:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&blockStatus];
+	[eventData getBytes:&blockStatus length:sizeof(BlockStatus)];
 }
 
 - (void) dirChangeStimParams:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&stimParams];
+	[eventData getBytes:&stimParams length:sizeof(StimParams)];
 }
 
 - (void)mappingBlockStatus:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&mappingBlockStatus];
+	[eventData getBytes:&mappingBlockStatus length:sizeof(MappingBlockStatus)];
 	[trialTable reloadData];
 }
 
@@ -522,7 +522,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 {
     long eotCode;
 	
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 	lastEOTCode = eotCode;
     if (eotCode <= kMyLastEOTTypeDisplayed) {
         myRecentEOTs[eotCode]++;
@@ -555,7 +555,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 
 - (void) taskMode:(NSData *)eventData eventTime:(NSNumber *)eventTime {
 
-	[eventData getBytes:&taskMode];
+	[eventData getBytes:&taskMode length:sizeof(long)];
     switch (taskMode) {
         case kTaskRunning:
             lastStartTimeS = [LLSystemUtil getTimeS];
@@ -572,7 +572,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 
 	long certifyCode; 
 	
-	[eventData getBytes:&certifyCode];
+	[eventData getBytes:&certifyCode length:sizeof(long)];
     if (certifyCode != 0) { // -1 because computer errors stored separately
         recentComputer++;  
         dayComputer++;  
@@ -583,7 +583,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 {
     long eotCode;
 	
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 
 	if (eotCode <= kLastEOTTypeDisplayed) {
         recentEOTs[eotCode]++;
@@ -600,7 +600,7 @@ NSString *CRSMySummaryTotalKey = @"CRSMySummaryTotal";
 
 - (void) trial:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
     newTrial = YES;
 	[trialTable reloadData];
     [percentTable reloadData];

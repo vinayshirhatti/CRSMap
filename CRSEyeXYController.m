@@ -81,8 +81,9 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 - (IBAction) doOptions:(id)sender {
 
-    [NSApp beginSheet:optionsSheet modalForWindow:[self window] modalDelegate:self
-        didEndSelector:nil contextInfo:nil];
+//    [NSApp beginSheet:optionsSheet modalForWindow:[self window] modalDelegate:self
+//        didEndSelector:nil contextInfo:nil];
+    [[self window] beginSheet:optionsSheet completionHandler:nil];
 }
 
 // Because we have added ourself as an LLDrawable to the eyePlot, this draw method
@@ -209,7 +210,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 {
 	LLEyeCalibrationData cal;
     
-	[eventData getBytes:&cal];
+	[eventData getBytes:&cal length:sizeof(LLEyeCalibrationData)];
     
 	[unitsToDeg[eyeIndex] setTransformStruct:cal.calibration];
 	[degToUnits[eyeIndex] setTransformStruct:cal.calibration];
@@ -284,7 +285,7 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 
 	FixWindowData fixWindowData;
     
-	[eventData getBytes:&fixWindowData];
+	[eventData getBytes:&fixWindowData length:sizeof(FixWindowData)];
 	eyeWindowRectDeg = fixWindowData.windowDeg;
     [eyePlot setNeedsDisplay:YES];
 }
@@ -325,13 +326,13 @@ NSString *CRSXYAutosaveKey = @"CRSXYAutosave";
 {
 	FixWindowData respWindowData;
     
-	[eventData getBytes:&respWindowData];
+	[eventData getBytes:&respWindowData length:sizeof(FixWindowData)];
 	respWindowRectDeg = respWindowData.windowDeg;
 }
 
 - (void)trial:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
     inTrial = YES;
 	respWindowIndex = kAttend0;
 }

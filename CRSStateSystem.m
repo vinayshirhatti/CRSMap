@@ -138,7 +138,7 @@ TrialDesc			trial;
 
 	long tries;
 	
-	[eventData getBytes:&tries];
+	[eventData getBytes:&tries length:sizeof(long)];
 }
 
 @end

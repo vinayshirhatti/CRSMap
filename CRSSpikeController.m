@@ -246,17 +246,17 @@
 
 - (void)interstimMS:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&interstimDurMS];
+	[eventData getBytes:&interstimDurMS length:sizeof(long)];
 }
 
 - (void)map0Settings:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&mapSettings[0]];     // don't checkParams - wait for map1Settings
+	[eventData getBytes:&mapSettings[0] length:sizeof(MapSettings)];     // don't checkParams - wait for map1Settings
 }
 
 - (void)map1Settings:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&mapSettings[1]];
+	[eventData getBytes:&mapSettings[1] length:sizeof(MapSettings)];
 	[self checkParams];
 }
 
@@ -281,7 +281,7 @@
 {
     TimestampData spikeData;
     
-	[eventData getBytes:&spikeData];
+	[eventData getBytes:&spikeData length:sizeof(TimestampData)];
     if (spikeData.time >= 0 && spikeData.time < kMaxSpikeMS) {
         trialSpikes[spikeData.channel][spikeData.time]++;
     }
@@ -289,14 +289,14 @@
 
 - (void)mapStimDurationMS:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
-	[eventData getBytes:&stimDurMS];
+	[eventData getBytes:&stimDurMS length:sizeof(long)];
 }
 
 - (void)stimulus:(NSData *)eventData eventTime:(NSNumber *)eventTime;
 {
 	StimDesc stimDesc;
 	
-	[eventData getBytes:&stimDesc];
+	[eventData getBytes:&stimDesc length:sizeof(StimDesc)];
     if (stimDesc.gaborIndex != kMapGabor0 && stimDesc.gaborIndex != kMapGabor1) {
         return;
     }
@@ -309,7 +309,7 @@
 {
     long index, bin;
     
-	[eventData getBytes:&trial];
+	[eventData getBytes:&trial length:sizeof(TrialDesc)];
 	trialStartTime = [eventTime longValue];
     NSLog(@"trialStartTime %ld", trialStartTime);
     for (index = 0; index < kNumSpikes; index++) {
@@ -337,7 +337,7 @@
 // Think about if there is any reason to update for other trials.
 // Maybe separate superimposed histograms for failed trials
 
-	[eventData getBytes:&eotCode];
+	[eventData getBytes:&eotCode length:sizeof(long)];
 //	if (((eotCode != kEOTCorrect) && (eotCode != kEOTFailed)) || (trial.catchTrial == YES)) {
 //		return;
 //	}
