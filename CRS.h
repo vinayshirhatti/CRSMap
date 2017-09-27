@@ -150,6 +150,7 @@ typedef struct BehaviorSetting {
 	long	rewardMS;
 	float	fixWinWidthDeg;
 	float	respWinWidthDeg;
+    long    protocolNumber; // [Vinay] 260917 saving the protocolNumber in behaviorSetting as well
 } BehaviorSetting;
 
 // put parameters set in the Stimulus controller
@@ -175,6 +176,8 @@ typedef struct StimSetting {
 	float	maxChangeDeg;
 	float	minChangeDeg;
 	long	changeRemains;
+    long	lagGabors; //[Vinay] 23/09/17 Lag between gabors : boolean flag
+    long    lagGaborsMS; //[Vinay] 23/09/17 Lag between gabors in ms
 } StimSetting;
 
 
@@ -317,6 +320,11 @@ extern NSString *CRSMapTFMappingSurroundKey;
 
 // [Vinay] - to opt color stimuli
 extern NSString *CRSConvertToColorKey;
+
+// [Vinay] - 23 Sep 2017 Adding an option to show gabor1 and gabor2 after a lag after gabor0
+// [Vinay] - to show a delayed discontinuity - initially show only the surround (or ring gabor in dual protocols) gabor (i.e. full stimulus), then show centre (and ring) gabors after a lag
+extern NSString *CRSLagGaborsKey;
+extern NSString *CRSLagGaborsMSKey; // lag value in ms
 
 // [Vinay] - till here
 

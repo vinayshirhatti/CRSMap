@@ -148,6 +148,10 @@ NSString *CRSMapTFMappingSurroundKey = @"CRSMapTFMappingSurround";
 // [Vinay] - to opt color stimuli
 NSString *CRSConvertToColorKey = @"CRSConvertToColor";
 
+// [Vinay] - to show gabors with a lag
+NSString *CRSLagGaborsKey = @"CRSLagGabors";
+NSString *CRSLagGaborsMSKey = @"CRSLagGaborsMS";
+
 
 // [Vinay] - till here
 
@@ -255,6 +259,7 @@ LLDataDef behaviorSettingDef[] = {
 	{@"long",	@"rewardMS", 1, offsetof(BehaviorSetting, rewardMS)},
 	{@"float",	@"fixWinWidthDeg", 1, offsetof(BehaviorSetting, fixWinWidthDeg)},
 	{@"float",	@"respWinWidthDeg", 1, offsetof(BehaviorSetting, respWinWidthDeg)},
+    {@"long",	@"protocolNumber", 1, offsetof(BehaviorSetting, protocolNumber)}, // [Vinay] 260917 - saving protocolNumber in behaviorSetting now onwards
 	{nil}};
 
 LLDataDef stimSettingDef[] = {
@@ -278,6 +283,8 @@ LLDataDef stimSettingDef[] = {
 	{@"float",	@"maxChangeDeg", 1, offsetof(StimSetting, maxChangeDeg)},
 	{@"float",	@"minChangeDeg", 1, offsetof(StimSetting, minChangeDeg)},
 	{@"long",	@"changeRemains", 1, offsetof(StimSetting, changeRemains)},
+    {@"long",	@"lagGabors", 1, offsetof(StimSetting, lagGabors)}, // [Vinay] 260917 - boolean flag for lagging R and C
+    {@"long",	@"lagGaborsMS", 1, offsetof(StimSetting, lagGaborsMS)}, // [Vinay] 260917 - lag in ms for R and C
 	{nil}};
 
 LLDataDef mapParamsDef[] = {
@@ -342,6 +349,8 @@ EventDefinition CRSEvents[] = {
 	{@"meanTargetTimeMS",	sizeof(long),			{@"long"}},
 	{@"minTargetTimeMS",	sizeof(long),			{@"long"}},
 	{@"maxTargetTimeMS",	sizeof(long),			{@"long"}},
+    {@"lagGabors",          sizeof(long),			{@"long"}}, // [Vinay] - to record whether lag between gabors option was used or not
+    {@"lagGaborsMS",		sizeof(long),			{@"long"}}, // [Vinay] - to record the lag value in ms
 
     // declared at start of each trial	
 	{@"trial",				sizeof(TrialDesc),		{@"struct", @"trial", 1, 0, sizeof(TrialDesc), trialDescDef}},
@@ -964,6 +973,10 @@ long                trialCounter;
     else if ([key isEqualTo:CRSHideTaskGaborKey]) {
         [[task defaults] setBool:YES forKey:CRSIncludeCatchTrialsinDoneListKey];
         [[task defaults] setInteger:100 forKey:CRSCatchTrialPCKey];
+    }
+    // [Vinay] set lagGabors
+    else if ([key isEqualTo:CRSLagGaborsKey]) {
+        [[task defaults] setBool:YES forKey:CRSLagGaborsKey];
     }
     /* // [Vinay] - commented and replaced the following loops
     else if ([key isEqualTo:CRSHideLeftKey]) {

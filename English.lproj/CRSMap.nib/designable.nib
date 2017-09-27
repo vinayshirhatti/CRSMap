@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13F1112" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CRSMap">
@@ -13,7 +13,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Behavior Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="BehaviorSettingsWindow" animationBehavior="default" id="425" userLabel="Behavior Settings" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -980,10 +980,10 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveName="CRSChangeArrayTable" headerView="2616" id="1496">
-                                    <rect key="frame" x="0.0" y="0.0" width="268" height="220"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="268" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn identifier="change" width="70" minWidth="40" maxWidth="1000" id="1497">
@@ -1381,10 +1381,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3430">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -1732,10 +1732,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3411" id="3409">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="19"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -2154,10 +2154,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3247">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -2505,10 +2505,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3264" id="3266">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="19"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -2927,10 +2927,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" id="3517">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="20"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -3278,10 +3278,10 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="3498" id="3496">
-                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="22"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="628" height="19"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <tableViewGridLines key="gridStyleMask" vertical="YES" horizontal="YES"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
@@ -3918,8 +3918,8 @@
                                     <menuItem title="Drifting Phase Protocol" toolTip="Set S; C rad only; R TF and rad" id="3942" userLabel="Menu Item - Drifting Phase Protocol"/>
                                     <menuItem title="Cross Orientation Protocol (Plaids)" toolTip="Don't Use this as yet!" id="3947" userLabel="Menu Item - Cross Orientation Protocol"/>
                                     <menuItem title="Annulus Fixed Protocol" toolTip="Set S; C rad only; R rad for annulus width" id="HRq-Gj-heK" userLabel="Menu Item - Annulus Fixed Protocol"/>
-                                    <menuItem title="Colour Protocol (Dual mode)" state="on" toolTip="hue->ori, sat->sf, val->cont" id="ZGz-wm-fFj" userLabel="Menu Item - Colour Protocol (Dual mode)"/>
-                                    <menuItem title="Colour Protocol (Ring mode)" toolTip="hue->ori, sat->sf, val->cont" id="QdP-jT-4s6" userLabel="Menu Item - Colour Protocol (Ring mode)"/>
+                                    <menuItem title="Colour Protocol (Dual mode)" state="on" toolTip="hue-&gt;ori, sat-&gt;sf, val-&gt;cont" id="ZGz-wm-fFj" userLabel="Menu Item - Colour Protocol (Dual mode)"/>
+                                    <menuItem title="Colour Protocol (Ring mode)" toolTip="hue-&gt;ori, sat-&gt;sf, val-&gt;cont" id="QdP-jT-4s6" userLabel="Menu Item - Colour Protocol (Ring mode)"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -3954,6 +3954,36 @@
                             <binding destination="498" name="value" keyPath="values.CRSMatchRingSurround" id="3926"/>
                         </connections>
                     </button>
+                    <button toolTip="Introduce lag between the displayed gabors forming a stimulus" id="qPy-tw-ghE">
+                        <rect key="frame" x="380" y="344" width="149" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Lag Gabors, by (ms):" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="VFo-iM-avi">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSLagGabors" id="9o3-Pv-j1z"/>
+                        </connections>
+                    </button>
+                    <textField toolTip="Lag (in ms) after which the C (and R) are drawn for the stimulus" verticalHuggingPriority="750" id="suO-KO-35V">
+                        <rect key="frame" x="532" y="342" width="78" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="Ih7-ba-Wek">
+                            <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0" negativeFormat="-0" hasThousandSeparators="NO" thousandSeparator="," id="dWV-k3-Y3q">
+                                <attributedString key="attributedStringForZero">
+                                    <fragment content="0"/>
+                                </attributedString>
+                                <decimal key="minimum" value="0"/>
+                                <decimal key="maximum" value="NaN"/>
+                            </numberFormatter>
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="498" name="value" keyPath="values.CRSLagGaborsMS" id="wjj-io-yth"/>
+                        </connections>
+                    </textField>
                 </subviews>
             </view>
         </window>

@@ -78,10 +78,23 @@
     if (trialCounter == 1) { // first trial
         if (!useFewDigitalCodes) {
             [digitalOut outputEventName:@"protocolNumber" withData:(long)[[task defaults] integerForKey:@"CRSProtocolNumber"]];
+            // [Vinay] send the lag value if lag between gabors is being used
+            if (CRSLagGaborsKey){
+                [digitalOut outputEventName:@"lagGaborsMS" withData:(long)[[task defaults] integerForKey:@"CRSLagGaborsMS"]];
+            }
         }
         //NSLog(@"trial number %ld , protocol number is %ld", trialCounter, [[task defaults] integerForKey:@"CRSProtocolNumber"]);
-        int protocolNumber = [[task defaults] integerForKey:@"CRSProtocolNumber"]; // This variable reads the value of the protocol number
+        
+        
+        // [Vinay] 260917 protocolNumber must be read as a (long) datatype
+        long protocolNumber = (long)[[task defaults] integerForKey:@"CRSProtocolNumber"]; // This variable reads the value of the protocol number
         [[task dataDoc] putEvent:@"protocolNumber" withData:&protocolNumber];
+        
+        // [Vinay] send the lag value if lag between gabors is being used
+        if (CRSLagGaborsKey){
+            long lagGaborsMSVal = (long)[[task defaults] integerForKey:@"CRSLagGaborsMS"];
+            [[task dataDoc] putEvent:@"lagGaborsMS" withData:&lagGaborsMSVal];
+        }
     }
 }
 

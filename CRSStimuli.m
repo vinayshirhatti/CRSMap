@@ -157,7 +157,7 @@ by mapStimTable.
 {
 	long targetIndex;
 	long stim, nextStimOnFrame, lastStimOffFrame = 0;
-	long stimDurFrames, interDurFrames, stimJitterPC, interJitterPC, stimJitterFrames, interJitterFrames;
+	long stimDurFrames, interDurFrames, stimJitterPC, interJitterPC, stimJitterFrames, interJitterFrames, lagFrames; // [Vinay] 23/09/17 - added lagFrames to contain the number of lag frames i.e. after the 1st gabor the later ones are drawn after these many frames when the lag option is enabled
 	long stimDurBase, interDurBase;
 	float frameRateHz;
 	StimDesc stimDesc, copyStimDesc, copyStimDesc2; // [Vinay] added copyStimDesc and copyStimDesc2
@@ -259,6 +259,7 @@ by mapStimTable.
     [[(CRSMap*)task mapStimTable0] makeMapStimList:mapStimList0 index:0 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];
 	[[(CRSMap*)task mapStimTable1] makeMapStimList:mapStimList1 index:1 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];
     [[(CRSMap*)task mapStimTable2] makeMapStimList:mapStimList2 index:2 lastFrame:lastStimOffFrame pTrial:pTrial trialStimIndicesList:stimIndexList];          // [Vinay] - for the centre gabor
+
     
     //===================^^^==========================
     // [Vinay] - the following lines have been added to change stimulus parameters mapping as per the specific protocol requirements
@@ -958,6 +959,30 @@ by mapStimTable.
     }
     */
     //==========================___============================== [Vinay] - till here
+    
+    //==================================================
+    // [Vinay] 23 Sep 2017 - code to introduce a delay/lag between the display of S gabor and the subsequent gabors (R,C)
+    BOOL lagGabors = [[task defaults] boolForKey:CRSLagGaborsKey];
+    if (lagGabors) {
+        lagFrames = ceil([[task defaults] integerForKey:CRSLagGaborsMSKey] / 1000.0 * frameRateHz);
+        if ((matchCentreSurround == YES) || (protocolNumber == 1) || (protocolNumber == 2) || (protocolNumber == 6) || (protocolNumber == 7) || (protocolNumber == 8) || (protocolNumber == 10) || (protocolNumber == 12))  {
+            for (stim = 0; stim < [mapStimList0 count]; stim++) {
+                
+                val = [mapStimList1 objectAtIndex:stim]; // ring
+                [val getValue:&copyStimDesc];
+                val2 = [mapStimList2 objectAtIndex:stim]; // centre
+                [val2 getValue:&copyStimDesc2];
+                
+                // Advance the stimOnFrame for R and C by lagFrames
+                copyStimDesc.stimOnFrame = copyStimDesc.stimOnFrame + lagFrames;
+                copyStimDesc2.stimOnFrame = copyStimDesc2.stimOnFrame + lagFrames;
+                
+                [mapStimList1 replaceObjectAtIndex:stim withObject:[NSValue valueWithBytes:&copyStimDesc objCType:@encode(StimDesc)]];
+                [mapStimList2 replaceObjectAtIndex:stim withObject:[NSValue valueWithBytes:&copyStimDesc2 objCType:@encode(StimDesc)]];
+            }
+        }
+
+    }
 
 }
 	

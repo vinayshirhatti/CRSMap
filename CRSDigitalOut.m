@@ -93,6 +93,8 @@
         thisEventName = @"SP";
     else if ([eventName isEqualTo:@"protocolNumber"] || [eventName isEqualTo:@"PN"] )
         thisEventName = @"PN";
+    else if ([eventName isEqualTo:@"lagGaborsMS"] || [eventName isEqualTo:@"LG"] )
+        thisEventName = @"LG";
 	else
         thisEventName = @"";
 //		NSRunAlertPanel(@"CRSDigitalOut",  @"Can't find digital event named \"%@\".",

@@ -69,3 +69,13 @@ vinay 15 Sep 2014:
 Modified the amount of digital code sent for each gabor depending on the specific protocol that is being run.
 This prevents computer errors that were happening for all protocols where 3 gabors were being drawn (and subsequently digital codes for all 3 were being sent)
 The digtal codes sent for each such protocol have been reduced now and the computer errors are not arising any more for those protocols.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+---------
+vinay 26 September 2017
+Including comments in Notes after a long long long time. All the comments until now have been incluced at the relevant places in the code (which shall continue anyway).
+- I have included an option to draw the ring and centre gabors with a lag after drawing the surround gabor. In short, the stimOnFrame of the Ring and Centre gabors are advanced by the number of frames determined from the specified lag (the value in millisecinds is converted to the equivalent number of frames). This happens only when the lag option is enabled/checked.
+- protocolNumber is now being saved in behaviorSetting as well
+- lagGabors (boolean flag) and the value of lag in milliseconds, lagGaborsMS, are saved under stimSetting. The value, lagGaborsMS, is also put out as a digital event (when lagGabors is enabled) before the first trial only.

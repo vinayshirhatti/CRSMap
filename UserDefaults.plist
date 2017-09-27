@@ -561,5 +561,9 @@
 	<integer>0</integer>
 	<key>CRSEyeFilterWeight</key>
 	<real>0.5</real>
+	<key>CRSLagGabors</key>
+	<false/>
+	<key>CRSLagGaborsMS</key>
+	<integer>800</integer>
 </dict>
 </plist>

@@ -141,6 +141,7 @@ BehaviorSetting *getBehaviorSetting(void) {
 	behaviorSetting.rewardMS = [[task defaults] integerForKey:CRSRewardMSKey];
 	behaviorSetting.fixWinWidthDeg = [[task defaults] floatForKey:CRSFixWindowWidthDegKey];
 	behaviorSetting.respWinWidthDeg = [[task defaults] floatForKey:CRSRespWindowWidthDegKey];
+    behaviorSetting.protocolNumber = [[task defaults] floatForKey:CRSProtocolNumberKey]; // [Vinay] 260917 saving protocolNumber in behaviorSetting
 	
 	return &behaviorSetting;
 }
@@ -163,6 +164,8 @@ StimSetting *getStimSetting(void) {
 	stimSetting.maxChangeDeg =  [[task defaults] floatForKey:CRSMaxDirChangeDegKey];
 	stimSetting.minChangeDeg =  [[task defaults] floatForKey:CRSMinDirChangeDegKey];
 	stimSetting.changeRemains =  [[task defaults] boolForKey:CRSChangeRemainKey];
+    stimSetting.lagGabors =  [[task defaults] boolForKey:CRSLagGaborsKey];
+    stimSetting.lagGaborsMS = [[task defaults] integerForKey:CRSLagGaborsMSKey];
 	
 	return &stimSetting;
 }
